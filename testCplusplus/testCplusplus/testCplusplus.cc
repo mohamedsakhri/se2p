@@ -8,7 +8,9 @@
 using namespace std;
 using namespace thread;
 
-
+/*
+ first commit from mohamed
+ */
 
 int main(int argc, char *argv[]) {
 	std::cout << "Welcome to the QNX Momentics IDE" << endl;
