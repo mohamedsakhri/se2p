@@ -8,6 +8,8 @@
 using namespace std;
 using namespace thread;
 
+
+
 int main(int argc, char *argv[]) {
 	std::cout << "Welcome to the QNX Momentics IDE" << endl;
 /*
