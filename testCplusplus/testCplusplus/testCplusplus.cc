@@ -11,7 +11,7 @@ using namespace thread;
 
 
 int main(int argc, char *argv[]) {
-	std::cout << "Welcome to the QNX Momentics IDE <SE2P>" << endl;
+	std::cout << "Welcome to the QNX Momentics IDE <SE2P> Kashif" << endl;
 /*
 	MyObject myObject; //konstruktur wird aufgerufen
 
