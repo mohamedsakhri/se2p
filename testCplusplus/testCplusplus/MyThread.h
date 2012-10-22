@@ -9,6 +9,9 @@
 #define MYTHREAD_H_
 
 #include "HAWThread.h"
+#include "HALAktorik.h"
+
+
 
 namespace thread {
 
