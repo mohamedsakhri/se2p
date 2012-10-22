@@ -11,7 +11,6 @@
  */
 // Die Header Datei HWaccess.h steuert den Zugriff auf die HW bzw. Simulation
 // Sie muss in jeder Datei stehen, die auf die HW zugreift
-
 #include "HWaccess.h"
 #include "MyThread.h"
 #include <unistd.h>
