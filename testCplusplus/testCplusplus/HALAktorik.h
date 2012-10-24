@@ -1,28 +1,33 @@
 /*
- * HALintro.h
+ * HALAktorik.h
  *
  *  Created on: Oct 18, 2012
  *      Author: simohamed
  */
-#ifndef HALINTRO_H_
-#define HALINTRO_H_
+
 #include "HWaccess.h"
-#include "Adresse.h"
+#include "Adress.h"
 #include <cstdlib>
 #include <iostream>
 #include <unistd.h>
 #include <errno.h>
-class HALintro {
-public:
-	HALintro();
-	virtual ~HALintro();
 
-private :
-	HALintro* getInstance();
+#ifndef HALAktorik_H_
+#define HALAktorik_H_
+
+class HALAktorik {
+public:
+	//constructor
+	HALAktorik();
+	//destructor
+	virtual ~HALAktorik();
+
+
+	HALAktorik* getInstance();
 	// Aktoren PORT A
-  	void lampeRotAn();
+  	static void lampeRotAn();
   	void lampeRotAus();
-  	void lampeGruenAn();
+  	static void lampeGruenAn();
   	void lampeGruenAus();
   	void lampeGelbAn();
   	void lampeGelbAus();
@@ -42,4 +47,5 @@ private :
 
 };
 
-#endif /* HALINTRO_H_ */
+
+#endif /* HALAktorik_H_ */

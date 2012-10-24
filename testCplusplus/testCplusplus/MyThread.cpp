@@ -7,20 +7,17 @@
 
 // Die Header Datei HWaccess.h steuert den Zugriff auf die HW bzw. Simulation
 // Sie muss in jeder Datei stehen, die auf die HW zugreift
-#include "HWaccess.h"
-#include "MyThread.h"
+
+
 #include<unistd.h>
 #include <cstdlib>
 #include <iostream>
 #include <errno.h>
+#include "MyThread.h"
+#include "HALAktorik.h"
 
 
 
-// Port der Digitalen IO Karte (s. Datenblatt)
-
-#define D_IOBASE 0x300 								// Anfangsadresse Ports
-#define DIGITAL_CARD_CONTROL (D_IOBASE + 0x03) 		// Adresse von Card Control
-#define DIGITAL_CARD_CROUP0_PORTA (D_IOBASE + 0x00) // Adresse von Port A
 
 
 namespace thread {
@@ -43,6 +40,16 @@ MyThread::~MyThread() {
     {
     	while(!isStopped())
     	{
+
+    		HALAktorik::lampeRotAn();
+    		cout << "RED" << endl;
+    	  	sleep(1);
+    	  	HALAktorik::lampeGruenAn();
+    	  	cout << "RED and Green" << endl;
+    	  	sleep(1);
+    	}
+
+    		/*
     		// Simpler Test des HW Zugriffs ohne Klassen, Pattern etc.
     			// Reicht nicht fuer den ersten Meilenstein aus
 
@@ -68,7 +75,9 @@ MyThread::~MyThread() {
     				out8(D_IOBASE, 0x20);//gruen
     				sleep(1);
     			}
-    	}
+    	}*/
+
+
     }
 
 }
