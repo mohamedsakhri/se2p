@@ -1,9 +1,9 @@
 /***************************************************************************
 *                                                                         
-*    Hochschule f�r Angewandte Wissenschaften Hamburg              
+*    Hochschule fuer Angewandte Wissenschaften Hamburg
 *                                                                          
 *    WP
-*    Effiziente Datenstrukturen in C++ f�r verteilte Echtzeitprogrammierung
+*    Effiziente Datenstrukturen in C++ fuer verteilte Echtzeitprogrammierung
 *
 *	 Prof. Dr. Stephan Pareigis  
 *

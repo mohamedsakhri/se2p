@@ -47,19 +47,45 @@ HALAktorik *HALAktorik::getInstance()
 void HALAktorik::lampeRotAn()
 {
 	uint8_t val = in8(DIGITAL_CARD_CROUP0_PORTA);
-	cout << val << endl;
+	//cout << val << endl;
 	//out8(DIGITAL_CARD_CROUP0_PORTA, val | BIT_7);
-	out8(DIGITAL_CARD_CROUP0_PORTA, 0x80);
+	out8(DIGITAL_CARD_CROUP0_PORTA, 0x80 | val);
 }
 
 void HALAktorik::lampeRotAus()
 {
-
+	 uint8_t val = in8(DIGITAL_CARD_CROUP0_PORTA);
+	 out8(DIGITAL_CARD_CROUP0_PORTA, 0x80 ^ val);
 }
 
  void HALAktorik::lampeGruenAn()
  {
 	 uint8_t val = in8(DIGITAL_CARD_CROUP0_PORTA);
-	 out8(DIGITAL_CARD_CROUP0_PORTA, 0x20);
+	 out8(DIGITAL_CARD_CROUP0_PORTA, 0x20 | val);
  }
 
+ void HALAktorik::lampeGruenAus()
+  {
+ 	 uint8_t val = in8(DIGITAL_CARD_CROUP0_PORTA);
+ 	 out8(DIGITAL_CARD_CROUP0_PORTA, 0x20 ^ val);
+  }
+
+ void HALAktorik::lampeGelbAn()
+ {
+ 	uint8_t val = in8(DIGITAL_CARD_CROUP0_PORTA);
+ 	cout << val << endl;
+ 	//out8(DIGITAL_CARD_CROUP0_PORTA, val | BIT_7);
+ 	out8(DIGITAL_CARD_CROUP0_PORTA, 0x40);
+ }
+
+ void HALAktorik::lampeGelbAus()
+ {
+ 	 uint8_t val = in8(DIGITAL_CARD_CROUP0_PORTA);
+ 	 out8(DIGITAL_CARD_CROUP0_PORTA, 0x40 ^ val);
+ }
+
+ void HALAktorik::scheibeAuf()
+  {
+  	 uint8_t val = in8(DIGITAL_CARD_CROUP0_PORTA);
+  	 out8(DIGITAL_CARD_CROUP0_PORTA, 0x10 | val);
+  }

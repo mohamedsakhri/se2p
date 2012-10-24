@@ -26,12 +26,12 @@ public:
 	HALAktorik* getInstance();
 	// Aktoren PORT A
   	static void lampeRotAn();
-  	void lampeRotAus();
+  	static void lampeRotAus();
   	static void lampeGruenAn();
-  	void lampeGruenAus();
-  	void lampeGelbAn();
-  	void lampeGelbAus();
-  	void scheibeAuf();
+  	static void lampeGruenAus();
+  	static void lampeGelbAn();
+  	static void lampeGelbAus();
+  	static void scheibeAuf();
   	void motorAn();
   	void motorAus();
   	void motorLangsamLaufen();

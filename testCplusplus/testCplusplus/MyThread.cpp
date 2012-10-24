@@ -9,7 +9,7 @@
 // Sie muss in jeder Datei stehen, die auf die HW zugreift
 
 
-#include<unistd.h>
+#include <unistd.h>
 #include <cstdlib>
 #include <iostream>
 #include <errno.h>
@@ -17,10 +17,7 @@
 #include "HALAktorik.h"
 
 
-
-
-
-namespace thread {
+namespace thread{
 
 MyThread::MyThread() {
 	// TODO Auto-generated constructor stub
@@ -41,12 +38,28 @@ MyThread::~MyThread() {
     	while(!isStopped())
     	{
 
+    		HALAktorik::scheibeAuf();
+    		cout << "Scheibe Auf " << endl;
+    		sleep(1);
     		HALAktorik::lampeRotAn();
-    		cout << "RED" << endl;
+    		cout << "RED An" << endl;
+    	  	sleep(1);
+    	  	HALAktorik::lampeRotAus();
+    		cout << "RED Aus " << endl;
     	  	sleep(1);
     	  	HALAktorik::lampeGruenAn();
-    	  	cout << "RED and Green" << endl;
+    	  	cout << "GRUEN An " << endl;
     	  	sleep(1);
+    	  	HALAktorik::lampeGruenAus();
+    	  	cout << "GRUEN Aus " << endl;
+    	  	sleep(1);
+    		HALAktorik::lampeGelbAn();
+    		cout << "GELB An" << endl;
+    		sleep(1);
+    		HALAktorik::lampeGelbAus();
+    		cout << "GRUEN Aus " << endl;
+    		sleep(1);
+
     	}
 
     		/*

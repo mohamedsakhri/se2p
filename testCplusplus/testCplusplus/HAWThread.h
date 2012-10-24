@@ -1,9 +1,9 @@
 /***************************************************************************
 *                                                                         
-*    Hochschule für Angewandte Wissenschaften Hamburg              
+*    Hochschule fuer Angewandte Wissenschaften Hamburg
 *                                                                          
 *    WP
-*    Effiziente Datenstrukturen in C++ für verteilte Echtzeitprogrammierung
+*    Effiziente Datenstrukturen in C++ fuer verteilte Echtzeitprogrammierung
 *
 *	 Prof. Dr. Stephan Pareigis  
 *
@@ -14,7 +14,6 @@
 #define _HAW_THREAD_H_
 
 #include <iostream.h>
-
 #include <pthread.h>
 #include <sys/neutrino.h>
 
