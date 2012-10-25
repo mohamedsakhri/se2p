@@ -5,18 +5,16 @@
  *
  */
 
-
 /*
  * Ueber SIMULATION wird zwischen Simulation und HW umgeschaltet
  *
  * Damit die Aenderungen beachtet werden, muss Check Dependencies On/Off -> Check User Headers Only
  * gesetzt sein.
  *
- * Zur Not : Ein Clean auf das Projekt ausf�hren
+ * Zur Not : Ein Clean auf das Projekt ausfuehren
  */
 
-
-// Die drei folgenden includes d�rfen nur in dieser Datei stehen
+// Die drei folgenden includes duerfen nur in dieser Datei stehen
 
 #include <stdio.h>
 #include <sys/neutrino.h>

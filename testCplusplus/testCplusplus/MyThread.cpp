@@ -16,8 +16,7 @@
 #include "MyThread.h"
 #include "HALAktorik.h"
 
-
-namespace thread{
+namespace thread {
 
 MyThread::MyThread() {
 	// TODO Auto-generated constructor stub
@@ -28,69 +27,66 @@ MyThread::~MyThread() {
 	// TODO Auto-generated destructor stub
 }
 
-    void MyThread::shutdown()
-    {
-    	cout << "Test beendet" << endl;
-    }
+void MyThread::shutdown() {
+	cout << "Test beendet" << endl;
+}
 
-    void MyThread::execute(void *arg)
-    {
-    	while(!isStopped())
-    	{
+void MyThread::execute(void *arg) {
+	while (!isStopped()) {
+		/*
+		 HALAktorik::scheibeAuf();
+		 cout << "Scheibe Auf " << endl;
+		 sleep(1);
+		 HALAktorik::lampeRotAn();
+		 cout << "RED An" << endl;
+		 sleep(1);
+		 HALAktorik::lampeRotAus();
+		 cout << "RED Aus " << endl;
+		 sleep(1);
+		 HALAktorik::lampeGruenAn();
+		 cout << "GRUEN An " << endl;
+		 sleep(1);
+		 HALAktorik::lampeGruenAus();
+		 cout << "GRUEN Aus " << endl;
+		 sleep(1);
+		 HALAktorik::lampeGelbAn();
+		 cout << "GELB An" << endl;
+		 sleep(1);
+		 HALAktorik::lampeGelbAus();
+		 cout << "GRUEN Aus " << endl;
+		 sleep(1);
+		 */
 
-    		HALAktorik::scheibeAuf();
-    		cout << "Scheibe Auf " << endl;
-    		sleep(1);
-    		HALAktorik::lampeRotAn();
-    		cout << "RED An" << endl;
-    	  	sleep(1);
-    	  	HALAktorik::lampeRotAus();
-    		cout << "RED Aus " << endl;
-    	  	sleep(1);
-    	  	HALAktorik::lampeGruenAn();
-    	  	cout << "GRUEN An " << endl;
-    	  	sleep(1);
-    	  	HALAktorik::lampeGruenAus();
-    	  	cout << "GRUEN Aus " << endl;
-    	  	sleep(1);
-    		HALAktorik::lampeGelbAn();
-    		cout << "GELB An" << endl;
-    		sleep(1);
-    		HALAktorik::lampeGelbAus();
-    		cout << "GRUEN Aus " << endl;
-    		sleep(1);
+	}
 
-    	}
+	/*
+	 // Simpler Test des HW Zugriffs ohne Klassen, Pattern etc.
+	 // Reicht nicht fuer den ersten Meilenstein aus
 
-    		/*
-    		// Simpler Test des HW Zugriffs ohne Klassen, Pattern etc.
-    			// Reicht nicht fuer den ersten Meilenstein aus
+	 // Zugriffsrechte fuer den Zugriff auf die HW holen
+	 if (-1 == ThreadCtl(_NTO_TCTL_IO, 0)) {
+	 perror("ThreadCtl access failed\n");
+	 return;
+	 }
+	 // Initialisierung der Digitalen IO Karte
+	 out8(DIGITAL_CARD_CONTROL, 0x82);
 
-    			// Zugriffsrechte fuer den Zugriff auf die HW holen
-    			if (-1 == ThreadCtl(_NTO_TCTL_IO, 0)) {
-    				perror("ThreadCtl access failed\n");
-    				return;
-    			}
-    			// Initialisierung der Digitalen IO Karte
-    			out8(DIGITAL_CARD_CONTROL, 0x82);
+	 // Treibe die Ampel
+	 for (int count = 0; count < 20; count ++) {
+	 cout << "rot" << endl;
+	 out8(D_IOBASE, 0x80);//rot
+	 sleep(1);
 
-    			// Treibe die Ampel
-    			for (int count = 0; count < 20; count ++) {
-    				cout << "rot" << endl;
-    				out8(D_IOBASE, 0x80);//rot
-    				sleep(1);
+	 cout << "gelb" << endl;
+	 out8(D_IOBASE, 0x40);//gelb
+	 sleep(1);
 
-    				cout << "gelb" << endl;
-    				out8(D_IOBASE, 0x40);//gelb
-    				sleep(1);
+	 cout << "gruen" << endl;
+	 out8(D_IOBASE, 0x20);//gruen
+	 sleep(1);
+	 }
+	 }*/
 
-    				cout << "gruen" << endl;
-    				out8(D_IOBASE, 0x20);//gruen
-    				sleep(1);
-    			}
-    	}*/
-
-
-    }
+}
 
 }

@@ -8,14 +8,20 @@
 #ifndef ADDRESS_H_
 #define ADDRESS_H_
 
+/*
+ *  Digital Card Base and Ports Adresses
+ *
+ */
+#define D_IOBASE 0x300 								// Base adress
+#define DIGITAL_CARD_CONTROL (D_IOBASE + 0x03) 		// Control adress
+#define DIGITAL_CARD_CROUP0_PORTA (D_IOBASE + 0x00) // Port A adress
+#define DIGITAL_CARD_CROUP0_PORTB (D_IOBASE + 0x01) // Port B adress
+#define DIGITAL_CARD_CROUP0_PORTC (D_IOBASE + 0x02) // Port C adress
 
-#define D_IOBASE 0x300 								// Anfangsadresse Ports
-#define DIGITAL_CARD_CONTROL (D_IOBASE + 0x03) 		// Adresse von Card Control
-#define DIGITAL_CARD_CROUP0_PORTA (D_IOBASE + 0x00) // Adresse von Port A
-#define DIGITAL_CARD_CROUP0_PORTB (D_IOBASE + 0x01) // Adresse von Port B
-#define DIGITAL_CARD_CROUP0_PORTC (D_IOBASE + 0x02) // Adresse von Port C
-
-
+/*
+ * Using BIT_x instead of some magic numbers
+ *
+ */
 #define BIT_0 0x01
 #define BIT_1 0x02
 #define BIT_2 0x04

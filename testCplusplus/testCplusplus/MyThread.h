@@ -17,8 +17,8 @@ public:
 	MyThread();
 	virtual ~MyThread();
 
-    virtual void execute(void*arg);
-    virtual void shutdown();
+	virtual void execute(void*arg);
+	virtual void shutdown();
 };
 
 }

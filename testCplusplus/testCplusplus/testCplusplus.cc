@@ -17,18 +17,16 @@
 
 #include <unistd.h>
 
-
-
 using namespace std;
 using namespace thread;
 
 int main(int argc, char *argv[]) {
 #ifdef SIMULATION
 	cout << "Simulation aktiv" << endl;
-	cout << "Zum Aufbau der Verbindung muss Die Festo Simulation schon laufen." << endl;
+	cout << "Zum Aufbau der Verbindung muss Die Festo Simulation schon laufen."
+			<< endl;
 	IOaccess_open(); // Baue die Verbindung zur Simulation auf
 #endif
-
 
 	MyThread thr;
 	thr.start(NULL);
@@ -36,9 +34,7 @@ int main(int argc, char *argv[]) {
 	thr.stop();
 	thr.join();
 
-
-
 #ifdef SIMULATION
-	IOaccess_close(); // Schlie�e die Verbindung zur Simulation
+	IOaccess_close(); // Schliesse die Verbindung zur Simulation
 #endif
 }

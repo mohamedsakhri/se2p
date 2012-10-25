@@ -3,10 +3,10 @@
  *
  *  Created on: Oct 18, 2012
  *      Author: simohamed
- */
+
 
 #include "HALAktorik.h"
-#include "Adress.h"
+//#include "Adress.h"
 
 HALAktorik* instance = new HALAktorik();
 
@@ -89,3 +89,4 @@ void HALAktorik::lampeRotAus()
   	 uint8_t val = in8(DIGITAL_CARD_CROUP0_PORTA);
   	 out8(DIGITAL_CARD_CROUP0_PORTA, 0x10 | val);
   }
+  */
