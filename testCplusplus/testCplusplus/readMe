@@ -1,0 +1,13 @@
+
+HAL has to be started from the Controler class by calling the getInstance methode.
+
+Now, that we haven't dectared a controller class yet, it will be started in myThread
+
+TO DO:
+solving : undefined Reference for HALAktorik::getInstance(); 
+
+Some tests : For each component a class to test it. It'd make more sense if they run as Threads
+
+Tests will be added in a Test folder
+
+Serial interface in a new Folder, called SerInterface

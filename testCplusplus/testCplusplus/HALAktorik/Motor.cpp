@@ -16,19 +16,19 @@ Motor::~Motor() {
 	// TODO Auto-generated destructor stub
 }
 
-void Motor::motorOn() {
-	Motor::runRight();
+void Motor::motor_on() {
+	Motor::run_Right();
 }
 
 /*
  * stops motor by changing BIT_0 to 0, if the motor was already running
  */
-void Motor::motorOff() {
+void Motor::motor_off() {
 	uint8_t portAState = in8(DIGITAL_CARD_CROUP0_PORTA);
 	out8(DIGITAL_CARD_CROUP0_PORTA, BIT_0 ^ portAState);
 }
 
-void Motor::runRight() {
+void Motor::run_right() {
 	uint8_t portAState = in8(DIGITAL_CARD_CROUP0_PORTA);
 	out8(DIGITAL_CARD_CROUP0_PORTA, BIT_0 | portAState);
 }
@@ -36,7 +36,7 @@ void Motor::runRight() {
 /*
  * this function isn't obligatory in our Software
  */
-void Motor::runLeft() {
+void Motor::run_left() {
 	uint8_t portAState = in8(DIGITAL_CARD_CROUP0_PORTA);
 	out8(DIGITAL_CARD_CROUP0_PORTA, BIT_1 | portAState);
 }
@@ -44,7 +44,7 @@ void Motor::runLeft() {
 /*
  * this function isn't obligatory in our Software
  */
-void Motor::runSlow() {
+void Motor::run_slow() {
 	uint8_t portAState = in8(DIGITAL_CARD_CROUP0_PORTA);
 	out8(DIGITAL_CARD_CROUP0_PORTA, BIT_2 | portAState);
 }
@@ -52,7 +52,7 @@ void Motor::runSlow() {
 /*
  * stops motor by changing BIT_3 to 0, the other bits stay unchanged
  */
-void Motor::stopMotor() {
+void Motor::stop_Motor() {
 	uint8_t portAState = in8(DIGITAL_CARD_CROUP0_PORTA);
 	out8(DIGITAL_CARD_CROUP0_PORTA, BIT_3 | portAState);
 }

@@ -8,17 +8,16 @@
 #ifndef SWITCH_H_
 #define SWITCH_H_
 
-#include "Adress.h"
-#include "HWaccess.h"
+#include "HALAktorik.h"
 
 class Switch {
 public:
 	Switch();
 	virtual ~Switch();
-private:
-	void open();
-	void close();
-	bool isOpen();
+
+	void open_Switch();
+	void close_Switch();
+	bool is_Switch_Open();
 };
 
 #endif /* SWITCH_H_ */

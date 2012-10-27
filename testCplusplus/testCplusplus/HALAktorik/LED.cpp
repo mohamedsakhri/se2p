@@ -16,41 +16,41 @@ LED::~LED() {
 	// TODO Auto-generated destructor stub
 }
 
-void LED::flashStartLED() {
+void LED::Start_LED_on() {
 	uint8_t portCState = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, BIT_0 | portCState);
 }
 
-void LED::darkStartLED() {
+void LED::Start_LED_off() {
 	uint8_t portCState = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, BIT_0 ^ portCState);
 }
 
-void LED::flashResetLED() {
+void LED::Reset_LED_on() {
 	uint8_t portCState = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, BIT_1 | portCState);
 }
 
-void LED::darkResetLED() {
+void LED::Reset_LED_off() {
 	uint8_t portCState = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, BIT_1 ^ portCState);
 }
 
-void LED::flashQ1LED() {
+void LED::Q1_LED_on() {
 	uint8_t portCState = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, BIT_2 | portCState);
 }
 
-void LED::darkQ1LED() {
+void LED::Q1_LED_off() {
 	uint8_t portCState = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, BIT_2 ^ portCState);
 }
-void LED::flashQ2LED() {
+void LED::Q2_LED_on() {
 	uint8_t portCState = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, BIT_3 | portCState);
 }
 
-void LED::darkQ2LED() {
+void LED::Q2_LED_on() {
 	uint8_t portCState = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, BIT_3 ^ portCState);
 }

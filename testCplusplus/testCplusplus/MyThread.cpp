@@ -14,13 +14,13 @@
 #include <iostream>
 #include <errno.h>
 #include "MyThread.h"
-#include "HALAktorik.h"
+#include "HALAktorik/HALAktorik.h"
 
-namespace thread {
+
+using namespace thread;
 
 MyThread::MyThread() {
 	// TODO Auto-generated constructor stub
-
 }
 
 MyThread::~MyThread() {
@@ -28,11 +28,23 @@ MyThread::~MyThread() {
 }
 
 void MyThread::shutdown() {
-	cout << "Test beendet" << endl;
+	cout << "Test finished" << endl;
 }
 
 void MyThread::execute(void *arg) {
+	// This returns an error which is driving me crazy!!
+	// still working on itS
+	//HALAktorik *hal_A = HALAktorik::getInstance();
+
 	while (!isStopped()) {
+
+	//	hal_A->red_Light_on();
+		cout << "Red light on " << endl;
+		sleep(1);
+
+		//hal_A->red_Light_off();
+		cout << "Red light off " << endl;
+		sleep(1);
 		/*
 		 HALAktorik::scheibeAuf();
 		 cout << "Scheibe Auf " << endl;
@@ -55,7 +67,7 @@ void MyThread::execute(void *arg) {
 		 HALAktorik::lampeGelbAus();
 		 cout << "GRUEN Aus " << endl;
 		 sleep(1);
-		 */
+*/
 
 	}
 
@@ -89,4 +101,3 @@ void MyThread::execute(void *arg) {
 
 }
 
-}

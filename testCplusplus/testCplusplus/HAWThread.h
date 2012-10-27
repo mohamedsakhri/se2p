@@ -16,7 +16,7 @@
 #include <iostream.h>
 #include <pthread.h>
 #include <sys/neutrino.h>
-
+#include "HWaccess.h"
 /**
  * HAWThread class.
  * Encapsulates the most important features of a thread.

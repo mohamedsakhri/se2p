@@ -8,7 +8,10 @@
 #ifndef MYTHREAD_H_
 #define MYTHREAD_H_
 
+#include "HWaccess.h"
 #include "HAWThread.h"
+#include "HALAktorik/HALAktorik.h"
+
 
 namespace thread {
 
