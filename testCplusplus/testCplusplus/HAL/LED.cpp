@@ -6,6 +6,10 @@
  */
 
 #include "LED.h"
+#include "HWaccess.h"
+#include "Adress.h"
+#include "stdint.h"
+
 
 
 LED::LED() {
@@ -20,6 +24,7 @@ LED::~LED() {
 void LED::Start_LED_on() {
 	uint8_t portCState = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, BIT_0 | portCState);
+
 }
 
 void LED::Start_LED_off() {

@@ -6,7 +6,8 @@
  */
 
 #include "Switch.h"
-#include "HWaccess.h"
+#include "Adress.h"
+#include "stdint.h"
 
 
 Switch::Switch() {
@@ -30,7 +31,7 @@ void Switch::open_Switch() {
 
 void Switch::close_Switch() {
 	uint8_t portAState = in8(DIGITAL_CARD_CROUP0_PORTA);
-	out8(DIGITAL_CARD_CROUP0_PORTA, BIT_4 ^ portAState);
+	out8(DIGITAL_CARD_CROUP0_PORTA, ~BIT_4 & portAState);
 }
 
 

@@ -9,6 +9,7 @@
 #define LIGHT_H_
 #include "HWaccess.h"
 #include "Adress.h"
+#include "stdint.h"
 
 class Light {
 public:

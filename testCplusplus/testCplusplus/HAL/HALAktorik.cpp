@@ -38,7 +38,9 @@ HALAktorik::HALAktorik()
 	 light_ = new Light();
 	 switch_ = new Switch();
 
-	 out8(DIGITAL_CARD_CONTROL, 0x82);
+	 out8(DIGITAL_CARD_CONTROL, 0x8A);
+
+
 
 }
 

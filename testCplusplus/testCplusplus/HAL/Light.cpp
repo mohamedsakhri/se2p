@@ -6,7 +6,9 @@
  */
 
 #include "Light.h"
-#include "HWaccess.h"
+#include "Adress.h"
+#include "stdint.h"
+
 #include <unistd.h>
 #include <cstdlib>
 #include <iostream>
@@ -48,11 +50,16 @@ void Light::red_Light_off() {
 void Light::light_on(uint8_t bitNumber) {
 	uint8_t portAState = in8(DIGITAL_CARD_CROUP0_PORTA);
 	out8(DIGITAL_CARD_CROUP0_PORTA, bitNumber | portAState);
+
+	cout << hex << "BIT: " << bitNumber << endl;
+	cout << hex << "port State: " << portAState << endl;
 }
 
 void Light::light_off(uint8_t bitNumber) {
 	uint8_t portAState = in8(DIGITAL_CARD_CROUP0_PORTA);
-	out8(DIGITAL_CARD_CROUP0_PORTA, bitNumber ^ portAState);
+	out8(DIGITAL_CARD_CROUP0_PORTA, ~bitNumber & portAState);
+	cout << "Port State" << portAState << endl;
+	cout << hex << "(off) port State&Bit: " << (~bitNumber & portAState) << endl;
 }
 
 void Light::red_Light_slow()
@@ -61,6 +68,7 @@ void Light::red_Light_slow()
 	red_Light_on();
 	sleep(1);
 	red_Light_off();
+	sleep(1);
 	}
 }
 
@@ -70,8 +78,9 @@ void Light::red_Light_quick()
 {
 	while (1) {
 	red_Light_on();
-	sleep(0.5);
+	sleep(1);
 	red_Light_off();
+	sleep(1);
 	}
 }
 

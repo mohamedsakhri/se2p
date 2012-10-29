@@ -14,6 +14,8 @@
  * Zur Not : Ein Clean auf das Projekt ausfuehren
  */
 
+//#define SIMULATION
+
 // Die drei folgenden includes duerfen nur in dieser Datei stehen
 
 #include <stdio.h>

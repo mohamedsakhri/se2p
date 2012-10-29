@@ -6,7 +6,8 @@
  */
 
 #include "Motor.h"
-#include "HWaccess.h"
+#include "Adress.h"
+#include "stdint.h"
 
 
 Motor::Motor() {
