@@ -14,7 +14,7 @@
 #include <iostream>
 #include <errno.h>
 #include "MyThread.h"
-#include "HAL/HALAktorik.h"
+#include "HALAktorik.h"
 
 using namespace thread;
 class HALAktorik;
@@ -39,6 +39,13 @@ void MyThread::execute(void *arg) {
 
 	while (!isStopped()) {
 
+	//	hal_A->red_Light_quick();
+
+		hal_A->open_Switch();
+		sleep(1);
+		hal_A->close_Switch();
+		sleep(1);
+		/*
 		hal_A->motor_on();
 		cout << "Motor on " << endl;
 
@@ -73,59 +80,9 @@ void MyThread::execute(void *arg) {
 		hal_A->motor_off();
 		cout << "Motor off " << endl;
 
-		/*
-		 HALAktorik::scheibeAuf();
-		 cout << "Scheibe Auf " << endl;
-		 sleep(1);
-		 HALAktorik::lampeRotAn();
-		 cout << "RED An" << endl;
-		 sleep(1);
-		 HALAktorik::lampeRotAus();
-		 cout << "RED Aus " << endl;
-		 sleep(1);
-		 HALAktorik::lampeGruenAn();
-		 cout << "GRUEN An " << endl;
-		 sleep(1);
-		 HALAktorik::lampeGruenAus();
-		 cout << "GRUEN Aus " << endl;
-		 sleep(1);
-		 HALAktorik::lampeGelbAn();
-		 cout << "GELB An" << endl;
-		 sleep(1);
-		 HALAktorik::lampeGelbAus();
-		 cout << "GRUEN Aus " << endl;
-		 sleep(1);
 		 */
 
 	}
-
-	/*
-	 // Simpler Test des HW Zugriffs ohne Klassen, Pattern etc.
-	 // Reicht nicht fuer den ersten Meilenstein aus
-
-	 // Zugriffsrechte fuer den Zugriff auf die HW holen
-	 if (-1 == ThreadCtl(_NTO_TCTL_IO, 0)) {
-	 perror("ThreadCtl access failed\n");
-	 return;
-	 }
-	 // Initialisierung der Digitalen IO Karte
-	 out8(DIGITAL_CARD_CONTROL, 0x82);
-
-	 // Treibe die Ampel
-	 for (int count = 0; count < 20; count ++) {
-	 cout << "rot" << endl;
-	 out8(D_IOBASE, 0x80);//rot
-	 sleep(1);
-
-	 cout << "gelb" << endl;
-	 out8(D_IOBASE, 0x40);//gelb
-	 sleep(1);
-
-	 cout << "gruen" << endl;
-	 out8(D_IOBASE, 0x20);//gruen
-	 sleep(1);
-	 }
-	 }*/
 
 }
 

@@ -5,13 +5,23 @@
  *      Author: simohamed
 
 */
-#include "HAL/HALAktorik.h"
+#include "HALAktorik.h"
 
 
 using namespace std;
 
 HALAktorik* HALAktorik::hal_Aktorik_instance_ = NULL;
 Mutex* HALAktorik::hal_Aktorik_mutex_ = new Mutex();
+
+void HALAktorik::red_Light_slow()
+{
+	light_->red_Light_slow();
+}
+
+void HALAktorik::red_Light_quick()
+{
+	light_->red_Light_quick();
+}
 
 HALAktorik::HALAktorik()
 {

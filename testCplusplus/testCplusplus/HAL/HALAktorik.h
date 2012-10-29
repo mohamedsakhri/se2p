@@ -10,7 +10,7 @@
 
 #include "HWaccess.h"
 #include "Adress.h"
-#include "Mutex/Mutex.h"
+#include "Mutex.h"
 #include "LED.h"
 #include "Switch.h"
 #include "Motor.h"
@@ -29,6 +29,9 @@ public:
 	void yellow_Light_off();
 	void red_Light_on();
 	void red_Light_off();
+
+	void red_Light_slow();
+	void red_Light_quick();
 
 	void motor_on();	// will be called at the start, it just calls runRight() or runLeft()
 	void motor_off();	// stops the motor by changing BIT_1 or BIT_2

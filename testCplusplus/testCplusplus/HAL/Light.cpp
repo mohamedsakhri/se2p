@@ -7,6 +7,10 @@
 
 #include "Light.h"
 #include "HWaccess.h"
+#include <unistd.h>
+#include <cstdlib>
+#include <iostream>
+#include "MyThread.h"
 
 
 Light::Light() {
@@ -50,3 +54,25 @@ void Light::light_off(uint8_t bitNumber) {
 	uint8_t portAState = in8(DIGITAL_CARD_CROUP0_PORTA);
 	out8(DIGITAL_CARD_CROUP0_PORTA, bitNumber ^ portAState);
 }
+
+void Light::red_Light_slow()
+{
+	while (1) {
+	red_Light_on();
+	sleep(1);
+	red_Light_off();
+	}
+}
+
+
+
+void Light::red_Light_quick()
+{
+	while (1) {
+	red_Light_on();
+	sleep(0.5);
+	red_Light_off();
+	}
+}
+
+

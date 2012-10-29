@@ -24,6 +24,8 @@ public:
 	void yellow_Light_off();
 	void red_Light_on();
 	void red_Light_off();
+	void red_Light_slow();
+	void red_Light_quick();
 };
 
 #endif /* LIGHT_H_ */
