@@ -10,7 +10,7 @@
 
 #include "HWaccess.h"
 #include "HAWThread.h"
-#include "HALAktorik/HALAktorik.h"
+#include "HAL/HALAktorik.h"
 
 
 namespace thread {

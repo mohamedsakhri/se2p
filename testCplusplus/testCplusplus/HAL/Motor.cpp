@@ -6,6 +6,8 @@
  */
 
 #include "Motor.h"
+#include "HWaccess.h"
+
 
 Motor::Motor() {
 	// TODO Auto-generated constructor stub
@@ -17,7 +19,7 @@ Motor::~Motor() {
 }
 
 void Motor::motor_on() {
-	Motor::run_Right();
+	Motor::run_right();
 }
 
 /*

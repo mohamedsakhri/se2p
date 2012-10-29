@@ -7,8 +7,8 @@
 
 #ifndef MOTOR_H_
 #define MOTOR_H_
-
-#include "HALAktorik.h"
+#include "HWaccess.h"
+#include "Adress.h"
 
 class Motor {
 public:

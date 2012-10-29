@@ -7,6 +7,7 @@
 
 #include "LED.h"
 
+
 LED::LED() {
 	// TODO Auto-generated constructor stub
 
@@ -50,7 +51,7 @@ void LED::Q2_LED_on() {
 	out8(DIGITAL_CARD_CROUP0_PORTC, BIT_3 | portCState);
 }
 
-void LED::Q2_LED_on() {
+void LED::Q2_LED_off() {
 	uint8_t portCState = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, BIT_3 ^ portCState);
 }

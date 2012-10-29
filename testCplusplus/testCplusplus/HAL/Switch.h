@@ -7,8 +7,8 @@
 
 #ifndef SWITCH_H_
 #define SWITCH_H_
-
-#include "HALAktorik.h"
+#include "HWaccess.h"
+#include "Adress.h"
 
 class Switch {
 public:

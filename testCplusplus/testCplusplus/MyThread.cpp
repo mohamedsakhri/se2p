@@ -14,10 +14,10 @@
 #include <iostream>
 #include <errno.h>
 #include "MyThread.h"
-#include "HALAktorik/HALAktorik.h"
-
+#include "HAL/HALAktorik.h"
 
 using namespace thread;
+class HALAktorik;
 
 MyThread::MyThread() {
 	// TODO Auto-generated constructor stub
@@ -34,17 +34,45 @@ void MyThread::shutdown() {
 void MyThread::execute(void *arg) {
 	// This returns an error which is driving me crazy!!
 	// still working on itS
-	//HALAktorik *hal_A = HALAktorik::getInstance();
+	//HALAktorik *hal_A = new HALAktorik();
+	HALAktorik *hal_A = HALAktorik::getInstance();
 
 	while (!isStopped()) {
 
-	//	hal_A->red_Light_on();
+		hal_A->motor_on();
+		cout << "Motor on " << endl;
+
+		hal_A->red_Light_on();
 		cout << "Red light on " << endl;
 		sleep(1);
 
-		//hal_A->red_Light_off();
+		hal_A->red_Light_off();
 		cout << "Red light off " << endl;
 		sleep(1);
+
+		hal_A->yellow_Light_on();
+		cout << "Yellow light on " << endl;
+		sleep(1);
+
+		hal_A->yellow_Light_off();
+		cout << "Yellow light off " << endl;
+		sleep(1);
+
+		hal_A->green_Light_on();
+		cout << "Green light on " << endl;
+		sleep(1);
+
+		hal_A->green_Light_off();
+		cout << "Green light off " << endl;
+		sleep(1);
+
+		hal_A->open_Switch();
+		cout << "Switch open" << endl;
+		sleep(1);
+
+		hal_A->motor_off();
+		cout << "Motor off " << endl;
+
 		/*
 		 HALAktorik::scheibeAuf();
 		 cout << "Scheibe Auf " << endl;
@@ -67,7 +95,7 @@ void MyThread::execute(void *arg) {
 		 HALAktorik::lampeGelbAus();
 		 cout << "GRUEN Aus " << endl;
 		 sleep(1);
-*/
+		 */
 
 	}
 

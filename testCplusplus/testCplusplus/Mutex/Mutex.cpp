@@ -26,7 +26,7 @@ void Mutex::unlock()
 
 void Mutex::lock()
 {
-	pthread_mutex_lock(&mutex);
+	pthread_mutex_lock(&mutex_);
 }
 
 

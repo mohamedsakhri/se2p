@@ -5,16 +5,17 @@
  *      Author: simohamed
 
 */
-#include "HALAktorik.h"
+#include "HAL/HALAktorik.h"
+
 
 using namespace std;
-using namespace HALAktorik;
 
 HALAktorik* HALAktorik::hal_Aktorik_instance_ = NULL;
 Mutex* HALAktorik::hal_Aktorik_mutex_ = new Mutex();
 
 HALAktorik::HALAktorik()
 {
+
 	// TODO  Implement Singelton Pattern HERE
 	 // test Access' right
 	 if (-1 == ThreadCtl(_NTO_TCTL_IO, 0)) {
@@ -22,7 +23,13 @@ HALAktorik::HALAktorik()
 	 return;
 	 }
 	 // Initialize IO Card in case of success
+	 led_ = new LED();
+	 motor_ = new Motor();
+	 light_ = new Light();
+	 switch_ = new Switch();
+
 	 out8(DIGITAL_CARD_CONTROL, 0x82);
+
 }
 
 HALAktorik::~HALAktorik()
@@ -43,6 +50,7 @@ HALAktorik* HALAktorik::getInstance()
 		}
 		hal_Aktorik_mutex_->unlock();
 	}
+
 	return hal_Aktorik_instance_;
 }
 
@@ -65,6 +73,7 @@ void HALAktorik::motor_off()
 bool HALAktorik::is_Switch_Open()
 {
 	switch_->is_Switch_Open();
+	return false;
 }
 
 

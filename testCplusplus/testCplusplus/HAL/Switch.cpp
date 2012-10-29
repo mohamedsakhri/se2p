@@ -6,6 +6,8 @@
  */
 
 #include "Switch.h"
+#include "HWaccess.h"
+
 
 Switch::Switch() {
 	// TODO Auto-generated constructor stub

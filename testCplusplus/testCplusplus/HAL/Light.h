@@ -7,8 +7,8 @@
 
 #ifndef LIGHT_H_
 #define LIGHT_H_
-
-#include "HALAktorik.h"
+#include "HWaccess.h"
+#include "Adress.h"
 
 class Light {
 public:

@@ -13,6 +13,10 @@
 // Sie muss in jeder Datei stehen, die auf die HW zugreift
 
 #include "MyThread.h"
+#include <cstdlib>
+#include <iostream>
+#include<unistd.h>
+#include <errno.h>
 
 using namespace std;
 using namespace thread;

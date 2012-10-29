@@ -8,23 +8,17 @@
 #ifndef HALAktorik_H_
 #define HALAktorik_H_
 
-#include <cstdlib>
-#include <iostream>
-#include <unistd.h>
-#include <errno.h>
-
 #include "HWaccess.h"
 #include "Adress.h"
-#include "LED.h"
-#include "Light.h"
-#include "Motor.h"
-#include "Switch.h"
 #include "Mutex/Mutex.h"
+#include "LED.h"
+#include "Switch.h"
+#include "Motor.h"
+#include "Light.h"
 
 
 class HALAktorik {
 public:
-	HALAktorik();
 	virtual ~HALAktorik();
 
 	static HALAktorik* getInstance();
@@ -58,6 +52,7 @@ public:
 	void Q2_LED_off();
 
 private :
+	HALAktorik();
 	LED *led_;
 	Light *light_;
 	Motor *motor_;
@@ -65,6 +60,5 @@ private :
 	static HALAktorik *hal_Aktorik_instance_;
 	static Mutex *hal_Aktorik_mutex_;
 };
-
 
 #endif /* HALAktorik_H_ */

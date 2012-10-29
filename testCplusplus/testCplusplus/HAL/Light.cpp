@@ -6,6 +6,8 @@
  */
 
 #include "Light.h"
+#include "HWaccess.h"
+
 
 Light::Light() {
 	// TODO Auto-generated constructor stub
@@ -17,26 +19,26 @@ Light::~Light() {
 }
 
 void Light::green_Light_on() {
-	Light::lightOn( BIT_5);
+	Light::light_on( BIT_5);
 }
 
 void Light::green_Light_off() {
-	Light::lightOn( BIT_5);
+	Light::light_off( BIT_5);
 }
 void Light::yellow_Light_on() {
-	Light::lightOn( BIT_6);
+	Light::light_on( BIT_6);
 }
 
 void Light::yellow_Light_off() {
-	Light::lightOn( BIT_6);
+	Light::light_off( BIT_6);
 }
 
 void Light::red_Light_on() {
-	Light::lightOn( BIT_7);
+	Light::light_on( BIT_7);
 }
 
 void Light::red_Light_off() {
-	Light::lightOn( BIT_7);
+	Light::light_off( BIT_7);
 }
 
 void Light::light_on(uint8_t bitNumber) {
