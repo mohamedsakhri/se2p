@@ -17,16 +17,11 @@ Mutex::~Mutex() {
 	pthread_mutex_unlock(&mutex_);
 }
 
-void Mutex::unlock()
-{
+void Mutex::unlock() {
 	pthread_mutex_unlock(&mutex_);
 }
 
-
-
-void Mutex::lock()
-{
+void Mutex::lock() {
 	pthread_mutex_lock(&mutex_);
 }
-
 

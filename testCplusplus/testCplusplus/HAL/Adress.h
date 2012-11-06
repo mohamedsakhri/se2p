@@ -17,7 +17,6 @@
 #define DIGITAL_CARD_CROUP0_PORTA (D_IOBASE + 0x00) // Port A adress
 #define DIGITAL_CARD_CROUP0_PORTB (D_IOBASE + 0x01) // Port B adress
 #define DIGITAL_CARD_CROUP0_PORTC (D_IOBASE + 0x02) // Port C adress
-
 /*
  * Using BIT_x instead of some magic numbers
  *
@@ -31,10 +30,5 @@
 #define BIT_6 0x40
 #define BIT_7 0x80
 
-
-
 #endif /* ADDRESS_H_ */
-
-
-
 

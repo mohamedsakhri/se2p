@@ -1,0 +1,11 @@
+<map id="LEDTest::execute" name="LEDTest::execute">
+<area shape="rect" id="node3" href="$classHALAktorik.html#a20a68e52a470319e011e5f8cee37df28" title="Used to implement Singleton Pattern." alt="" coords="192,5,357,35"/>
+<area shape="rect" id="node5" href="$classHALAktorik.html#adec03bb7d9e3e5743eb5c60001d41669" title="Turn Q1&#45;LED off." alt="" coords="191,59,359,88"/>
+<area shape="rect" id="node7" href="$classHALAktorik.html#a378aac1c7823ce369715cd244172601b" title="Turn Q1&#45;LED on." alt="" coords="191,112,359,141"/>
+<area shape="rect" id="node9" href="$classHALAktorik.html#aaccb1a786e8316db0c9f8600cb4d96aa" title="Turn Q2&#45;LED off." alt="" coords="191,165,359,195"/>
+<area shape="rect" id="node11" href="$classHALAktorik.html#a8d4003f8e8375602c82646cb21b439a3" title="Turn Q2&#45;LED on." alt="" coords="191,219,359,248"/>
+<area shape="rect" id="node13" href="$classHALAktorik.html#abdbc6bed8a1e3661ca71a1a44cb0ccd9" title="Turn Reset&#45;LED off." alt="" coords="181,272,368,301"/>
+<area shape="rect" id="node15" href="$classHALAktorik.html#a5b49fdda4469af595e49da361854485c" title="Turn Reset&#45;LED on." alt="" coords="181,325,368,355"/>
+<area shape="rect" id="node17" href="$classHALAktorik.html#ab42deff30e627dfe2a8961cb4464959f" title="Turn Start&#45;LED off." alt="" coords="185,379,364,408"/>
+<area shape="rect" id="node19" href="$classHALAktorik.html#a7cb012113b02679c109ffaca68277958" title="Turn Start&#45;LED on." alt="" coords="185,432,364,461"/>
+</map>

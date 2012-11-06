@@ -1,0 +1,14 @@
+<map id="thread::MyThread::execute" name="thread::MyThread::execute">
+<area shape="rect" id="node3" href="$classHALAktorik.html#ad55e017d8de25a0dc7092b53244c271a" title="Close the switch." alt="" coords="239,5,412,35"/>
+<area shape="rect" id="node5" href="$classHALAktorik.html#a20a68e52a470319e011e5f8cee37df28" title="Used to implement Singleton Pattern." alt="" coords="243,59,408,88"/>
+<area shape="rect" id="node7" href="$classHALAktorik.html#aeaceae8a8a0ef3be81dca8df7ea0ab0a" title="Turn green light off." alt="" coords="232,112,419,141"/>
+<area shape="rect" id="node9" href="$classHALAktorik.html#ae55384d6c51f9a43b43ca84c280f5430" title="Turn green light on." alt="" coords="233,165,417,195"/>
+<area shape="rect" id="node11" href="$classthread_1_1HAWThread.html#a46e9f127856f36917b3a8a345b7be5ee" title="thread::HAWThread::\lisStopped" alt="" coords="252,218,399,265"/>
+<area shape="rect" id="node13" href="$classHALAktorik.html#a2a57b4eb5fcde44bf160c46815f14b28" title="Turn motor off." alt="" coords="249,288,401,317"/>
+<area shape="rect" id="node15" href="$classHALAktorik.html#a6f27f19f7fd52467a18fb3bdfc82ec66" title="Turn motor on." alt="" coords="251,341,400,371"/>
+<area shape="rect" id="node17" href="$classHALAktorik.html#abe3471c5b68686bc39f85cb152741be7" title="Open the switch." alt="" coords="240,395,411,424"/>
+<area shape="rect" id="node19" href="$classHALAktorik.html#ac8c0c9960dba4287e6df67e2c254db35" title="Turn red light off." alt="" coords="240,448,411,477"/>
+<area shape="rect" id="node21" href="$classHALAktorik.html#a0d55175ff6c4e3b9a5ae42c85f95c41e" title="Turn red light on." alt="" coords="240,501,411,531"/>
+<area shape="rect" id="node23" href="$classHALAktorik.html#a32e891e6f153e0a9cbb48f652ca74335" title="Turn yellow light off." alt="" coords="259,554,392,601"/>
+<area shape="rect" id="node25" href="$classHALAktorik.html#a346a3ca71aef54f0f0217b538cd908e0" title="Turn yellow light on." alt="" coords="259,623,392,670"/>
+</map>

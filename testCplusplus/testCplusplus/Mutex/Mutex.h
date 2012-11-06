@@ -14,11 +14,10 @@ class Mutex {
 public:
 	Mutex();
 	virtual ~Mutex();
-
 	void lock();
 	void unlock();
 
-private :
+private:
 	pthread_mutex_t mutex_;
 };
 

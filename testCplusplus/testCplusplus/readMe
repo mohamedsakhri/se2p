@@ -1,13 +1,13 @@
+HAL with two classes PortA and PortB.
 
-HAL has to be started from the Controler class by calling the getInstance methode.
+Both classes are thread-safe :
 
-Now, that we haven't dectared a controller class yet, it will be started in myThread
+set_Bit_on(uint_8) : to set a bit on, thread-sef using Port_Mutex
+set_Bit_off(uint_8) : to set a bit off, thread-sef using Port_Mutex
 
-TO DO:
-solving : undefined Reference for HALAktorik::getInstance(); 
-
-Some tests : For each component a class to test it. It'd make more sense if they run as Threads
-
-Tests will be added in a Test folder
-
-Serial interface in a new Folder, called SerInterface
+ All other methods in PortA and PortC call these two methodes to set a bit on or off.
+ 
+ Macros in main thread :
+ - to run selected tests
+ - to turn on/off mutex debuging
+ 

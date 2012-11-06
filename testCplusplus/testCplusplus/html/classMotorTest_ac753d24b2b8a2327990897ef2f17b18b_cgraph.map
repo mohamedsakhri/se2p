@@ -1,0 +1,5 @@
+<map id="MotorTest::execute" name="MotorTest::execute">
+<area shape="rect" id="node3" href="$classHALAktorik.html#a20a68e52a470319e011e5f8cee37df28" title="Used to implement Singleton Pattern." alt="" coords="189,5,355,35"/>
+<area shape="rect" id="node5" href="$classHALAktorik.html#a2a57b4eb5fcde44bf160c46815f14b28" title="Turn motor off." alt="" coords="196,59,348,88"/>
+<area shape="rect" id="node7" href="$classHALAktorik.html#a6f27f19f7fd52467a18fb3bdfc82ec66" title="Turn motor on." alt="" coords="197,112,347,141"/>
+</map>

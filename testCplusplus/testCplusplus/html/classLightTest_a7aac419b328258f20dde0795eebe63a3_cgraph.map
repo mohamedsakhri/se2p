@@ -1,0 +1,11 @@
+<map id="LightTest::execute" name="LightTest::execute">
+<area shape="rect" id="node3" href="$classHALAktorik.html#a20a68e52a470319e011e5f8cee37df28" title="Used to implement Singleton Pattern." alt="" coords="195,5,360,35"/>
+<area shape="rect" id="node5" href="$classHALAktorik.html#aeaceae8a8a0ef3be81dca8df7ea0ab0a" title="Turn green light off." alt="" coords="184,59,371,88"/>
+<area shape="rect" id="node7" href="$classHALAktorik.html#ae55384d6c51f9a43b43ca84c280f5430" title="Turn green light on." alt="" coords="185,112,369,141"/>
+<area shape="rect" id="node9" href="$classHALAktorik.html#ac8c0c9960dba4287e6df67e2c254db35" title="Turn red light off." alt="" coords="192,165,363,195"/>
+<area shape="rect" id="node11" href="$classHALAktorik.html#a0d55175ff6c4e3b9a5ae42c85f95c41e" title="Turn red light on." alt="" coords="192,219,363,248"/>
+<area shape="rect" id="node13" href="$classHALAktorik.html#af5741db1e05ef85153ed695b0dc4a0f1" title="Start red light flashing quickly." alt="" coords="203,271,352,318"/>
+<area shape="rect" id="node15" href="$classHALAktorik.html#a686dc1d2e18bb5286ebf9a7c4a8da418" title="Start red light flashing slowly." alt="" coords="185,341,369,371"/>
+<area shape="rect" id="node17" href="$classHALAktorik.html#a32e891e6f153e0a9cbb48f652ca74335" title="Turn yellow light off." alt="" coords="211,394,344,441"/>
+<area shape="rect" id="node19" href="$classHALAktorik.html#a346a3ca71aef54f0f0217b538cd908e0" title="Turn yellow light on." alt="" coords="211,463,344,510"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="PortA::red_Light_quick" name="PortA::red_Light_quick">
+<area shape="rect" id="node3" href="$classPortA.html#a37cd9f4ebd731b85efd4138025c8282b" title="Turn red light off." alt="" coords="208,5,347,35"/>
+<area shape="rect" id="node11" href="$classPortA.html#af43ebb22aa86ec7ef3633ec1d4ca5a41" title="Turn red light on." alt="" coords="209,59,345,88"/>
+<area shape="rect" id="node5" href="$classPortA.html#a9492069866d0c220a4d1f0ed8f570f53" title="Set a bit off." alt="" coords="396,5,521,35"/>
+<area shape="rect" id="node7" href="$classMutex.html#ad91be808bf0a60a16f10b897ec246d3a" title="Mutex::lock" alt="" coords="577,5,668,35"/>
+<area shape="rect" id="node9" href="$classMutex.html#a546a5b797ba29959357586aa2b3740a8" title="Mutex::unlock" alt="" coords="571,59,675,88"/>
+<area shape="rect" id="node13" href="$classPortA.html#a1fdd53f5255eb4a7d6856e84c79a261f" title="Set a bit on." alt="" coords="396,59,521,88"/>
+</map>
