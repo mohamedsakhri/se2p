@@ -14,7 +14,8 @@
 #define QUICK 500000
 #define SLOW 1000000
 
-#define FLASH_TEST
+//#define FLASH_TEST
+#define LIGHT_TEST
 
 LightTest::LightTest() {
 	// TODO Auto-generated constructor stub

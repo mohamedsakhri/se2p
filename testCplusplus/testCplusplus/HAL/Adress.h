@@ -12,11 +12,14 @@
  *  Digital Card Base and Ports Adresses
  *
  */
-#define D_IOBASE 0x300 								// Base adress
-#define DIGITAL_CARD_CONTROL (D_IOBASE + 0x03) 		// Control adress
-#define DIGITAL_CARD_CROUP0_PORTA (D_IOBASE + 0x00) // Port A adress
-#define DIGITAL_CARD_CROUP0_PORTB (D_IOBASE + 0x01) // Port B adress
-#define DIGITAL_CARD_CROUP0_PORTC (D_IOBASE + 0x02) // Port C adress
+#define D_IOBASE 0x300 								//!< Base adress
+#define DIGITAL_CARD_CONTROL (D_IOBASE + 0x03) 		//!< Control adress
+#define DIGITAL_CARD_CROUP0_PORTA (D_IOBASE + 0x00) //!< Port A adress
+#define DIGITAL_CARD_CROUP0_PORTB (D_IOBASE + 0x01) //!< Port B adress
+#define DIGITAL_CARD_CROUP0_PORTC (D_IOBASE + 0x02) //!< Port C adress
+
+#define INTERRUPT_STATUS_REG (D_IOBASE + 0x0F)		//!< Status register
+
 /*
  * Using BIT_x instead of some magic numbers
  *

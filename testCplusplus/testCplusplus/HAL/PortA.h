@@ -20,14 +20,6 @@ class PortA {
 public:
 	PortA();	//!< Constructor
 	virtual ~PortA();	//!< Destructor
-	/**
-	 * @param bitNumber Bit's mask to set on
-	 */
-	void set_Bit_on(uint8_t bitNumber);	//!< Set a bit on
-	/**
-	 * @param bitNumber Bit's mask to set off
-	 */
-	void set_Bit_off(uint8_t bitNumber);	//!< Set a bit off
 
 	void green_Light_on();	//!< Turn green light on
 	void green_Light_off();	//!< Turn green light off
@@ -54,7 +46,16 @@ public:
 
 
 private:
-	static Mutex *portA_mutex_;		//!< Mutex for thread-safe implementation
+	static Mutex portA_mutex_;		//!< Mutex for thread-safe implementation
+	/**
+	 * @param bitNumber Bit's mask to set on
+	 */
+	void set_Bit_on(uint8_t bitNumber);	//!< Set a bit on
+	/**
+	 * @param bitNumber Bit's mask to set off
+	 */
+	void set_Bit_off(uint8_t bitNumber);	//!< Set a bit off
+
 };
 
 #endif /* PORTA_H_ */

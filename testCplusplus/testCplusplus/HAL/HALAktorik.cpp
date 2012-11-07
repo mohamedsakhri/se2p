@@ -12,7 +12,7 @@
 using namespace std;
 
 HALAktorik* HALAktorik::hal_Aktorik_instance_ = NULL;
-Mutex* HALAktorik::hal_Aktorik_mutex_ = new Mutex();
+Mutex HALAktorik::hal_Aktorik_mutex_ = Mutex();
 
 /**
  * Initialization of portA and PortC
@@ -46,12 +46,12 @@ HALAktorik* HALAktorik::getInstance() {
 		}
 
 	if (!hal_Aktorik_instance_) {
-		hal_Aktorik_mutex_->lock();
+		hal_Aktorik_mutex_.lock();
 		if (!hal_Aktorik_instance_) {
 			hal_Aktorik_instance_ = new HALAktorik;
 			out8(DIGITAL_CARD_CONTROL, 0x8A);
 		}
-		hal_Aktorik_mutex_->unlock();
+		hal_Aktorik_mutex_.unlock();
 	}
 
 

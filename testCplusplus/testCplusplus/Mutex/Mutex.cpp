@@ -14,7 +14,7 @@ Mutex::Mutex() {
 
 Mutex::~Mutex() {
 	// TODO Auto-generated destructor stub
-	pthread_mutex_unlock(&mutex_);
+	pthread_mutex_destroy(&mutex_);
 }
 
 void Mutex::unlock() {

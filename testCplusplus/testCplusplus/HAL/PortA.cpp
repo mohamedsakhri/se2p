@@ -18,7 +18,7 @@
  * \see set_Bit_on()
  * \see set_Bit_off()
  */
-Mutex* PortA::portA_mutex_ = new Mutex();
+Mutex PortA::portA_mutex_ = Mutex();
 
 /**
  * Constructor does nothing
@@ -30,6 +30,7 @@ PortA::PortA() {
  * Destructor does nothing
  */
 PortA::~PortA() {
+
 }
 
 /**
@@ -37,13 +38,13 @@ PortA::~PortA() {
  * \see portA_mutex
  */
 void PortA::set_Bit_on(uint8_t bitNumber) {
-	portA_mutex_->lock();
+	portA_mutex_.lock();
 #ifdef DEBUG_MUTEX
 	cout << "On:PortA_Mutex locked" << endl;
 #endif
 	uint8_t portAState = in8(DIGITAL_CARD_CROUP0_PORTA);
 	out8(DIGITAL_CARD_CROUP0_PORTA, bitNumber | portAState);
-	portA_mutex_->unlock();
+	portA_mutex_.unlock();
 #ifdef DEBUG_MUTEX
 	cout << "On:PortA_Mutex unlocked" << endl;
 #endif
@@ -54,13 +55,13 @@ void PortA::set_Bit_on(uint8_t bitNumber) {
  * \see portA_mutex
  */
 void PortA::set_Bit_off(uint8_t bitNumber) {
-	portA_mutex_->lock();
+	portA_mutex_.lock();
 #ifdef DEBUG_MUTEX
 	cout << "Off:PortA_Mutex locked" << endl;
 #endif
 	uint8_t portAState = in8(DIGITAL_CARD_CROUP0_PORTA);
 	out8(DIGITAL_CARD_CROUP0_PORTA, ~bitNumber & portAState);
-	portA_mutex_->unlock();
+	portA_mutex_.unlock();
 #ifdef DEBUG_MUTEX
 	cout << "Off:PortA_Mutex unlocked" << endl;
 #endif

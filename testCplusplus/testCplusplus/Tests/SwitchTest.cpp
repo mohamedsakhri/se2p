@@ -21,6 +21,7 @@ SwitchTest::~SwitchTest() {
 void SwitchTest::execute(void *arg) {
 	HALAktorik *hal_A = HALAktorik::getInstance();
 
+	WAIT_ONE_S;
 	hal_A->open_Switch();
 	cout << "Switch open" << endl;
 	WAIT_THREE_S;

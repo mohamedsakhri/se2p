@@ -16,7 +16,7 @@
  * \see set_Bit_on()
  * \see set_Bit_off()
  */
-Mutex* PortC::portC_mutex_ = new Mutex();
+Mutex PortC::portC_mutex_ = Mutex();
 
 /**
  * Constructor does nothing
@@ -35,13 +35,13 @@ PortC::~PortC() {
  * \see portC_mutex
  */
 void PortC::set_Bit_on(uint8_t bitNumber) {
-	portC_mutex_->lock();
+	portC_mutex_.lock();
 #ifdef DEBUG_MUTEX
 	cout << "On:PortC_Mutex locked" << endl;
 #endif
 	uint8_t portC_state = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, portC_state | bitNumber);
-	portC_mutex_->unlock();
+	portC_mutex_.unlock();
 #ifdef DEBUG_MUTEX
 	cout << "On:PortC_Mutex locked" << endl;
 #endif
@@ -52,13 +52,13 @@ void PortC::set_Bit_on(uint8_t bitNumber) {
  * \see portC_mutex
  */
 void PortC::set_Bit_off(uint8_t bitNumber) {
-	portC_mutex_->lock();
+	portC_mutex_.lock();
 #ifdef DEBUG_MUTEX
 	cout << "Off:PortC_Mutex locked" << endl;
 #endif
 	uint8_t portC_state = in8(DIGITAL_CARD_CROUP0_PORTC);
 	out8(DIGITAL_CARD_CROUP0_PORTC, ~bitNumber & portC_state);
-	portC_mutex_->unlock();
+	portC_mutex_.unlock();
 #ifdef DEBUG_MUTEX
 	cout << "Off:PortC_Mutex locked" << endl;
 #endif

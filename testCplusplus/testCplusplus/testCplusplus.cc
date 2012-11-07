@@ -15,11 +15,10 @@
 /*
  * macros to run tests
  */
-//#define LED_TEST
-#define SWITCH_TEST
-#define MOTOR_TEST
+#define LED_TEST
+//#define SWITCH_TEST
+//#define MOTOR_TEST
 //#define LIGHT_TEST
-#define FLASH_TEST
 //#define SER_INTERFACE_TEST
 //#define DEBUG_MUTEX
 
@@ -54,7 +53,7 @@ int main(int argc, char *argv[]) {
 	ledTest.start(NULL);
 #endif
 
-#ifdef FLASH_TEST
+#ifdef LIGHT_TEST
 	LightTest lightTest;
 	lightTest.start(NULL);
 #endif

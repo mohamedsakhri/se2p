@@ -22,17 +22,14 @@ HAWThread::HAWThread() :
 }
 
 HAWThread::~HAWThread() {
-	cout << "Destructor" << tid_ << endl;
 	ThreadDestroy(tid_, 0, 0);
 
 }
 
 void HAWThread::start(void * arg) {
 	if (bRunning_){
-		cout << "bRunning" << bRunning_ << endl;
 		return;
 	}
-	cout << "bRunning" << bRunning_ << endl;
 	bRunning_ = true;
 	Arg(arg); // store user data
 	int code = pthread_create(&tid_, NULL, (HAWThread::entryPoint), this);

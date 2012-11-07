@@ -19,14 +19,6 @@ class PortC {
 public:
 	PortC();	//!< Constructor
 	virtual ~PortC();	//!< Destructor
-	/**
-	 * @param bitNumber Bit's mask to set on
-	 */
-	void set_Bit_on(uint8_t bitNumber);	//!< Set a bit on
-	/**
-	 * @param bitNumber Bit's mask to set off
-	 */
-	void set_Bit_off(uint8_t bitNumber);	//!< Set a bit off
 
 	void Start_LED_on();	//!< Turn Start-LED on
 	void Start_LED_off();	//!< Turn Start-LED off
@@ -39,7 +31,15 @@ public:
 
 
 private:
-	static Mutex *portC_mutex_;		//!< Mutex for thread-safe implementation
+	static Mutex portC_mutex_;		//!< Mutex for thread-safe implementation
+	/**
+	 * @param bitNumber Bit's mask to set on
+	 */
+	void set_Bit_on(uint8_t bitNumber);	//!< Set a bit on
+	/**
+	 * @param bitNumber Bit's mask to set off
+	 */
+	void set_Bit_off(uint8_t bitNumber);	//!< Set a bit off
 };
 
 #endif /* PORTC_H_ */

@@ -63,7 +63,7 @@ private:
 	PortA *portA_; //!< Represent Port A
 	PortC *portC_; //!< Represent Port C
 	static HALAktorik *hal_Aktorik_instance_; //!< The only instance of HAL
-	static Mutex *hal_Aktorik_mutex_; //!< Mutex for thread-safe implementation
+	static Mutex hal_Aktorik_mutex_; //!< Mutex for thread-safe implementation
 };
 
 #endif /* HALAktorik_H_ */
