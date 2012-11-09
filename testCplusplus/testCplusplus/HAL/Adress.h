@@ -19,6 +19,9 @@
 #define DIGITAL_CARD_CROUP0_PORTC (D_IOBASE + 0x02) //!< Port C adress
 
 #define INTERRUPT_STATUS_REG (D_IOBASE + 0x0F)		//!< Status register
+#define INTERRUPT_CTR_REG (D_IOBASE + 0x0B)			//!< Interrupt control (Enable Chg-of-St. Interrupt)
+#define PB_CTR 0x02
+#define PC_LOW_CTR 0x04
 
 /*
  * Using BIT_x instead of some magic numbers

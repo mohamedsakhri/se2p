@@ -15,9 +15,9 @@
 /*
  * macros to run tests
  */
-#define LED_TEST
-//#define SWITCH_TEST
-//#define MOTOR_TEST
+//#define LED_TEST
+#define SWITCH_TEST
+#define MOTOR_TEST
 //#define LIGHT_TEST
 //#define SER_INTERFACE_TEST
 //#define DEBUG_MUTEX
@@ -34,6 +34,7 @@
 #include "MotorTest.h"
 #include "SwitchTest.h"
 #include "SerInterfaceTest.h"
+#include "HALSensoric.h"
 
 using namespace std;
 using namespace thread;
@@ -46,7 +47,8 @@ int main(int argc, char *argv[]) {
 	IOaccess_open(); // Baue die Verbindung zur Simulation auf
 #endif
 
-
+HALSensoric *hal_sensorik = HALSensoric::getInstance();
+hal_sensorik->start(NULL);
 
 #ifdef LED_TEST
 	LEDTest ledTest;
@@ -87,7 +89,7 @@ int main(int argc, char *argv[]) {
 #ifdef SWITCH_TEST
 	switchTest.join();
 #endif
-
+	hal_sensorik->join();
 #ifdef SIMULATION
 	IOaccess_close(); // Schliesse die Verbindung zur Simulation
 #endif

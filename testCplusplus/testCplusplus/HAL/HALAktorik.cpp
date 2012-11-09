@@ -30,6 +30,7 @@ HALAktorik::HALAktorik() {
 HALAktorik::~HALAktorik() {
 	delete portA_;
 	delete portC_;
+	delete hal_Aktorik_instance_;
 }
 
 /**

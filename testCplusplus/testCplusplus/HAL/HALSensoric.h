@@ -10,12 +10,13 @@
 
 #include "HAWThread.h"
 #include "Adress.h"
-
-
+#include "Mutex.h"
+#include "stdint.h"
 
 using namespace thread;
+const struct sigevent* ISR(void *arg, int id);
 
-class HALSensoric:public HAWThread {
+class HALSensoric: public HAWThread {
 public:
 	virtual ~HALSensoric();
 	static HALSensoric* getInstance();
@@ -23,19 +24,17 @@ public:
 private:
 	HALSensoric(); //!< Constructor
 	void initInterrupt(); //!<
-	const struct sigevent* ISR (void *arg, int id);
-
-//	PortC portC_;
-//	PortB portB_;
-	Mutex hal_Sensoric_mutex_;
+	static Mutex hal_Sensoric_mutex_;
 	static HALSensoric *hal_Sensoric_instance_; //!< Singelton instance for HALSensoric
 	struct sigevent event_;
-	int isr_coid_;
+	int channel_id_;
+	int interrupt_id_;
+	uint8_t portC_state_;
+	uint8_t portB_state_;
 
-//protected:
+	//protected:
 	virtual void execute(void* arg);
 	virtual void shutdown();
-
 
 };
 
