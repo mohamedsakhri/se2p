@@ -16,11 +16,13 @@
  * macros to run tests
  */
 //#define LED_TEST
-#define SWITCH_TEST
-#define MOTOR_TEST
+//#define SWITCH_TEST
+//#define MOTOR_TEST
 //#define LIGHT_TEST
 //#define SER_INTERFACE_TEST
+#define SENSORIC_TEST
 //#define DEBUG_MUTEX
+#define DEBUX_
 
 
 #include "HWaccess.h"
@@ -35,6 +37,7 @@
 #include "SwitchTest.h"
 #include "SerInterfaceTest.h"
 #include "HALSensoric.h"
+#include "SensoricTest.h"
 
 using namespace std;
 using namespace thread;
@@ -47,8 +50,10 @@ int main(int argc, char *argv[]) {
 	IOaccess_open(); // Baue die Verbindung zur Simulation auf
 #endif
 
-HALSensoric *hal_sensorik = HALSensoric::getInstance();
-hal_sensorik->start(NULL);
+#ifdef SENSORIC_TEST
+	SensoricTest sensoric_test ;
+	sensoric_test.start(NULL);
+#endif
 
 #ifdef LED_TEST
 	LEDTest ledTest;
@@ -89,7 +94,11 @@ hal_sensorik->start(NULL);
 #ifdef SWITCH_TEST
 	switchTest.join();
 #endif
-	hal_sensorik->join();
+
+#ifdef SENSORIC_TEST
+	sensoric_test.join();
+#endif
+
 #ifdef SIMULATION
 	IOaccess_close(); // Schliesse die Verbindung zur Simulation
 #endif

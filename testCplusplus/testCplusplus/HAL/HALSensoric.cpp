@@ -1,29 +1,32 @@
-/*
- * HALSensoric.cpp
+/**
+ * @file 	HALSensoric.cpp
+ * @author	Mahmud Dariti
+ * @author	Mohamed Sakhri
+ * @date	Nov 07, 2012
  *
- *  Created on: 07.11.2012
- *      Author: aax877
+ * This class implements all methods needed to interact with input-hardware.
+ *
  */
-
+#define DEBUG_
 #include "HALSensoric.h"
-
 #include "HALAktorik.h"
 
 Mutex HALSensoric::hal_Sensoric_mutex_ = Mutex();
 HALSensoric* HALSensoric::hal_Sensoric_instance_ = NULL;
 
+/**
+ * ISR connection id
+ */
 static int isr_coid_;
 
 
 HALSensoric::HALSensoric() {
-	// TODO Auto-generated constructor stub
 	initInterrupt();
 
 }
 
 HALSensoric::~HALSensoric() {
-	// TODO Auto-generated destructor stub
-//	delete hal_Sensoric_instance_;
+	delete hal_Sensoric_instance_;
 }
 
 HALSensoric *HALSensoric::getInstance() {
@@ -42,36 +45,47 @@ HALSensoric *HALSensoric::getInstance() {
 	return hal_Sensoric_instance_;
 }
 
+/**
+ * ISR : Interrupt service routine determines what to do
+ * 		when an interrupt occurs
+ * @param *arg
+ * @param id
+ * @return struct sigevent*
+ */
 const struct sigevent *ISR(void *arg, int id) {
+#ifdef DEBUG_
+	cout << " ISR started ... " << endl;
+#endif
+	uint8_t reg_stat;	//!< Interrupt register status
+	uint8_t port_state;	//!< To save Port B and c state temporary
+	struct sigevent *event_ = (struct sigevent *) arg;		//<!
 
-	uint8_t reg_stat;
-	uint8_t port_state;
-	struct sigevent *event_ = (struct sigevent *) arg;
-
-	/**
+	/*
 	 * read the interrupt register status
 	 */
 	reg_stat = in8(INTERRUPT_STATUS_REG) & (BIT_1 | BIT_3);
 	out8(INTERRUPT_STATUS_REG, 0); // reset interr_register
-	// if no interrupt from portC or portB ignore
+	// if no interrupt's source isn't portC or portB it will be ignored
 	if (!reg_stat) {
 		return (NULL);
 	}
 
+	/*
+	 * determine which port causes the interrupt and react
+	 */
 	switch (reg_stat) {
 	case BIT_1:
-		/** if the interrupt is from port B */
+		/* if the interrupt is from port B */
 		port_state = in8(DIGITAL_CARD_CROUP0_PORTB); //read portB
 		SIGEV_PULSE_INIT(event_, isr_coid_, SIGEV_PULSE_PRIO_INHERIT,
 				BIT_1, port_state);
 		break;
 
 	case BIT_3:
-		/** if the interrupt is from port C */
+		/* if the interrupt is from port C */
 		port_state = in8(DIGITAL_CARD_CROUP0_PORTC); //read portC
 		SIGEV_PULSE_INIT(event_, isr_coid_, SIGEV_PULSE_PRIO_INHERIT,
 				BIT_3, port_state);
-
 		break;
 
 	default:
@@ -80,29 +94,36 @@ const struct sigevent *ISR(void *arg, int id) {
 	return (event_);
 }
 
+/**
+ * Initialize interrupt's options
+ * It will be called once in constructor
+ */
 void HALSensoric::initInterrupt() {
 	/*
 	 * Create a channel and assign its id to channel_id_
 	 * @param 0 Channel with default parameters
 	 */
+#ifdef DEBUG_
+	cout << " initInterrupt started ... " << endl;
+#endif
 	channel_id_ = ChannelCreate(0);
 	if(channel_id_ == -1) {
 		perror ("HALSensoric: ChannelCreat failed : ");
 		exit(EXIT_FAILURE);
 	}
 	/*
-	 * @param 0 local node
-	 * @param 0 channel in the same process, which started the thread
-	 * @param channel_id channel id
-	 * @param _NTO_SIDE_CHANNEL file descriptor vs. connectionIds
-	 * @param 0 default flags
+	 * 	0 : 				local node
+	 * 	0 : 				channel in the same process, which started the thread
+	 * 	channel_id : 		channel id
+	 * 	_NTO_SIDE_CHANNEL : file descriptor vs. connectionIds
+	 * 	0 : 				default flags
 	 */
 	isr_coid_ = ConnectAttach(0, 0, channel_id_, _NTO_SIDE_CHANNEL, 0);
 	if(isr_coid_ == -1) {
 		perror ("HALSensoric: ConnectAttach failed : ");
 		exit(EXIT_FAILURE);
 	}
-	// Init pulse
+	// Initialize pulse
 	SIGEV_PULSE_INIT(&event_, isr_coid_, SIGEV_PULSE_PRIO_INHERIT,0, 0);
 	// 11 : Bit2 in board status register. It reflects the global interrupt.
 	// See AIO-Manual p. 16 !?
@@ -129,49 +150,27 @@ void HALSensoric::initInterrupt() {
     portC_state_ = in8(DIGITAL_CARD_CROUP0_PORTC);
 
 }
+int HALSensoric::calculateHeight() {
+#ifdef DEBUG_
+	cout << " calculateHeight started ... " << endl;
+#endif
+	int height = 0;
+	// write control byte to ADC
+	out8(A_IOBASE + BIT_1, AIO_CONVERT_CONTROL);
 
-void HALSensoric::execute(void *arg) {
-	struct _pulse pulse;
+	// wait til Bit 7 in Base adress goes high => Conversion is done
+	while (in8(A_IOBASE) & BIT_7) {};
 
+	// Result can be read as 16bit from Base + 2h. See AIO M. p. 20
+	height = in16(A_IOBASE + AD_C_LOW_OFFS);
 
-	while( !isStopped()) {
-        if( -1 == MsgReceivePulse(channel_id_, &pulse, sizeof(pulse), NULL) ){
-            if (isStopped()) {
-                break; // channel destroyed, Thread ending
-            }
-            perror("HALSensoric: MsgReceivePulse");
-            exit(EXIT_FAILURE);
-        }
+	return height;
+}
 
-//      //  portB_state_ = in8(DIGITAL_CARD_CROUP0_PORTB );
-//        //portC_state_ = in8(DIGITAL_CARD_CROUP0_PORTC);
-//        cout <<"portB : " << hex << (int) portB_state_ << endl;
-//  //      cout <<"portC : " << hex << (int) portC_state_ << endl;
-
-       // cout << " port : " << hex << (int) pulse.code << " Value : " << pulse.value.sival_int << endl;
-/*
- *  JUST FOR TEST
+/**
+ * returns channel id of Hal Sensoric. That's the only way other classes could get the channel id
+ * because as parameter it's private
  */
-        switch(pulse.value.sival_int) {
-        case 0xCA:
-        	HALAktorik::getInstance()->motor_on();
-        	break;
-        case 0x4B:
-        	HALAktorik::getInstance()->motor_off();
-        	break;
-        case 0xC3:
-        	HALAktorik::getInstance()->open_Switch();
-        	break;
-        default :
-            cout << " Default - port : " << hex << (int) pulse.code << " Value : " << pulse.value.sival_int << endl;
-
-        }
-        // just for test
-
-	}
+int HALSensoric::getChannelId() {
+	return channel_id_;
 }
-
-void HALSensoric::shutdown() {
-
-}
-

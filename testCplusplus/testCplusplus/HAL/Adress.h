@@ -24,6 +24,10 @@
 #define PC_LOW_CTR 0x04
 
 /*
+ * Port B and Port C High
+ */
+
+/*
  * Using BIT_x instead of some magic numbers
  *
  */
@@ -36,5 +40,12 @@
 #define BIT_6 0x40
 #define BIT_7 0x80
 
+/*
+ *  Aio Card Base and Ports Adresses
+ *
+ */
+#define A_IOBASE 0x00  				// TO BE REPLACED WITH THE RIGHT ADDRESS. See AIO Manual p.14
+#define AIO_CONVERT_CONTROL 0x10  	// See AIO Manual p. 18
+#define AD_C_LOW_OFFS 0x02  		// p. 16
 #endif /* ADDRESS_H_ */
 

@@ -1,10 +1,12 @@
-/*
- * HALSensoric.h
+/**
+ * @file 	HALSensoric.h
+ * @author	Mahmud Dariti
+ * @author	Mohamed Sakhri
+ * @date	Nov 07, 2012
  *
- *  Created on: 07.11.2012
- *      Author: aax877
+ * This class implements all methods needed to interact with input-hardware.
+ *
  */
-
 #ifndef HALSENSORIC_H_
 #define HALSENSORIC_H_
 
@@ -13,28 +15,37 @@
 #include "Mutex.h"
 #include "stdint.h"
 
-using namespace thread;
+
 const struct sigevent* ISR(void *arg, int id);
 
-class HALSensoric: public HAWThread {
+class HALSensoric {
 public:
-	virtual ~HALSensoric();
-	static HALSensoric* getInstance();
+	virtual ~HALSensoric();					//!< Destructor
+	static HALSensoric* getInstance();		//!< Singleton pattern implementation
+	/**
+	 * @return channel_id Channel id used in HAL Sensoric
+	 */
+	int getChannelId();
+	/**
+	 * @return height Worksspace's height after conversion A/D
+	 */
+	int calculateHeight();
 
 private:
-	HALSensoric(); //!< Constructor
-	void initInterrupt(); //!<
-	static Mutex hal_Sensoric_mutex_;
-	static HALSensoric *hal_Sensoric_instance_; //!< Singelton instance for HALSensoric
+	HALSensoric();								//!< Constructor
+	void initInterrupt();						//!< initialize interrupt's options
+
+	static Mutex hal_Sensoric_mutex_;			//!< Needed for thread-safe implemetation
+	static HALSensoric *hal_Sensoric_instance_;//!< Singelton pattern instance for HALSensoric
 	struct sigevent event_;
-	int channel_id_;
-	int interrupt_id_;
-	uint8_t portC_state_;
-	uint8_t portB_state_;
+	int channel_id_;							//!< Channel id
+	int interrupt_id_;							//!< Interrupt id
+	uint8_t portC_state_;						//!< Port C state
+	uint8_t portB_state_;						//!< Port B state
 
 	//protected:
-	virtual void execute(void* arg);
-	virtual void shutdown();
+//	virtual void execute(void* arg);
+//	virtual void shutdown();
 
 };
 
