@@ -15,10 +15,10 @@
 #include "Mutex.h"
 #include "stdint.h"
 
-
+using namespace thread;
 const struct sigevent* ISR(void *arg, int id);
 
-class HALSensoric {
+class HALSensoric: public HAWThread {
 public:
 	virtual ~HALSensoric();					//!< Destructor
 	static HALSensoric* getInstance();		//!< Singleton pattern implementation
@@ -44,8 +44,8 @@ private:
 	uint8_t portB_state_;						//!< Port B state
 
 	//protected:
-//	virtual void execute(void* arg);
-//	virtual void shutdown();
+	virtual void execute(void* arg);
+	virtual void shutdown();
 
 };
 

@@ -20,7 +20,7 @@
 //#define MOTOR_TEST
 //#define LIGHT_TEST
 //#define SER_INTERFACE_TEST
-#define SENSORIC_TEST
+//#define SENSORIC_TEST
 //#define DEBUG_MUTEX
 #define DEBUX_
 
@@ -31,13 +31,16 @@
 #include <iostream>
 #include <unistd.h>
 #include <errno.h>
+#include "SensoricTest.h"
+
+/*
 #include "LEDTest.h"
 #include "LightTest.h"
 #include "MotorTest.h"
 #include "SwitchTest.h"
 #include "SerInterfaceTest.h"
 #include "HALSensoric.h"
-#include "SensoricTest.h"
+*/
 
 using namespace std;
 using namespace thread;
@@ -49,6 +52,14 @@ int main(int argc, char *argv[]) {
 			<< endl;
 	IOaccess_open(); // Baue die Verbindung zur Simulation auf
 #endif
+
+	HALSensoric *hal_sensorik = HALSensoric::getInstance();
+	hal_sensorik->start(NULL);
+
+	SensoricTest sensorik_test ;
+	sensorik_test.start(NULL);
+	sensorik_test.join();
+
 
 #ifdef SENSORIC_TEST
 	SensoricTest sensoric_test ;

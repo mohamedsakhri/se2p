@@ -22,7 +22,11 @@
 #define INTERRUPT_CTR_REG (D_IOBASE + 0x0B)			//!< Interrupt control (Enable Chg-of-St. Interrupt)
 #define PB_CTR 0x02
 #define PC_LOW_CTR 0x04
-
+#define READ_IRQ_CLEAR_INTERRUPT (D_IOBASE + 0x18)	//!< Read IRQ register and clear Interrupt register
+													//!< in the same time. See DIO p.18
+#define IRQ 11
+#define IIR_PORTB 0x02
+#define IIR_PORTC 0x08
 /*
  * Port B and Port C High
  */
@@ -44,7 +48,7 @@
  *  Aio Card Base and Ports Adresses
  *
  */
-#define A_IOBASE 0x00  				// TO BE REPLACED WITH THE RIGHT ADDRESS. See AIO Manual p.14
+#define A_IOBASE 0x320  				// TO BE REPLACED WITH THE RIGHT ADDRESS. See AIO Manual p.14
 #define AIO_CONVERT_CONTROL 0x10  	// See AIO Manual p. 18
 #define AD_C_LOW_OFFS 0x02  		// p. 16
 #endif /* ADDRESS_H_ */

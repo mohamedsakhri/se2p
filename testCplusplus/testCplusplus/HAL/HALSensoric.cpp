@@ -27,6 +27,8 @@ HALSensoric::HALSensoric() {
 
 HALSensoric::~HALSensoric() {
 	delete hal_Sensoric_instance_;
+	ChannelDestroy(channel_id_);
+	InterruptDetach(interrupt_id_);
 }
 
 HALSensoric *HALSensoric::getInstance() {
@@ -34,6 +36,7 @@ HALSensoric *HALSensoric::getInstance() {
 			perror("ThreadCtl access failed\n");
 			return NULL;
 		}
+
 	if (!hal_Sensoric_instance_) {
 		hal_Sensoric_mutex_.lock();
 		if (!hal_Sensoric_instance_) {
@@ -53,45 +56,44 @@ HALSensoric *HALSensoric::getInstance() {
  * @return struct sigevent*
  */
 const struct sigevent *ISR(void *arg, int id) {
-#ifdef DEBUG_
-	cout << " ISR started ... " << endl;
-#endif
-	uint8_t reg_stat;	//!< Interrupt register status
-	uint8_t port_state;	//!< To save Port B and c state temporary
+
+	uint8_t iir;	//!< Interrupt identification register
+	uint8_t port_state;	//!< To save Port B and C state temporary
 	struct sigevent *event_ = (struct sigevent *) arg;		//<!
 
 	/*
-	 * read the interrupt register status
+	 * read IRQ register and clear interrupt register at the same time
 	 */
-	reg_stat = in8(INTERRUPT_STATUS_REG) & (BIT_1 | BIT_3);
-	out8(INTERRUPT_STATUS_REG, 0); // reset interr_register
+//	 iir = in8(READ_IRQ_CLEAR_INTERRUPT) & (BIT_1 | BIT_3);
+	 iir = in8(INTERRUPT_STATUS_REG) & (BIT_1 | BIT_3);
+
+	// reset interrupt register
+	out8(INTERRUPT_STATUS_REG, 0);
 	// if no interrupt's source isn't portC or portB it will be ignored
-	if (!reg_stat) {
+	if (!iir) {
 		return (NULL);
 	}
 
 	/*
 	 * determine which port causes the interrupt and react
 	 */
-	switch (reg_stat) {
-	case BIT_1:
+	switch (iir) {
+	case IIR_PORTB:
 		/* if the interrupt is from port B */
 		port_state = in8(DIGITAL_CARD_CROUP0_PORTB); //read portB
 		SIGEV_PULSE_INIT(event_, isr_coid_, SIGEV_PULSE_PRIO_INHERIT,
-				BIT_1, port_state);
+				IIR_PORTB, port_state);
 		break;
-
-	case BIT_3:
+	case IIR_PORTC:
 		/* if the interrupt is from port C */
 		port_state = in8(DIGITAL_CARD_CROUP0_PORTC); //read portC
 		SIGEV_PULSE_INIT(event_, isr_coid_, SIGEV_PULSE_PRIO_INHERIT,
-				BIT_3, port_state);
+				IIR_PORTC, port_state);
 		break;
-
 	default:
 		break;
 	}
-	return (event_);
+	return event_;
 }
 
 /**
@@ -99,13 +101,13 @@ const struct sigevent *ISR(void *arg, int id) {
  * It will be called once in constructor
  */
 void HALSensoric::initInterrupt() {
+#ifdef DEBUG_
+	cout << " initInterrupt started ... " << endl;
+#endif
 	/*
 	 * Create a channel and assign its id to channel_id_
 	 * @param 0 Channel with default parameters
 	 */
-#ifdef DEBUG_
-	cout << " initInterrupt started ... " << endl;
-#endif
 	channel_id_ = ChannelCreate(0);
 	if(channel_id_ == -1) {
 		perror ("HALSensoric: ChannelCreat failed : ");
@@ -125,10 +127,10 @@ void HALSensoric::initInterrupt() {
 	}
 	// Initialize pulse
 	SIGEV_PULSE_INIT(&event_, isr_coid_, SIGEV_PULSE_PRIO_INHERIT,0, 0);
-	// 11 : Bit2 in board status register. It reflects the global interrupt.
-	// See AIO-Manual p. 16 !?
 
-	interrupt_id_ = InterruptAttach(11, ISR, &event_, sizeof(event_), 0);
+	// IRQ = 11 : Bit2 in board status register. It reflects the global interrupt.
+	// See AIO-Manual p. 16 !?
+	interrupt_id_ = InterruptAttach(IRQ, ISR, &event_, sizeof(event_), 0);
 
 	if(interrupt_id_ == -1) {
 		perror ("HALSensoric: InterruptAttach failed : ");
@@ -146,6 +148,7 @@ void HALSensoric::initInterrupt() {
 	out8(INTERRUPT_CTR_REG, intr_ctr & ~(PB_CTR | PC_LOW_CTR));
 
     // read out port B and C values
+	// NEEDED NOW ?
     portB_state_ = in8(DIGITAL_CARD_CROUP0_PORTB );
     portC_state_ = in8(DIGITAL_CARD_CROUP0_PORTC);
 
@@ -173,4 +176,13 @@ int HALSensoric::calculateHeight() {
  */
 int HALSensoric::getChannelId() {
 	return channel_id_;
+}
+
+void HALSensoric::execute(void *arg) {
+	// just keep running
+	while (!isStopped()) {
+	}
+}
+
+void HALSensoric::shutdown() {
 }
