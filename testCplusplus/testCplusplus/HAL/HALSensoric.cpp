@@ -57,8 +57,8 @@ HALSensoric *HALSensoric::getInstance() {
  */
 const struct sigevent *ISR(void *arg, int id) {
 
-	uint8_t iir;	//!< Interrupt identification register
-	uint8_t port_state;	//!< To save Port B and C state temporary
+	uint16_t iir;	//!< Interrupt identification register
+	uint16_t port_state;	//!< To save Port B and C state temporary
 	struct sigevent *event_ = (struct sigevent *) arg;		//<!
 
 	/*
@@ -74,25 +74,11 @@ const struct sigevent *ISR(void *arg, int id) {
 		return (NULL);
 	}
 
-	/*
-	 * determine which port causes the interrupt and react
-	 */
-	switch (iir) {
-	case IIR_PORTB:
-		/* if the interrupt is from port B */
-		port_state = in8(DIGITAL_CARD_CROUP0_PORTB); //read portB
-		SIGEV_PULSE_INIT(event_, isr_coid_, SIGEV_PULSE_PRIO_INHERIT,
-				IIR_PORTB, port_state);
-		break;
-	case IIR_PORTC:
-		/* if the interrupt is from port C */
-		port_state = in8(DIGITAL_CARD_CROUP0_PORTC); //read portC
-		SIGEV_PULSE_INIT(event_, isr_coid_, SIGEV_PULSE_PRIO_INHERIT,
-				IIR_PORTC, port_state);
-		break;
-	default:
-		break;
-	}
+	/* if the interrupt is from port B or C */
+	port_state = (in8(DIGITAL_CARD_CROUP0_PORTB) << 8) | (in8(DIGITAL_CARD_CROUP0_PORTC)) ; //read portB and portC
+	SIGEV_PULSE_INIT(event_, isr_coid_, SIGEV_PULSE_PRIO_INHERIT,
+			IIR_PORTB, port_state);
+
 	return event_;
 }
 
@@ -153,11 +139,11 @@ void HALSensoric::initInterrupt() {
     portC_state_ = in8(DIGITAL_CARD_CROUP0_PORTC);
 
 }
-int HALSensoric::calculateHeight() {
+uint16_t HALSensoric::calculateHeight() {
 #ifdef DEBUG_
 	cout << " calculateHeight started ... " << endl;
 #endif
-	int height = 0;
+	uint16_t height = 0;
 	// write control byte to ADC
 	out8(A_IOBASE + BIT_1, AIO_CONVERT_CONTROL);
 
@@ -178,11 +164,3 @@ int HALSensoric::getChannelId() {
 	return channel_id_;
 }
 
-void HALSensoric::execute(void *arg) {
-	// just keep running
-	while (!isStopped()) {
-	}
-}
-
-void HALSensoric::shutdown() {
-}

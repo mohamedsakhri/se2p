@@ -44,6 +44,15 @@
 #define BIT_6 0x40
 #define BIT_7 0x80
 
+#define BIT_8 0x100
+#define BIT_9 0x200
+#define BIT_10 0x400
+#define BIT_11 0x800
+#define BIT_12 0x1000
+#define BIT_13 0x2000
+#define BIT_14 0x4000
+#define BIT_15 0x8000
+
 /*
  *  Aio Card Base and Ports Adresses
  *

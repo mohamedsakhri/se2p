@@ -15,10 +15,10 @@
 #include "Mutex.h"
 #include "stdint.h"
 
-using namespace thread;
+
 const struct sigevent* ISR(void *arg, int id);
 
-class HALSensoric: public HAWThread {
+class HALSensoric {
 public:
 	virtual ~HALSensoric();					//!< Destructor
 	static HALSensoric* getInstance();		//!< Singleton pattern implementation
@@ -29,7 +29,7 @@ public:
 	/**
 	 * @return height Worksspace's height after conversion A/D
 	 */
-	int calculateHeight();
+	uint16_t calculateHeight();
 
 private:
 	HALSensoric();								//!< Constructor
@@ -43,9 +43,6 @@ private:
 	uint8_t portC_state_;						//!< Port C state
 	uint8_t portB_state_;						//!< Port B state
 
-	//protected:
-	virtual void execute(void* arg);
-	virtual void shutdown();
 
 };
 
