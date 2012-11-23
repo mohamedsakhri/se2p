@@ -24,12 +24,9 @@
 #define PC_LOW_CTR 0x04
 #define READ_IRQ_CLEAR_INTERRUPT (D_IOBASE + 0x18)	//!< Read IRQ register and clear Interrupt register
 													//!< in the same time. See DIO p.18
-#define IRQ 11
+#define IRQ 11										//!< IRQ
 #define IIR_PORTB 0x02
 #define IIR_PORTC 0x08
-/*
- * Port B and Port C High
- */
 
 /*
  * Using BIT_x instead of some magic numbers
@@ -44,21 +41,30 @@
 #define BIT_6 0x40
 #define BIT_7 0x80
 
-#define BIT_8 0x100
-#define BIT_9 0x200
-#define BIT_10 0x400
-#define BIT_11 0x800
-#define BIT_12 0x1000
-#define BIT_13 0x2000
-#define BIT_14 0x4000
-#define BIT_15 0x8000
-
 /*
- *  Aio Card Base and Ports Adresses
+ *  AIO Card Base and Ports Addresses
  *
  */
 #define A_IOBASE 0x320  				// TO BE REPLACED WITH THE RIGHT ADDRESS. See AIO Manual p.14
-#define AIO_CONVERT_CONTROL 0x10  	// See AIO Manual p. 18
-#define AD_C_LOW_OFFS 0x02  		// p. 16
+#define AIO_CONVERT_CONTROL 0x10  		// See AIO Manual p. 18
+#define AD_C_LOW_OFFS 0x02  			// AIO p. 16
+
+/**
+ * Port B and Port C high bits' meaning
+ */
+
+#define START_BUTTON 0x01
+#define STOP_BUTTON 0x02
+#define RESET_BUTTON 0x04
+#define E_STOP_BUTTON 0x08
+#define LIGHT_BARRIER_1 0x10
+#define HEIGHT_SENSOR 0x20
+#define HEIGHT_STATUS 0x40
+#define WP_IN_SWITCH 0x80
+#define METAL_STATUS 0x100
+#define SWITCH_STATUS 0x200
+#define SLIDE_STATUS 0x400
+#define LIGHT_BARRIER_2 0x800
+
 #endif /* ADDRESS_H_ */
 

@@ -20,17 +20,26 @@ HALSensoric* HALSensoric::hal_Sensoric_instance_ = NULL;
 static int isr_coid_;
 
 
+/**
+ *
+ */
 HALSensoric::HALSensoric() {
 	initInterrupt();
 
 }
 
+/**
+ *
+ */
 HALSensoric::~HALSensoric() {
 	delete hal_Sensoric_instance_;
 	ChannelDestroy(channel_id_);
 	InterruptDetach(interrupt_id_);
 }
 
+/**
+ *
+ */
 HALSensoric *HALSensoric::getInstance() {
 	if (-1 == ThreadCtl(_NTO_TCTL_IO, 0)) {
 			perror("ThreadCtl access failed\n");
@@ -139,20 +148,31 @@ void HALSensoric::initInterrupt() {
     portC_state_ = in8(DIGITAL_CARD_CROUP0_PORTC);
 
 }
-uint16_t HALSensoric::calculateHeight() {
+int HALSensoric::calculateHeight() {
 #ifdef DEBUG_
 	cout << " calculateHeight started ... " << endl;
 #endif
-	uint16_t height = 0;
-	// write control byte to ADC
+	int height = -1; 	// height to be returned
+	int byte_2 = -1;	// value of base + 2h. See AIO manual
+	int byte_3 = -1;	// value of base + 3h
+
+	// write control byte to ADC. Range 0-10V supported
 	out8(A_IOBASE + BIT_1, AIO_CONVERT_CONTROL);
 
-	// wait til Bit 7 in Base adress goes high => Conversion is done
-	while (in8(A_IOBASE) & BIT_7) {};
+	// wait till Bit 7 in Base address goes high.
+	int i = 1;
+	while (true) {
+		cout << " i : " << i++ << endl;
+		if (in8(A_IOBASE) & BIT_7) {
+			// Result can be read as 16bit from Base + 2h. See AIO M. p. 20
+			byte_2 = in8(A_IOBASE + 0x02);
+			byte_3 = in8(A_IOBASE + 0x03);
+			height = (byte_2 << 8) | byte_3;
+			break;
+		}
+	};
 
-	// Result can be read as 16bit from Base + 2h. See AIO M. p. 20
-	height = in16(A_IOBASE + AD_C_LOW_OFFS);
-
+//	cout << " calculating : " << height << endl;
 	return height;
 }
 

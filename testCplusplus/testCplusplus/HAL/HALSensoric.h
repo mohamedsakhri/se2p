@@ -29,7 +29,7 @@ public:
 	/**
 	 * @return height Worksspace's height after conversion A/D
 	 */
-	uint16_t calculateHeight();
+	int calculateHeight();
 
 private:
 	HALSensoric();								//!< Constructor

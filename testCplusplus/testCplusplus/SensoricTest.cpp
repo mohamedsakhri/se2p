@@ -9,7 +9,6 @@
 #include "SensoricTest.h"
 
 /**
- * Singleton pattern implemetation, thread safe implemented
  * get HALSensoric and HALAktorik's Instances or created new ones
  */
 SensoricTest::SensoricTest() {
@@ -38,27 +37,28 @@ SensoricTest::~SensoricTest() {
  * All tests will be implemented here ! Using macros could filter which one will be started
  */
 void SensoricTest::execute(void *arg) {
-#ifdef DEBUG_
-	cout << " SensoricTest started ... " << endl;
-#endif
+	#ifdef DEBUG_
+		cout << " SensoricTest started ... " << endl;
+	#endif
+
 	struct _pulse pulse;
-	uint16_t new_value = -1;
-	uint16_t old_port_value; // used to compare new value from pulse with the old value to know what has been changed
+	int new_value = -1;
+	int old_port_value; // used to compare new value from pulse with the old value to know what has been changed
 	int test_coid; 		// used for connectAttach with halSensoruíc channel
-	uint16_t changed_bits = -1;
-	int current_bit =-1;
+	int changed_bits = -1;
+	int current_bit = -1;
+//	int height = -1;
 
 
-	bool height_ok = false;
+	bool is_height_ok = false;	// true if workpiece's height in tolerance range
 	bool is_metal = false;
-	bool switch_open = false;
+	bool is_switch_open = false;
 
 	// get the default value of port B and C.
 	old_port_value = (in8(DIGITAL_CARD_CROUP0_PORTB)<<8)|(in8(DIGITAL_CARD_CROUP0_PORTC));
 
-
-	test_coid = ConnectAttach(0, 0, hal_sensoric_->getChannelId(),
-			_NTO_SIDE_CHANNEL, 0);
+	// connect with HALSencsoric's channel to get pulses
+	test_coid = ConnectAttach(0, 0, hal_sensoric_->getChannelId(), _NTO_SIDE_CHANNEL, 0);
 	if (test_coid == -1) {
 		perror("Test_Sensoric: ConnectAttach failed : ");
 		exit(EXIT_FAILURE);
@@ -66,10 +66,11 @@ void SensoricTest::execute(void *arg) {
 
 	while (!isStopped()) {
 
-#ifdef DEBUG_
-		cout << " waiting for MsgReceivePulse " << endl;
-#endif
-		// Receive pulse messages from HAL Sensoric (Interrupt handler) channel and react
+		#ifdef DEBUG_
+			cout << " waiting for MsgReceivePulse " << endl;
+		#endif
+
+		// Receive pulse messages from HAL Sensoric's (Interrupt handler) channel and react
 		if (-1 == MsgReceivePulse(hal_sensoric_->getChannelId(), &pulse,
 				sizeof(pulse), NULL)) {
 			if (isStopped()) {
@@ -79,103 +80,107 @@ void SensoricTest::execute(void *arg) {
 			exit(EXIT_FAILURE);
 		}
 
-
-
-#ifdef DEBUG_
-		cout << "TEST port : " << hex << (int) pulse.code << " Value : "
-		<< (int) new_value  << endl;
-#endif
 		new_value = pulse.value.sival_int;
-		changed_bits = new_value ^ old_port_value;
-		old_port_value = pulse.value.sival_int;
+		changed_bits = new_value ^ old_port_value;	// which bits have been changed
+		old_port_value = pulse.value.sival_int;		// update old value with the new one
 
+		// shift 12 bits right. First 4 bits from port C are useless here
 		changed_bits >>= 4;
 		new_value >>= 4;
+
+		#ifdef DEBUG_
+			cout << "TEST port : " << hex << (int) pulse.code << " Value : "<< (int) new_value << endl;
+		#endif
+
+		// check all the 12 bits and react
 		for (int i=0;i<=12;i++){
 			current_bit = (1<<i);
-			if (changed_bits & current_bit){
-				cout << " current_bit: "<< hex << (int)current_bit << endl;
+			if (changed_bits & current_bit){ // if the bit has changed
+//				cout << " current_bit: "<< hex << (int)current_bit << endl;
 				switch (current_bit) {
 
-				case BIT_0:		// Start Button
-					if (new_value & BIT_0) {
-						cout << "Start button " << endl;
-						HALAktorik::getInstance()->motor_on();
+				case START_BUTTON:		// Start Button
+					if (new_value & START_BUTTON) {
+						cout << "Start button pressed " << endl;
+						hal_aktorik_->motor_on();
+						hal_aktorik_->green_Light_on();
 					}
 					break;
-				case BIT_1:		//Stop Button
-					if (!(new_value & BIT_1)) {
-						cout << "Stop button " << endl;
-						HALAktorik::getInstance()->close_Switch();
-						HALAktorik::getInstance()->motor_off();
-						HALAktorik::getInstance()->green_Light_off();
+				case STOP_BUTTON:		//Stop Button
+					if (!(new_value & STOP_BUTTON)) {
+						cout << "Stop button pressed " << endl;
+						hal_aktorik_->close_Switch();
+						hal_aktorik_->motor_off();
+						hal_aktorik_->green_Light_off();
 					}
 					break;
-				case BIT_2: 	//Reset Button
-					if (new_value & BIT_2) {
-						cout << "Reset button " << endl;
+				case RESET_BUTTON: 	//Reset Button
+					if (new_value & RESET_BUTTON) {
+						cout << "Reset button pressed " << endl;
 					}
 					break;
-				case BIT_3:		//E-Stop
-					if (new_value & BIT_3) {
+				case E_STOP_BUTTON:		//E-Stop
+					if (new_value & E_STOP_BUTTON) {
 						cout << "E-Stop button : not pressed" << endl;
 					} else {
 						cout << "E-Stop button : pressed" << endl;
 					}
 					break;
-				case BIT_4:		//Light Barrier 1
-					if ( !(new_value & BIT_4)) {
+				case LIGHT_BARRIER_1:		//Light Barrier 1
+					if ( !(new_value & LIGHT_BARRIER_1)) {
 						cout << "Workpiece in LB 1 " << endl;
-						HALAktorik::getInstance()->motor_on();
-						HALAktorik::getInstance()->green_Light_on();
+						hal_aktorik_->motor_on();
+						hal_aktorik_->green_Light_on();
+						is_metal = false;
+						is_switch_open = false;
+						is_height_ok = false;
 					}
 					break;
-//TODO
-				case BIT_5:		//WP in HeightSensor  LB2
-					if (!(new_value & BIT_5)) {
-						cout << "Workpiece in height measurement" << endl;
+					//TODO
+				case HEIGHT_SENSOR:		//WP in HeightSensor  LB2
+					if (!(new_value & HEIGHT_SENSOR)) {
+//						cout << "Workpiece in height measurement" << endl;
+						// start height measurement
+//						height = hal_sensoric_->calculateHeight();
+//						cout << " Height : " << height << endl;
 
-						if (new_value & BIT_2){
+						// getting around the height's measurement by checking height's tolerance
+						// range when workpiece in height's sensor
+						if (new_value & HEIGHT_STATUS){
 							cout << " P hat loch nach UNTEN " << endl;
 						}
 						else{
-							if (height_ok){
+							if (is_height_ok){
 								cout << " P hat loch nach OBEN  " << endl;
 							}
-							else
+							else {
 								cout << " P ist FLACH  " << endl;
+								is_height_ok = false;
+							}
 						}
 					}
-					else
-						cout << "No Workpiece in height measurement" << endl;
-
 					break;
-				case BIT_6:		//HeightSensor tolerance range
-					if (new_value & BIT_6) {
-						cout << "Workpiece's height in tolerance range"	<< endl;
-						height_ok = true;
-					} else {
-						cout << "Workpiece's height NOT in tolerance range"	<< endl;
+				case HEIGHT_STATUS:		//HeightSensor tolerance range
+					if (new_value & HEIGHT_STATUS) {
+//						cout << "Workpiece's height in tolerance range"	<< endl;
+						is_height_ok = true;
 					}
 					break;
-				case BIT_7:		// P in switch  LB3
-					if (new_value & BIT_7) {
-						cout << "No Workpiece in Switch BIT = 1" << endl;
-						cout << "switch open: " << switch_open << endl;
-						if (switch_open) {
-							HALAktorik::getInstance()->close_Switch();
-							switch_open = false;
+				case WP_IN_SWITCH:		// P in switch  LB3
+					if (new_value & WP_IN_SWITCH) {
+						if (is_switch_open) {
+							hal_aktorik_->close_Switch();
+							is_switch_open = false;
 						}
 					} else {
-						cout << "Workpiece in Switch BIT = 0" << endl;
-						cout << "BIT = 0 switch open: " << switch_open << endl;
-						if (is_metal){
-						HALAktorik::getInstance()->open_Switch();
+//						cout << "BIT = 0 switch open: " << is_switch_open << endl;
+						if (is_height_ok){
+							hal_aktorik_->open_Switch();
 						}
 					}
 					break;
-				case BIT_8:		// Metall Sensor
-					if (new_value & BIT_8) {
+				case METAL_STATUS:		// Metal Sensor
+					if (new_value & METAL_STATUS) {
 						cout << "Workpiece metal : YES" << endl;
 						is_metal = true;
 					} else {
@@ -183,41 +188,42 @@ void SensoricTest::execute(void *arg) {
 						is_metal = false;
 					}
 					break;
-				case BIT_9:		//Switch
-					if (new_value & BIT_9) {
+				case SWITCH_STATUS:		//Switch
+					if (new_value & SWITCH_STATUS) {
 						cout << "Switch is open" << endl;
-						switch_open = true;
+						is_switch_open = true;
 					} else {
 						cout << "Switch is closed" << endl;
 					//	switch_open = false;
 					}
 					break;
-				case BIT_10:	//Slide
-					if (new_value & BIT_10) {
+				case SLIDE_STATUS:	//Slide
+					if (new_value & SLIDE_STATUS) {
 	//					cout << "Slide not full" << endl;
 					} else {
 	//					cout << "Slide full" << endl;
 
 					}
 					break;
-				case BIT_11:	// LB end
-					if (!(new_value & BIT_11)) {
+				case LIGHT_BARRIER_2:	// LB end
+					if (!(new_value & LIGHT_BARRIER_2)) {
 						cout << "Workpiece in in the end of the band " << endl;
-						HALAktorik::getInstance()->motor_off();
-						HALAktorik::getInstance()->green_Light_off();
+						hal_aktorik_->motor_off();
+						hal_aktorik_->green_Light_off();
 					}
 					break;
-
-
 				default :
 				break;
-				}
+				} // switch (current_bit)
+			} //if (changed_bits & current_bit)
+		} // for
+	} // while
 
-			}
-		}
-	}
+	 ConnectDetach(test_coid);
+
 }
 
 void SensoricTest::shutdown() {
+
 }
 
