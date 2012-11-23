@@ -131,12 +131,11 @@ void SensoricTest::execute(void *arg) {
 						cout << "Workpiece in LB 1 " << endl;
 						hal_aktorik_->motor_on();
 						hal_aktorik_->green_Light_on();
-						is_metal = false;
-						is_switch_open = false;
+//						is_metal = false;
+//						is_switch_open = false;
 						is_height_ok = false;
 					}
 					break;
-					//TODO
 				case HEIGHT_SENSOR:		//WP in HeightSensor  LB2
 					if (!(new_value & HEIGHT_SENSOR)) {
 //						cout << "Workpiece in height measurement" << endl;
@@ -152,6 +151,7 @@ void SensoricTest::execute(void *arg) {
 						else{
 							if (is_height_ok){
 								cout << " P hat loch nach OBEN  " << endl;
+
 							}
 							else {
 								cout << " P ist FLACH  " << endl;
