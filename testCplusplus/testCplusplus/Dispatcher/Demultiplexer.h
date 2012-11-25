@@ -16,7 +16,7 @@
 
 #include "HAWThread.h"
 #include "HALSensoric.h"
-#include "Dispatcher.h"
+//#include "Dispatcher.h"
 #include "Mutex.h"
 #include "Messages.h"
 
@@ -40,12 +40,15 @@ public:
 
 private:
 	Demultiplexer();
+	void init();										//!< init dispatcher and HALSensoric
 	int channel_id_;									//!< get Channel ID to receive and send messages
+	int sendMsg2D(int);
 	int con_id_;										//!< Connection ID : with HAL Sensoric
 	HALSensoric *hal_sensoric_;
 	static Demultiplexer *demultiplexer_instance_;		//!< The only demultiplexer's instance
 	static Mutex demultiplexer_mutex_;					//!< Mutex used in Singleton implementation
-	Dispatcher *dispatcher_;
+	//static Dispatcher *dispatcher_;
+//	struct sigevent event_;
 
 
 };

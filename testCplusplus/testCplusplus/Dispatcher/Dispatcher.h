@@ -18,6 +18,7 @@
 #include "Mutex.h"
 #include "Messages.h"
 #include "Adress.h"
+#include "Demultiplexer.h"
 
 using namespace thread;
 
@@ -48,6 +49,8 @@ private :
 	int con_id_;								//!< Connection ID to own channel
 	static Dispatcher* dispatcher_instance_;	//!< The only dispatcher's instance
 	static Mutex dispatcher_mutex_;				//!< Mutex used in Singleton implementation
+
+	Demultiplexer* demultiplexer_;
 };
 
 #endif /* DISPATCHER_H_ */

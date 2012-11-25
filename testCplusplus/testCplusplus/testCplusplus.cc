@@ -20,7 +20,7 @@
 //#define MOTOR_TEST
 //#define LIGHT_TEST
 //#define SER_INTERFACE_TEST
-#define SENSORIC_TEST
+//#define SENSORIC_TEST
 //#define DEBUG_MUTEX
 #define DEBUX_
 
@@ -33,6 +33,8 @@
 #include <errno.h>
 #include "SensoricTest.h"
 #include "HALSensoric.h"
+#include "Demultiplexer.h"
+#include "Dispatcher.h"
 /*
 #include "LEDTest.h"
 #include "LightTest.h"
@@ -53,7 +55,14 @@ int main(int argc, char *argv[]) {
 	IOaccess_open(); // Baue die Verbindung zur Simulation auf
 #endif
 
+//Demultiplexer* dmux = Demultiplexer::getInstance();
+Dispatcher* disp = Dispatcher::getInstance();
 
+//dmux->start(NULL);
+disp->start(NULL);
+
+//dmux->join();
+disp->join();
 
 
 #ifdef SENSORIC_TEST
