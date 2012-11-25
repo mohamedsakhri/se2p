@@ -1,8 +1,11 @@
-/*
- * Address.h
+/**
+ * @file	Address.h
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ * @date 	Oct 21, 2012
  *
- *  Created on: Oct 21, 2012
- *      Author: aksil
+ *	This header contains all Adress's macros and some others macros used in HAL, Demultiplexer, Dispatcher
+ *	and Controller
  */
 
 #ifndef ADDRESS_H_
@@ -25,8 +28,8 @@
 #define READ_IRQ_CLEAR_INTERRUPT (D_IOBASE + 0x18)	//!< Read IRQ register and clear Interrupt register
 													//!< in the same time. See DIO p.18
 #define IRQ 11										//!< IRQ
-#define IIR_PORTB 0x02
-#define IIR_PORTC 0x08
+#define IIR_PORTB 0x02								//!< Interrupt from Port B
+#define IIR_PORTC 0x08								//!< Interrupt from Port C
 
 /*
  * Using BIT_x instead of some magic numbers
@@ -53,18 +56,23 @@
  * Port B and Port C high bits' meaning
  */
 
-#define START_BUTTON 0x01
-#define STOP_BUTTON 0x02
-#define RESET_BUTTON 0x04
-#define E_STOP_BUTTON 0x08
-#define LIGHT_BARRIER_1 0x10
-#define HEIGHT_SENSOR 0x20
-#define HEIGHT_STATUS 0x40
-#define WP_IN_SWITCH 0x80
-#define METAL_STATUS 0x100
-#define SWITCH_STATUS 0x200
-#define SLIDE_STATUS 0x400
-#define LIGHT_BARRIER_2 0x800
+#define START_BUTTON 		0x01
+#define STOP_BUTTON 		0x02
+#define RESET_BUTTON 		0x04
+#define E_STOP_BUTTON 		0x08
+#define ENGINE_START	 	0x10
+#define HEIGHT_SENSOR 		0x20
+#define HEIGHT_STATUS 		0x40
+#define WP_IS_IN_SWITCH 	0x80
+#define METAL_STATUS 		0x100
+#define SWITCH_STATUS 		0x200
+#define SLIDE_STATUS 		0x400
+#define ENGINE_END		 	0x800
 
+/**
+ * Code used as demultiplexer's code while sending pulses to Dispatcher
+ */
+#define DEMULTIPLEXER_CODE 50	// Any unreserved number could have done the job
+#define	 CONTROLLER_CODE	51	// Any unreserved number could have done the job too
 #endif /* ADDRESS_H_ */
 

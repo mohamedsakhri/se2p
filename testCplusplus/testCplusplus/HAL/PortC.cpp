@@ -2,8 +2,9 @@
  * @file 	PortC.cpp
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
- *
  * @date	NOV 2, 2012
+ *
+ * This class implements all methods needed to interact with Port C
  *
  */
 #include "PortC.h"

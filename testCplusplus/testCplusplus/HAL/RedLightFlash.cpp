@@ -2,16 +2,18 @@
  * @file 	RedLightFlash.cpp
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
- *
  * @date	NOV 6, 2012
  *
- *This class is a thread implementation of the flashing red light.
- *the blinking frequence id given as a parameter of the thread function execute.
+ *	This class is a thread implementation of the flashing red light.
+ *	the blinking frequence id given as a parameter of the thread function execute.
  *
  */
 
 #include "RedLightFlash.h"
 
+/**
+ * Does nothing
+ */
 RedLightFlash::RedLightFlash() {
 	// TODO Auto-generated constructor stub
 

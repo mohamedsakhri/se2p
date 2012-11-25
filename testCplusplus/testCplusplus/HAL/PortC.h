@@ -2,11 +2,10 @@
  * @file 	PortC.h
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
- *
  * @date	NOV 2, 2012
  *
  *
- *This class implements all methods needed to interact Port C.
+ * This class implements all methods needed to interact with Port C
  */
 #ifndef PORTC_H_
 #define PORTC_H_

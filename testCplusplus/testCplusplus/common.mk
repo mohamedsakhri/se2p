@@ -24,7 +24,7 @@ LIBS+=ioaccess
 
 #===== EXTRA_SRCVPATH - a space-separated list of directories to search for source files.
 EXTRA_SRCVPATH+=$(PROJECT_ROOT) $(PROJECT_ROOT)/HAL  \
-	$(PROJECT_ROOT)/Mutex
+	$(PROJECT_ROOT)/Mutex $(PROJECT_ROOT)/Reactor
 
 include $(MKFILES_ROOT)/qmacros.mk
 ifndef QNX_INTERNAL

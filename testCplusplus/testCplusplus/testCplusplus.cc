@@ -1,16 +1,16 @@
 /*
- * Kleines Beispielprogramm fuer den Zugriff auf die Festo Simulationsumgebung
- * der Transferstrecke und die Transferstrecke selbst.
+ * @file	testCplusplus.cpp
  *
- * Voraussetzungen:
- *      - Die Bibliotheken und Header Files mussen in in der Entwicklungs-
- *        umgebung eingepfegt sein.
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ * @date	Nov 19, 2012
  *
- *       - Die Bibliothek ioaccess muss im Projekt eingebunden sein via
- *         Project->Properties : QNX C/C++ Project : Linker : Extra libraries
+ *
+ * This is supposed to be the class which contain main
  */
-// Die Header Datei HWaccess.h steuert den Zugriff auf die HW bzw. Simulation
-// Sie muss in jeder Datei stehen, die auf die HW zugreift
+
+// TODO Change class's name and do some organization work here !
+
 
 /*
  * macros to run tests

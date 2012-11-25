@@ -1,8 +1,12 @@
 /*
- * SensoricTest.h
+ * @file	SensoricTest.h
  *
- *  Created on: Nov 19, 2012
- *      Author: simohamed
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ * @date	Nov 19, 2012
+ *
+ *
+ * This class implements some regression tests
  */
 
 #ifndef SENSORIKTEST_H_

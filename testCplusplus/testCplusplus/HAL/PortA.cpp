@@ -1,11 +1,10 @@
 /**
  * @file 	PortA.cpp
  * @author	Mahmoud Dariti
- * @author	Mohamed Sakhri
- *
+ * @author	Mohamed Sakhri *
  * @date	NOV 2, 2012
  *
- *This class implements all methodes needed to interact Port A.
+ *This class implements all methods needed to interact Port A.
  */
 
 #include "PortA.h"

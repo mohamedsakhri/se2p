@@ -2,7 +2,6 @@
  * @file 	RedLightFlash.h
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
- *
  * @date	NOV 6, 2012
  *
  *

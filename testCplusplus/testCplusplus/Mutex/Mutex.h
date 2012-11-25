@@ -1,10 +1,11 @@
 /*
- * Mutex.h
+ * @file 	Mutex.h
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ * @date	Oct 27, 2012
  *
- *  Created on: Oct 27, 2012
- *      Author: simohamed
+ * This class implements an own Mutex based on POSIX's mutex
  */
-
 #ifndef MUTEX_H_
 #define MUTEX_H_
 

@@ -1,8 +1,12 @@
 /*
- * SensoricTest.cpp
+ * @file	SensoricTest.cpp
  *
- *  Created on: Nov 19, 2012
- *      Author: simohamed
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ * @date	Nov 19, 2012
+ *
+ *
+ * This class implements some regression tests
  */
 
 //#define DEBUG_
@@ -26,6 +30,7 @@ SensoricTest::SensoricTest() {
 
 /**
  * Free memory allocated by HALSensoric and HALAktorik's Instances
+ * and detach from channel
  */
 
 SensoricTest::~SensoricTest() {
@@ -47,8 +52,6 @@ void SensoricTest::execute(void *arg) {
 	int test_coid; 		// used for connectAttach with halSensoruíc channel
 	int changed_bits = -1;
 	int current_bit = -1;
-//	int height = -1;
-
 
 	bool is_height_ok = false;	// true if workpiece's height in tolerance range
 	bool is_metal = false;
@@ -114,7 +117,7 @@ void SensoricTest::execute(void *arg) {
 						hal_aktorik_->green_Light_off();
 					}
 					break;
-				case RESET_BUTTON: 	//Reset Button
+				case RESET_BUTTON: 		//Reset Button
 					if (new_value & RESET_BUTTON) {
 						cout << "Reset button pressed " << endl;
 					}
@@ -126,8 +129,8 @@ void SensoricTest::execute(void *arg) {
 						cout << "E-Stop button : pressed" << endl;
 					}
 					break;
-				case LIGHT_BARRIER_1:		//Light Barrier 1
-					if ( !(new_value & LIGHT_BARRIER_1)) {
+				case ENGINE_START:		//Light Barrier 1
+					if ( !(new_value & ENGINE_START)) {
 						cout << "Workpiece in LB 1 " << endl;
 						hal_aktorik_->motor_on();
 						hal_aktorik_->green_Light_on();
@@ -166,8 +169,8 @@ void SensoricTest::execute(void *arg) {
 						is_height_ok = true;
 					}
 					break;
-				case WP_IN_SWITCH:		// P in switch  LB3
-					if (new_value & WP_IN_SWITCH) {
+				case WP_IS_IN_SWITCH:	// P in switch  LB3
+					if (new_value & WP_IS_IN_SWITCH) {
 						if (is_switch_open) {
 							hal_aktorik_->close_Switch();
 							is_switch_open = false;
@@ -197,7 +200,7 @@ void SensoricTest::execute(void *arg) {
 					//	switch_open = false;
 					}
 					break;
-				case SLIDE_STATUS:	//Slide
+				case SLIDE_STATUS:		//Slide
 					if (new_value & SLIDE_STATUS) {
 	//					cout << "Slide not full" << endl;
 					} else {
@@ -205,8 +208,8 @@ void SensoricTest::execute(void *arg) {
 
 					}
 					break;
-				case LIGHT_BARRIER_2:	// LB end
-					if (!(new_value & LIGHT_BARRIER_2)) {
+				case ENGINE_END:		// LB end
+					if (!(new_value & ENGINE_END)) {
 						cout << "Workpiece in in the end of the band " << endl;
 						hal_aktorik_->motor_off();
 						hal_aktorik_->green_Light_off();
@@ -218,9 +221,6 @@ void SensoricTest::execute(void *arg) {
 			} //if (changed_bits & current_bit)
 		} // for
 	} // while
-
-	 ConnectDetach(test_coid);
-
 }
 
 void SensoricTest::shutdown() {

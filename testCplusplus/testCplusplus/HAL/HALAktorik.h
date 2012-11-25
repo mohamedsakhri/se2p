@@ -1,6 +1,6 @@
 /**
  * @file 	HALAktorik.h
- * @author	Mahmud Dariti
+ * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
  * @date	Oct 18, 2012
  *
@@ -22,7 +22,7 @@ public:
 
 	virtual ~HALAktorik();	//!< Destructor
 	/**
-	 * @return instance of HALAktorik
+	 * @return HALAktorik's instance
 	 */
 	static HALAktorik* getInstance();	//!< Used to implement Singleton Pattern
 

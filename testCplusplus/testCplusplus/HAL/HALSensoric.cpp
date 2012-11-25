@@ -21,15 +21,16 @@ static int isr_coid_;
 
 
 /**
- *
+ * Call Interrupt's initializer routine
  */
 HALSensoric::HALSensoric() {
 	initInterrupt();
-
 }
 
 /**
- *
+ * Free memory allocated by HALSensoric instance
+ * destroy own channel
+ * and detach interrupt
  */
 HALSensoric::~HALSensoric() {
 	delete hal_Sensoric_instance_;
@@ -93,7 +94,7 @@ const struct sigevent *ISR(void *arg, int id) {
 
 /**
  * Initialize interrupt's options
- * It will be called once in constructor
+ * Called once in constructor
  */
 void HALSensoric::initInterrupt() {
 #ifdef DEBUG_
@@ -148,6 +149,10 @@ void HALSensoric::initInterrupt() {
     portC_state_ = in8(DIGITAL_CARD_CROUP0_PORTC);
 
 }
+
+/**
+ * Return Workpiece's height after A/D conversion
+ */
 int HALSensoric::calculateHeight() {
 #ifdef DEBUG_
 	cout << " calculateHeight started ... " << endl;
@@ -177,7 +182,7 @@ int HALSensoric::calculateHeight() {
 }
 
 /**
- * returns channel id of Hal Sensoric. That's the only way other classes could get the channel id
+ * Return channel id of Hal Sensoric. That's the only way other classes could get the channel id
  * because as parameter it's private
  */
 int HALSensoric::getChannelId() {

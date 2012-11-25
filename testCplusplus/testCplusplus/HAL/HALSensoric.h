@@ -1,6 +1,6 @@
 /**
  * @file 	HALSensoric.h
- * @author	Mahmud Dariti
+ * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
  * @date	Nov 07, 2012
  *
@@ -21,6 +21,9 @@ const struct sigevent* ISR(void *arg, int id);
 class HALSensoric {
 public:
 	virtual ~HALSensoric();					//!< Destructor
+	/**
+	 * @return HALSensoric's instance
+	 */
 	static HALSensoric* getInstance();		//!< Singleton pattern implementation
 	/**
 	 * @return channel_id Channel id used in HAL Sensoric
@@ -42,8 +45,6 @@ private:
 	int interrupt_id_;							//!< Interrupt id
 	uint8_t portC_state_;						//!< Port C state
 	uint8_t portB_state_;						//!< Port B state
-
-
 };
 
 #endif /* HALSENSORIC_H_ */
