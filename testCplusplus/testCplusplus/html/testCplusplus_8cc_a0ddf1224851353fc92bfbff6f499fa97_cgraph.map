@@ -1,9 +1,20 @@
 <map id="main" name="main">
-<area shape="rect" id="node3" href="$classthread_1_1HAWThread.html#a4732efa3445c499f1723971acc07863f" title="thread::HAWThread::join" alt="" coords="105,5,271,35"/>
-<area shape="rect" id="node5" href="$classthread_1_1HAWThread.html#ae08d268c337511a1e67fbbeefcb1e89d" title="thread::HAWThread::\lstart" alt="" coords="115,58,261,105"/>
-<area shape="rect" id="node7" href="$classthread_1_1HAWThread.html#ab692f3a55b92623653d8213793ba4ebb" title="thread::HAWThread::Arg" alt="" coords="516,40,681,69"/>
-<area shape="rect" id="node9" href="$classthread_1_1HAWThread.html#a044da2e1a8884a3e2764f9f1863863c7" title="thread::HAWThread::\lentryPoint" alt="" coords="320,87,467,134"/>
-<area shape="rect" id="node11" href="$classthread_1_1HAWThread.html#a9a3e17be59877d350e310eb19c52679b" title="thread::HAWThread::run" alt="" coords="517,96,680,125"/>
-<area shape="rect" id="node13" href="$classthread_1_1HAWThread.html#ae565cb73c096b246664bd2474b9c8907" title="thread::HAWThread::\lexecute" alt="" coords="731,53,877,99"/>
-<area shape="rect" id="node15" href="$classthread_1_1HAWThread.html#a843ee9493a41cec7e932fdec67a3b244" title="thread::HAWThread::\lshutdown" alt="" coords="731,122,877,169"/>
+<area shape="rect" id="node3" href="$classDispatcher.html#ada39c44b5d8aab83c567b8c163dc58cf" title="For Singleton pattern implementation." alt="" coords="108,124,268,153"/>
+<area shape="rect" id="node29" href="$classthread_1_1HAWThread.html#a4732efa3445c499f1723971acc07863f" title="thread::HAWThread::join" alt="" coords="105,180,271,209"/>
+<area shape="rect" id="node31" href="$classthread_1_1HAWThread.html#ae08d268c337511a1e67fbbeefcb1e89d" title="thread::HAWThread::\lstart" alt="" coords="115,238,261,285"/>
+<area shape="rect" id="node5" href="$classMutex.html#ad91be808bf0a60a16f10b897ec246d3a" title="Mutex::lock" alt="" coords="1439,40,1529,69"/>
+<area shape="rect" id="node7" href="$classDispatcher.html#a1bd5ef08a829632075b6ccc7c81b1609" title="Dispatcher::Dispatcher" alt="" coords="321,115,476,144"/>
+<area shape="rect" id="node25" href="$classMutex.html#a546a5b797ba29959357586aa2b3740a8" title="Mutex::unlock" alt="" coords="1432,147,1536,176"/>
+<area shape="rect" id="node9" href="$classDemultiplexer.html#a5a17e686068d2d41d5661e38618ad5cf" title="For Singleton pattern implementation." alt="" coords="525,96,704,125"/>
+<area shape="rect" id="node12" href="$classDemultiplexer.html#a981990651c49350c60dc97b7b8a1ee48" title="Demultiplexer::Demultiplexer" alt="" coords="753,93,943,123"/>
+<area shape="rect" id="node14" href="$classDemultiplexer.html#ad52a14d16708491baaab8363159e873f" title="Init dispatcher and HALSensoric." alt="" coords="993,93,1119,123"/>
+<area shape="rect" id="node16" href="$classHALSensoric.html#a5ffd0468fd57022b81be3848bce36a1e" title="Singleton pattern implementation." alt="" coords="1169,93,1343,123"/>
+<area shape="rect" id="node19" href="$classHALSensoric.html#ae779e59bcfa5e7cf3110a09359412761" title="Constructor." alt="" coords="1392,93,1576,123"/>
+<area shape="rect" id="node21" href="$classHALSensoric.html#a9456c390a75fc2dfb18936bf37462034" title="initialize interrupt&#39;s options" alt="" coords="1625,93,1796,123"/>
+<area shape="rect" id="node23" href="$HALSensoric_8cpp.html#a20a93d69d4c85d322500e6f8a6053b3d" title="ISR" alt="" coords="1845,93,1891,123"/>
+<area shape="rect" id="node33" href="$classthread_1_1HAWThread.html#ab692f3a55b92623653d8213793ba4ebb" title="thread::HAWThread::Arg" alt="" coords="532,251,697,280"/>
+<area shape="rect" id="node35" href="$classthread_1_1HAWThread.html#a044da2e1a8884a3e2764f9f1863863c7" title="thread::HAWThread::\lentryPoint" alt="" coords="325,298,472,345"/>
+<area shape="rect" id="node37" href="$classthread_1_1HAWThread.html#a9a3e17be59877d350e310eb19c52679b" title="thread::HAWThread::run" alt="" coords="533,307,696,336"/>
+<area shape="rect" id="node39" href="$classthread_1_1HAWThread.html#ae565cb73c096b246664bd2474b9c8907" title="thread::HAWThread::\lexecute" alt="" coords="775,273,921,319"/>
+<area shape="rect" id="node41" href="$classthread_1_1HAWThread.html#a843ee9493a41cec7e932fdec67a3b244" title="thread::HAWThread::\lshutdown" alt="" coords="775,342,921,389"/>
 </map>

@@ -5,6 +5,7 @@ var searchData=
   ['red_5flight_5fon',['red_Light_on',['../classHALAktorik.html#a0d55175ff6c4e3b9a5ae42c85f95c41e',1,'HALAktorik::red_Light_on()'],['../classPortA.html#af43ebb22aa86ec7ef3633ec1d4ca5a41',1,'PortA::red_Light_on()']]],
   ['red_5flight_5fquick',['red_Light_quick',['../classHALAktorik.html#af5741db1e05ef85153ed695b0dc4a0f1',1,'HALAktorik::red_Light_quick()'],['../classPortA.html#a7fdc45cb0d3c36762d636c01ae17c048',1,'PortA::red_Light_quick()']]],
   ['red_5flight_5fslow',['red_Light_slow',['../classHALAktorik.html#a686dc1d2e18bb5286ebf9a7c4a8da418',1,'HALAktorik::red_Light_slow()'],['../classPortA.html#a08970059a8672c11ec39584b5464032e',1,'PortA::red_Light_slow()']]],
+  ['redlightflash',['RedLightFlash',['../classRedLightFlash.html#afe982fea74e93166968325de144b775b',1,'RedLightFlash']]],
   ['reset_5fled_5foff',['Reset_LED_off',['../classHALAktorik.html#abdbc6bed8a1e3661ca71a1a44cb0ccd9',1,'HALAktorik::Reset_LED_off()'],['../classPortC.html#a1043c7d57b10ae25a9aedae04eafc7d9',1,'PortC::Reset_LED_off()']]],
   ['reset_5fled_5fon',['Reset_LED_on',['../classHALAktorik.html#a5b49fdda4469af595e49da361854485c',1,'HALAktorik::Reset_LED_on()'],['../classPortC.html#a852237138aa10fd097b20bb65dfd4722',1,'PortC::Reset_LED_on()']]],
   ['run',['run',['../classthread_1_1HAWThread.html#a9a3e17be59877d350e310eb19c52679b',1,'thread::HAWThread']]],

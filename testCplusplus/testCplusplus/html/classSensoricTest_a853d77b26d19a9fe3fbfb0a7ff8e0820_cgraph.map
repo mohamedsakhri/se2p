@@ -1,0 +1,10 @@
+<map id="SensoricTest::execute" name="SensoricTest::execute">
+<area shape="rect" id="node3" href="$classHALAktorik.html#ad55e017d8de25a0dc7092b53244c271a" title="Close the switch." alt="" coords="215,5,388,35"/>
+<area shape="rect" id="node5" href="$classHALSensoric.html#af49f20f974f2d0074155ce1f4f11f8a2" title="HALSensoric::getChannelId" alt="" coords="209,59,393,88"/>
+<area shape="rect" id="node7" href="$classHALAktorik.html#aeaceae8a8a0ef3be81dca8df7ea0ab0a" title="Turn green light off." alt="" coords="208,112,395,141"/>
+<area shape="rect" id="node9" href="$classHALAktorik.html#ae55384d6c51f9a43b43ca84c280f5430" title="Turn green light on." alt="" coords="209,165,393,195"/>
+<area shape="rect" id="node11" href="$classthread_1_1HAWThread.html#a46e9f127856f36917b3a8a345b7be5ee" title="thread::HAWThread::\lisStopped" alt="" coords="228,218,375,265"/>
+<area shape="rect" id="node13" href="$classHALAktorik.html#a2a57b4eb5fcde44bf160c46815f14b28" title="Turn motor off." alt="" coords="225,288,377,317"/>
+<area shape="rect" id="node15" href="$classHALAktorik.html#a6f27f19f7fd52467a18fb3bdfc82ec66" title="Turn motor on." alt="" coords="227,341,376,371"/>
+<area shape="rect" id="node17" href="$classHALAktorik.html#abe3471c5b68686bc39f85cb152741be7" title="Open the switch." alt="" coords="216,395,387,424"/>
+</map>

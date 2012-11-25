@@ -4,7 +4,7 @@ var dir_33c78a012c8d08979f57a54a07694c46 =
     [ "LEDTest.h", "LEDTest_8h.html", [
       [ "LEDTest", "classLEDTest.html", "classLEDTest" ]
     ] ],
-    [ "LightTest.cpp", "LightTest_8cpp.html", null ],
+    [ "LightTest.cpp", "LightTest_8cpp.html", "LightTest_8cpp" ],
     [ "LightTest.h", "LightTest_8h.html", [
       [ "LightTest", "classLightTest.html", "classLightTest" ]
     ] ],

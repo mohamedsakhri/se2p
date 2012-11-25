@@ -1,0 +1,12 @@
+<map id="Dispatcher::getInstance" name="Dispatcher::getInstance">
+<area shape="rect" id="node3" href="$classDispatcher.html#a1bd5ef08a829632075b6ccc7c81b1609" title="Dispatcher::Dispatcher" alt="" coords="217,93,372,123"/>
+<area shape="rect" id="node13" href="$classMutex.html#ad91be808bf0a60a16f10b897ec246d3a" title="Mutex::lock" alt="" coords="1335,40,1425,69"/>
+<area shape="rect" id="node21" href="$classMutex.html#a546a5b797ba29959357586aa2b3740a8" title="Mutex::unlock" alt="" coords="1328,147,1432,176"/>
+<area shape="rect" id="node5" href="$classDemultiplexer.html#a5a17e686068d2d41d5661e38618ad5cf" title="For Singleton pattern implementation." alt="" coords="421,93,600,123"/>
+<area shape="rect" id="node7" href="$classDemultiplexer.html#a981990651c49350c60dc97b7b8a1ee48" title="Demultiplexer::Demultiplexer" alt="" coords="649,93,839,123"/>
+<area shape="rect" id="node9" href="$classDemultiplexer.html#ad52a14d16708491baaab8363159e873f" title="Init dispatcher and HALSensoric." alt="" coords="889,93,1015,123"/>
+<area shape="rect" id="node11" href="$classHALSensoric.html#a5ffd0468fd57022b81be3848bce36a1e" title="Singleton pattern implementation." alt="" coords="1065,93,1239,123"/>
+<area shape="rect" id="node15" href="$classHALSensoric.html#ae779e59bcfa5e7cf3110a09359412761" title="Constructor." alt="" coords="1288,93,1472,123"/>
+<area shape="rect" id="node17" href="$classHALSensoric.html#a9456c390a75fc2dfb18936bf37462034" title="initialize interrupt&#39;s options" alt="" coords="1521,93,1692,123"/>
+<area shape="rect" id="node19" href="$HALSensoric_8cpp.html#a20a93d69d4c85d322500e6f8a6053b3d" title="ISR" alt="" coords="1741,93,1787,123"/>
+</map>

@@ -2,10 +2,16 @@
 <area shape="rect" id="node3" href="$classHALAktorik.html#a20a68e52a470319e011e5f8cee37df28" title="Used to implement Singleton Pattern." alt="" coords="195,5,360,35"/>
 <area shape="rect" id="node5" href="$classHALAktorik.html#aeaceae8a8a0ef3be81dca8df7ea0ab0a" title="Turn green light off." alt="" coords="184,59,371,88"/>
 <area shape="rect" id="node7" href="$classHALAktorik.html#ae55384d6c51f9a43b43ca84c280f5430" title="Turn green light on." alt="" coords="185,112,369,141"/>
-<area shape="rect" id="node9" href="$classHALAktorik.html#ac8c0c9960dba4287e6df67e2c254db35" title="Turn red light off." alt="" coords="192,165,363,195"/>
-<area shape="rect" id="node11" href="$classHALAktorik.html#a0d55175ff6c4e3b9a5ae42c85f95c41e" title="Turn red light on." alt="" coords="192,219,363,248"/>
-<area shape="rect" id="node13" href="$classHALAktorik.html#af5741db1e05ef85153ed695b0dc4a0f1" title="Start red light flashing quickly." alt="" coords="203,271,352,318"/>
-<area shape="rect" id="node15" href="$classHALAktorik.html#a686dc1d2e18bb5286ebf9a7c4a8da418" title="Start red light flashing slowly." alt="" coords="185,341,369,371"/>
-<area shape="rect" id="node17" href="$classHALAktorik.html#a32e891e6f153e0a9cbb48f652ca74335" title="Turn yellow light off." alt="" coords="211,394,344,441"/>
-<area shape="rect" id="node19" href="$classHALAktorik.html#a346a3ca71aef54f0f0217b538cd908e0" title="Turn yellow light on." alt="" coords="211,463,344,510"/>
+<area shape="rect" id="node9" href="$classthread_1_1HAWThread.html#a4732efa3445c499f1723971acc07863f" title="thread::HAWThread::join" alt="" coords="195,165,360,195"/>
+<area shape="rect" id="node11" href="$classHALAktorik.html#ac8c0c9960dba4287e6df67e2c254db35" title="Turn red light off." alt="" coords="192,219,363,248"/>
+<area shape="rect" id="node13" href="$classHALAktorik.html#a0d55175ff6c4e3b9a5ae42c85f95c41e" title="Turn red light on." alt="" coords="192,272,363,301"/>
+<area shape="rect" id="node15" href="$classthread_1_1HAWThread.html#ae08d268c337511a1e67fbbeefcb1e89d" title="thread::HAWThread::\lstart" alt="" coords="204,325,351,371"/>
+<area shape="rect" id="node28" href="$classthread_1_1HAWThread.html#ae8a89c83fd7e9b9a712c19f636ab2638" title="thread::HAWThread::stop" alt="" coords="192,395,363,424"/>
+<area shape="rect" id="node30" href="$classHALAktorik.html#a32e891e6f153e0a9cbb48f652ca74335" title="Turn yellow light off." alt="" coords="211,447,344,494"/>
+<area shape="rect" id="node32" href="$classHALAktorik.html#a346a3ca71aef54f0f0217b538cd908e0" title="Turn yellow light on." alt="" coords="211,517,344,563"/>
+<area shape="rect" id="node17" href="$classthread_1_1HAWThread.html#ab692f3a55b92623653d8213793ba4ebb" title="thread::HAWThread::Arg" alt="" coords="615,308,780,337"/>
+<area shape="rect" id="node19" href="$classthread_1_1HAWThread.html#a044da2e1a8884a3e2764f9f1863863c7" title="thread::HAWThread::\lentryPoint" alt="" coords="419,355,565,402"/>
+<area shape="rect" id="node21" href="$classthread_1_1HAWThread.html#a9a3e17be59877d350e310eb19c52679b" title="thread::HAWThread::run" alt="" coords="616,364,779,393"/>
+<area shape="rect" id="node23" href="$classthread_1_1HAWThread.html#ae565cb73c096b246664bd2474b9c8907" title="thread::HAWThread::\lexecute" alt="" coords="829,321,976,367"/>
+<area shape="rect" id="node25" href="$classthread_1_1HAWThread.html#a843ee9493a41cec7e932fdec67a3b244" title="thread::HAWThread::\lshutdown" alt="" coords="829,390,976,437"/>
 </map>

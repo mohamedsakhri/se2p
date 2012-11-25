@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('Constants_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -114,23 +114,25 @@ $(document).ready(function(){initNavTree('Constants_8h_source.html','');});
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define CONSTANTS_H_</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="code" href="Constants_8h.html#a7a5991d5486f3a85c8bfe4048ed5274a">   12</a></span>&#160;<span class="preprocessor">#define WAIT_THREE_S sleep(3)</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="code" href="Constants_8h.html#a26d469ac1a9975202725fb245919a746">   13</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define WAIT_ONE_S sleep(1)</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="code" href="Constants_8h.html#a093bda17772465a0cd79cae4f88aae68">   14</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define WAIT_TEN_S sleep(10)</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="code" href="Constants_8h.html#a1728721e833cc2d20f87f3ba822be6e8">   16</a></span>&#160;<span class="preprocessor">#define WAIT_HALF_S usleep(500000);</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="code" href="Constants_8h.html#a26d469ac1a9975202725fb245919a746">   13</a></span>&#160;<span class="preprocessor">#define WAIT_ONE_S sleep(1)</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="code" href="Constants_8h.html#a7a5991d5486f3a85c8bfe4048ed5274a">   14</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define WAIT_THREE_S sleep(3)</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="code" href="Constants_8h.html#a0c97586af08e08fb9bfcf52771d75e25">   15</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define WAIT_FIVE_S sleep(5)</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="code" href="Constants_8h.html#a093bda17772465a0cd79cae4f88aae68">   16</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define WAIT_TEN_S sleep(10)</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="code" href="Constants_8h.html#af55149bc1f05cf18af067a302e31e3f9">   18</a></span>&#160;<span class="preprocessor">#define DATA_SIZE 8    //serial interface send</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="code" href="Constants_8h.html#a1728721e833cc2d20f87f3ba822be6e8">   18</a></span>&#160;<span class="preprocessor">#define WAIT_HALF_S usleep(500000);</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* CONSTANTS_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="Constants_8h.html#af55149bc1f05cf18af067a302e31e3f9">   20</a></span>&#160;<span class="preprocessor">#define DATA_SIZE 8    //serial interface send</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* CONSTANTS_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="Constants_8h.html">Constants.h</a></li>
-    <li class="footer">Generated on Tue Nov 6 2012 03:21:24 for Festo by
+    <li class="footer">Generated on Sun Nov 25 2012 23:40:11 for Festo by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 </li>
   </ul>

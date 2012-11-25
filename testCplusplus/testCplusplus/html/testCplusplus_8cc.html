@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('testCplusplus_8cc.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -107,29 +107,21 @@ $(document).ready(function(){initNavTree('testCplusplus_8cc.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="HWaccess_8h_source.html">HWaccess.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="MyThread_8h_source.html">MyThread.h</a>&quot;</code><br/>
 <code>#include &lt;cstdlib&gt;</code><br/>
 <code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;unistd.h&gt;</code><br/>
 <code>#include &lt;errno.h&gt;</code><br/>
-<code>#include &quot;<a class="el" href="LEDTest_8h_source.html">LEDTest.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="LightTest_8h_source.html">LightTest.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="MotorTest_8h_source.html">MotorTest.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="SwitchTest_8h_source.html">SwitchTest.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="SerInterfaceTest_8h_source.html">SerInterfaceTest.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="SensoricTest_8h_source.html">SensoricTest.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="HALSensoric_8h_source.html">HALSensoric.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="Demultiplexer_8h_source.html">Demultiplexer.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="Dispatcher_8h_source.html">Dispatcher.h</a>&quot;</code><br/>
 </div>
 <p><a href="testCplusplus_8cc_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aba47f091aed11e606d47e16f16047cea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testCplusplus_8cc.html#aba47f091aed11e606d47e16f16047cea">LED_TEST</a></td></tr>
-<tr class="separator:aba47f091aed11e606d47e16f16047cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9282ada230287a58a645912e69af342"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testCplusplus_8cc.html#ad9282ada230287a58a645912e69af342">SWITCH_TEST</a></td></tr>
-<tr class="separator:ad9282ada230287a58a645912e69af342"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1322ef555b71ef4a87233f6b8582d591"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testCplusplus_8cc.html#a1322ef555b71ef4a87233f6b8582d591">MOTOR_TEST</a></td></tr>
-<tr class="separator:a1322ef555b71ef4a87233f6b8582d591"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1329df6da641cb622f10bcf8e63b6b80"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testCplusplus_8cc.html#a1329df6da641cb622f10bcf8e63b6b80">LIGHT_TEST</a></td></tr>
-<tr class="separator:a1329df6da641cb622f10bcf8e63b6b80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb7c506bcacb7a58f1d618bb5aa8d5c9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testCplusplus_8cc.html#afb7c506bcacb7a58f1d618bb5aa8d5c9">DISPATCHER_TEST</a></td></tr>
+<tr class="separator:afb7c506bcacb7a58f1d618bb5aa8d5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -137,59 +129,17 @@ Functions</h2></td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="aba47f091aed11e606d47e16f16047cea"></a>
+<a class="anchor" id="afb7c506bcacb7a58f1d618bb5aa8d5c9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define LED_TEST</td>
+          <td class="memname">#define DISPATCHER_TEST</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="testCplusplus_8cc_source.html#l00018">18</a> of file <a class="el" href="testCplusplus_8cc_source.html">testCplusplus.cc</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1329df6da641cb622f10bcf8e63b6b80"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LIGHT_TEST</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="testCplusplus_8cc_source.html#l00021">21</a> of file <a class="el" href="testCplusplus_8cc_source.html">testCplusplus.cc</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1322ef555b71ef4a87233f6b8582d591"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MOTOR_TEST</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="testCplusplus_8cc_source.html#l00020">20</a> of file <a class="el" href="testCplusplus_8cc_source.html">testCplusplus.cc</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad9282ada230287a58a645912e69af342"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SWITCH_TEST</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="testCplusplus_8cc_source.html#l00019">19</a> of file <a class="el" href="testCplusplus_8cc_source.html">testCplusplus.cc</a>.</p>
+<p>Definition at line <a class="el" href="testCplusplus_8cc_source.html#l00024">24</a> of file <a class="el" href="testCplusplus_8cc_source.html">testCplusplus.cc</a>.</p>
 
 </div>
 </div>
@@ -218,16 +168,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="testCplusplus_8cc_source.html#l00041">41</a> of file <a class="el" href="testCplusplus_8cc_source.html">testCplusplus.cc</a>.</p>
+<p>Definition at line <a class="el" href="testCplusplus_8cc_source.html#l00050">50</a> of file <a class="el" href="testCplusplus_8cc_source.html">testCplusplus.cc</a>.</p>
 
-<p>References <a class="el" href="HAWThread_8cpp_source.html#l00065">thread::HAWThread::join()</a>, and <a class="el" href="HAWThread_8cpp_source.html#l00030">thread::HAWThread::start()</a>.</p>
+<p>References <a class="el" href="Dispatcher_8cpp_source.html#l00047">Dispatcher::getInstance()</a>, <a class="el" href="HAWThread_8cpp_source.html#l00062">thread::HAWThread::join()</a>, and <a class="el" href="HAWThread_8cpp_source.html#l00029">thread::HAWThread::start()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="testCplusplus_8cc_a0ddf1224851353fc92bfbff6f499fa97_cgraph.png" border="0" usemap="#testCplusplus_8cc_a0ddf1224851353fc92bfbff6f499fa97_cgraph" alt=""/></div>
 <map name="testCplusplus_8cc_a0ddf1224851353fc92bfbff6f499fa97_cgraph" id="testCplusplus_8cc_a0ddf1224851353fc92bfbff6f499fa97_cgraph">
-<area shape="rect" id="node3" href="classthread_1_1HAWThread.html#a4732efa3445c499f1723971acc07863f" title="thread::HAWThread::join" alt="" coords="105,5,271,35"/><area shape="rect" id="node5" href="classthread_1_1HAWThread.html#ae08d268c337511a1e67fbbeefcb1e89d" title="thread::HAWThread::\lstart" alt="" coords="115,58,261,105"/><area shape="rect" id="node7" href="classthread_1_1HAWThread.html#ab692f3a55b92623653d8213793ba4ebb" title="thread::HAWThread::Arg" alt="" coords="516,40,681,69"/><area shape="rect" id="node9" href="classthread_1_1HAWThread.html#a044da2e1a8884a3e2764f9f1863863c7" title="thread::HAWThread::\lentryPoint" alt="" coords="320,87,467,134"/><area shape="rect" id="node11" href="classthread_1_1HAWThread.html#a9a3e17be59877d350e310eb19c52679b" title="thread::HAWThread::run" alt="" coords="517,96,680,125"/><area shape="rect" id="node13" href="classthread_1_1HAWThread.html#ae565cb73c096b246664bd2474b9c8907" title="thread::HAWThread::\lexecute" alt="" coords="731,53,877,99"/><area shape="rect" id="node15" href="classthread_1_1HAWThread.html#a843ee9493a41cec7e932fdec67a3b244" title="thread::HAWThread::\lshutdown" alt="" coords="731,122,877,169"/></map>
+<area shape="rect" id="node3" href="classDispatcher.html#ada39c44b5d8aab83c567b8c163dc58cf" title="For Singleton pattern implementation." alt="" coords="108,124,268,153"/><area shape="rect" id="node29" href="classthread_1_1HAWThread.html#a4732efa3445c499f1723971acc07863f" title="thread::HAWThread::join" alt="" coords="105,180,271,209"/><area shape="rect" id="node31" href="classthread_1_1HAWThread.html#ae08d268c337511a1e67fbbeefcb1e89d" title="thread::HAWThread::\lstart" alt="" coords="115,238,261,285"/><area shape="rect" id="node5" href="classMutex.html#ad91be808bf0a60a16f10b897ec246d3a" title="Mutex::lock" alt="" coords="1439,40,1529,69"/><area shape="rect" id="node7" href="classDispatcher.html#a1bd5ef08a829632075b6ccc7c81b1609" title="Dispatcher::Dispatcher" alt="" coords="321,115,476,144"/><area shape="rect" id="node25" href="classMutex.html#a546a5b797ba29959357586aa2b3740a8" title="Mutex::unlock" alt="" coords="1432,147,1536,176"/><area shape="rect" id="node9" href="classDemultiplexer.html#a5a17e686068d2d41d5661e38618ad5cf" title="For Singleton pattern implementation." alt="" coords="525,96,704,125"/><area shape="rect" id="node12" href="classDemultiplexer.html#a981990651c49350c60dc97b7b8a1ee48" title="Demultiplexer::Demultiplexer" alt="" coords="753,93,943,123"/><area shape="rect" id="node14" href="classDemultiplexer.html#ad52a14d16708491baaab8363159e873f" title="Init dispatcher and HALSensoric." alt="" coords="993,93,1119,123"/><area shape="rect" id="node16" href="classHALSensoric.html#a5ffd0468fd57022b81be3848bce36a1e" title="Singleton pattern implementation." alt="" coords="1169,93,1343,123"/><area shape="rect" id="node19" href="classHALSensoric.html#ae779e59bcfa5e7cf3110a09359412761" title="Constructor." alt="" coords="1392,93,1576,123"/><area shape="rect" id="node21" href="classHALSensoric.html#a9456c390a75fc2dfb18936bf37462034" title="initialize interrupt&#39;s options" alt="" coords="1625,93,1796,123"/><area shape="rect" id="node23" href="HALSensoric_8cpp.html#a20a93d69d4c85d322500e6f8a6053b3d" title="ISR" alt="" coords="1845,93,1891,123"/><area shape="rect" id="node33" href="classthread_1_1HAWThread.html#ab692f3a55b92623653d8213793ba4ebb" title="thread::HAWThread::Arg" alt="" coords="532,251,697,280"/><area shape="rect" id="node35" href="classthread_1_1HAWThread.html#a044da2e1a8884a3e2764f9f1863863c7" title="thread::HAWThread::\lentryPoint" alt="" coords="325,298,472,345"/><area shape="rect" id="node37" href="classthread_1_1HAWThread.html#a9a3e17be59877d350e310eb19c52679b" title="thread::HAWThread::run" alt="" coords="533,307,696,336"/><area shape="rect" id="node39" href="classthread_1_1HAWThread.html#ae565cb73c096b246664bd2474b9c8907" title="thread::HAWThread::\lexecute" alt="" coords="775,273,921,319"/><area shape="rect" id="node41" href="classthread_1_1HAWThread.html#a843ee9493a41cec7e932fdec67a3b244" title="thread::HAWThread::\lshutdown" alt="" coords="775,342,921,389"/></map>
 </div>
 </p>
 
@@ -239,7 +189,7 @@ Here is the call graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="testCplusplus_8cc.html">testCplusplus.cc</a></li>
-    <li class="footer">Generated on Tue Nov 6 2012 03:21:25 for Festo by
+    <li class="footer">Generated on Sun Nov 25 2012 23:40:13 for Festo by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 </li>
   </ul>

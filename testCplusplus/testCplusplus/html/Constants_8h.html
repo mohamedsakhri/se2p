@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('Constants_8h.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -111,10 +111,12 @@ $(document).ready(function(){initNavTree('Constants_8h.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a7a5991d5486f3a85c8bfe4048ed5274a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Constants_8h.html#a7a5991d5486f3a85c8bfe4048ed5274a">WAIT_THREE_S</a>&#160;&#160;&#160;sleep(3)</td></tr>
-<tr class="separator:a7a5991d5486f3a85c8bfe4048ed5274a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26d469ac1a9975202725fb245919a746"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Constants_8h.html#a26d469ac1a9975202725fb245919a746">WAIT_ONE_S</a>&#160;&#160;&#160;sleep(1)</td></tr>
 <tr class="separator:a26d469ac1a9975202725fb245919a746"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a5991d5486f3a85c8bfe4048ed5274a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Constants_8h.html#a7a5991d5486f3a85c8bfe4048ed5274a">WAIT_THREE_S</a>&#160;&#160;&#160;sleep(3)</td></tr>
+<tr class="separator:a7a5991d5486f3a85c8bfe4048ed5274a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c97586af08e08fb9bfcf52771d75e25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Constants_8h.html#a0c97586af08e08fb9bfcf52771d75e25">WAIT_FIVE_S</a>&#160;&#160;&#160;sleep(5)</td></tr>
+<tr class="separator:a0c97586af08e08fb9bfcf52771d75e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a093bda17772465a0cd79cae4f88aae68"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Constants_8h.html#a093bda17772465a0cd79cae4f88aae68">WAIT_TEN_S</a>&#160;&#160;&#160;sleep(10)</td></tr>
 <tr class="separator:a093bda17772465a0cd79cae4f88aae68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1728721e833cc2d20f87f3ba822be6e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Constants_8h.html#a1728721e833cc2d20f87f3ba822be6e8">WAIT_HALF_S</a>&#160;&#160;&#160;usleep(500000);</td></tr>
@@ -133,9 +135,25 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="Constants_8h_source.html#l00018">18</a> of file <a class="el" href="Constants_8h_source.html">Constants.h</a>.</p>
+<p>Definition at line <a class="el" href="Constants_8h_source.html#l00020">20</a> of file <a class="el" href="Constants_8h_source.html">Constants.h</a>.</p>
 
 <p>Referenced by <a class="el" href="Reader_8cpp_source.html#l00029">Reader::execute()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0c97586af08e08fb9bfcf52771d75e25"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WAIT_FIVE_S&#160;&#160;&#160;sleep(5)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="Constants_8h_source.html#l00015">15</a> of file <a class="el" href="Constants_8h_source.html">Constants.h</a>.</p>
+
+<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -149,9 +167,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="Constants_8h_source.html#l00016">16</a> of file <a class="el" href="Constants_8h_source.html">Constants.h</a>.</p>
-
-<p>Referenced by <a class="el" href="PortA_8cpp_source.html#l00177">PortA::red_Light_quick()</a>.</p>
+<p>Definition at line <a class="el" href="Constants_8h_source.html#l00018">18</a> of file <a class="el" href="Constants_8h_source.html">Constants.h</a>.</p>
 
 </div>
 </div>
@@ -167,7 +183,7 @@ Macros</h2></td></tr>
 
 <p>Definition at line <a class="el" href="Constants_8h_source.html#l00013">13</a> of file <a class="el" href="Constants_8h_source.html">Constants.h</a>.</p>
 
-<p>Referenced by <a class="el" href="PortA_8cpp_source.html#l00164">PortA::red_Light_slow()</a>.</p>
+<p>Referenced by <a class="el" href="SwitchTest_8cpp_source.html#l00021">SwitchTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -181,9 +197,9 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="Constants_8h_source.html#l00014">14</a> of file <a class="el" href="Constants_8h_source.html">Constants.h</a>.</p>
+<p>Definition at line <a class="el" href="Constants_8h_source.html#l00016">16</a> of file <a class="el" href="Constants_8h_source.html">Constants.h</a>.</p>
 
-<p>Referenced by <a class="el" href="MotorTest_8cpp_source.html#l00022">MotorTest::execute()</a>, and <a class="el" href="SwitchTest_8cpp_source.html#l00021">SwitchTest::execute()</a>.</p>
+<p>Referenced by <a class="el" href="MotorTest_8cpp_source.html#l00022">MotorTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -197,9 +213,9 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="Constants_8h_source.html#l00012">12</a> of file <a class="el" href="Constants_8h_source.html">Constants.h</a>.</p>
+<p>Definition at line <a class="el" href="Constants_8h_source.html#l00014">14</a> of file <a class="el" href="Constants_8h_source.html">Constants.h</a>.</p>
 
-<p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>, <a class="el" href="SwitchTest_8cpp_source.html#l00021">SwitchTest::execute()</a>, and <a class="el" href="LightTest_8cpp_source.html#l00022">LightTest::execute()</a>.</p>
+<p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>, <a class="el" href="SwitchTest_8cpp_source.html#l00021">SwitchTest::execute()</a>, and <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -209,7 +225,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="Constants_8h.html">Constants.h</a></li>
-    <li class="footer">Generated on Tue Nov 6 2012 03:21:25 for Festo by
+    <li class="footer">Generated on Sun Nov 25 2012 23:40:12 for Festo by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 </li>
   </ul>

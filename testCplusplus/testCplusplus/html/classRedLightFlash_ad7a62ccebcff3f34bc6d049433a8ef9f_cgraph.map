@@ -1,0 +1,6 @@
+<map id="RedLightFlash::execute" name="RedLightFlash::execute">
+<area shape="rect" id="node3" href="$classHALAktorik.html#a20a68e52a470319e011e5f8cee37df28" title="Used to implement Singleton Pattern." alt="" coords="217,5,383,35"/>
+<area shape="rect" id="node5" href="$classthread_1_1HAWThread.html#a46e9f127856f36917b3a8a345b7be5ee" title="thread::HAWThread::\lisStopped" alt="" coords="227,58,373,105"/>
+<area shape="rect" id="node7" href="$classHALAktorik.html#ac8c0c9960dba4287e6df67e2c254db35" title="Turn red light off." alt="" coords="215,128,385,157"/>
+<area shape="rect" id="node9" href="$classHALAktorik.html#a0d55175ff6c4e3b9a5ae42c85f95c41e" title="Turn red light on." alt="" coords="215,181,385,211"/>
+</map>

@@ -21,8 +21,8 @@
 //#define LIGHT_TEST
 //#define SER_INTERFACE_TEST
 //#define SENSORIC_TEST
+#define DISPATCHER_TEST
 //#define DEBUG_MUTEX
-#define DEBUX_
 
 
 #include "HWaccess.h"
@@ -55,14 +55,11 @@ int main(int argc, char *argv[]) {
 	IOaccess_open(); // Baue die Verbindung zur Simulation auf
 #endif
 
-//Demultiplexer* dmux = Demultiplexer::getInstance();
-Dispatcher* disp = Dispatcher::getInstance();
-
-//dmux->start(NULL);
-disp->start(NULL);
-
-//dmux->join();
-disp->join();
+#ifdef DISPATCHER_TEST
+	Dispatcher* disp = Dispatcher::getInstance();
+	disp->start(NULL);
+	disp->join();
+#endif
 
 
 #ifdef SENSORIC_TEST

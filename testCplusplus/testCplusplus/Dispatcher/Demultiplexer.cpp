@@ -46,7 +46,7 @@ Demultiplexer::~Demultiplexer() {
  */
 Demultiplexer* Demultiplexer::getInstance() {
 #ifdef DEBUG_
-	cout << "demultiplexer strted" << endl;
+	cout << "Demultiplexer satrted" << endl;
 #endif
 	if (!demultiplexer_instance_) {
 		demultiplexer_mutex_.lock();
@@ -59,7 +59,11 @@ Demultiplexer* Demultiplexer::getInstance() {
 	return demultiplexer_instance_;
 }
 
-
+/**
+ * Do some initialization work :
+ * Get HALSensoric instance
+ * Create a channel and attach to it
+ */
 void Demultiplexer::init(){
 	hal_sensoric_ = HALSensoric::getInstance();
 
@@ -91,7 +95,7 @@ int Demultiplexer::getChannelId(){
  */
 void Demultiplexer::execute(void* arg){
 #ifdef DEBUG_
-		cout << "start dmux thread" << endl;
+		cout << "Start dmux thread" << endl;
 #endif
 		struct _pulse pulse;
 		int new_value = -1;
@@ -270,6 +274,10 @@ void Demultiplexer::execute(void* arg){
 			} // for
 		} // while
 }
+
+/**
+ * Send a message to Dispatcher
+ */
 int Demultiplexer::sendMsg2D(int message){
 
 	if (-1 == MsgSendPulse(con_id_,SIGEV_PULSE_PRIO_INHERIT, DEMULTIPLEXER_CODE, message )) {

@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('LightTest_8cpp.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -99,6 +99,8 @@ $(document).ready(function(){initNavTree('LightTest_8cpp.html','');});
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">LightTest.cpp File Reference</div>  </div>
 </div><!--header-->
@@ -107,15 +109,71 @@ $(document).ready(function(){initNavTree('LightTest_8cpp.html','');});
 <code>#include &lt;unistd.h&gt;</code><br/>
 <code>#include &quot;<a class="el" href="HALAktorik_8h_source.html">HALAktorik.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="Constants_8h_source.html">Constants.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="RedLightFlash_8h_source.html">RedLightFlash.h</a>&quot;</code><br/>
 </div>
 <p><a href="LightTest_8cpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:afdef56a4fa5a5d34969eb30aa2bfef47"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LightTest_8cpp.html#afdef56a4fa5a5d34969eb30aa2bfef47">QUICK</a>&#160;&#160;&#160;500000</td></tr>
+<tr class="separator:afdef56a4fa5a5d34969eb30aa2bfef47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5da43425fff36347c69fc3c090e42c6c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LightTest_8cpp.html#a5da43425fff36347c69fc3c090e42c6c">SLOW</a>&#160;&#160;&#160;1000000</td></tr>
+<tr class="separator:a5da43425fff36347c69fc3c090e42c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1329df6da641cb622f10bcf8e63b6b80"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LightTest_8cpp.html#a1329df6da641cb622f10bcf8e63b6b80">LIGHT_TEST</a></td></tr>
+<tr class="separator:a1329df6da641cb622f10bcf8e63b6b80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="a1329df6da641cb622f10bcf8e63b6b80"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIGHT_TEST</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="LightTest_8cpp_source.html#l00018">18</a> of file <a class="el" href="LightTest_8cpp_source.html">LightTest.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afdef56a4fa5a5d34969eb30aa2bfef47"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QUICK&#160;&#160;&#160;500000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="LightTest_8cpp_source.html#l00014">14</a> of file <a class="el" href="LightTest_8cpp_source.html">LightTest.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5da43425fff36347c69fc3c090e42c6c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SLOW&#160;&#160;&#160;1000000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="LightTest_8cpp_source.html#l00015">15</a> of file <a class="el" href="LightTest_8cpp_source.html">LightTest.cpp</a>.</p>
+
+<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_33c78a012c8d08979f57a54a07694c46.html">Tests</a></li><li class="navelem"><a class="el" href="LightTest_8cpp.html">LightTest.cpp</a></li>
-    <li class="footer">Generated on Tue Nov 6 2012 03:21:25 for Festo by
+    <li class="footer">Generated on Sun Nov 25 2012 23:40:13 for Festo by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 </li>
   </ul>

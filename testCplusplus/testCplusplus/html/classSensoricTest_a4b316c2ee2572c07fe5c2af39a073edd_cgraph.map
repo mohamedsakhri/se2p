@@ -1,0 +1,9 @@
+<map id="SensoricTest::SensoricTest" name="SensoricTest::SensoricTest">
+<area shape="rect" id="node3" href="$classHALAktorik.html#a20a68e52a470319e011e5f8cee37df28" title="Used to implement Singleton Pattern." alt="" coords="243,5,408,35"/>
+<area shape="rect" id="node5" href="$classHALSensoric.html#a5ffd0468fd57022b81be3848bce36a1e" title="Singleton pattern implementation." alt="" coords="239,59,412,88"/>
+<area shape="rect" id="node7" href="$classHALSensoric.html#ae779e59bcfa5e7cf3110a09359412761" title="Constructor." alt="" coords="461,5,645,35"/>
+<area shape="rect" id="node13" href="$classMutex.html#ad91be808bf0a60a16f10b897ec246d3a" title="Mutex::lock" alt="" coords="508,59,599,88"/>
+<area shape="rect" id="node15" href="$classMutex.html#a546a5b797ba29959357586aa2b3740a8" title="Mutex::unlock" alt="" coords="501,112,605,141"/>
+<area shape="rect" id="node9" href="$classHALSensoric.html#a9456c390a75fc2dfb18936bf37462034" title="initialize interrupt&#39;s options" alt="" coords="695,5,865,35"/>
+<area shape="rect" id="node11" href="$HALSensoric_8cpp.html#a20a93d69d4c85d322500e6f8a6053b3d" title="ISR" alt="" coords="915,5,960,35"/>
+</map>

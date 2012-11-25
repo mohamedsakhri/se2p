@@ -29,7 +29,7 @@ var classHALAktorik =
     [ "yellow_Light_off", "classHALAktorik.html#a32e891e6f153e0a9cbb48f652ca74335", null ],
     [ "yellow_Light_on", "classHALAktorik.html#a346a3ca71aef54f0f0217b538cd908e0", null ],
     [ "hal_Aktorik_instance_", "classHALAktorik.html#ae6def3a4a94c81c82eb4225841523bf7", null ],
-    [ "hal_Aktorik_mutex_", "classHALAktorik.html#adb6a1bfb761c86fb2885ecb673ff5b31", null ],
+    [ "hal_Aktorik_mutex_", "classHALAktorik.html#ad4f91eeff86d905505abbeacc6ccd4dc", null ],
     [ "portA_", "classHALAktorik.html#a97ff4477994d39dff92dba102d76d24c", null ],
     [ "portC_", "classHALAktorik.html#a4f52fd614ffb0a58e313c2bfc1621388", null ]
 ];

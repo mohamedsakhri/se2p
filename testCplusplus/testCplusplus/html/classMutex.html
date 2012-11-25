@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('classMutex.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -130,7 +130,7 @@ Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="Mutex_8h_source.html#l00013">13</a> of file <a class="el" href="Mutex_8h_source.html">Mutex.h</a>.</p>
+<p>Definition at line <a class="el" href="Mutex_8h_source.html#l00014">14</a> of file <a class="el" href="Mutex_8h_source.html">Mutex.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a593423d868daf926c7b0d63a833ae29a"></a>
 <div class="memitem">
@@ -144,10 +144,11 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Initialize the <a class="el" href="classMutex.html">Mutex</a> </p>
 
-<p>Definition at line <a class="el" href="Mutex_8cpp_source.html#l00010">10</a> of file <a class="el" href="Mutex_8cpp_source.html">Mutex.cpp</a>.</p>
+<p>Definition at line <a class="el" href="Mutex_8cpp_source.html#l00015">15</a> of file <a class="el" href="Mutex_8cpp_source.html">Mutex.cpp</a>.</p>
 
-<p>References <a class="el" href="Mutex_8h_source.html#l00021">mutex_</a>.</p>
+<p>References <a class="el" href="Mutex_8h_source.html#l00022">mutex_</a>.</p>
 
 </div>
 </div>
@@ -171,10 +172,11 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Destroy the <a class="el" href="classMutex.html">Mutex</a> </p>
 
-<p>Definition at line <a class="el" href="Mutex_8cpp_source.html#l00015">15</a> of file <a class="el" href="Mutex_8cpp_source.html">Mutex.cpp</a>.</p>
+<p>Definition at line <a class="el" href="Mutex_8cpp_source.html#l00022">22</a> of file <a class="el" href="Mutex_8cpp_source.html">Mutex.cpp</a>.</p>
 
-<p>References <a class="el" href="Mutex_8h_source.html#l00021">mutex_</a>.</p>
+<p>References <a class="el" href="Mutex_8h_source.html#l00022">mutex_</a>.</p>
 
 </div>
 </div>
@@ -191,12 +193,13 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Unlock the <a class="el" href="classMutex.html">Mutex</a> </p>
 
-<p>Definition at line <a class="el" href="Mutex_8cpp_source.html#l00024">24</a> of file <a class="el" href="Mutex_8cpp_source.html">Mutex.cpp</a>.</p>
+<p>Definition at line <a class="el" href="Mutex_8cpp_source.html#l00038">38</a> of file <a class="el" href="Mutex_8cpp_source.html">Mutex.cpp</a>.</p>
 
-<p>References <a class="el" href="Mutex_8h_source.html#l00021">mutex_</a>.</p>
+<p>References <a class="el" href="Mutex_8h_source.html#l00022">mutex_</a>.</p>
 
-<p>Referenced by <a class="el" href="PortC_8cpp_source.html#l00053">PortC::set_Bit_off()</a>, <a class="el" href="PortA_8cpp_source.html#l00056">PortA::set_Bit_off()</a>, <a class="el" href="PortC_8cpp_source.html#l00037">PortC::set_Bit_on()</a>, and <a class="el" href="PortA_8cpp_source.html#l00039">PortA::set_Bit_on()</a>.</p>
+<p>Referenced by <a class="el" href="HALSensoric_8cpp_source.html#l00044">HALSensoric::getInstance()</a>, <a class="el" href="Demultiplexer_8cpp_source.html#l00047">Demultiplexer::getInstance()</a>, <a class="el" href="Dispatcher_8cpp_source.html#l00047">Dispatcher::getInstance()</a>, <a class="el" href="PortC_8cpp_source.html#l00055">PortC::set_Bit_off()</a>, <a class="el" href="PortA_8cpp_source.html#l00056">PortA::set_Bit_off()</a>, <a class="el" href="PortC_8cpp_source.html#l00038">PortC::set_Bit_on()</a>, and <a class="el" href="PortA_8cpp_source.html#l00039">PortA::set_Bit_on()</a>.</p>
 
 </div>
 </div>
@@ -212,12 +215,13 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Lock the <a class="el" href="classMutex.html">Mutex</a> </p>
 
-<p>Definition at line <a class="el" href="Mutex_8cpp_source.html#l00020">20</a> of file <a class="el" href="Mutex_8cpp_source.html">Mutex.cpp</a>.</p>
+<p>Definition at line <a class="el" href="Mutex_8cpp_source.html#l00030">30</a> of file <a class="el" href="Mutex_8cpp_source.html">Mutex.cpp</a>.</p>
 
-<p>References <a class="el" href="Mutex_8h_source.html#l00021">mutex_</a>.</p>
+<p>References <a class="el" href="Mutex_8h_source.html#l00022">mutex_</a>.</p>
 
-<p>Referenced by <a class="el" href="PortC_8cpp_source.html#l00053">PortC::set_Bit_off()</a>, <a class="el" href="PortA_8cpp_source.html#l00056">PortA::set_Bit_off()</a>, <a class="el" href="PortC_8cpp_source.html#l00037">PortC::set_Bit_on()</a>, and <a class="el" href="PortA_8cpp_source.html#l00039">PortA::set_Bit_on()</a>.</p>
+<p>Referenced by <a class="el" href="HALSensoric_8cpp_source.html#l00044">HALSensoric::getInstance()</a>, <a class="el" href="Demultiplexer_8cpp_source.html#l00047">Demultiplexer::getInstance()</a>, <a class="el" href="Dispatcher_8cpp_source.html#l00047">Dispatcher::getInstance()</a>, <a class="el" href="PortC_8cpp_source.html#l00055">PortC::set_Bit_off()</a>, <a class="el" href="PortA_8cpp_source.html#l00056">PortA::set_Bit_off()</a>, <a class="el" href="PortC_8cpp_source.html#l00038">PortC::set_Bit_on()</a>, and <a class="el" href="PortA_8cpp_source.html#l00039">PortA::set_Bit_on()</a>.</p>
 
 </div>
 </div>
@@ -240,9 +244,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="Mutex_8h_source.html#l00021">21</a> of file <a class="el" href="Mutex_8h_source.html">Mutex.h</a>.</p>
+<p>Definition at line <a class="el" href="Mutex_8h_source.html#l00022">22</a> of file <a class="el" href="Mutex_8h_source.html">Mutex.h</a>.</p>
 
-<p>Referenced by <a class="el" href="Mutex_8cpp_source.html#l00024">lock()</a>, <a class="el" href="Mutex_8cpp_source.html#l00010">Mutex()</a>, <a class="el" href="Mutex_8cpp_source.html#l00020">unlock()</a>, and <a class="el" href="Mutex_8cpp_source.html#l00015">~Mutex()</a>.</p>
+<p>Referenced by <a class="el" href="Mutex_8cpp_source.html#l00038">lock()</a>, <a class="el" href="Mutex_8cpp_source.html#l00015">Mutex()</a>, <a class="el" href="Mutex_8cpp_source.html#l00030">unlock()</a>, and <a class="el" href="Mutex_8cpp_source.html#l00022">~Mutex()</a>.</p>
 
 </div>
 </div>
@@ -256,7 +260,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMutex.html">Mutex</a></li>
-    <li class="footer">Generated on Tue Nov 6 2012 03:21:25 for Festo by
+    <li class="footer">Generated on Sun Nov 25 2012 23:40:14 for Festo by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 </li>
   </ul>

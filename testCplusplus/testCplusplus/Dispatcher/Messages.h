@@ -17,7 +17,7 @@
 // to each message instead of the default ones used by enum.
 enum message {
 	// Message's for interrupt's from Port B
-	WP_IN_ENGINE_START,	//
+	WP_IN_ENGINE_START,
 	WP_OUT_ENGINE_START,
 	WP_IN_HEIGHT_M,
 	WP_OUT_HEIGHT_M,
@@ -47,7 +47,7 @@ enum message {
 	// Messages for errors. Those can be sent from Controller to dispatcher in case of errors
 	WP_IS_MISSING,		// a workpiece disappears or arrives to late
 	WP_IS_STRANGER,		// an unknown workpiece in engine or a workpiece arrives too early
-	WP_NOT_TURNED,		// Error from band2 if worspiece has not been turned in the end of band1
+	WP_NOT_TURNED,		// Error from band2 if workpiece has not been turned in the end of band1
 	SLIDE_FULL
 	// More specified errors are possible and could be added as messages here. May be later!
 } ;

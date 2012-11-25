@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('classthread_1_1HAWThread.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -248,7 +248,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>References <a class="el" href="HAWThread_8h_source.html#l00116">Arg_</a>.</p>
 
-<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00059">entryPoint()</a>, and <a class="el" href="HAWThread_8cpp_source.html#l00030">start()</a>.</p>
+<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00056">entryPoint()</a>, and <a class="el" href="HAWThread_8cpp_source.html#l00029">start()</a>.</p>
 
 </div>
 </div>
@@ -295,7 +295,7 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>This function continues (resumes) the thread. It makes a ThreadCtrl call. </p>
 
-<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00050">50</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00047">47</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
 
 <p>References <a class="el" href="HAWThread_8h_source.html#l00114">tid_</a>.</p>
 
@@ -323,11 +323,11 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00059">59</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00056">56</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
 
-<p>References <a class="el" href="HAWThread_8h_source.html#l00092">Arg()</a>, and <a class="el" href="HAWThread_8cpp_source.html#l00054">run()</a>.</p>
+<p>References <a class="el" href="HAWThread_8h_source.html#l00092">Arg()</a>, and <a class="el" href="HAWThread_8cpp_source.html#l00051">run()</a>.</p>
 
-<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00030">start()</a>.</p>
+<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00029">start()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -364,9 +364,9 @@ Here is the call graph for this function:</div>
 <pre class="fragment">   * (loop)
 </pre><p> to be implemented in the derived class. The application programmer has to write his own loop. He can check bool <a class="el" href="classthread_1_1HAWThread.html#a46e9f127856f36917b3a8a345b7be5ee">isStopped()</a> to see if the thread should exit the loop. </p>
 
-<p>Implemented in <a class="el" href="classthread_1_1MyThread.html#ad01a9b6ca5b4ef73004f5244550ede95">thread::MyThread</a>, <a class="el" href="classSender.html#a83dd8176d304c611fa5e4ecdc1395931">Sender</a>, <a class="el" href="classLightTest.html#a7aac419b328258f20dde0795eebe63a3">LightTest</a>, <a class="el" href="classSwitchTest.html#a279714d59b7df49da57e18c28790ea6c">SwitchTest</a>, <a class="el" href="classReader.html#abf5626c00140593aeddc0f501f6deadf">Reader</a>, <a class="el" href="classLEDTest.html#a2aa809a853bbf2795729d9b8625433ae">LEDTest</a>, and <a class="el" href="classMotorTest.html#ac753d24b2b8a2327990897ef2f17b18b">MotorTest</a>.</p>
+<p>Implemented in <a class="el" href="classDispatcher.html#a43e6543555c3ddc20e108a6b5a3647b7">Dispatcher</a>, <a class="el" href="classDemultiplexer.html#a5096fae76a5cade5728f3b15f64c1046">Demultiplexer</a>, <a class="el" href="classSensoricTest.html#a853d77b26d19a9fe3fbfb0a7ff8e0820">SensoricTest</a>, <a class="el" href="classthread_1_1MyThread.html#ad01a9b6ca5b4ef73004f5244550ede95">thread::MyThread</a>, <a class="el" href="classRedLightFlash.html#ad7a62ccebcff3f34bc6d049433a8ef9f">RedLightFlash</a>, <a class="el" href="classSender.html#a83dd8176d304c611fa5e4ecdc1395931">Sender</a>, <a class="el" href="classLightTest.html#a7aac419b328258f20dde0795eebe63a3">LightTest</a>, <a class="el" href="classSwitchTest.html#a279714d59b7df49da57e18c28790ea6c">SwitchTest</a>, <a class="el" href="classReader.html#abf5626c00140593aeddc0f501f6deadf">Reader</a>, <a class="el" href="classLEDTest.html#a2aa809a853bbf2795729d9b8625433ae">LEDTest</a>, and <a class="el" href="classMotorTest.html#ac753d24b2b8a2327990897ef2f17b18b">MotorTest</a>.</p>
 
-<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00054">run()</a>.</p>
+<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00051">run()</a>.</p>
 
 </div>
 </div>
@@ -384,7 +384,7 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 <p>This function holds (suspends) the thread. It makes a ThreadCtrl call. It shall be used if the thread is not being used for a while but may be used later </p>
 
-<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00047">47</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00044">44</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
 
 <p>References <a class="el" href="HAWThread_8h_source.html#l00114">tid_</a>.</p>
 
@@ -416,7 +416,7 @@ Here is the call graph for this function:</div>
 
 <p>References <a class="el" href="HAWThread_8h_source.html#l00117">GLOBAL_EXIT</a>, and <a class="el" href="HAWThread_8h_source.html#l00118">LOCAL_EXIT</a>.</p>
 
-<p>Referenced by <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>Referenced by <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>, <a class="el" href="RedLightFlash_8cpp_source.html#l00032">RedLightFlash::execute()</a>, <a class="el" href="SensoricTest_8cpp_source.html#l00044">SensoricTest::execute()</a>, <a class="el" href="Demultiplexer_8cpp_source.html#l00096">Demultiplexer::execute()</a>, <a class="el" href="Dispatcher_8cpp_source.html#l00073">Dispatcher::execute()</a>, and <a class="el" href="Demultiplexer_8cpp_source.html#l00281">Demultiplexer::sendMsg2D()</a>.</p>
 
 </div>
 </div>
@@ -435,11 +435,11 @@ Here is the call graph for this function:</div>
 <p>Calls join on the thread. </p>
 <dl class="section warning"><dt>Warning</dt><dd>must be called from the same context as start. </dd></dl>
 
-<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00065">65</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00062">62</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
 
 <p>References <a class="el" href="HAWThread_8h_source.html#l00114">tid_</a>.</p>
 
-<p>Referenced by <a class="el" href="testCplusplus_8cc_source.html#l00041">main()</a>, and <a class="el" href="SerInterfaceTest_8cpp_source.html#l00012">SerInterfaceTest::SerInterfaceTest()</a>.</p>
+<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>, <a class="el" href="testCplusplus_8cc_source.html#l00050">main()</a>, and <a class="el" href="SerInterfaceTest_8cpp_source.html#l00012">SerInterfaceTest::SerInterfaceTest()</a>.</p>
 
 </div>
 </div>
@@ -466,11 +466,11 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 <p>This is called when the thread is started. It calls execute an shutdown which are the user functions. </p>
 
-<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00054">54</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00051">51</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
 
 <p>References <a class="el" href="classthread_1_1HAWThread.html#ae565cb73c096b246664bd2474b9c8907">execute()</a>, and <a class="el" href="classthread_1_1HAWThread.html#a843ee9493a41cec7e932fdec67a3b244">shutdown()</a>.</p>
 
-<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00059">entryPoint()</a>.</p>
+<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00056">entryPoint()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -505,9 +505,9 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 <p>this function must be implemented in the derived class. The function is called once after the thread has been stopped. </p>
 
-<p>Implemented in <a class="el" href="classthread_1_1MyThread.html#aeea3d2b6eca3e8f9e2b3d3293044799b">thread::MyThread</a>, <a class="el" href="classSender.html#a06f850ebbc68b371f0785e0d28fe0bf7">Sender</a>, <a class="el" href="classLightTest.html#a38126a19b19bbf4b0eadd32516da841a">LightTest</a>, <a class="el" href="classSwitchTest.html#a45ec489c1b325a2d9ab173671235776b">SwitchTest</a>, <a class="el" href="classReader.html#ad5e0e29fb20881a59e618bdc5d73bfbe">Reader</a>, <a class="el" href="classLEDTest.html#a2723319d3d34df70e4f150db869c4921">LEDTest</a>, and <a class="el" href="classMotorTest.html#af6a295ae54897013f6587639afdd5a01">MotorTest</a>.</p>
+<p>Implemented in <a class="el" href="classDispatcher.html#aba342cec514e992de9b3c22e1e451d50">Dispatcher</a>, <a class="el" href="classDemultiplexer.html#ae981bb06b1d25042402f0824996f8f09">Demultiplexer</a>, <a class="el" href="classSensoricTest.html#aa7389f2fa80bab3ab3910605a619a8e3">SensoricTest</a>, <a class="el" href="classthread_1_1MyThread.html#aeea3d2b6eca3e8f9e2b3d3293044799b">thread::MyThread</a>, <a class="el" href="classRedLightFlash.html#a8a010bbf066071837461f969344cf9a2">RedLightFlash</a>, <a class="el" href="classSender.html#a06f850ebbc68b371f0785e0d28fe0bf7">Sender</a>, <a class="el" href="classLightTest.html#a38126a19b19bbf4b0eadd32516da841a">LightTest</a>, <a class="el" href="classSwitchTest.html#a45ec489c1b325a2d9ab173671235776b">SwitchTest</a>, <a class="el" href="classReader.html#ad5e0e29fb20881a59e618bdc5d73bfbe">Reader</a>, <a class="el" href="classLEDTest.html#a2723319d3d34df70e4f150db869c4921">LEDTest</a>, and <a class="el" href="classMotorTest.html#af6a295ae54897013f6587639afdd5a01">MotorTest</a>.</p>
 
-<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00054">run()</a>.</p>
+<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00051">run()</a>.</p>
 
 </div>
 </div>
@@ -560,11 +560,11 @@ If Thread is already running, <a class="el" href="classthread_1_1HAWThread.html#
 </ul>
 </dd></dl>
 
-<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00030">30</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00029">29</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
 
-<p>References <a class="el" href="HAWThread_8h_source.html#l00092">Arg()</a>, <a class="el" href="HAWThread_8h_source.html#l00115">bRunning_</a>, <a class="el" href="HAWThread_8cpp_source.html#l00059">entryPoint()</a>, and <a class="el" href="HAWThread_8h_source.html#l00114">tid_</a>.</p>
+<p>References <a class="el" href="HAWThread_8h_source.html#l00092">Arg()</a>, <a class="el" href="HAWThread_8h_source.html#l00115">bRunning_</a>, <a class="el" href="HAWThread_8cpp_source.html#l00056">entryPoint()</a>, and <a class="el" href="HAWThread_8h_source.html#l00114">tid_</a>.</p>
 
-<p>Referenced by <a class="el" href="testCplusplus_8cc_source.html#l00041">main()</a>, and <a class="el" href="SerInterfaceTest_8cpp_source.html#l00012">SerInterfaceTest::SerInterfaceTest()</a>.</p>
+<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>, <a class="el" href="Dispatcher_8cpp_source.html#l00073">Dispatcher::execute()</a>, <a class="el" href="testCplusplus_8cc_source.html#l00050">main()</a>, and <a class="el" href="SerInterfaceTest_8cpp_source.html#l00012">SerInterfaceTest::SerInterfaceTest()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -591,9 +591,11 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 <p>Sets the internal flag LOCAL_EXIT to true. </p>
 
-<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00043">43</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HAWThread_8cpp_source.html#l00040">40</a> of file <a class="el" href="HAWThread_8cpp_source.html">HAWThread.cpp</a>.</p>
 
 <p>References <a class="el" href="HAWThread_8h_source.html#l00118">LOCAL_EXIT</a>.</p>
+
+<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -644,7 +646,7 @@ Here is the call graph for this function:</div>
 
 <p>Definition at line <a class="el" href="HAWThread_8h_source.html#l00115">115</a> of file <a class="el" href="HAWThread_8h_source.html">HAWThread.h</a>.</p>
 
-<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00030">start()</a>.</p>
+<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00029">start()</a>.</p>
 
 </div>
 </div>
@@ -694,7 +696,7 @@ Here is the call graph for this function:</div>
 
 <p>Definition at line <a class="el" href="HAWThread_8h_source.html#l00118">118</a> of file <a class="el" href="HAWThread_8h_source.html">HAWThread.h</a>.</p>
 
-<p>Referenced by <a class="el" href="HAWThread_8h_source.html#l00106">isStopped()</a>, and <a class="el" href="HAWThread_8cpp_source.html#l00043">stop()</a>.</p>
+<p>Referenced by <a class="el" href="HAWThread_8h_source.html#l00106">isStopped()</a>, and <a class="el" href="HAWThread_8cpp_source.html#l00040">stop()</a>.</p>
 
 </div>
 </div>
@@ -719,7 +721,7 @@ Here is the call graph for this function:</div>
 
 <p>Definition at line <a class="el" href="HAWThread_8h_source.html#l00114">114</a> of file <a class="el" href="HAWThread_8h_source.html">HAWThread.h</a>.</p>
 
-<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00050">cont()</a>, <a class="el" href="HAWThread_8cpp_source.html#l00047">hold()</a>, <a class="el" href="HAWThread_8cpp_source.html#l00065">join()</a>, <a class="el" href="HAWThread_8cpp_source.html#l00030">start()</a>, and <a class="el" href="HAWThread_8cpp_source.html#l00024">~HAWThread()</a>.</p>
+<p>Referenced by <a class="el" href="HAWThread_8cpp_source.html#l00047">cont()</a>, <a class="el" href="HAWThread_8cpp_source.html#l00044">hold()</a>, <a class="el" href="HAWThread_8cpp_source.html#l00062">join()</a>, <a class="el" href="HAWThread_8cpp_source.html#l00029">start()</a>, and <a class="el" href="HAWThread_8cpp_source.html#l00024">~HAWThread()</a>.</p>
 
 </div>
 </div>
@@ -733,7 +735,7 @@ Here is the call graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacethread.html">thread</a></li><li class="navelem"><a class="el" href="classthread_1_1HAWThread.html">HAWThread</a></li>
-    <li class="footer">Generated on Tue Nov 6 2012 03:21:25 for Festo by
+    <li class="footer">Generated on Sun Nov 25 2012 23:40:15 for Festo by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 </li>
   </ul>

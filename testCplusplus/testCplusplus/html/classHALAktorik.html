@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('classHALAktorik.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -222,9 +222,9 @@ Static Private Attributes</h2></td></tr>
 <tr class="memitem:ae6def3a4a94c81c82eb4225841523bf7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classHALAktorik.html">HALAktorik</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHALAktorik.html#ae6def3a4a94c81c82eb4225841523bf7">hal_Aktorik_instance_</a> = NULL</td></tr>
 <tr class="memdesc:ae6def3a4a94c81c82eb4225841523bf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The only instance of HAL.  <a href="#ae6def3a4a94c81c82eb4225841523bf7"></a><br/></td></tr>
 <tr class="separator:ae6def3a4a94c81c82eb4225841523bf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb6a1bfb761c86fb2885ecb673ff5b31"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMutex.html">Mutex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHALAktorik.html#adb6a1bfb761c86fb2885ecb673ff5b31">hal_Aktorik_mutex_</a> = new <a class="el" href="classMutex.html">Mutex</a>()</td></tr>
-<tr class="memdesc:adb6a1bfb761c86fb2885ecb673ff5b31"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMutex.html">Mutex</a> for thread-safe implementation.  <a href="#adb6a1bfb761c86fb2885ecb673ff5b31"></a><br/></td></tr>
-<tr class="separator:adb6a1bfb761c86fb2885ecb673ff5b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4f91eeff86d905505abbeacc6ccd4dc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMutex.html">Mutex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHALAktorik.html#ad4f91eeff86d905505abbeacc6ccd4dc">hal_Aktorik_mutex_</a> = <a class="el" href="classMutex.html">Mutex</a>()</td></tr>
+<tr class="memdesc:ad4f91eeff86d905505abbeacc6ccd4dc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMutex.html">Mutex</a> for thread-safe implementation.  <a href="#ad4f91eeff86d905505abbeacc6ccd4dc"></a><br/></td></tr>
+<tr class="separator:ad4f91eeff86d905505abbeacc6ccd4dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -255,7 +255,7 @@ Static Private Attributes</h2></td></tr>
 <p>Free memory allocated by HAL. </p>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classHALAktorik.html#a48ec43c58482eae3df9a5f58531e8894" title="Constructor has to be private for the singleton pattern implementation.">HALAktorik()</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00036">36</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00030">30</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 </div>
 </div>
@@ -281,11 +281,9 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructor has to be private for the singleton pattern implementation. </p>
-<p>Test access' right and initialize IO-card in case of success. </p>
+<p>Initialization of portA and <a class="el" href="classPortC.html">PortC</a> </p>
 
 <p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00021">21</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
-
-<p>References <a class="el" href="Adress_8h_source.html#l00016">DIGITAL_CARD_CONTROL</a>.</p>
 
 </div>
 </div>
@@ -305,9 +303,9 @@ Static Private Attributes</h2></td></tr>
 
 <p>Close the switch. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00101">101</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00105">105</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
-<p>Referenced by <a class="el" href="SwitchTest_8cpp_source.html#l00021">SwitchTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>Referenced by <a class="el" href="SwitchTest_8cpp_source.html#l00021">SwitchTest::execute()</a>, <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>, and <a class="el" href="SensoricTest_8cpp_source.html#l00044">SensoricTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -333,12 +331,14 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Used to implement Singleton Pattern. </p>
-<dl class="section return"><dt>Returns</dt><dd>instance of <a class="el" href="classHALAktorik.html">HALAktorik</a></dd></dl>
-<p>At most one instance of <a class="el" href="classHALAktorik.html">HALAktorik</a> will be created. If no instance has been created yet, a new instance has to be created. Otherwise the already created instance will be returned. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classHALAktorik.html">HALAktorik</a>'s instance</dd></dl>
+<p>return an Instance of the <a class="el" href="classHALAktorik.html">HALAktorik</a> and initialize the IO_CARD At most one instance of <a class="el" href="classHALAktorik.html">HALAktorik</a> will be created. If no instance has been created yet, a new instance has to be created. Otherwise the already created instance will be returned. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00047">47</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00043">43</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
-<p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>, <a class="el" href="MotorTest_8cpp_source.html#l00022">MotorTest::execute()</a>, <a class="el" href="SwitchTest_8cpp_source.html#l00021">SwitchTest::execute()</a>, <a class="el" href="LightTest_8cpp_source.html#l00022">LightTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>References <a class="el" href="Adress_8h_source.html#l00019">DIGITAL_CARD_CONTROL</a>.</p>
+
+<p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>, <a class="el" href="MotorTest_8cpp_source.html#l00022">MotorTest::execute()</a>, <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>, <a class="el" href="SwitchTest_8cpp_source.html#l00021">SwitchTest::execute()</a>, <a class="el" href="RedLightFlash_8cpp_source.html#l00032">RedLightFlash::execute()</a>, <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>, and <a class="el" href="SensoricTest_8cpp_source.html#l00018">SensoricTest::SensoricTest()</a>.</p>
 
 </div>
 </div>
@@ -357,9 +357,9 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn green light off. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00119">119</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00123">123</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
-<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00022">LightTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>, <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>, and <a class="el" href="SensoricTest_8cpp_source.html#l00044">SensoricTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -378,9 +378,9 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn green light on. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00115">115</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00119">119</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
-<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00022">LightTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>, <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>, and <a class="el" href="SensoricTest_8cpp_source.html#l00044">SensoricTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -400,7 +400,7 @@ Static Private Attributes</h2></td></tr>
 <p>Return the switch's state. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the switch is open </dd></dl>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00105">105</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00109">109</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 </div>
 </div>
@@ -419,9 +419,9 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn motor off. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00067">67</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00071">71</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
-<p>Referenced by <a class="el" href="MotorTest_8cpp_source.html#l00022">MotorTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>Referenced by <a class="el" href="MotorTest_8cpp_source.html#l00022">MotorTest::execute()</a>, <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>, and <a class="el" href="SensoricTest_8cpp_source.html#l00044">SensoricTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -440,9 +440,9 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn motor on. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00063">63</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00067">67</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
-<p>Referenced by <a class="el" href="MotorTest_8cpp_source.html#l00022">MotorTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>Referenced by <a class="el" href="MotorTest_8cpp_source.html#l00022">MotorTest::execute()</a>, <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>, and <a class="el" href="SensoricTest_8cpp_source.html#l00044">SensoricTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -461,9 +461,9 @@ Static Private Attributes</h2></td></tr>
 
 <p>Open the switch. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00097">97</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00101">101</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
-<p>Referenced by <a class="el" href="SwitchTest_8cpp_source.html#l00021">SwitchTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>Referenced by <a class="el" href="SwitchTest_8cpp_source.html#l00021">SwitchTest::execute()</a>, <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>, and <a class="el" href="SensoricTest_8cpp_source.html#l00044">SensoricTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -482,7 +482,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn Q1-LED off. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00157">157</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00153">153</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 <p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>.</p>
 
@@ -503,7 +503,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn Q1-LED on. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00153">153</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00149">149</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 <p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>.</p>
 
@@ -524,7 +524,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn Q2-LED off. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00165">165</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00161">161</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 <p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>.</p>
 
@@ -545,7 +545,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn Q2-LED on. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00161">161</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00157">157</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 <p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>.</p>
 
@@ -566,9 +566,9 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn red light off. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00127">127</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00131">131</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
-<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00022">LightTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>, <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>, and <a class="el" href="RedLightFlash_8cpp_source.html#l00032">RedLightFlash::execute()</a>.</p>
 
 </div>
 </div>
@@ -587,9 +587,9 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn red light on. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00123">123</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00127">127</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
-<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00022">LightTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>, <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>, and <a class="el" href="RedLightFlash_8cpp_source.html#l00032">RedLightFlash::execute()</a>.</p>
 
 </div>
 </div>
@@ -608,10 +608,6 @@ Static Private Attributes</h2></td></tr>
 
 <p>Start red light flashing quickly. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00143">143</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
-
-<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00022">LightTest::execute()</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a686dc1d2e18bb5286ebf9a7c4a8da418"></a>
@@ -628,10 +624,6 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Start red light flashing slowly. </p>
-
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00139">139</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
-
-<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00022">LightTest::execute()</a>.</p>
 
 </div>
 </div>
@@ -650,7 +642,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn Reset-LED off. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00181">181</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00177">177</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 <p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>.</p>
 
@@ -671,7 +663,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn Reset-LED on. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00177">177</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00173">173</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 <p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>.</p>
 
@@ -692,7 +684,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Run production line from left to right. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00083">83</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00087">87</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 </div>
 </div>
@@ -711,7 +703,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Run production line from right to left. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00079">79</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00083">83</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 </div>
 </div>
@@ -730,7 +722,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Run production line slowly. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00087">87</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00091">91</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 </div>
 </div>
@@ -749,7 +741,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn Start-LED off. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00173">173</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00169">169</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 <p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>.</p>
 
@@ -770,7 +762,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn Start-LED on. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00169">169</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00165">165</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 <p>Referenced by <a class="el" href="LEDTest_8cpp_source.html#l00022">LEDTest::execute()</a>.</p>
 
@@ -792,7 +784,7 @@ Static Private Attributes</h2></td></tr>
 <p>Stop motor. </p>
 <p>Motor could be stopped by changing BIT_3, not changing BIT_1, BIT_2 or BIT_3 could be used to hold the band for a defined time too. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00075">75</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00079">79</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
 </div>
 </div>
@@ -811,9 +803,9 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn yellow light off. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00135">135</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00139">139</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
-<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00022">LightTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
 
 </div>
 </div>
@@ -832,9 +824,9 @@ Static Private Attributes</h2></td></tr>
 
 <p>Turn yellow light on. </p>
 
-<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00131">131</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
+<p>Definition at line <a class="el" href="HALAktorik_8cpp_source.html#l00135">135</a> of file <a class="el" href="HALAktorik_8cpp_source.html">HALAktorik.cpp</a>.</p>
 
-<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00022">LightTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
+<p>Referenced by <a class="el" href="LightTest_8cpp_source.html#l00029">LightTest::execute()</a>, and <a class="el" href="MyThread_8cpp_source.html#l00034">thread::MyThread::execute()</a>.</p>
 
 </div>
 </div>
@@ -863,7 +855,7 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adb6a1bfb761c86fb2885ecb673ff5b31"></a>
+<a class="anchor" id="ad4f91eeff86d905505abbeacc6ccd4dc"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -871,7 +863,7 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMutex.html">Mutex</a> * HALAktorik::hal_Aktorik_mutex_ = new <a class="el" href="classMutex.html">Mutex</a>()</td>
+          <td class="memname"><a class="el" href="classMutex.html">Mutex</a> HALAktorik::hal_Aktorik_mutex_ = <a class="el" href="classMutex.html">Mutex</a>()</td>
         </tr>
       </table>
   </td>
@@ -945,7 +937,7 @@ Static Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classHALAktorik.html">HALAktorik</a></li>
-    <li class="footer">Generated on Tue Nov 6 2012 03:21:25 for Festo by
+    <li class="footer">Generated on Sun Nov 25 2012 23:40:14 for Festo by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.2 </li>
   </ul>

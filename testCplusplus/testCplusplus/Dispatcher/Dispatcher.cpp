@@ -46,7 +46,7 @@ Dispatcher::~Dispatcher() {
 
 Dispatcher* Dispatcher::getInstance() {
 #ifdef DEBUG_
-	cout << "Dispatcher strted" << endl;
+	cout << "Dispatcher started" << endl;
 #endif
 	if (!dispatcher_instance_) {
 		dispatcher_mutex_.lock();
@@ -72,7 +72,7 @@ int Dispatcher::getChannelId() {
  */
 void Dispatcher::execute(void* arg){
 #ifdef DEBUG_
-	cout << "start dispatcher thread" << endl;
+	cout << "Start dispatcher thread" << endl;
 #endif
 
 	demultiplexer_->start(NULL);
@@ -101,9 +101,9 @@ void Dispatcher::execute(void* arg){
 
 		// get message and its code. That's all what interest us in the pulse
 		pulse_message = pulse.value.sival_int;
-		pulse_code = pulse_code;
+		pulse_code = pulse.code;
 #ifdef DEBUG_
-		cout << "Dispatcher: receive code: " << pulse_code << " message: " << pulse_message << endl;
+		cout << "Dispatcher: Receive code: " << pulse_code << " Message: " << pulse_message << endl;
 #endif
 		// Is message from Demultiplexer
 		if ( pulse_code == DEMULTIPLEXER_CODE) {
@@ -139,8 +139,10 @@ void Dispatcher::execute(void* arg){
 			case WP_OUT_SWITCH :
 				break;
 			case WP_IN_SLIDE :
+				cout << "Dispatcher: WP in Slide" << endl;
 				break;
 			case WP_OUT_SLIDE :
+				cout << "Dispatcher: WP out Slide" << endl;
 				break;
 			case WP_IN_ENGINE_END :
 				break;
