@@ -33,8 +33,8 @@
 #include <errno.h>
 #include "SensoricTest.h"
 #include "HALSensoric.h"
-#include "Demultiplexer.h"
-#include "Dispatcher.h"
+//#include "Demultiplexer.h"
+#include "DispatcherTest.h"
 /*
 #include "LEDTest.h"
 #include "LightTest.h"
@@ -56,9 +56,9 @@ int main(int argc, char *argv[]) {
 #endif
 
 #ifdef DISPATCHER_TEST
-	Dispatcher* disp = Dispatcher::getInstance();
-	disp->start(NULL);
-	disp->join();
+	DispatcherTest disp;
+	disp.start(NULL);
+	disp.join();
 #endif
 
 

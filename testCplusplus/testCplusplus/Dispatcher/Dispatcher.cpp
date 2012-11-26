@@ -24,6 +24,8 @@ Dispatcher* Dispatcher::dispatcher_instance_ = NULL;
  */
 Dispatcher::Dispatcher() {
 	demultiplexer_ = Demultiplexer::getInstance();
+
+	initPt2FuncArray();
 }
 
 /**
@@ -86,7 +88,7 @@ void Dispatcher::execute(void* arg){
 
 
 	struct _pulse pulse;
-	int pulse_message = -1;
+	int pulse_message_id = -1;
 	int pulse_code = -1;
 
 	while (!isStopped()) {
@@ -100,13 +102,16 @@ void Dispatcher::execute(void* arg){
 		}
 
 		// get message and its code. That's all what interest us in the pulse
-		pulse_message = pulse.value.sival_int;
+		pulse_message_id = pulse.value.sival_int;
 		pulse_code = pulse.code;
 #ifdef DEBUG_
-		cout << "Dispatcher: Receive code: " << pulse_code << " Message: " << pulse_message << endl;
+		cout << "Dispatcher: Receive code: " << pulse_code << " Message: " << pulse_message_id << endl;
 #endif
-		// Is message from Demultiplexer
-		if ( pulse_code == DEMULTIPLEXER_CODE) {
+		ControllersList::iterator i ;
+		for(i=CTRList.begin(); i != CTRList.end(); i++) {
+//			advance(i, pulse_message_id)->*pt2FuncArray[pulse_message_id];
+		}
+
 			//find the event handler assigned to this message and call it
 			/*
 			 * ATTENTION PLZ : Some messages here might not be obligatory useful. See TODO
@@ -114,77 +119,116 @@ void Dispatcher::execute(void* arg){
 			 */
 //TODO add function's call ( call-back mechanism )
 //TODO filter which messages have to be treated here, some are may be useless
-			switch (pulse_message) {
-			case WP_IN_ENGINE_START :
-				//TODO function call as said above. Same for all cases
-				cout << "Dispatcher: WP in LS1" << endl;
-				break;
-			case WP_OUT_ENGINE_START :
-				cout << "Dispatcher: WP out of LS1" << endl;
-				break;
-			case WP_IN_HEIGHT_M :
-				break;
-			case WP_OUT_HEIGHT_M:
-				break;
-			case WP_IN_TOLERANCE_R :
-				break;
-			case WP_NOT_IN_TOLERANCE_R :
-				break;
-			case WP_IS_METAL :
-				break;
-			case WP_NOT_METAL :
-				break;
-			case WP_IN_SWITCH :
-				break;
-			case WP_OUT_SWITCH :
-				break;
-			case WP_IN_SLIDE :
-				cout << "Dispatcher: WP in Slide" << endl;
-				break;
-			case WP_OUT_SLIDE :
-				cout << "Dispatcher: WP out Slide" << endl;
-				break;
-			case WP_IN_ENGINE_END :
-				break;
-			case WP_OUT_ENGINE_END:
-				break;
-			case START_PRESSED:
-				break;
-			case START_RELEASED:
-				break;
-			case STOP_PRESSED:
-				break;
-			case STOP_RELEASED:
-				break;
-			case RESET_PRESSED:
-				break;
-			case RESET_RELEASED:
-				break;
-			case E_STOP_PRESSED:
-				break;
-			case E_STOP_RELEASED:
-				break;
-			default :
-			cout << " Unknown message" << endl; 	// Need some work. Or may be NOT!
-			}
-		} else {
-			// Dispatcher can get messages from controller too, in case for errors i.e
-			if (pulse_code == CONTROLLER_CODE) {
-				switch(pulse_message) {
-				case WP_IS_MISSING :
-				break;
-				case WP_IS_STRANGER :
-				break;
-				case WP_NOT_TURNED:
-				break;
-				case SLIDE_FULL:
-				break;
-				}
-			}
-		}
+//
+//			switch (pulse_message) {
+//			case WP_IN_ENGINE_START :
+//				//TODO function call as said above. Same for all cases
+//				cout << "Dispatcher: WP in LS1" << endl;
+//
+//				break;
+//			case WP_OUT_ENGINE_START :
+//				cout << "Dispatcher: WP out of LS1" << endl;
+//				break;
+//			case WP_IN_HEIGHT_M :
+//				break;
+//			case WP_OUT_HEIGHT_M:
+//				break;
+//			case WP_IN_TOLERANCE_R :
+//				break;
+//			case WP_NOT_IN_TOLERANCE_R :
+//				break;
+//			case WP_IS_METAL :
+//				break;
+//			case WP_NOT_METAL :
+//				break;
+//			case WP_IN_SWITCH :
+//				break;
+//			case WP_OUT_SWITCH :
+//				break;
+//			case WP_IN_SLIDE :
+//				cout << "Dispatcher: WP in Slide" << endl;
+//				break;
+//			case WP_OUT_SLIDE :
+//				cout << "Dispatcher: WP out Slide" << endl;
+//				break;
+//			case WP_IN_ENGINE_END :
+//				break;
+//			case WP_OUT_ENGINE_END:
+//				break;
+//			case START_PRESSED:
+//				break;
+//			case START_RELEASED:
+//				break;
+//			case STOP_PRESSED:
+//				break;
+//			case STOP_RELEASED:
+//				break;
+//			case RESET_PRESSED:
+//				break;
+//			case RESET_RELEASED:
+//				break;
+//			case E_STOP_PRESSED:
+//				break;
+//			case E_STOP_RELEASED:
+//				break;
+//			default :
+//			cout << " Unknown message" << endl; 	// Need some work. Or may be NOT!
+//			}
+//		} else {
+//			// Dispatcher can get messages from controller too, in case for errors i.e
+//			if (pulse_code == CONTROLLER_CODE) {
+//				switch(pulse_message) {
+//				case WP_IS_MISSING :
+//				break;
+//				case WP_IS_STRANGER :
+//				break;
+//				case WP_NOT_TURNED:
+//				break;
+//				case SLIDE_FULL:
+//				break;
+//				}
+//			}
+//		}
 	}
 }
 
+/**
+* Assign each item in pt2funcArray to the appropriate HALCallInterface's function
+* Using messages as index makes it easy to follow and update the array
+*/
+void Dispatcher::initPt2FuncArray () {
+	// Not all entries are defined and used now. This is just the Sensoric's part
+	pt2FuncArray[WP_IN_ENGINE_START] 	= &HALCallInterface::inEngineStart;
+	pt2FuncArray[WP_OUT_ENGINE_START] 	= &HALCallInterface::outEngineStart;
+	pt2FuncArray[WP_IN_HEIGHT_M] 		= &HALCallInterface::inHeightMeasurement;
+	pt2FuncArray[WP_OUT_HEIGHT_M] 		= &HALCallInterface::outHeightMeasurement;
+	pt2FuncArray[WP_IN_TOLERANCE_R] 	= &HALCallInterface::inToleranceRange;
+	pt2FuncArray[WP_NOT_IN_TOLERANCE_R] = &HALCallInterface::notInToleranceRange;
+	pt2FuncArray[WP_IS_METAL] 			= &HALCallInterface::isMetal;
+	pt2FuncArray[WP_NOT_METAL] 			= &HALCallInterface::notMetal;
+	pt2FuncArray[WP_IN_SWITCH] 			= &HALCallInterface::inSwitch;
+	pt2FuncArray[WP_OUT_SWITCH] 		= &HALCallInterface::outSwitch;
+	pt2FuncArray[WP_IN_SLIDE] 			= &HALCallInterface::inSlide;
+	pt2FuncArray[WP_OUT_SLIDE] 			= &HALCallInterface::outSlide;
+	pt2FuncArray[WP_IN_ENGINE_END] 		= &HALCallInterface::inEngineEnd;
+	pt2FuncArray[WP_OUT_ENGINE_END] 	= &HALCallInterface::outEngineEnd;
+
+//TODO More items are supposed to be added if we want to assign some error's treatment here too
+}
+
+/**
+ * Register handler "controller" in Dispatcher's list of controllers
+ */
+void Dispatcher::reigisterHandler(int index, HALCallInterface* handler){
+//	CTRList.insert(index, handler);
+}
+
+/**
+ * Remove handler from Dispatcher's list of Controllers
+ */
+void Dispatcher::removeHandler(HALCallInterface* handler){
+	CTRList.remove(handler);
+}
 void Dispatcher::shutdown(){
 
 }

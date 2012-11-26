@@ -48,9 +48,14 @@ enum message {
 	WP_IS_MISSING,		// a workpiece disappears or arrives to late
 	WP_IS_STRANGER,		// an unknown workpiece in engine or a workpiece arrives too early
 	WP_NOT_TURNED,		// Error from band2 if workpiece has not been turned in the end of band1
-	SLIDE_FULL
+	SLIDE_FULL,
 	// More specified errors are possible and could be added as messages here. May be later!
+
+	// Trick to automaticly get the messages' number in this enum
+	DUMMY_MESSAGE
 } ;
+
+#define MESSAGES_NUMBER (DUMMY_MESSAGE - 1)
 
 
 #endif /* MESSAGES_H_ */
