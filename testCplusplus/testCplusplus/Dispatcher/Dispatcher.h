@@ -20,7 +20,7 @@
 #include "Adress.h"
 #include "Demultiplexer.h"
 #include "HALCallInterface.h"
-#include <list>
+#include <vector>
 
 using namespace thread;
 
@@ -32,7 +32,7 @@ using namespace thread;
 // Define a pointer to a NON-static member function of HALCallInterface
 // which takes no parameters and returns void
 typedef void(HALCallInterface::*pt2Func)();
-typedef list<HALCallInterface*> ControllersList;	// Define a list of controllers
+typedef vector<HALCallInterface*> ControllersList;	// Define a list of controllers
 
 class Dispatcher : public HAWThread {
 public:
@@ -45,6 +45,14 @@ public:
 	 * @return Dispatcher's channel ID
 	 */
 	int getChannelId();						//!< used to get Channel ID from outside this class
+	/**
+	 * @param handler Controller to be registered in Dispatcher
+	 */
+	void registerHandler(HALCallInterface* handler);
+	/**
+	 * @param handler Controller to be removed from Dispatcher
+	 */
+	void removeHandler(HALCallInterface* handler);		//!< Remove handler from Dispatcher
 
 	virtual void execute(void* arg);
 	virtual void shutdown();
@@ -52,15 +60,7 @@ public:
 
 private :
 	Dispatcher();
-	/**
-	 * @param handler Controller to be registered in Dispatcher
-	 * @param index   Controller's index in Event handler table
-	 */
-	void reigisterHandler(int index, HALCallInterface* handler);		//!< Register handler "controller" in Dispatcher
-	/**
-	 * @param handler Controller to be removed from Dispatcher
-	 */
-	void removeHandler(HALCallInterface* handler);		//!< Remove handler from Dispatcher
+
 	void initPt2FuncArray();								//!< Initialize an Array of pointer to functions
 	int channel_id_;										//!< Dispatcher's channel ID
 	int con_id_;											//!< Connection ID to own channel
@@ -69,7 +69,8 @@ private :
 
 	Demultiplexer* demultiplexer_;
 	pt2Func pt2FuncArray[MESSAGES_NUMBER];					//!< Array of pointers to functions
-	ControllersList CTRList;								//!< List of Controllers registered in Dispatcher
+	// MESSAGES_NUMBERS = Number of events
+	ControllersList CTRList[MESSAGES_NUMBER];				//!< Array of Controllers' list for each event
 };
 
 #endif /* DISPATCHER_H_ */

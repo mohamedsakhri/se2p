@@ -17,7 +17,18 @@ DispatcherTest::~DispatcherTest() {
 
 void DispatcherTest::execute(void *arg)
 {
+	cout << "DispatcherTest started" << endl;
+
+	Controller ctr;
+	ctr.addEvent(WP_IN_ENGINE_START);
+	ctr.addEvent((WP_IN_HEIGHT_M));
+	dispatcher_->registerHandler(&ctr);
 	dispatcher_->start(NULL);
+	dispatcher_->join();
+
+	cout << "DispatcherTest end" << endl;
+
+
 }
 
 

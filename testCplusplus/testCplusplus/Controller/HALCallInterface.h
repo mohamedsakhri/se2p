@@ -11,6 +11,8 @@
 #ifndef HALCALLINTERFACE_H_
 #define HALCALLINTERFACE_H_
 
+#include <vector>
+
 class HALCallInterface {
 public :
 	virtual void inEngineStart() = 0;
@@ -23,10 +25,13 @@ public :
 	virtual void notMetal() = 0;
 	virtual void inSwitch() = 0;
 	virtual void outSwitch() = 0;
+	virtual void switchOpen() = 0;
+	virtual void switchClosed() = 0;
 	virtual void inSlide() = 0;
 	virtual void outSlide() = 0;
 	virtual void inEngineEnd() = 0;
 	virtual void outEngineEnd() = 0;
+
 	virtual void startPressed() = 0;
 	virtual void startReleased() = 0;
 	virtual void stopPressed() = 0;
@@ -35,6 +40,9 @@ public :
 	virtual void resetReleased() = 0;
 	virtual void EStopPressed() = 0;
 	virtual void EStopReleased() = 0;
+
+	virtual void addEvent(int event_index) = 0;
+	virtual vector<int> getEvents() = 0;
 
 };
 

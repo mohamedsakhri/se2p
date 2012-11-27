@@ -15,6 +15,8 @@
 
 #define DEBUG_
 
+using namespace std;
+
 Mutex Dispatcher::dispatcher_mutex_ = Mutex();
 Dispatcher* Dispatcher::dispatcher_instance_ = NULL;
 
@@ -92,6 +94,8 @@ void Dispatcher::execute(void* arg){
 	int pulse_code = -1;
 
 	while (!isStopped()) {
+		cout << "Dispatcher : msgReceivePulse waiting... " << endl;
+
 		// Receive pulse messages from HAL Sensoric's (Interrupt handler) channel
 		if (-1 == MsgReceivePulse(demultiplexer_->getChannelId(), &pulse, sizeof(pulse), NULL)) {
 			if (isStopped()) {
@@ -107,88 +111,13 @@ void Dispatcher::execute(void* arg){
 #ifdef DEBUG_
 		cout << "Dispatcher: Receive code: " << pulse_code << " Message: " << pulse_message_id << endl;
 #endif
-		ControllersList::iterator i ;
-		for(i=CTRList.begin(); i != CTRList.end(); i++) {
-//			advance(i, pulse_message_id)->*pt2FuncArray[pulse_message_id];
-		}
 
-			//find the event handler assigned to this message and call it
-			/*
-			 * ATTENTION PLZ : Some messages here might not be obligatory useful. See TODO
-			 *
-			 */
-//TODO add function's call ( call-back mechanism )
-//TODO filter which messages have to be treated here, some are may be useless
-//
-//			switch (pulse_message) {
-//			case WP_IN_ENGINE_START :
-//				//TODO function call as said above. Same for all cases
-//				cout << "Dispatcher: WP in LS1" << endl;
-//
-//				break;
-//			case WP_OUT_ENGINE_START :
-//				cout << "Dispatcher: WP out of LS1" << endl;
-//				break;
-//			case WP_IN_HEIGHT_M :
-//				break;
-//			case WP_OUT_HEIGHT_M:
-//				break;
-//			case WP_IN_TOLERANCE_R :
-//				break;
-//			case WP_NOT_IN_TOLERANCE_R :
-//				break;
-//			case WP_IS_METAL :
-//				break;
-//			case WP_NOT_METAL :
-//				break;
-//			case WP_IN_SWITCH :
-//				break;
-//			case WP_OUT_SWITCH :
-//				break;
-//			case WP_IN_SLIDE :
-//				cout << "Dispatcher: WP in Slide" << endl;
-//				break;
-//			case WP_OUT_SLIDE :
-//				cout << "Dispatcher: WP out Slide" << endl;
-//				break;
-//			case WP_IN_ENGINE_END :
-//				break;
-//			case WP_OUT_ENGINE_END:
-//				break;
-//			case START_PRESSED:
-//				break;
-//			case START_RELEASED:
-//				break;
-//			case STOP_PRESSED:
-//				break;
-//			case STOP_RELEASED:
-//				break;
-//			case RESET_PRESSED:
-//				break;
-//			case RESET_RELEASED:
-//				break;
-//			case E_STOP_PRESSED:
-//				break;
-//			case E_STOP_RELEASED:
-//				break;
-//			default :
-//			cout << " Unknown message" << endl; 	// Need some work. Or may be NOT!
-//			}
-//		} else {
-//			// Dispatcher can get messages from controller too, in case for errors i.e
-//			if (pulse_code == CONTROLLER_CODE) {
-//				switch(pulse_message) {
-//				case WP_IS_MISSING :
-//				break;
-//				case WP_IS_STRANGER :
-//				break;
-//				case WP_NOT_TURNED:
-//				break;
-//				case SLIDE_FULL:
-//				break;
-//				}
-//			}
-//		}
+		unsigned int i = 0;
+		for ( i; i < CTRList[pulse_message_id].size(); i++) {
+			HALCallInterface& halCal = *CTRList[pulse_message_id].at(i);
+			cout << " CTRL::iterator : " << i << endl;
+			(halCal.*pt2FuncArray[pulse_message_id])();
+		}
 	}
 }
 
@@ -208,10 +137,22 @@ void Dispatcher::initPt2FuncArray () {
 	pt2FuncArray[WP_NOT_METAL] 			= &HALCallInterface::notMetal;
 	pt2FuncArray[WP_IN_SWITCH] 			= &HALCallInterface::inSwitch;
 	pt2FuncArray[WP_OUT_SWITCH] 		= &HALCallInterface::outSwitch;
+	pt2FuncArray[SWITCH_IS_OPEN] 		= &HALCallInterface::switchOpen;
+	pt2FuncArray[SWITCH_IS_CLOSED] 		= &HALCallInterface::switchClosed;
 	pt2FuncArray[WP_IN_SLIDE] 			= &HALCallInterface::inSlide;
 	pt2FuncArray[WP_OUT_SLIDE] 			= &HALCallInterface::outSlide;
 	pt2FuncArray[WP_IN_ENGINE_END] 		= &HALCallInterface::inEngineEnd;
 	pt2FuncArray[WP_OUT_ENGINE_END] 	= &HALCallInterface::outEngineEnd;
+
+	pt2FuncArray[START_PRESSED]			= &HALCallInterface::startPressed;
+	pt2FuncArray[START_RELEASED]		= &HALCallInterface::startReleased;
+	pt2FuncArray[STOP_PRESSED]			= &HALCallInterface::stopPressed;
+	pt2FuncArray[STOP_RELEASED]			= &HALCallInterface::stopReleased;
+	pt2FuncArray[RESET_PRESSED]			= &HALCallInterface::resetPressed;
+	pt2FuncArray[RESET_RELEASED]		= &HALCallInterface::resetReleased;
+	pt2FuncArray[E_STOP_PRESSED]		= &HALCallInterface::EStopPressed;
+	pt2FuncArray[E_STOP_RELEASED]		= &HALCallInterface::EStopReleased;
+
 
 //TODO More items are supposed to be added if we want to assign some error's treatment here too
 }
@@ -219,15 +160,20 @@ void Dispatcher::initPt2FuncArray () {
 /**
  * Register handler "controller" in Dispatcher's list of controllers
  */
-void Dispatcher::reigisterHandler(int index, HALCallInterface* handler){
-//	CTRList.insert(index, handler);
+void Dispatcher::registerHandler(HALCallInterface* handler){
+	unsigned int i;
+	vector<int> events = handler->getEvents();
+
+	for ( i = 0 ; i < events.size(); i++){
+		CTRList[events.at(i)].push_back(handler);
+	}
 }
 
 /**
  * Remove handler from Dispatcher's list of Controllers
  */
 void Dispatcher::removeHandler(HALCallInterface* handler){
-	CTRList.remove(handler);
+//	CTRList.remove(handler);
 }
 void Dispatcher::shutdown(){
 

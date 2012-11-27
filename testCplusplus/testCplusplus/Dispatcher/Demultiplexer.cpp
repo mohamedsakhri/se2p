@@ -133,7 +133,7 @@ void Demultiplexer::execute(void* arg){
 			new_value >>= 4;
 
 			#ifdef DEBUG_
-//				cout << "Demultplexer: port : " << hex << (int) pulse.code << " Value : "<< (int) new_value << endl;
+				cout << "Demultplexer: port : " << hex << (int) pulse.code << " Value : "<< (int) new_value << endl;
 			#endif
 
 			// check all the 12 bits and assign the right message to be send

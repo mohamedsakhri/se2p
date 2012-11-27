@@ -11,13 +11,12 @@
 #include "Controller.h"
 
 Controller::Controller() {
-	// TODO Auto-generated constructor stub
 
 }
 
 void Controller::inEngineStart()
 {
-	cout << "In Engine Start" << endl;
+	cout << "Controller : In Engine Start" << endl;
 }
 
 void Controller::outEngineStart()
@@ -27,7 +26,7 @@ void Controller::outEngineStart()
 
 void Controller::inHeightMeasurement()
 {
-	cout << "In Height Measurement" << endl;
+	cout << "Controller In Height Measurement" << endl;
 }
 
 void Controller::outHeightMeasurement()
@@ -57,6 +56,16 @@ void Controller::inSwitch()
 
 void Controller::outSwitch()
 {
+}
+
+void Controller::switchOpen()
+{
+
+}
+
+void Controller::switchClosed()
+{
+
 }
 
 void Controller::inSlide()
@@ -103,21 +112,25 @@ void Controller::EStopPressed()
 {
 }
 
-
-
-
-
-
 void Controller::EStopReleased()
 {
 }
 
+/**
+ *
+ */
+void Controller::addEvent(int event_index)
+{
+	events_list_.push_back(event_index);
+}
 
-
-
-
-
-
+/**
+ *
+ */
+vector<int> Controller::getEvents()
+{
+	return events_list_;
+}
 
 
 Controller::~Controller() {

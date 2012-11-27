@@ -13,6 +13,7 @@
 
 #include <iostream.h>
 #include "HALCallInterface.h"
+#include <vector>
 
 class Controller: public HALCallInterface {
 public:
@@ -28,6 +29,8 @@ public:
 	void notMetal();
 	void inSwitch();
 	void outSwitch();
+	void switchOpen();
+	void switchClosed();
 	void inSlide();
 	void outSlide();
 	void inEngineEnd();
@@ -42,6 +45,11 @@ public:
 	void EStopReleased();
 
 	virtual ~Controller();
+
+	void addEvent(int event_index);
+	vector<int> getEvents();
+private:
+	vector<int> events_list_;
 };
 
 #endif /* CONTROLLER_H_ */

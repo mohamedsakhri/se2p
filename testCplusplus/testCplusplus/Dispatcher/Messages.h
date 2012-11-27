@@ -55,7 +55,7 @@ enum message {
 	DUMMY_MESSAGE
 } ;
 
-#define MESSAGES_NUMBER (DUMMY_MESSAGE - 1)
+#define MESSAGES_NUMBER (DUMMY_MESSAGE)
 
 
 #endif /* MESSAGES_H_ */
