@@ -10,8 +10,10 @@
 
 #include "Controller.h"
 
-Controller::Controller() {
+int Controller::ctr_id_ = 0;
 
+Controller::Controller() {
+	ctr_id_++;
 }
 
 void Controller::inEngineStart()
@@ -114,6 +116,11 @@ void Controller::EStopPressed()
 
 void Controller::EStopReleased()
 {
+}
+
+int Controller::getControllerId()
+{
+	return ctr_id_;
 }
 
 /**

@@ -46,9 +46,11 @@ public:
 
 	virtual ~Controller();
 
+	int getControllerId();
 	void addEvent(int event_index);
 	vector<int> getEvents();
 private:
+	static int ctr_id_;
 	vector<int> events_list_;
 };
 

@@ -94,7 +94,9 @@ void Dispatcher::execute(void* arg){
 	int pulse_code = -1;
 
 	while (!isStopped()) {
+#ifdef DEBUG_
 		cout << "Dispatcher : msgReceivePulse waiting... " << endl;
+#endif
 
 		// Receive pulse messages from HAL Sensoric's (Interrupt handler) channel
 		if (-1 == MsgReceivePulse(demultiplexer_->getChannelId(), &pulse, sizeof(pulse), NULL)) {
@@ -108,14 +110,14 @@ void Dispatcher::execute(void* arg){
 		// get message and its code. That's all what interest us in the pulse
 		pulse_message_id = pulse.value.sival_int;
 		pulse_code = pulse.code;
+
 #ifdef DEBUG_
 		cout << "Dispatcher: Receive code: " << pulse_code << " Message: " << pulse_message_id << endl;
 #endif
-
-		unsigned int i = 0;
-		for ( i; i < CTRList[pulse_message_id].size(); i++) {
+//TODO comment what's done here
+		unsigned int i ;
+		for ( i = 0; i < CTRList[pulse_message_id].size(); i++) {
 			HALCallInterface& halCal = *CTRList[pulse_message_id].at(i);
-			cout << " CTRL::iterator : " << i << endl;
 			(halCal.*pt2FuncArray[pulse_message_id])();
 		}
 	}
@@ -153,7 +155,6 @@ void Dispatcher::initPt2FuncArray () {
 	pt2FuncArray[E_STOP_PRESSED]		= &HALCallInterface::EStopPressed;
 	pt2FuncArray[E_STOP_RELEASED]		= &HALCallInterface::EStopReleased;
 
-
 //TODO More items are supposed to be added if we want to assign some error's treatment here too
 }
 
@@ -161,6 +162,7 @@ void Dispatcher::initPt2FuncArray () {
  * Register handler "controller" in Dispatcher's list of controllers
  */
 void Dispatcher::registerHandler(HALCallInterface* handler){
+
 	unsigned int i;
 	vector<int> events = handler->getEvents();
 
@@ -169,12 +171,31 @@ void Dispatcher::registerHandler(HALCallInterface* handler){
 	}
 }
 
+//TODO how to remove a handler from dispatcher
 /**
  * Remove handler from Dispatcher's list of Controllers
  */
 void Dispatcher::removeHandler(HALCallInterface* handler){
-//	CTRList.remove(handler);
+	unsigned int i;
+	unsigned int j;
+	vector<int> events = handler->getEvents();
+	cout << "Dispatcher : Handler to be removed " << handler->getControllerId() << endl;
+
+//TODO comment
+	for ( i = 0 ; i < events.size(); i++){
+		for (j = 0; j < CTRList[events.at(i)].size(); j++){
+			if ( handler->getControllerId() == CTRList[events.at(i)].at(j)->getControllerId()){
+#ifdef DEBUG_
+				cout << "Dispatcher : Handler " << CTRList[events.at(i)].at(j)->getControllerId() << endl;
+#endif
+
+				CTRList[events.at(i)].erase(CTRList[events.at(i)].begin() + j);
+				cout << "...removed " << endl;
+			}
+		}
+	}
 }
+
 void Dispatcher::shutdown(){
 
 }

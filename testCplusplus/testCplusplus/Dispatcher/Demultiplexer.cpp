@@ -13,7 +13,7 @@
 
 #include "Demultiplexer.h"
 
-#define DEBUG_
+//#define DEBUG_
 
 Mutex Demultiplexer::demultiplexer_mutex_ = Mutex();
 Demultiplexer *Demultiplexer::demultiplexer_instance_ = NULL;

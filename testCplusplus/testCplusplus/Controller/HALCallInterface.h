@@ -43,6 +43,7 @@ public :
 
 	virtual void addEvent(int event_index) = 0;
 	virtual vector<int> getEvents() = 0;
+	virtual int getControllerId() = 0;
 
 };
 
