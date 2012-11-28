@@ -8,6 +8,8 @@
 #include "DispatcherTest.h"
 #include "Constants.h"
 
+#define UNREGISTER_TEST
+
 DispatcherTest::DispatcherTest() {
 	dispatcher_ = Dispatcher::getInstance();
 }
@@ -24,22 +26,25 @@ void DispatcherTest::execute(void *arg)
 	Controller ctr_2;
 	// Controllers add some events to register to
 	ctr.addEvent(WP_IN_ENGINE_START);
-	ctr.addEvent((WP_IN_HEIGHT_M));
+	ctr.addEvent(STOP_PRESSED);
+
 	ctr_2.addEvent(WP_IN_ENGINE_START);
 	ctr_2.addEvent(WP_IN_ENGINE_END);
+	ctr_2.addEvent(WP_IS_MISSING);
 
 	// Register Controllers for some events
 	dispatcher_->registerHandler(&ctr);
 	dispatcher_->registerHandler(&ctr_2);
 	dispatcher_->start(NULL);
 
+#ifdef UNREGISTER_TEST
 	// Wait a while, than unregister ctr from Dispatcher
-	sleep(WAIT_FIVE_S);
+	WAIT_TEN_S;
 	dispatcher_->removeHandler(&ctr);
+#endif
 	dispatcher_->join();
 
 	cout << "DispatcherTest end" << endl;
-
 
 }
 

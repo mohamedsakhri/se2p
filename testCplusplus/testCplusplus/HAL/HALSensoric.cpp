@@ -7,7 +7,7 @@
  * This class implements all methods needed to interact with input-hardware.
  *
  */
-#define DEBUG_
+//#define DEBUG_
 #include "HALSensoric.h"
 #include "HALAktorik.h"
 
@@ -141,11 +141,6 @@ void HALSensoric::initInterrupt() {
 	// Enable interrupts for port B and Port C low
 	intr_ctr = in8(INTERRUPT_CTR_REG);
 	out8(INTERRUPT_CTR_REG, intr_ctr & ~(PB_CTR | PC_LOW_CTR));
-
-    // read out port B and C values
-	// NEEDED NOW ?
-    portB_state_ = in8(DIGITAL_CARD_CROUP0_PORTB );
-    portC_state_ = in8(DIGITAL_CARD_CROUP0_PORTC);
 
 }
 

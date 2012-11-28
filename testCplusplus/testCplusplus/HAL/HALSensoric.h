@@ -39,12 +39,11 @@ private:
 	void initInterrupt();						//!< initialize interrupt's options
 
 	static Mutex hal_Sensoric_mutex_;			//!< Needed for thread-safe implemetation
-	static HALSensoric *hal_Sensoric_instance_;//!< Singelton pattern instance for HALSensoric
+	static HALSensoric *hal_Sensoric_instance_;	//!< Singelton pattern instance for HALSensoric
 	struct sigevent event_;
 	int channel_id_;							//!< Channel id
 	int interrupt_id_;							//!< Interrupt id
-	uint8_t portC_state_;						//!< Port C state
-	uint8_t portB_state_;						//!< Port B state
+
 };
 
 #endif /* HALSENSORIC_H_ */

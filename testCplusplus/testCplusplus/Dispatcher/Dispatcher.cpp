@@ -13,7 +13,7 @@
 
 #include "Dispatcher.h"
 
-#define DEBUG_
+//#define DEBUG_
 
 using namespace std;
 
@@ -65,6 +65,7 @@ void Dispatcher::initPt2FuncArray () {
 	pt2FuncArray[RESET_RELEASED]		= &HALCallInterface::resetReleased;
 	pt2FuncArray[E_STOP_PRESSED]		= &HALCallInterface::EStopPressed;
 	pt2FuncArray[E_STOP_RELEASED]		= &HALCallInterface::EStopReleased;
+	pt2FuncArray[WP_IS_MISSING]			= &HALCallInterface::isMissing;
 
 //TODO More items are supposed to be added if we want to assign some error's treatment here too
 }

@@ -12,14 +12,14 @@
 //#define DEBUG_
 #include "SensoricTest.h"
 
-#define METAL_TEST
+//#define METAL_TEST
 #define HEIGHT_TEST
 /**
  * get HALSensoric and HALAktorik's Instances or created new ones
  */
 SensoricTest::SensoricTest() {
 #ifdef DEBUG_
-	cout << " SensoricTest cunstructor started ... " << endl;
+	cout << " SensoricTest Cunstructor started ... " << endl;
 #endif
 	if (-1 == ThreadCtl(_NTO_TCTL_IO, 0)) {
 			perror("ThreadCtl access failed\n");

@@ -257,6 +257,10 @@ void Demultiplexer::execute(void* arg){
 						}
 						sendMsg2Dispatcher(message);
 						break;
+					case WP_IS_MISSING:
+						message = WP_IS_MISSING;
+						sendMsg2Dispatcher(message);
+						break;
 					default :
 					break;
 

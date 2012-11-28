@@ -46,7 +46,7 @@ public:
 	 * @param handler Controller to be removed from Dispatcher
 	 */
 	void removeHandler(HALCallInterface* handler);		//!< Remove handler from Dispatcher
-
+//TODO Suggesttion : overload register and remove to add and remove single event passing as parameter
 	void execute(void* arg);
 	void shutdown();
 
