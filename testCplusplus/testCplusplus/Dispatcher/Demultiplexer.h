@@ -45,7 +45,7 @@ private:
 	 * @param message Message to be sent to Dispatcher
 	 * @return 0 in case of success, otherwise -1
 	 */
-	int sendMsg2D(int message);						//!< Send message to Dispatcher
+	int sendMsg2Dispatcher(int message);				//!< Send message to Dispatcher
 
 	int channel_id_;									//!< get Channel ID to receive and send messages
 	int con_id_;										//!< Connection ID : with HAL Sensoric

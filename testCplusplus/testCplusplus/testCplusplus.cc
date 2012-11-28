@@ -56,9 +56,9 @@ int main(int argc, char *argv[]) {
 #endif
 
 #ifdef DISPATCHER_TEST
-	DispatcherTest disp;
-	disp.start(NULL);
-	disp.join();
+	DispatcherTest dispatcher_test;
+	dispatcher_test.start(NULL);
+	dispatcher_test.join();
 #endif
 
 

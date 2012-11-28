@@ -14,6 +14,7 @@
 #include <iostream.h>
 #include "HALCallInterface.h"
 #include <vector>
+#include "HALAktorik.h"
 
 class Controller: public HALCallInterface {
 public:
@@ -50,8 +51,11 @@ public:
 	void addEvent(int event_index);
 	vector<int> getEvents();
 private:
-	static int ctr_id_;
-	vector<int> events_list_;
+	static int ctr_number_;		//!< Controller's number. Needed to assigne an id to each new one
+	int ctr_id_;					//!< Controller id
+	vector<int> events_list_;		//!< Event's list the controller is/want to registered to
+	// HALaktoric's instance now just for Dispatcher test
+	HALAktorik* hal_aktorik_;
 };
 
 #endif /* CONTROLLER_H_ */

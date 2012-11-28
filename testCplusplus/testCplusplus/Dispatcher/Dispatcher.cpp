@@ -3,7 +3,7 @@
  *
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
- * @date Nov 25, 2012
+ * @date 	Nov 25, 2012
  *
  *
  *	This Class implements the Dispatcher's design pattern.
@@ -21,106 +21,17 @@ Mutex Dispatcher::dispatcher_mutex_ = Mutex();
 Dispatcher* Dispatcher::dispatcher_instance_ = NULL;
 
 /**
- * Create a channel and attach to it to get messages from Demultiplexer
- * and controller ( for errors i.e )
+ * Get Demultiplexer's instance and initialize an array of pointers to functions for Callback
+ *
  */
 Dispatcher::Dispatcher() {
+#ifdef DEBUG_
+	cout << "Dispatcher created" << endl;
+#endif
+
 	demultiplexer_ = Demultiplexer::getInstance();
 
 	initPt2FuncArray();
-}
-
-/**
- * free memory used by dispatcher's instance
- * detach from the channel and destroy it
- */
-Dispatcher::~Dispatcher() {
-	delete dispatcher_instance_;
-	if (con_id_) {
-		ConnectDetach_r(con_id_);
-		ChannelDestroy(channel_id_);
-	}
-}
-/**
- * return an Instance of the Dispatcher
- * At most one instance of Dispatcher will be created.
- * If no instance has been created yet, a new instance has to be created.
- * Otherwise the already created instance will be returned.
- */
-
-Dispatcher* Dispatcher::getInstance() {
-#ifdef DEBUG_
-	cout << "Dispatcher started" << endl;
-#endif
-	if (!dispatcher_instance_) {
-		dispatcher_mutex_.lock();
-		if (!dispatcher_instance_) {
-			dispatcher_instance_ = new Dispatcher;
-		}
-		dispatcher_mutex_.unlock();
-	}
-
-	return dispatcher_instance_;
-}
-
-/**
- * Return channel id. It will be used from outside to connect to dispatcher's channel
- */
-int Dispatcher::getChannelId() {
-	return channel_id_;
-}
-
-/**
- * All the Dispatcher's work will be done here
- * It gets messages from its channel and make call-backs using its event handker table
- */
-void Dispatcher::execute(void* arg){
-#ifdef DEBUG_
-	cout << "Start dispatcher thread" << endl;
-#endif
-
-	demultiplexer_->start(NULL);
-
-	// Connect to Demultiplexer's channel to get pulses
-	con_id_ = ConnectAttach(0, 0,demultiplexer_->getChannelId(), _NTO_SIDE_CHANNEL, 0);
-	if (con_id_ == -1) {
-		perror("Dispatcher : ConnectAttach failed : ");
-		exit(EXIT_FAILURE);
-	}
-
-
-	struct _pulse pulse;
-	int pulse_message_id = -1;
-	int pulse_code = -1;
-
-	while (!isStopped()) {
-#ifdef DEBUG_
-		cout << "Dispatcher : msgReceivePulse waiting... " << endl;
-#endif
-
-		// Receive pulse messages from HAL Sensoric's (Interrupt handler) channel
-		if (-1 == MsgReceivePulse(demultiplexer_->getChannelId(), &pulse, sizeof(pulse), NULL)) {
-			if (isStopped()) {
-				break; // channel destroyed, Thread ending
-			}
-			perror("Dispatcher: MsgReceivePulse");
-			exit(EXIT_FAILURE);
-		}
-
-		// get message and its code. That's all what interest us in the pulse
-		pulse_message_id = pulse.value.sival_int;
-		pulse_code = pulse.code;
-
-#ifdef DEBUG_
-		cout << "Dispatcher: Receive code: " << pulse_code << " Message: " << pulse_message_id << endl;
-#endif
-//TODO comment what's done here
-		unsigned int i ;
-		for ( i = 0; i < CTRList[pulse_message_id].size(); i++) {
-			HALCallInterface& halCal = *CTRList[pulse_message_id].at(i);
-			(halCal.*pt2FuncArray[pulse_message_id])();
-		}
-	}
 }
 
 /**
@@ -159,19 +70,115 @@ void Dispatcher::initPt2FuncArray () {
 }
 
 /**
+ * return an Instance of the Dispatcher
+ * At most one instance of Dispatcher will be created.
+ * If no instance has been created yet, a new instance has to be created.
+ * Otherwise the already created instance will be returned.
+ */
+
+Dispatcher* Dispatcher::getInstance() {
+#ifdef DEBUG_
+	cout << "Dispatcher getInstance" << endl;
+#endif
+	if (!dispatcher_instance_) {
+		dispatcher_mutex_.lock();
+		if (!dispatcher_instance_) {
+			dispatcher_instance_ = new Dispatcher;
+		}
+		dispatcher_mutex_.unlock();
+	}
+
+	return dispatcher_instance_;
+}
+
+/**
+ * free memory used by dispatcher's instance
+ * detach from the channel and destroy it
+ */
+Dispatcher::~Dispatcher() {
+#ifdef DEBUG_
+	cout << "Dispatcher deleted" << endl;
+#endif
+
+	demultiplexer_->stop();
+
+	delete dispatcher_instance_;
+	if (con_id_) {
+		ConnectDetach_r(con_id_);
+	}
+}
+
+/**
+ * All the Dispatcher's work will be done here
+ * It gets messages from demultiplexer's channel and make call-backs using its event handler table
+ */
+void Dispatcher::execute(void* arg){
+#ifdef DEBUG_
+	cout << "Start dispatcher thread" << endl;
+#endif
+
+	demultiplexer_->start(NULL);
+
+	// Connect to Demultiplexer's channel to get pulses
+	con_id_ = ConnectAttach(0, 0,demultiplexer_->getChannelId(), _NTO_SIDE_CHANNEL, 0);
+	if (con_id_ == -1) {
+		perror("Dispatcher : ConnectAttach failed : ");
+		exit(EXIT_FAILURE);
+	}
+
+
+	struct _pulse pulse;
+	int event_id = -1;		// an id (index) is assigned to each event handler
+	int pulse_code = -1;
+
+	while (!isStopped()) {
+#ifdef DEBUG_
+		cout << "Dispatcher : msgReceivePulse waiting... " << endl;
+#endif
+
+		// Receive pulse messages from HAL Sensoric's (Interrupt handler) channel
+		if (-1 == MsgReceivePulse(demultiplexer_->getChannelId(), &pulse, sizeof(pulse), NULL)) {
+			if (isStopped()) {
+				break; // channel destroyed, Thread ending
+			}
+			perror("Dispatcher: MsgReceivePulse");
+			exit(EXIT_FAILURE);
+		}
+
+		// get message and its code. That's all what interest us in the pulse
+		event_id = pulse.value.sival_int;
+		pulse_code = pulse.code;
+
+#ifdef DEBUG_
+		cout << "Dispatcher: Receive code: " << pulse_code << " Message: " << event_id << endl;
+#endif
+		/*
+		 * Each controller which is registered for this event will be notified
+		 * to callback its handler
+		 */
+		unsigned int i ;
+
+		for ( i = 0; i < CTRList[event_id].size(); i++) {
+			HALCallInterface& halCal = *CTRList[event_id].at(i);		// Each controller registred for event_id
+			(halCal.*pt2FuncArray[event_id])();							// Make Callback
+		}
+	}
+}
+
+
+/**
  * Register handler "controller" in Dispatcher's list of controllers
  */
 void Dispatcher::registerHandler(HALCallInterface* handler){
 
 	unsigned int i;
-	vector<int> events = handler->getEvents();
+	vector<int> events = handler->getEvents(); // Events the controller want to register to
 
 	for ( i = 0 ; i < events.size(); i++){
 		CTRList[events.at(i)].push_back(handler);
 	}
 }
 
-//TODO how to remove a handler from dispatcher
 /**
  * Remove handler from Dispatcher's list of Controllers
  */
@@ -179,23 +186,34 @@ void Dispatcher::removeHandler(HALCallInterface* handler){
 	unsigned int i;
 	unsigned int j;
 	vector<int> events = handler->getEvents();
-	cout << "Dispatcher : Handler to be removed " << handler->getControllerId() << endl;
 
-//TODO comment
+#ifdef DEBUG_
+	cout << "Dispatcher : Handler to be removed " << handler->getControllerId() << endl;
+#endif
+
+	/*
+	 * Find controllers registered for events and remove the the one which has to be removed
+	 * Therefore is he controller id needed
+	 */
 	for ( i = 0 ; i < events.size(); i++){
 		for (j = 0; j < CTRList[events.at(i)].size(); j++){
 			if ( handler->getControllerId() == CTRList[events.at(i)].at(j)->getControllerId()){
 #ifdef DEBUG_
-				cout << "Dispatcher : Handler " << CTRList[events.at(i)].at(j)->getControllerId() << endl;
+	cout << "Dispatcher : Handler " << CTRList[events.at(i)].at(j)->getControllerId() << endl;
 #endif
 
 				CTRList[events.at(i)].erase(CTRList[events.at(i)].begin() + j);
-				cout << "...removed " << endl;
+#ifdef DEBUG_
+	cout << "Controller removed " << endl;
+#endif
 			}
 		}
 	}
 }
 
+/**
+ *
+ */
 void Dispatcher::shutdown(){
 
 }

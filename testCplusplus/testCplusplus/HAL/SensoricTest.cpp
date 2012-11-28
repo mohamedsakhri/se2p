@@ -12,6 +12,8 @@
 //#define DEBUG_
 #include "SensoricTest.h"
 
+#define METAL_TEST
+#define HEIGHT_TEST
 /**
  * get HALSensoric and HALAktorik's Instances or created new ones
  */
@@ -107,14 +109,16 @@ void SensoricTest::execute(void *arg) {
 						cout << "Start button pressed " << endl;
 						hal_aktorik_->motor_on();
 						hal_aktorik_->green_Light_on();
+						hal_aktorik_->Start_LED_on();
 					}
 					break;
 				case STOP_BUTTON:		//Stop Button
 					if (!(new_value & STOP_BUTTON)) {
 						cout << "Stop button pressed " << endl;
-						hal_aktorik_->close_Switch();
 						hal_aktorik_->motor_off();
 						hal_aktorik_->green_Light_off();
+						hal_aktorik_->Start_LED_off();
+						hal_aktorik_->close_Switch();
 					}
 					break;
 				case RESET_BUTTON: 		//Reset Button
@@ -124,17 +128,21 @@ void SensoricTest::execute(void *arg) {
 					break;
 				case E_STOP_BUTTON:		//E-Stop
 					if (new_value & E_STOP_BUTTON) {
-						cout << "E-Stop button : not pressed" << endl;
+						cout << "E-Stop button : released" << endl;
 					} else {
 						cout << "E-Stop button : pressed" << endl;
+						hal_aktorik_->close_Switch();
+						hal_aktorik_->motor_off();
+						hal_aktorik_->green_Light_off();
+						hal_aktorik_->Start_LED_off();
 					}
 					break;
 				case ENGINE_START:		//Light Barrier 1
 					if ( !(new_value & ENGINE_START)) {
-						cout << "Workpiece in LB 1 " << endl;
+						cout << "WP in engine's start " << endl;
 						hal_aktorik_->motor_on();
 						hal_aktorik_->green_Light_on();
-//						is_metal = false;
+						is_metal = false;
 //						is_switch_open = false;
 						is_height_ok = false;
 					}
@@ -149,15 +157,15 @@ void SensoricTest::execute(void *arg) {
 						// getting around the height's measurement by checking height's tolerance
 						// range when workpiece in height's sensor
 						if (new_value & HEIGHT_STATUS){
-							cout << " P hat loch nach UNTEN " << endl;
+							cout << "WP hat Loch nach UNTEN " << endl;
 						}
 						else{
 							if (is_height_ok){
-								cout << " P hat loch nach OBEN  " << endl;
+								cout << "WP hat Loch nach OBEN  " << endl;
 
 							}
 							else {
-								cout << " P ist FLACH  " << endl;
+								cout << "WP ist FLACH  " << endl;
 								is_height_ok = false;
 							}
 						}
@@ -176,18 +184,24 @@ void SensoricTest::execute(void *arg) {
 							is_switch_open = false;
 						}
 					} else {
-//						cout << "BIT = 0 switch open: " << is_switch_open << endl;
+#ifdef HEIGHT_TEST
 						if (is_height_ok){
 							hal_aktorik_->open_Switch();
 						}
+#endif
+#ifdef METAL_TEST
+						if ( is_metal) {
+							hal_aktorik_->open_Switch();
+						}
+#endif
 					}
 					break;
 				case METAL_STATUS:		// Metal Sensor
 					if (new_value & METAL_STATUS) {
-						cout << "Workpiece metal : YES" << endl;
+						cout << "WP has metal : YES" << endl;
 						is_metal = true;
 					} else {
-						cout << "Workpiece metal : NO" << endl;
+						cout << "WP has metal : NO" << endl;
 						is_metal = false;
 					}
 					break;
@@ -202,17 +216,18 @@ void SensoricTest::execute(void *arg) {
 					break;
 				case SLIDE_STATUS:		//Slide
 					if (new_value & SLIDE_STATUS) {
-	//					cout << "Slide not full" << endl;
+						cout << "WP out Slide" << endl;
 					} else {
-	//					cout << "Slide full" << endl;
+						cout << "WP in Slide" << endl;
 
 					}
 					break;
 				case ENGINE_END:		// LB end
 					if (!(new_value & ENGINE_END)) {
-						cout << "Workpiece in in the end of the band " << endl;
+						cout << "WP in engine's end " << endl;
 						hal_aktorik_->motor_off();
 						hal_aktorik_->green_Light_off();
+						hal_aktorik_->Start_LED_off();
 					}
 					break;
 				default :

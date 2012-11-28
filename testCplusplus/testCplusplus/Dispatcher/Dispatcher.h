@@ -3,7 +3,7 @@
  *
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
- * @date Nov 25, 2012
+ * @date 	Nov 25, 2012
  *
  *
  *	This Class implements the Dispatcher's design pattern.
@@ -24,15 +24,12 @@
 
 using namespace thread;
 
-//TODO Implement Call-back mechanism : event handler table
-// Dispatcher now gets the message from Demultiplexer and has to call the right function
-// which must be defined in an event handler table ( not obligatory an array,
-// a switch-case on message could do the job too
-
 // Define a pointer to a NON-static member function of HALCallInterface
 // which takes no parameters and returns void
 typedef void(HALCallInterface::*pt2Func)();
-typedef vector<HALCallInterface*> ControllersList;	// Define a list of controllers
+
+// Define a list of pointer to controllers
+typedef vector<HALCallInterface*> ControllersList;
 
 class Dispatcher : public HAWThread {
 public:
@@ -40,36 +37,31 @@ public:
 	/**
 	* @return Dispatcher's instance
 	*/
-	static Dispatcher* getInstance();			//!< For Singleton pattern implementation
-	/**
-	 * @return Dispatcher's channel ID
-	 */
-	int getChannelId();						//!< used to get Channel ID from outside this class
+	static Dispatcher* getInstance();						//!< For Singleton pattern implementation
 	/**
 	 * @param handler Controller to be registered in Dispatcher
 	 */
-	void registerHandler(HALCallInterface* handler);
+	void registerHandler(HALCallInterface* handler);		//!< Register handler in Dispatcher's list
 	/**
 	 * @param handler Controller to be removed from Dispatcher
 	 */
 	void removeHandler(HALCallInterface* handler);		//!< Remove handler from Dispatcher
 
-	virtual void execute(void* arg);
-	virtual void shutdown();
+	void execute(void* arg);
+	void shutdown();
 
 
 private :
 	Dispatcher();
 
 	void initPt2FuncArray();								//!< Initialize an Array of pointer to functions
-	int channel_id_;										//!< Dispatcher's channel ID
 	int con_id_;											//!< Connection ID to own channel
 	static Dispatcher* dispatcher_instance_;				//!< The only dispatcher's instance
 	static Mutex dispatcher_mutex_;							//!< Mutex used in Singleton implementation
 
 	Demultiplexer* demultiplexer_;
 	pt2Func pt2FuncArray[MESSAGES_NUMBER];					//!< Array of pointers to functions
-	// MESSAGES_NUMBERS = Number of events
+	// MESSAGES_NUMBERS = Number of events. See Messages.h
 	ControllersList CTRList[MESSAGES_NUMBER];				//!< Array of Controllers' list for each event
 };
 

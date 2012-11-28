@@ -19,6 +19,39 @@ HALSensoric* HALSensoric::hal_Sensoric_instance_ = NULL;
  */
 static int isr_coid_;
 
+/**
+ * ISR : Interrupt service routine determines what to do
+ * 		when an interrupt occurs
+ * @param *arg
+ * @param id
+ * @return struct sigevent*
+ */
+const struct sigevent *ISR(void *arg, int id) {
+
+	uint16_t iir;	//!< Interrupt identification register
+	uint16_t port_state;	//!< To save Port B and C state temporary
+	struct sigevent *event_ = (struct sigevent *) arg;		//<!
+
+	/*
+	 * read IRQ register and clear interrupt register at the same time
+	 */
+//	 iir = in8(READ_IRQ_CLEAR_INTERRUPT) & (BIT_1 | BIT_3);
+	 iir = in8(INTERRUPT_STATUS_REG) & (BIT_1 | BIT_3);
+
+	// reset interrupt register
+	out8(INTERRUPT_STATUS_REG, 0);
+	// if no interrupt or source isn't portC or portB it will be ignored
+	if (!iir) {
+		return (NULL);
+	}
+
+	/* if the interrupt is from port B or C */
+	port_state = (in8(DIGITAL_CARD_CROUP0_PORTB) << 8) | (in8(DIGITAL_CARD_CROUP0_PORTC)) ; //read portB and portC
+	SIGEV_PULSE_INIT(event_, isr_coid_, SIGEV_PULSE_PRIO_INHERIT,
+			IIR_PORTB, port_state);
+
+	return event_;
+}
 
 /**
  * Call Interrupt's initializer routine
@@ -56,40 +89,6 @@ HALSensoric *HALSensoric::getInstance() {
 	}
 
 	return hal_Sensoric_instance_;
-}
-
-/**
- * ISR : Interrupt service routine determines what to do
- * 		when an interrupt occurs
- * @param *arg
- * @param id
- * @return struct sigevent*
- */
-const struct sigevent *ISR(void *arg, int id) {
-
-	uint16_t iir;	//!< Interrupt identification register
-	uint16_t port_state;	//!< To save Port B and C state temporary
-	struct sigevent *event_ = (struct sigevent *) arg;		//<!
-
-	/*
-	 * read IRQ register and clear interrupt register at the same time
-	 */
-//	 iir = in8(READ_IRQ_CLEAR_INTERRUPT) & (BIT_1 | BIT_3);
-	 iir = in8(INTERRUPT_STATUS_REG) & (BIT_1 | BIT_3);
-
-	// reset interrupt register
-	out8(INTERRUPT_STATUS_REG, 0);
-	// if no interrupt's source isn't portC or portB it will be ignored
-	if (!iir) {
-		return (NULL);
-	}
-
-	/* if the interrupt is from port B or C */
-	port_state = (in8(DIGITAL_CARD_CROUP0_PORTB) << 8) | (in8(DIGITAL_CARD_CROUP0_PORTC)) ; //read portB and portC
-	SIGEV_PULSE_INIT(event_, isr_coid_, SIGEV_PULSE_PRIO_INHERIT,
-			IIR_PORTB, port_state);
-
-	return event_;
 }
 
 /**
