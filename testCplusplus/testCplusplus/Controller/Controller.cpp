@@ -19,6 +19,8 @@ int Controller::ctr_number_ = 0;
 Controller::Controller() {
 	ctr_id_= ctr_number_++;
 	hal_aktorik_ = HALAktorik::getInstance();
+	inLine_state_ = new StateLineStart();
+	height_state_ = new WaitingHeightM1();
 	init();
 
 }
@@ -38,37 +40,29 @@ void Controller::init(){
 
 void Controller::inEngineStart()
 {
-#ifdef DISPATCHER_TEST
-	cout << "Controller "<< this->getControllerId()<< " In Engine Start" << endl;
-	hal_aktorik_->motor_on();
-	hal_aktorik_->green_Light_on();
-	hal_aktorik_->red_Light_off();
-	hal_aktorik_->Start_LED_on();
-
-#endif
+	WorkPiece wp(1) ;
+	wp_list_.push_back(wp);
+	inLine_state_->inLineStart();
 }
 
 void Controller::outEngineStart()
 {
+	inLine_state_->outLineStart();
 }
 
 void Controller::inHeightMeasurement()
 {
-#ifdef DISPATCHER_TEST
-	cout << "Controller "<< this->getControllerId()<< " : In Height Measurement" << endl;
-#endif
+	height_state_->inHeightMeasurement();
 }
 
 void Controller::outHeightMeasurement()
 {
-	cout << "Controller "<< this->getControllerId() <<": Out Height Measurement" << endl;
+	height_state_->outHeightMeasurement();
 }
 
 void Controller::inToleranceRange()
 {
-#ifdef DISPATCHER_TEST
-	cout << "Controller "<< this->getControllerId()<<": WP in Height's sensor " << endl;
-#endif
+	height_state_->inToleranceRange();
 }
 
 void Controller::notInToleranceRange()
@@ -77,16 +71,10 @@ void Controller::notInToleranceRange()
 
 void Controller::isMetal()
 {
-#ifdef DISPATCHER_TEST
-	cout << "Controller "<< this->getControllerId()<<": WP has Metal : YES " << endl;
-#endif
 }
 
 void Controller::notMetal()
 {
-#ifdef DISPATCHER_TEST
-	cout << "Controller "<< this->getControllerId()<<": WP has Metal : NO " << endl;
-#endif
 }
 
 void Controller::inSwitch()
@@ -117,13 +105,6 @@ void Controller::outSlide()
 
 void Controller::inEngineEnd()
 {
-#ifdef DISPATCHER_TEST
-	cout << "Controller "<< this->getControllerId()<<" : in Line end " << endl;
-	hal_aktorik_->motor_off();
-	hal_aktorik_->green_Light_off();
-	hal_aktorik_->red_Light_off();
-	hal_aktorik_->close_Switch();
-#endif
 }
 
 void Controller::outEngineEnd()
@@ -132,14 +113,6 @@ void Controller::outEngineEnd()
 
 void Controller::startPressed()
 {
-#ifdef DISPATCHER_TEST
-	cout << "Controller "<< this->getControllerId()<<": Start button pressed " << endl;
-	hal_aktorik_->motor_on();
-	hal_aktorik_->green_Light_on();
-	hal_aktorik_->red_Light_off();
-	hal_aktorik_->Start_LED_on();
-
-#endif
 }
 
 void Controller::startReleased()
@@ -148,14 +121,6 @@ void Controller::startReleased()
 
 void Controller::stopPressed()
 {
-#ifdef DISPATCHER_TEST
-	cout << "Controller "<< this->getControllerId()<<" : Stop button pressed " << endl;
-	hal_aktorik_->motor_off();
-	hal_aktorik_->green_Light_off();
-	hal_aktorik_->Start_LED_off();
-	hal_aktorik_->close_Switch();
-	sendMsg2Dispatcher(WP_IS_MISSING);
-#endif
 }
 
 void Controller::stopReleased()
@@ -164,15 +129,6 @@ void Controller::stopReleased()
 
 void Controller::resetPressed()
 {
-#ifdef DISPATCHER_TEST
-	cout << "Controller "<< this->getControllerId()<<": Stop button pressed " << endl;
-	hal_aktorik_->motor_off();
-	hal_aktorik_->green_Light_off();
-	hal_aktorik_->Start_LED_off();
-	hal_aktorik_->close_Switch();
-	sendMsg2Dispatcher(WP_IS_MISSING);
-#endif
-
 }
 
 void Controller::resetReleased()
@@ -189,8 +145,6 @@ void Controller::EStopReleased()
 
 void Controller::isMissing()
 {
-	cout << "Controller "<< this->getControllerId()<<": WP is missing " << endl;
-	hal_aktorik_->red_Light_on();
 }
 
 /**

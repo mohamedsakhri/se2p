@@ -17,14 +17,11 @@
 #include "HALAktorik.h"
 #include "Dispatcher.h"
 #include "Demultiplexer.h"
-#include "IState.h"
-#include "StateLineStart.h"
 #include "WorkPiece.h"
-#include "StateHeight.h"
 
-class Controller: public HALCallInterface {
+class ControllerTest: public HALCallInterface {
 public:
-	Controller();
+	ControllerTest();
 
 	void inEngineStart();
 	void outEngineStart();
@@ -56,7 +53,7 @@ public:
 	int sendMsg2Dispatcher(int message);
 	void init();
 
-	virtual ~Controller();
+	virtual ~ControllerTest();
 
 	int getControllerId();
 	void addEvent(int event_index);
@@ -72,8 +69,6 @@ private:
 	Dispatcher* dispatcher_;
 	int con_id_;
 	Demultiplexer* demultiplexer_;
-	IState* inLine_state_;
-	IState* height_state_;
 };
 
 #endif /* CONTROLLER_H_ */

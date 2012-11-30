@@ -9,7 +9,7 @@
 #define DISPATCHERTEST_H_
 
 #include "HAWThread.h"
-#include "Controller.h"
+#include "ControllerTest.h"
 #include "Dispatcher.h"
 
 class DispatcherTest: public thread::HAWThread {

@@ -22,14 +22,15 @@ void DispatcherTest::execute(void *arg)
 {
 	cout << "DispatcherTest started" << endl;
 
-	Controller ctr;
-	Controller ctr_2;
+	ControllerTest ctr;
+	ControllerTest ctr_2;
 	// Controllers add some events to register to
 	ctr.addEvent(WP_IN_ENGINE_START);
 	ctr.addEvent(STOP_PRESSED);
 
 	ctr_2.addEvent(WP_IN_ENGINE_START);
 	ctr_2.addEvent(WP_IN_ENGINE_END);
+	ctr_2.addEvent(STOP_PRESSED);
 	ctr_2.addEvent(WP_IS_MISSING);
 
 	// Register Controllers for some events
@@ -52,7 +53,6 @@ void DispatcherTest::execute(void *arg)
 
 void DispatcherTest::shutdown()
 {
-	dispatcher_->join();
 }
 
 

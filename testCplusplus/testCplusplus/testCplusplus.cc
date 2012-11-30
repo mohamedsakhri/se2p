@@ -21,8 +21,9 @@
 //#define LIGHT_TEST
 //#define SER_INTERFACE_TEST
 //#define SENSORIC_TEST
-#define DISPATCHER_TEST
+//#define DISPATCHER_TEST
 //#define DEBUG_MUTEX
+#define STATE_TEST
 
 
 #include "HWaccess.h"
@@ -35,6 +36,7 @@
 #include "HALSensoric.h"
 //#include "Demultiplexer.h"
 #include "DispatcherTest.h"
+#include "StateTest.h"
 /*
 #include "LEDTest.h"
 #include "LightTest.h"
@@ -53,6 +55,12 @@ int main(int argc, char *argv[]) {
 	cout << "Zum Aufbau der Verbindung muss Die Festo Simulation schon laufen."
 			<< endl;
 	IOaccess_open(); // Baue die Verbindung zur Simulation auf
+#endif
+
+#ifdef STATE_TEST
+	StateTest state_test;
+	state_test.start(NULL);
+	state_test.join();
 #endif
 
 #ifdef DISPATCHER_TEST
