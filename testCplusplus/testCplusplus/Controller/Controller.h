@@ -21,6 +21,7 @@
 #include "StateLineStart.h"
 #include "WorkPiece.h"
 #include "StateHeight.h"
+#include "WaitingSwitch.h"
 
 class Controller: public HALCallInterface {
 public:
@@ -65,6 +66,13 @@ public:
 	int getControllerId();
 	void addEvent(int event_index);
 	vector<int> getEvents();
+
+	//FIFO Control
+	void addWP2List(WorkPiece wp);
+	WorkPiece getLastWP();
+	void removeLastWP();
+	void passWP2Ctr(HALCallInterface* ctr);
+
 private:
 
 	static int ctr_number_;		//!< Controller's number. Needed to assigne an id to each new one
@@ -78,7 +86,8 @@ private:
 	Demultiplexer* demultiplexer_;
 	IState* inLine_state_;
 	IState* height_state_;
-	IState* state;
+	IState* switch_state_;
+//	IState* state;
 
 };
 

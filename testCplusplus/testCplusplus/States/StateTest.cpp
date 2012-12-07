@@ -22,24 +22,33 @@ void StateTest::execute(void *arg)
 {
 	cout << "StateTaste started" << endl;
 
-	Controller ctr;
+	Controller ctr1;
+	Controller ctr2;
+	Controller ctr3;
+
+
+
 	// Controllers add some events to register to
-	ctr.addEvent(WP_IN_ENGINE_START);
-	ctr.addEvent(WP_OUT_ENGINE_START);
-	ctr.addEvent(WP_IN_HEIGHT_M);
-	ctr.addEvent(WP_OUT_HEIGHT_M);
-	ctr.addEvent(WP_IN_TOLERANCE_R);
+	ctr1.addEvent(WP_IN_ENGINE_START);
+	ctr1.addEvent(WP_OUT_ENGINE_START);
+
+	ctr2.addEvent(WP_IN_HEIGHT_M);
+	ctr2.addEvent(WP_OUT_HEIGHT_M);
+	ctr2.addEvent(WP_IN_TOLERANCE_R);
+	ctr2.addEvent(WP_NOT_IN_TOLERANCE_R);
+
+	ctr3.addEvent(WP_IN_SWITCH);
+	ctr3.addEvent(WP_OUT_SWITCH);
+
+	ctr3.addEvent(STOP_PRESSED);
 
 
 	// Register Controllers for some events
-	dispatcher_->registerHandler(&ctr);
+	dispatcher_->registerHandler(&ctr1);
+	dispatcher_->registerHandler(&ctr2);
+	dispatcher_->registerHandler(&ctr3);
 	dispatcher_->start(NULL);
 
-#ifdef UNREGISTER_TEST
-	// Wait a while, than unregister ctr from Dispatcher
-	WAIT_TEN_S;
-	dispatcher_->removeHandler(&ctr);
-#endif
 	dispatcher_->join();
 
 	cout << "StateTaste end" << endl;

@@ -18,9 +18,11 @@ int Controller::ctr_number_ = 0;
  */
 Controller::Controller() {
 	ctr_id_= ctr_number_++;
-	hal_aktorik_ = HALAktorik::getInstance();
+//	hal_aktorik_ = HALAktorik::getInstance();
 	inLine_state_ = new StateLineStart(this);
-	height_state_ = new WaitingHeightM1();
+	height_state_ = new WaitingHeightM1(this);
+	switch_state_ = new WaitingSwitch(this);
+
 	init();
 }
 
@@ -37,15 +39,16 @@ Controller::Controller(const Controller& ctr) {
  * Do some initialization work
  */
 void Controller::init(){
+
 	demultiplexer_ = Demultiplexer::getInstance();
 
-		con_id_ = ConnectAttach(0, 0, demultiplexer_->getChannelId(), _NTO_SIDE_CHANNEL, 0);
-		if (con_id_ == -1) {
-			perror("Controller : ConnectAttach failed : ");
-			exit(EXIT_FAILURE);
-		}
+	con_id_ = ConnectAttach(0, 0, demultiplexer_->getChannelId(), _NTO_SIDE_CHANNEL, 0);
+	if (con_id_ == -1) {
+		perror("Controller : ConnectAttach failed : ");
+		exit(EXIT_FAILURE);
+	}
 #ifdef DEBUG_
-		cout << "Controller attached to channelId: " << con_id_ << endl;
+	cout << "Controller attached to channelId: " << con_id_ << endl;
 #endif
 }
 
@@ -53,16 +56,15 @@ void Controller::init(){
 
 void Controller::inEngineStart()
 {
-	state = new StateLineStart(this);
-	WorkPiece wp(1) ;
-	wp_list_.push_back(wp);
-	state->inLineStart();
+//	state = new StateLineStart(this);
+
+	inLine_state_->inLineStart();
 }
 
 void Controller::outEngineStart()
 {
 	inLine_state_->outLineStart();
-	wp_list_.pop_back();
+	this->passWP2Ctr(height_state_->controller);
 
 }
 
@@ -74,6 +76,7 @@ void Controller::inHeightMeasurement()
 void Controller::outHeightMeasurement()
 {
 	height_state_->outHeightMeasurement();
+	this->passWP2Ctr(height_state_->controller);
 }
 
 void Controller::inToleranceRange()
@@ -83,6 +86,7 @@ void Controller::inToleranceRange()
 
 void Controller::notInToleranceRange()
 {
+	height_state_->notInToleranceRange();
 }
 
 void Controller::isMetal()
@@ -95,20 +99,22 @@ void Controller::notMetal()
 
 void Controller::inSwitch()
 {
+	switch_state_->inSwitch();
 }
 
 void Controller::outSwitch()
 {
+	switch_state_->outSwitch();
 }
 
 void Controller::switchOpen()
 {
-
+	switch_state_->switchOpen();
 }
 
 void Controller::switchClosed()
 {
-
+	switch_state_->switchClosed();
 }
 
 void Controller::inSlide()
@@ -137,6 +143,7 @@ void Controller::startReleased()
 
 void Controller::stopPressed()
 {
+	HALAktorik::getInstance()->motor_off();
 }
 
 void Controller::stopReleased()
@@ -198,6 +205,27 @@ void Controller::addEvent(int event_index)
 vector<int> Controller::getEvents()
 {
 	return events_list_;
+}
+
+void Controller::addWP2List(WorkPiece wp)
+{
+	wp_list_.push_back(wp);
+}
+
+WorkPiece Controller::getLastWP()
+{
+	return wp_list_.at(wp_list_.size());
+}
+
+
+void Controller::removeLastWP()
+{
+	wp_list_.pop_back();
+}
+
+void Controller::passWP2Ctr(HALCallInterface* ctr)
+{
+	ctr->addWP2List(getLastWP());
 }
 
 

@@ -17,7 +17,27 @@ StateLineStart::~StateLineStart() {
 	// TODO Auto-generated destructor stub
 }
 
-StateWorkPieceCreated::StateWorkPieceCreated(){
+
+void StateLineStart::inLineStart()
+{
+#ifdef DEBUG_
+	cout << "StateLineStart->inLineStart" << endl;
+	cout << "StateLineStart : Controller Id = " << this->controller->getControllerId() << endl;
+#endif
+	WorkPiece wp(1) ;
+	controller->addWP2List(wp);
+	//TODO test if the motor have to be started
+	hal_aktorik_->motor_on();
+	hal_aktorik_->green_Light_on();
+	new (this) StateWorkPieceCreated(controller);
+}
+
+
+//---------------------StateWorkPieceCreated-----------------
+
+
+StateWorkPieceCreated::StateWorkPieceCreated(HALCallInterface* ctr){
+	this->controller = ctr;
 	hal_aktorik_ = HALAktorik::getInstance();
 }
 
@@ -25,19 +45,12 @@ StateWorkPieceCreated::~StateWorkPieceCreated(){
 
 }
 
-void StateLineStart::inLineStart()
-{
-#ifdef DEBUG_
-	cout << "StateLineStart->inLineStart" << endl;
-#endif
-	hal_aktorik_->motor_on();
-	hal_aktorik_->green_Light_on();
-	new (this) StateWorkPieceCreated;
-}
 void StateWorkPieceCreated::outLineStart(){
 	#ifdef DEBUG_
 	cout << "StateWorkPieceCreated->outLineStart" << endl;
 	#endif
+	// Start timer ??
 
+	controller->removeLastWP();
 	new (this) StateLineStart(this->controller);
 }

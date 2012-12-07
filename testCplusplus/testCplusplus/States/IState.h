@@ -12,6 +12,9 @@
 #define ISTATE_H_
 
 //#include "HALCallInterface.h"
+#include "HALAktorik.h"
+#include "WorkPiece.h"
+#include <iostream>
 
 class HALCallInterface;
 

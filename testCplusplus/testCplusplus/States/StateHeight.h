@@ -17,7 +17,7 @@ using namespace std;
 class WaitingHeightM1: public IState {
 public:
 
-	WaitingHeightM1();
+	WaitingHeightM1(HALCallInterface* ctr);
 	virtual ~WaitingHeightM1();
 	void inHeightMeasurement();
 	void inToleranceRange();
@@ -28,16 +28,17 @@ private:
 
 class CheckDrill: public IState {
 public:
-	CheckDrill();
+	CheckDrill(HALCallInterface* ctr);
 	virtual ~CheckDrill();
 	void inHeightMeasurement();
+	void notInToleranceRange();
 private:
 	HALAktorik* hal_aktorik_;
 };
 
 class DrillChecked: public IState{
 public:
-	DrillChecked();
+	DrillChecked(HALCallInterface* ctr);
 	virtual ~DrillChecked();
 	void outHeightMeasurement();
 private:
@@ -46,7 +47,7 @@ private:
 
 class TooSmall: public IState{
 public:
-	TooSmall();
+	TooSmall(HALCallInterface* ctr);
 	virtual ~TooSmall();
 	void outHeightMeasurement();
 private:

@@ -20,7 +20,7 @@ DispatcherTest::~DispatcherTest() {
 
 void DispatcherTest::execute(void *arg)
 {
-	cout << "DispatcherTest started" << endl;
+/*	cout << "DispatcherTest started" << endl;
 
 	ControllerTest ctr;
 	ControllerTest ctr_2;
@@ -46,7 +46,7 @@ void DispatcherTest::execute(void *arg)
 	dispatcher_->join();
 
 	cout << "DispatcherTest end" << endl;
-
+*/
 }
 
 

@@ -12,6 +12,9 @@
 #define HALCALLINTERFACE_H_
 
 #include <vector>
+//#include "WorkPiece.h"
+
+class WorkPiece;
 
 class HALCallInterface {
 public :											//WP = Workpiece
@@ -55,6 +58,11 @@ public :											//WP = Workpiece
 	 * @return controller id
 	 */
 	virtual int getControllerId() = 0;
+
+	virtual void addWP2List(WorkPiece wp) =0;
+	virtual WorkPiece getLastWP() =0;
+	virtual void removeLastWP() =0;
+	virtual void passWP2Ctr(HALCallInterface* ctr) =0;
 };
 
 #endif //HALCALLINTERFACE_H_

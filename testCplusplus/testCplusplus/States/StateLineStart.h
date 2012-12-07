@@ -27,7 +27,7 @@ private:
 
 class StateWorkPieceCreated:public IState {
 public:
-	StateWorkPieceCreated();
+	StateWorkPieceCreated(HALCallInterface* ctr);
 	virtual ~StateWorkPieceCreated();
 
 	void outLineStart();
