@@ -17,7 +17,7 @@ using namespace std;
 
 class StateLineStart:public IState {
 public:
-	StateLineStart();
+	StateLineStart(HALCallInterface* ctr);
 	virtual ~StateLineStart();
 
 	void inLineStart();

@@ -13,7 +13,7 @@
 
 #include <iostream.h>
 #include "HALCallInterface.h"
-#include <vector>
+//#include <vector>
 #include "HALAktorik.h"
 #include "Dispatcher.h"
 #include "Demultiplexer.h"
@@ -25,6 +25,9 @@
 class Controller: public HALCallInterface {
 public:
 	Controller();
+//TODO implement copy-constructor
+	Controller(const Controller &);
+//TODO implement operator-overloading
 
 	void inEngineStart();
 	void outEngineStart();
@@ -42,6 +45,7 @@ public:
 	void outSlide();
 	void inEngineEnd();
 	void outEngineEnd();
+
 	void startPressed();
 	void startReleased();
 	void stopPressed();
@@ -74,6 +78,8 @@ private:
 	Demultiplexer* demultiplexer_;
 	IState* inLine_state_;
 	IState* height_state_;
+	IState* state;
+
 };
 
 #endif /* CONTROLLER_H_ */

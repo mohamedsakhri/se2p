@@ -50,11 +50,11 @@ public :											//WP = Workpiece
 	 * @return List of events the controller is registered to
 	 */
 	virtual vector<int> getEvents() = 0;
+
 	/**
 	 * @return controller id
 	 */
 	virtual int getControllerId() = 0;
-
 };
 
 #endif //HALCALLINTERFACE_H_

@@ -11,7 +11,9 @@
 #ifndef ISTATE_H_
 #define ISTATE_H_
 
-#include <vector>
+//#include "HALCallInterface.h"
+
+class HALCallInterface;
 
 class IState {
 public :
@@ -43,7 +45,7 @@ public :
 
 	virtual void isMissing(){};
 
-
+	HALCallInterface* controller;
 };
 
 #endif //ISTATE_H_

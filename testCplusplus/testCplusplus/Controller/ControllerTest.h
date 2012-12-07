@@ -13,7 +13,7 @@
 
 #include <iostream.h>
 #include "HALCallInterface.h"
-#include <vector>
+//#include <vector>
 #include "HALAktorik.h"
 #include "Dispatcher.h"
 #include "Demultiplexer.h"
@@ -39,6 +39,7 @@ public:
 	void outSlide();
 	void inEngineEnd();
 	void outEngineEnd();
+
 	void startPressed();
 	void startReleased();
 	void stopPressed();

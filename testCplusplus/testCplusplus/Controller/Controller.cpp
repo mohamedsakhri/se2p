@@ -19,14 +19,25 @@ int Controller::ctr_number_ = 0;
 Controller::Controller() {
 	ctr_id_= ctr_number_++;
 	hal_aktorik_ = HALAktorik::getInstance();
-	inLine_state_ = new StateLineStart();
+	inLine_state_ = new StateLineStart(this);
 	height_state_ = new WaitingHeightM1();
 	init();
+}
+
+//TODO comment and implement
+/**
+ * Copy-Constructor
+ *
+ */
+Controller::Controller(const Controller& ctr) {
 
 }
+
+/**
+ * Do some initialization work
+ */
 void Controller::init(){
 	demultiplexer_ = Demultiplexer::getInstance();
-
 
 		con_id_ = ConnectAttach(0, 0, demultiplexer_->getChannelId(), _NTO_SIDE_CHANNEL, 0);
 		if (con_id_ == -1) {
@@ -38,16 +49,21 @@ void Controller::init(){
 #endif
 }
 
+
+
 void Controller::inEngineStart()
 {
+	state = new StateLineStart(this);
 	WorkPiece wp(1) ;
 	wp_list_.push_back(wp);
-	inLine_state_->inLineStart();
+	state->inLineStart();
 }
 
 void Controller::outEngineStart()
 {
 	inLine_state_->outLineStart();
+	wp_list_.pop_back();
+
 }
 
 void Controller::inHeightMeasurement()

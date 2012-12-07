@@ -8,8 +8,9 @@
 #include "StateLineStart.h"
 #define DEBUG_
 
-StateLineStart::StateLineStart() {
+StateLineStart::StateLineStart(HALCallInterface* ctr) {
 	hal_aktorik_ = HALAktorik::getInstance();
+	this->controller = ctr;
 }
 
 StateLineStart::~StateLineStart() {
@@ -38,5 +39,5 @@ void StateWorkPieceCreated::outLineStart(){
 	cout << "StateWorkPieceCreated->outLineStart" << endl;
 	#endif
 
-	new (this) StateLineStart;
+	new (this) StateLineStart(this->controller);
 }
