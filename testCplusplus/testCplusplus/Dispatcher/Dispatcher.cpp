@@ -198,7 +198,7 @@ void Dispatcher::removeHandler(HALCallInterface* handler){
 	 */
 	for ( i = 0 ; i < events.size(); i++){
 		for (j = 0; j < CTRList[events.at(i)].size(); j++){
-			if ( handler->getControllerId() == CTRList[events.at(i)].at(j)->getControllerId()){
+//TODO			if ( handler->getControllerId() == CTRList[events.at(i)].at(j)->getControllerId()){
 #ifdef DEBUG_
 	cout << "Dispatcher : Handler " << CTRList[events.at(i)].at(j)->getControllerId() << endl;
 #endif

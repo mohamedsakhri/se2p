@@ -10,14 +10,13 @@
 
 #include "IState.h"
 #include "HALAktorik.h"
-#include "Controller.h"
 
 using namespace std;
 
 class WaitingHeightM1: public IState {
 public:
 
-	WaitingHeightM1(HALCallInterface* ctr);
+	WaitingHeightM1();
 	virtual ~WaitingHeightM1();
 	void inHeightMeasurement();
 	void inToleranceRange();
@@ -28,7 +27,7 @@ private:
 
 class CheckDrill: public IState {
 public:
-	CheckDrill(HALCallInterface* ctr);
+	CheckDrill();
 	virtual ~CheckDrill();
 	void inHeightMeasurement();
 	void notInToleranceRange();
@@ -38,7 +37,7 @@ private:
 
 class DrillChecked: public IState{
 public:
-	DrillChecked(HALCallInterface* ctr);
+	DrillChecked();
 	virtual ~DrillChecked();
 	void outHeightMeasurement();
 private:
@@ -47,7 +46,7 @@ private:
 
 class TooSmall: public IState{
 public:
-	TooSmall(HALCallInterface* ctr);
+	TooSmall();
 	virtual ~TooSmall();
 	void outHeightMeasurement();
 private:

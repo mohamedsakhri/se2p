@@ -12,7 +12,7 @@
 
 //-----------------WaitingHeightM1--------------
 
-WaitingHeightM1::WaitingHeightM1(HALCallInterface* ctr){
+WaitingHeightM1::WaitingHeightM1(){
 	this->controller = ctr;
 	hal_aktorik_ = HALAktorik::getInstance();
 }
@@ -28,7 +28,7 @@ void WaitingHeightM1::inHeightMeasurement(){
 //	WorkPiece wp(1) ;
 //	controller->addWP2List(wp);
 
-	new (this) TooSmall(controller);
+	new (this) TooSmall();
 }
 
 void WaitingHeightM1::inToleranceRange(){
@@ -37,16 +37,16 @@ void WaitingHeightM1::inToleranceRange(){
 #endif
 	//TODO WP's Id !!
 //	WorkPiece wp(1) ;
-	WorkPiece wp = controller->getLastWP();
+	WorkPiece wp = ControllerSeg2::getInstance()->getLastWP();
 	wp.setIs_inTolleranceRange(true);
-	controller->addWP2List(wp);
+	ControllerSeg2::getInstance()->addWP2List(wp);
 
-	new (this) CheckDrill(controller);
+	new (this) CheckDrill();
 }
 
 //-----------------TooSmall-------------
 
-TooSmall::TooSmall(HALCallInterface* ctr){
+TooSmall::TooSmall(){
 	this->controller = ctr;
 	hal_aktorik_ = HALAktorik::getInstance();
 
@@ -60,12 +60,12 @@ void TooSmall::outHeightMeasurement(){
 	cout << "TooSmall::outHeightMeasurement" << endl;
 #endif
 	//timer ??
-	new (this) WaitingHeightM1(controller);
+	new (this) WaitingHeightM1();
 }
 
 //-------------------- CheckDrill-----------
 
-CheckDrill::CheckDrill(HALCallInterface* ctr){
+CheckDrill::CheckDrill(){
 	this->controller = ctr;
 	hal_aktorik_ = HALAktorik::getInstance();
 }
@@ -78,8 +78,8 @@ void CheckDrill::inHeightMeasurement(){
 #ifdef DEBUG_
 	cout << "CheckDrill::inHeightMeasurement" << endl;
 #endif
-	controller->getLastWP().setHas_Drill(false);
-	new (this) DrillChecked(controller);
+	ControllerSeg2::getInstance()->getLastWP().setHas_Drill(false);
+	new (this) DrillChecked();
 }
 
 
@@ -87,15 +87,15 @@ void CheckDrill::notInToleranceRange(){
 #ifdef DEBUG_
 	cout << "CheckDrill::notInToleranceRange " << endl;
 #endif
-	controller->getLastWP().setHas_Drill(true);
-	new (this) DrillChecked(controller);
+	ControllerSeg2::getInstance()->getLastWP().setHas_Drill(true);
+	new (this) DrillChecked();
 }
 
 
 
 //-----------------DrillChecked--------------
 
-DrillChecked::DrillChecked(HALCallInterface* ctr){
+DrillChecked::DrillChecked(){
 	this->controller = ctr;
 	hal_aktorik_ = HALAktorik::getInstance();
 }
@@ -110,6 +110,6 @@ void DrillChecked::outHeightMeasurement(){
 #endif
 
 	// timer !!
-	controller->removeLastWP();
-	new (this) WaitingHeightM1(controller);
+	ControllerSeg2::getInstance()->removeLastWP();
+	new (this) WaitingHeightM1();
 }

@@ -11,13 +11,12 @@
 #include "HALAktorik.h"
 #include "IState.h"
 #include <iostream.h>
-#include "Controller.h"
 
 using namespace std;
 
 class StateLineStart:public IState {
 public:
-	StateLineStart(HALCallInterface* ctr);
+	StateLineStart();
 	virtual ~StateLineStart();
 
 	void inLineStart();
@@ -27,7 +26,7 @@ private:
 
 class StateWorkPieceCreated:public IState {
 public:
-	StateWorkPieceCreated(HALCallInterface* ctr);
+	StateWorkPieceCreated();
 	virtual ~StateWorkPieceCreated();
 
 	void outLineStart();

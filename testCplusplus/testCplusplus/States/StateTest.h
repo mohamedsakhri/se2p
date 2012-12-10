@@ -8,7 +8,7 @@
 #ifndef STATETASTE_H_
 #define STATETASTE_H_
 
-#include "Controller.h"
+#include "ControllerSeg1.h"
 #include "HAWThread.h"
 #include "Dispatcher.h"
 

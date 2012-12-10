@@ -48,7 +48,6 @@ public :
 
 	virtual void isMissing(){};
 
-	HALCallInterface* controller;
 };
 
 #endif //ISTATE_H_
