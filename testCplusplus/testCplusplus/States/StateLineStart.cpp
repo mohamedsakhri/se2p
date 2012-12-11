@@ -9,8 +9,8 @@
 #define DEBUG_
 
 StateLineStart::StateLineStart() {
-	hal_aktorik_ = HALAktorik::getInstance();
-	this->controller = ctr;
+//	hal_aktorik_ = HALAktorik::getInstance();
+	cout << "stateLine Start constructur" << endl;
 }
 
 StateLineStart::~StateLineStart() {
@@ -22,13 +22,13 @@ void StateLineStart::inLineStart()
 {
 #ifdef DEBUG_
 	cout << "StateLineStart->inLineStart" << endl;
-	cout << "StateLineStart : Controller Id = " << ControllerSeg1::getInstance()->getControllerId() << endl;
 #endif
-	WorkPiece wp(1) ;
+	//TODO check if the WP id is needed
+	WorkPiece* wp = new WorkPiece(1) ;
 	ControllerSeg1::getInstance()->addWP2List(wp);
 	//TODO test if the motor have to be started
-	hal_aktorik_->motor_on();
-	hal_aktorik_->green_Light_on();
+	HALAktorik::getInstance()->motor_on();
+	HALAktorik::getInstance()->green_Light_on();
 	new (this) StateWorkPieceCreated();
 }
 
@@ -37,8 +37,7 @@ void StateLineStart::inLineStart()
 
 
 StateWorkPieceCreated::StateWorkPieceCreated(){
-	this->controller = ctr;
-	hal_aktorik_ = HALAktorik::getInstance();
+	cout << "StateWorkPieceCreated Start constructur" << endl;
 }
 
 StateWorkPieceCreated::~StateWorkPieceCreated(){
@@ -50,7 +49,9 @@ void StateWorkPieceCreated::outLineStart(){
 	cout << "StateWorkPieceCreated->outLineStart" << endl;
 	#endif
 	// Start timer ??
-
+	ControllerSeg1::getInstance()->passWP2Ctr();
 	ControllerSeg1::getInstance()->removeLastWP();
+
 	new (this) StateLineStart();
+	cout << "StateWorkPieceCreated->outLineStart END" << endl;
 }

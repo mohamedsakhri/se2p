@@ -207,7 +207,6 @@ void Dispatcher::removeHandler(HALCallInterface* handler){
 #ifdef DEBUG_
 	cout << "Controller removed " << endl;
 #endif
-			}
 		}
 	}
 }

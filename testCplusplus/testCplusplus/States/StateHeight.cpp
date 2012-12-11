@@ -6,15 +6,15 @@
  */
 
 #include "StateHeight.h"
-#include <iostream>
 #define DEBUG_
 
 
 //-----------------WaitingHeightM1--------------
 
 WaitingHeightM1::WaitingHeightM1(){
-	this->controller = ctr;
-	hal_aktorik_ = HALAktorik::getInstance();
+#ifdef DEBUG_
+	cout << "WaitingHeightM1 Start constructur" << endl;
+#endif
 }
 
 WaitingHeightM1::~WaitingHeightM1() {
@@ -25,8 +25,6 @@ void WaitingHeightM1::inHeightMeasurement(){
 #ifdef DEBUG_
 	cout << "WaitingHeightM1::inHeightMeasurement" << endl;
 #endif
-//	WorkPiece wp(1) ;
-//	controller->addWP2List(wp);
 
 	new (this) TooSmall();
 }
@@ -36,10 +34,9 @@ void WaitingHeightM1::inToleranceRange(){
 	cout << "WaitingHeightM1->inToleranceRange" << endl;
 #endif
 	//TODO WP's Id !!
-//	WorkPiece wp(1) ;
-	WorkPiece wp = ControllerSeg2::getInstance()->getLastWP();
-	wp.setIs_inTolleranceRange(true);
-	ControllerSeg2::getInstance()->addWP2List(wp);
+	(ControllerSeg2::getInstance()->getLastWP())->setIs_inTolleranceRange(true);
+	cout << "get inTol after set inTol to true: " << ControllerSeg2::getInstance()->getLastWP()->getIs_inTolleranceRange() <<
+			" WP: " <<  (ControllerSeg2::getInstance()->getLastWP())->getId() << endl;
 
 	new (this) CheckDrill();
 }
@@ -47,9 +44,7 @@ void WaitingHeightM1::inToleranceRange(){
 //-----------------TooSmall-------------
 
 TooSmall::TooSmall(){
-	this->controller = ctr;
-	hal_aktorik_ = HALAktorik::getInstance();
-
+	cout << "Too small const" << endl;
 }
 TooSmall::~TooSmall(){
 
@@ -59,15 +54,17 @@ void TooSmall::outHeightMeasurement(){
 #ifdef DEBUG_
 	cout << "TooSmall::outHeightMeasurement" << endl;
 #endif
+
 	//timer ??
+	ControllerSeg2::getInstance()->passWP2Ctr();
+	ControllerSeg2::getInstance()->removeLastWP();
 	new (this) WaitingHeightM1();
 }
 
 //-------------------- CheckDrill-----------
 
 CheckDrill::CheckDrill(){
-	this->controller = ctr;
-	hal_aktorik_ = HALAktorik::getInstance();
+	cout << "CheckDrill const" << endl;
 }
 
 CheckDrill::~CheckDrill(){
@@ -78,7 +75,7 @@ void CheckDrill::inHeightMeasurement(){
 #ifdef DEBUG_
 	cout << "CheckDrill::inHeightMeasurement" << endl;
 #endif
-	ControllerSeg2::getInstance()->getLastWP().setHas_Drill(false);
+	ControllerSeg2::getInstance()->getLastWP()->setHas_Drill(false);
 	new (this) DrillChecked();
 }
 
@@ -87,7 +84,7 @@ void CheckDrill::notInToleranceRange(){
 #ifdef DEBUG_
 	cout << "CheckDrill::notInToleranceRange " << endl;
 #endif
-	ControllerSeg2::getInstance()->getLastWP().setHas_Drill(true);
+	ControllerSeg2::getInstance()->getLastWP()->setHas_Drill(true);
 	new (this) DrillChecked();
 }
 
@@ -96,8 +93,7 @@ void CheckDrill::notInToleranceRange(){
 //-----------------DrillChecked--------------
 
 DrillChecked::DrillChecked(){
-	this->controller = ctr;
-	hal_aktorik_ = HALAktorik::getInstance();
+	cout << "DrillChecked const" << endl;
 }
 
 DrillChecked::~DrillChecked(){
@@ -110,6 +106,7 @@ void DrillChecked::outHeightMeasurement(){
 #endif
 
 	// timer !!
+	ControllerSeg2::getInstance()->passWP2Ctr();
 	ControllerSeg2::getInstance()->removeLastWP();
 	new (this) WaitingHeightM1();
 }

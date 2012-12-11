@@ -9,13 +9,14 @@
  */
 
 #define DISPATCHER_TEST
+//#define DEBUG_
 #include "ControllerSeg2.h"
 
 Mutex ControllerSeg2::controllerSeg2_mutex_ = Mutex();
 ControllerSeg2* ControllerSeg2::controllerSeg2_instance_ = NULL ;
 
 ControllerSeg2::ControllerSeg2() {
-	state_ = new StateHeight();
+	state_ = new WaitingHeightM1();
 	init();
 }
 
@@ -55,7 +56,6 @@ void ControllerSeg2::inHeightMeasurement()
 void ControllerSeg2::outHeightMeasurement()
 {
 	state_->outHeightMeasurement();
-//	this->passWP2Ctr(height_state_->controller);
 }
 
 void ControllerSeg2::inToleranceRange()
@@ -100,25 +100,42 @@ vector<int> ControllerSeg2::getEvents()
 	return events_list_;
 }
 
-void ControllerSeg2::addWP2List(WorkPiece wp)
+void ControllerSeg2::addWP2List(WorkPiece* wp)
 {
+#ifdef DEBUG_
+	cout << "ControllerSeg2::addWP2List: ID: " << wp->getId() << " TOL: " << wp->getIs_inTolleranceRange() << endl;
+#endif
 	wp_list_.push_back(wp);
 }
 
-WorkPiece ControllerSeg2::getLastWP()
+WorkPiece* ControllerSeg2::getLastWP()
 {
-	return wp_list_.at(wp_list_.size());
+//	return wp_list_.at(wp_list_.size());
+	return wp_list_.front();
 }
 
 
 void ControllerSeg2::removeLastWP()
 {
-	wp_list_.pop_back();
+	if (!wp_list_.empty()){
+#ifdef DEBUG_
+			cout << "ControllerSeg2: WP:" << wp_list_.begin()->getId() <<" removed" << endl;
+#endif
+			wp_list_.erase(wp_list_.begin());
+		}
+	else{
+		cout << "fifo in seg2 empty " << endl;
+	}
 }
 
-void ControllerSeg2::passWP2Ctr(HALCallInterface* ctr)
+void ControllerSeg2::passWP2Ctr()
 {
-	ctr->addWP2List(getLastWP());
+//#ifdef DEBUG_
+	cout << "ControllerSeg2::passWP2Ctr: ID: " << getLastWP()->getId() << " TOL: " << getLastWP()->getIs_inTolleranceRange() << endl;
+//#endif
+	if (!wp_list_.empty()) {
+		ControllerSeg3::getInstance()->addWP2List(getLastWP());
+	}
 }
 
 

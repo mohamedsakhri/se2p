@@ -10,6 +10,10 @@
 
 #include "IState.h"
 #include "HALAktorik.h"
+#include <iostream>
+#include "ControllerSeg2.h"
+
+//class ControllerSeg2;
 
 using namespace std;
 
@@ -20,8 +24,6 @@ public:
 	virtual ~WaitingHeightM1();
 	void inHeightMeasurement();
 	void inToleranceRange();
-private:
-	HALAktorik* hal_aktorik_;
 };
 
 
@@ -31,8 +33,6 @@ public:
 	virtual ~CheckDrill();
 	void inHeightMeasurement();
 	void notInToleranceRange();
-private:
-	HALAktorik* hal_aktorik_;
 };
 
 class DrillChecked: public IState{
@@ -40,8 +40,6 @@ public:
 	DrillChecked();
 	virtual ~DrillChecked();
 	void outHeightMeasurement();
-private:
-	HALAktorik* hal_aktorik_;
 };
 
 class TooSmall: public IState{
@@ -49,7 +47,5 @@ public:
 	TooSmall();
 	virtual ~TooSmall();
 	void outHeightMeasurement();
-private:
-	HALAktorik* hal_aktorik_;
 };
 #endif /* STATEHEIGHT_H_ */

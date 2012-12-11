@@ -13,14 +13,16 @@ public:
 	WorkPiece(int id);
 	virtual ~WorkPiece();
 
-	bool getIs_inTolleranceRange() const;
-	void setIs_inTolleranceRange(bool is_inTolleranceRange_);
+	int getId();
 
-    bool getIs_Metal() const;
-    void setIs_Metal(bool is_Metal);
+	bool getIs_inTolleranceRange();
+	void setIs_inTolleranceRange(bool isinTolleranceRange);
 
-    void setHas_Drill(bool has_Drill_);
-    bool getHas_Drill() const;
+    bool getIs_Metal();
+    void setIs_Metal(bool isMetal);
+
+    void setHas_Drill(bool hasDrill);
+    bool getHas_Drill();
 
 private:
 	int wp_id_ ;

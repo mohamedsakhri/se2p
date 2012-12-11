@@ -8,8 +8,8 @@
  *
  */
 
-#ifndef CONTROLLERSEG2_H_
-#define CONTROLLERSEG2_H_
+#ifndef CONTROLLERSEG3_H_
+#define CONTROLLERSEG3_H_
 
 #include <iostream.h>
 #include "HALCallInterface.h"
@@ -18,25 +18,22 @@
 #include "Demultiplexer.h"
 #include "IState.h"
 #include "WorkPiece.h"
-#include "StateHeight.h"
+#include "WaitingSwitch.h"
 #include "Mutex.h"
-#include "ControllerSeg3.h"
 
-class ControllerSeg2: public HALCallInterface {
+class ControllerSeg3: public HALCallInterface {
 public:
-	static ControllerSeg2* getInstance();
+	static ControllerSeg3* getInstance();
 
-	void inHeightMeasurement();
-	void outHeightMeasurement();
-	void inToleranceRange();
-	void notInToleranceRange();
+	void inSwitch();
+	void outSwitch();
 
 	//TODO COMMENT
 		// Error's handling
 		int sendMsg2Dispatcher(int message);
 		void init();
 
-		virtual ~ControllerSeg2();
+		virtual ~ControllerSeg3();
 
 		void addEvent(int event_index);
 		vector<int> getEvents();
@@ -48,14 +45,14 @@ public:
 		void passWP2Ctr();
 
 	private:
-		ControllerSeg2();
+		ControllerSeg3();
 
 		vector<int> events_list_;		//!< Event's list the controller is/want to registered to
 		vector<WorkPiece*> wp_list_;		//!< fifo list for workpieces
 		int con_id_;
 		IState* state_;
-		static ControllerSeg2* controllerSeg2_instance_ ;
-		static Mutex controllerSeg2_mutex_; 		//!< Mutex for thread-safe implementation
+		static ControllerSeg3* controllerSeg3_instance_ ;
+		static Mutex controllerSeg3_mutex_; 		//!< Mutex for thread-safe implementation
 
 
 	};

@@ -8,8 +8,8 @@
  *
  */
 
-#ifndef CONTROLLER_H_
-#define CONTROLLER_H_
+#ifndef CONTROLLERTEST_H_
+#define CONTROLLERTEST_H_
 
 #include <iostream.h>
 #include "HALCallInterface.h"

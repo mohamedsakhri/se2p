@@ -6,6 +6,7 @@
  */
 
 #include "WorkPiece.h"
+#include <iostream.h>
 
 WorkPiece::WorkPiece(int id) {
 
@@ -20,31 +21,36 @@ WorkPiece::~WorkPiece() {
 
 }
 
-
-void WorkPiece::setIs_inTolleranceRange(bool is_inTolleranceRange_)
+int WorkPiece::getId()
 {
-    this->is_inTolleranceRange_ = is_inTolleranceRange_;
-}
-bool WorkPiece::getIs_inTolleranceRange() const
-{
-    return is_inTolleranceRange_;
+	return this->wp_id_;
 }
 
-void WorkPiece::setIs_Metal(bool is_Metal_)
+
+void WorkPiece::setIs_inTolleranceRange(bool inTolleranceRange)
 {
-    this->is_Metal_ = is_Metal_;
+	this->is_inTolleranceRange_ = inTolleranceRange;
+}
+bool WorkPiece::getIs_inTolleranceRange()
+{
+    return this->is_inTolleranceRange_;
 }
 
-bool WorkPiece::getIs_Metal() const
+void WorkPiece::setIs_Metal(bool isMetal)
 {
-    return is_Metal_;
+    this->is_Metal_ = isMetal;
 }
 
-void WorkPiece::setHas_Drill(bool has_Drill_)
+bool WorkPiece::getIs_Metal()
 {
-    this->has_Drill_ = has_Drill_;
+    return this->is_Metal_;
 }
-bool WorkPiece::getHas_Drill() const
+
+void WorkPiece::setHas_Drill(bool hasDrill)
 {
-    return has_Drill_;
+    this->has_Drill_ = hasDrill;
+}
+bool WorkPiece::getHas_Drill()
+{
+    return this->has_Drill_;
 }

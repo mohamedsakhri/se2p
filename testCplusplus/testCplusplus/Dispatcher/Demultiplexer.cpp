@@ -218,9 +218,9 @@ void Demultiplexer::execute(void* arg){
 						break;
 					case WP_IS_IN_SWITCH:	// P in switch  LB3
 						if (new_value & WP_IS_IN_SWITCH) {
-							message = WP_IN_SWITCH;
-						}else {
 							message = WP_OUT_SWITCH;
+						}else {
+							message = WP_IN_SWITCH;
 						}
 						sendMsg2Dispatcher(message);
 						break;

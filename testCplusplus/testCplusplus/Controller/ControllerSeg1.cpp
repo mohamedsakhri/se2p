@@ -9,6 +9,7 @@
  */
 
 #define DISPATCHER_TEST
+//#define DEBUG_
 #include "ControllerSeg1.h"
 
 
@@ -59,8 +60,6 @@ void ControllerSeg1::inEngineStart()
 void ControllerSeg1::outEngineStart()
 {
 	state_->outLineStart();
-//	this->passWP2Ctr();
-
 }
 
 
@@ -96,26 +95,37 @@ vector<int> ControllerSeg1::getEvents()
 	return events_list_;
 }
 
-void ControllerSeg1::addWP2List(WorkPiece wp)
+void ControllerSeg1::addWP2List(WorkPiece* wp)
 {
 	wp_list_.push_back(wp);
 }
 
-WorkPiece ControllerSeg1::getLastWP()
+WorkPiece* ControllerSeg1::getLastWP()
 {
-	return wp_list_.at(wp_list_.size());
+//	return wp_list_.at(wp_list_.size()-1);
+	return wp_list_.front();
 }
 
 
 void ControllerSeg1::removeLastWP()
 {
-	wp_list_.pop_back();
+	if (!wp_list_.empty()){
+#ifdef DEBUG_
+			cout << "ControllerSeg1: WP:" << wp_list_.begin()->getId() <<" removed" << endl;
+#endif
+		wp_list_.erase(wp_list_.begin());
+	}
+	else{
+		cout << "fifo in seg1 empty " << endl;
+	}
+
 }
 
+// in case of problem : remove it and use addWP2List directely from state
 void ControllerSeg1::passWP2Ctr()
 {
-	//TODO:
-	//ctr->addWP2List(getLastWP());
+	cout << "ControllerSeg1::passWP2Ctr: ID: " << getLastWP()->getId() << " TOL: " << getLastWP()->getIs_inTolleranceRange() << endl;
+	ControllerSeg2::getInstance()->addWP2List(this->getLastWP());
 }
 
 

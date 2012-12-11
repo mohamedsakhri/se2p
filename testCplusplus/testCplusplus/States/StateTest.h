@@ -9,6 +9,8 @@
 #define STATETASTE_H_
 
 #include "ControllerSeg1.h"
+#include "ControllerSeg2.h"
+#include "ControllerSeg3.h"
 #include "HAWThread.h"
 #include "Dispatcher.h"
 

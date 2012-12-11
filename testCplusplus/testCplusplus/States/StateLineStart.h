@@ -11,6 +11,7 @@
 #include "HALAktorik.h"
 #include "IState.h"
 #include <iostream.h>
+#include "ControllerSeg1.h"
 
 using namespace std;
 
@@ -20,8 +21,6 @@ public:
 	virtual ~StateLineStart();
 
 	void inLineStart();
-private:
-	HALAktorik* hal_aktorik_;
 };
 
 class StateWorkPieceCreated:public IState {
@@ -30,8 +29,6 @@ public:
 	virtual ~StateWorkPieceCreated();
 
 	void outLineStart();
-private:
-	HALAktorik* hal_aktorik_;
 };
 
 #endif /* STATELINESTART_H_ */
