@@ -13,7 +13,7 @@
 #define CONTROLLERSEG5_H_
 
 #include "HALCallInterface.h"
-#include "SegSwitch.h"
+#include "SegLineEnd.h"
 
 class ControllerSeg5: public HALCallInterface {
 public:

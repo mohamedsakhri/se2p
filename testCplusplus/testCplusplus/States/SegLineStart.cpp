@@ -14,15 +14,16 @@
 #include "SegLineStart.h"
 #define DEBUG_
 
+
+/************************************************************************************
+ *									StateLineStart									*
+ *																					*
+ ************************************************************************************/
+
 StateLineStart::StateLineStart() {
 //	hal_aktorik_ = HALAktorik::getInstance();
-	cout << "stateLine Start constructur" << endl;
+	cout << "StateLine Start constructor" << endl;
 }
-
-StateLineStart::~StateLineStart() {
-	// TODO Auto-generated destructor stub
-}
-
 
 void StateLineStart::inLineStart()
 {
@@ -38,26 +39,41 @@ void StateLineStart::inLineStart()
 	new (this) StateWorkPieceCreated();
 }
 
+StateLineStart::~StateLineStart() {
+	// TODO Auto-generated destructor stub
+}
 
-//---------------------StateWorkPieceCreated-----------------
 
+/************************************************************************************
+ *									StateWorkPieceCreated							*
+ *																					*
+ ************************************************************************************/
 
 StateWorkPieceCreated::StateWorkPieceCreated(){
-	cout << "StateWorkPieceCreated Start constructur" << endl;
+	cout << "StateWorkPieceCreated Start constructor" << endl;
+}
+
+void StateWorkPieceCreated::outLineStart(){
+#ifdef DEBUG_
+	cout << "StateWorkPieceCreated->outLineStart" << endl;
+#endif
+	// Start timer ??
+	if (!ControllerSeg1::getInstance()->isFifoEmpty()) {
+		ControllerSeg1::getInstance()->passWP2Ctr();
+		ControllerSeg1::getInstance()->removeFirsttWP();
+
+		new (this) StateLineStart();
+	} else {
+		//TODO  just send msg and let controller do the rest according to the error event handler
+		ControllerSeg1::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
+		HALAktorik::getInstance()->motor_off();
+		HALAktorik::getInstance()->red_Light_on();
+		HALAktorik::getInstance()->green_Light_off();
+	}
 }
 
 StateWorkPieceCreated::~StateWorkPieceCreated(){
 
 }
 
-void StateWorkPieceCreated::outLineStart(){
-	#ifdef DEBUG_
-	cout << "StateWorkPieceCreated->outLineStart" << endl;
-	#endif
-	// Start timer ??
-	ControllerSeg1::getInstance()->passWP2Ctr();
-	ControllerSeg1::getInstance()->removeFirsttWP();
 
-	new (this) StateLineStart();
-	cout << "StateWorkPieceCreated->outLineStart END" << endl;
-}

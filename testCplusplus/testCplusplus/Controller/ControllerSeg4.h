@@ -14,7 +14,7 @@
 
 #include "HALCallInterface.h"
 //TODO .h of slide
-#include "SegSwitch.h"
+#include "SegSlide.h"
 
 class ControllerSeg4: public HALCallInterface {
 public:

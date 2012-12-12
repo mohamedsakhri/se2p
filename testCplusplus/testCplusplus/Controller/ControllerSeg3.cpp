@@ -18,6 +18,7 @@ Mutex ControllerSeg3::controllerSeg3_mutex_ = Mutex();
 ControllerSeg3* ControllerSeg3::controllerSeg3_instance_ = NULL ;
 
 ControllerSeg3::ControllerSeg3() {
+	ctr_id_ = CONTROLLER_SEG3;
 	state_ = new WaitingSwitch();
 	init();
 }
@@ -83,6 +84,14 @@ int ControllerSeg3::sendMsg2Dispatcher(int message){
 void ControllerSeg3::passWP2Ctr()
 {
 //	ControllerSeg5::getInstance()->addWP2List(getFirstWP());
+}
+
+void ControllerSeg3::passWP2Ctr(int controller_id)
+{
+	if (controller_id == CONTROLLER_SEG4)
+		ControllerSeg4::getInstance()->addWP2List(getFirstWP());
+	if (controller_id == CONTROLLER_SEG5)
+		ControllerSeg5::getInstance()->addWP2List(getFirstWP());
 }
 
 

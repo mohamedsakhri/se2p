@@ -18,6 +18,9 @@
 
 using namespace std;
 
+/*
+ *
+ */
 class StateLineStart:public IState {
 public:
 	StateLineStart();
@@ -26,6 +29,9 @@ public:
 	void inLineStart();
 };
 
+/*
+ *
+ */
 class StateWorkPieceCreated:public IState {
 public:
 	StateWorkPieceCreated();

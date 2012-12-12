@@ -19,12 +19,12 @@
 
 class IState {
 public :
-	virtual void inLineStart(){};					//!< WP in Line's start
+	virtual void inLineStart(){};				//!< WP in Line's start
 	virtual void outLineStart(){};				//!< WP has left Line's start
-	virtual void inHeightMeasurement(){};			//!< WP is in height measurement area
+	virtual void inHeightMeasurement(){};		//!< WP is in height measurement area
 	virtual void outHeightMeasurement(){};		//!< WP has left height measurement area
 	virtual void inToleranceRange(){};			//!< WP's height is in tolerance range
-	virtual void notInToleranceRange(){};			//!< WP's height is not in tolerance range
+	virtual void notInToleranceRange(){};		//!< WP's height is not in tolerance range
 	virtual void isMetal(){};						//!< WP has metal
 	virtual void notMetal(){};					//!< WP doesn't have metal
 	virtual void inSwitch(){};					//!< WP is in switch area

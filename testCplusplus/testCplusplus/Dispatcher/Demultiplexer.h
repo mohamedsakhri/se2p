@@ -16,7 +16,6 @@
 
 #include "HAWThread.h"
 #include "HALSensoric.h"
-//#include "Dispatcher.h"
 #include "Mutex.h"
 #include "Messages.h"
 

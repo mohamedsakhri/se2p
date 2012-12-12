@@ -19,6 +19,7 @@ ControllerSeg1* ControllerSeg1::controllerSeg1_instance_ = NULL ;
 
 
 ControllerSeg1::ControllerSeg1() {
+	ctr_id_ = CONTROLLER_SEG1;
 	state_ = new StateLineStart();
 	init();
 }

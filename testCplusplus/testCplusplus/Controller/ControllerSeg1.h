@@ -26,6 +26,7 @@ public:
 
 	// Error's handling
 	int sendMsg2Dispatcher(int message);
+
 	void init();
 	void passWP2Ctr();
 

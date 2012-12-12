@@ -13,37 +13,43 @@
 #include "SegSwitch.h"
 #define DEBUG_
 
-//TODO removeWP fehlt
-//------------WaitingSwitsch--------------------
 
-WaitingSwitch::WaitingSwitch()
-{
+/************************************************************************************
+ *									WaitingSwitch									*
+ *																					*
+ ************************************************************************************/
+
+WaitingSwitch::WaitingSwitch() {
 #ifdef DEBUG_
 	cout << "WaitingSwitch Start constructor" << endl;
 #endif
 }
 
-WaitingSwitch::~WaitingSwitch()
-{
+void WaitingSwitch::inSwitch() {
+	if (!ControllerSeg3::getInstance()->isFifoEmpty()) {
+		if (ControllerSeg3::getInstance()->getFirstWP()->getIs_inTolleranceRange()) {
+			HALAktorik::getInstance()->open_Switch();
+			new (this) WorkPieceValid();
+		} else {
+			new (this) WorkPieceInvalid();
+		}
+	} else {
+		//TODO  just send msg and let controller do the rest according to the error event handler
+		ControllerSeg3::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
+		HALAktorik::getInstance()->motor_off();
+		HALAktorik::getInstance()->red_Light_on();
+		HALAktorik::getInstance()->green_Light_off();
+	}
 }
 
-void WaitingSwitch::inSwitch()
-{
-//	WorkPiece wp = ControllerSeg3::getInstance()->getFirstWP();
-	if(ControllerSeg3::getInstance()->getFirstWP()->getIs_inTolleranceRange())
-	{
-		HALAktorik::getInstance()->open_Switch();
-		new (this) WorkPieceValid();
-	}
-	else
-	{
-		new (this) WorkPieceInvalid();
-	}
-
-
+WaitingSwitch::~WaitingSwitch() {
 }
 
-//------------WorkPieceInvalid--------------------
+
+/************************************************************************************
+ *									WorkPieceInvalid								*
+ *																					*
+ ************************************************************************************/
 
 WorkPieceInvalid::WorkPieceInvalid()
 {
@@ -52,19 +58,22 @@ WorkPieceInvalid::WorkPieceInvalid()
 #endif
 }
 
+void WorkPieceInvalid::outSwitch()
+{
+	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG4);
+	ControllerSeg3::getInstance()->removeFirsttWP();
+	new (this) WaitingSwitch();
+}
 
 WorkPieceInvalid::~WorkPieceInvalid()
 {
 }
 
-void WorkPieceInvalid::outSwitch()
-{
-	ControllerSeg3::getInstance()->removeFirsttWP();
-	new (this) WaitingSwitch();
-}
 
-
-//------------WorkPiecevalid--------------------
+/************************************************************************************
+ *									WorkPieceValid									*
+ *																					*
+ ************************************************************************************/
 
 WorkPieceValid::WorkPieceValid()
 {
@@ -79,6 +88,8 @@ void WorkPieceValid::outSwitch()
 #ifdef DEBUG_
 	cout << "Switch closed" << endl;
 #endif
+
+	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG5);
 	ControllerSeg3::getInstance()->removeFirsttWP();
 	HALAktorik::getInstance()->close_Switch();
 	new (this) WaitingSwitch();

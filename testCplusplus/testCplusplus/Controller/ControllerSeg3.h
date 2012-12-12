@@ -14,6 +14,9 @@
 
 #include "HALCallInterface.h"
 #include "SegSwitch.h"
+#include "ControllerSeg4.h"
+#include "ControllerSeg5.h"
+
 
 class ControllerSeg3: public HALCallInterface {
 public:
@@ -26,7 +29,7 @@ public:
 	int sendMsg2Dispatcher(int message);
 	void init();
 	void passWP2Ctr();
-
+	void passWP2Ctr(int ctr_id);
 	virtual ~ControllerSeg3();
 
 private:

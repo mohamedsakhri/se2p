@@ -66,6 +66,8 @@ void Dispatcher::initPt2FuncArray () {
 	pt2FuncArray[E_STOP_PRESSED]		= &HALCallInterface::EStopPressed;
 	pt2FuncArray[E_STOP_RELEASED]		= &HALCallInterface::EStopReleased;
 	pt2FuncArray[WP_IS_MISSING]			= &HALCallInterface::isMissing;
+	pt2FuncArray[WP_IS_STRANGER]			= &HALCallInterface::isStranger;
+
 
 //TODO More items are supposed to be added if we want to assign some error's treatment here too
 }
@@ -198,7 +200,7 @@ void Dispatcher::removeHandler(HALCallInterface* handler){
 	 */
 	for ( i = 0 ; i < events.size(); i++){
 		for (j = 0; j < CTRList[events.at(i)].size(); j++){
-//TODO			if ( handler->getControllerId() == CTRList[events.at(i)].at(j)->getControllerId()){
+			if ( handler->getControllerId() == CTRList[events.at(i)].at(j)->getControllerId()){
 #ifdef DEBUG_
 	cout << "Dispatcher : Handler " << CTRList[events.at(i)].at(j)->getControllerId() << endl;
 #endif
@@ -209,6 +211,7 @@ void Dispatcher::removeHandler(HALCallInterface* handler){
 #endif
 		}
 	}
+}
 }
 
 /**

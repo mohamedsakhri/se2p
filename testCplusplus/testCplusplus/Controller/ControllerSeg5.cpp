@@ -18,8 +18,8 @@ Mutex ControllerSeg5::controllerSeg5_mutex_ = Mutex();
 ControllerSeg5* ControllerSeg5::controllerSeg5_instance_ = NULL ;
 
 ControllerSeg5::ControllerSeg5() {
-	//TODO slide state
-	state_ = new WaitingSwitch();
+	ctr_id_ = CONTROLLER_SEG5;
+	state_ = new WaitLineEndM1();
 	init();
 }
 

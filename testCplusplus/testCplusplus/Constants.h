@@ -19,5 +19,12 @@
 
 #define DATA_SIZE 8    //serial interface send
 
+// Controllers Ids
+#define CONTROLLER_SEG1 1
+#define CONTROLLER_SEG2 2
+#define CONTROLLER_SEG3 3
+#define CONTROLLER_SEG4 4
+#define CONTROLLER_SEG5 5
+
 
 #endif /* CONSTANTS_H_ */

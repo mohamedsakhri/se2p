@@ -18,6 +18,7 @@ Mutex ControllerSeg2::controllerSeg2_mutex_ = Mutex();
 ControllerSeg2* ControllerSeg2::controllerSeg2_instance_ = NULL ;
 
 ControllerSeg2::ControllerSeg2() {
+	ctr_id_ = CONTROLLER_SEG2;
 	state_ = new WaitingHeightM1();
 	init();
 }

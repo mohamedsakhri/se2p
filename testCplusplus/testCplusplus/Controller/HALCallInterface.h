@@ -17,6 +17,7 @@
 #include <vector>
 #include "WorkPiece.h"
 #include "IState.h"
+#include "Constants.h"
 
 //class WorkPiece;
 
@@ -49,6 +50,7 @@ public :											//WP = Workpiece
 	virtual void EStopReleased(){};
 
 	virtual void isMissing(){};
+	virtual void isStranger(){};
 
 	/**
 	 * @param even_index Id of event the controller want to register to
@@ -90,7 +92,19 @@ public :											//WP = Workpiece
 		}
 	};
 
+	virtual bool isFifoEmpty() {
+		return wp_list_.empty();
+	};
+
 	virtual void passWP2Ctr() = 0;	//!< Pass WP to next controller
+
+	/**
+	 * @return ctr_id Controller Id
+	 */
+	virtual int getControllerId(){
+		return ctr_id_;
+	}
+
 protected :
 	vector<int> events_list_;			//!< Event's list the controller is/want to registered to
 	vector<WorkPiece*> wp_list_;		//!< Fifo as list of pointers to workpieces

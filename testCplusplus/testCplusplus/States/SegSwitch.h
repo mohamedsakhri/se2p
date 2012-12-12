@@ -18,6 +18,9 @@
 
 using namespace std;
 
+/*
+ *
+ */
 class WaitingSwitch: public IState {
 public:
 	WaitingSwitch();
@@ -26,6 +29,9 @@ public:
 	void inSwitch();
 };
 
+/*
+ *
+ */
 class WorkPieceInvalid: public IState {
 public:
 	WorkPieceInvalid();
@@ -34,6 +40,9 @@ public:
 	void outSwitch();
 };
 
+/*
+ *
+ */
 class WorkPieceValid: public IState {
 public:
 	WorkPieceValid();
