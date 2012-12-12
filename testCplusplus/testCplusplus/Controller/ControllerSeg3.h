@@ -1,11 +1,12 @@
 /*
- * @file	Controller.h
+ * @file 	ControllerSeg3.h
  *
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
  *
- * @date	Nov 26, 2012
+ * @date	 Dec 10, 2012
  *
+ * This class represents the controller of the third segment which controls the switch area
  */
 
 #ifndef CONTROLLERSEG3_H_
@@ -16,7 +17,7 @@
 //#include <vector>
 #include "Dispatcher.h"
 #include "Demultiplexer.h"
-#include "IState.h"
+//#include "IState.h"
 #include "WorkPiece.h"
 #include "WaitingSwitch.h"
 #include "Mutex.h"
@@ -47,10 +48,10 @@ public:
 	private:
 		ControllerSeg3();
 
-		vector<int> events_list_;		//!< Event's list the controller is/want to registered to
-		vector<WorkPiece*> wp_list_;		//!< fifo list for workpieces
-		int con_id_;
-		IState* state_;
+//		vector<int> events_list_;		//!< Event's list the controller is/want to registered to
+//		vector<WorkPiece*> wp_list_;		//!< fifo list for workpieces
+//		int con_id_;
+//		IState* state_;
 		static ControllerSeg3* controllerSeg3_instance_ ;
 		static Mutex controllerSeg3_mutex_; 		//!< Mutex for thread-safe implementation
 

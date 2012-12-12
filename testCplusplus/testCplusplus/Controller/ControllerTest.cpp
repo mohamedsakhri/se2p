@@ -6,15 +6,18 @@
  *
  * @date	 Nov 26, 2012
  *
+ *	Class created to be used in dispatcherTest. The events hander work directly with HALAktorik because the test has to be
+ *	implemented before States machine are implemented.
+ *
  */
 
-#define DISPATCHER_TEST
+#define DEBUG_
 #include "ControllerTest.h"
 
 int ControllerTest::ctr_number_ = 0;
 
-/**
- * Assigne an id to this controller
+/*
+ * Assign an id to this controller
  */
 ControllerTest::ControllerTest() {
 	ctr_id_= ctr_number_++;
@@ -22,10 +25,12 @@ ControllerTest::ControllerTest() {
 	init();
 
 }
+
+/*
+ * Attach to Demultiplexer channel to send error's messages
+ */
 void ControllerTest::init(){
 	demultiplexer_ = Demultiplexer::getInstance();
-
-
 		con_id_ = ConnectAttach(0, 0, demultiplexer_->getChannelId(), _NTO_SIDE_CHANNEL, 0);
 		if (con_id_ == -1) {
 			perror("Controller : ConnectAttach failed : ");
@@ -36,65 +41,97 @@ void ControllerTest::init(){
 #endif
 }
 
+/*
+ * Create Workpiece and add it to FIFO and call appropriate HALAktorik methods
+ */
 void ControllerTest::inEngineStart()
 {
-#ifdef DISPATCHER_TEST
+#ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<< " In Engine Start" << endl;
+#endif
+	WorkPiece* wp;
+	wp = new WorkPiece(1);
+	wp_list_.push_back(wp);
 	hal_aktorik_->motor_on();
 	hal_aktorik_->green_Light_on();
 	hal_aktorik_->red_Light_off();
 	hal_aktorik_->Start_LED_on();
-
-#endif
 }
 
+/*
+ * WP left Line Start
+ */
 void ControllerTest::outEngineStart()
 {
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<< " Out Engine Start" << endl;
+#endif
+
 }
 
 void ControllerTest::inHeightMeasurement()
 {
-#ifdef DISPATCHER_TEST
+#ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<< " : In Height Measurement" << endl;
 #endif
 }
 
 void ControllerTest::outHeightMeasurement()
 {
+#ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId() <<": Out Height Measurement" << endl;
+#endif
 }
 
 void ControllerTest::inToleranceRange()
 {
-#ifdef DISPATCHER_TEST
-	cout << "Controller "<< this->getControllerId()<<": WP in Height's sensor " << endl;
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<": WP in Tolerance range " << endl;
 #endif
+	getLastWP()->setIs_inTolleranceRange(true);
+
 }
 
 void ControllerTest::notInToleranceRange()
 {
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<": WP not in Tolerance range " << endl;
+#endif
 }
 
 void ControllerTest::isMetal()
 {
-#ifdef DISPATCHER_TEST
+#ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<<": WP has Metal : YES " << endl;
 #endif
+	getLastWP()->setIs_Metal(true);
+
 }
 
 void ControllerTest::notMetal()
 {
-#ifdef DISPATCHER_TEST
+#ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<<": WP has Metal : NO " << endl;
 #endif
 }
 
 void ControllerTest::inSwitch()
 {
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<": WP in switch " << endl;
+#endif
+
+	if (getLastWP()->getIs_inTolleranceRange()){
+		hal_aktorik_->open_Switch();
+	}
 }
 
 void ControllerTest::outSwitch()
 {
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<": WP out switch " << endl;
+#endif
+	hal_aktorik_->close_Switch();
 }
 
 void ControllerTest::switchOpen()
@@ -113,83 +150,107 @@ void ControllerTest::inSlide()
 
 void ControllerTest::outSlide()
 {
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<": WP out Slide " << endl;
+#endif
+	removeLastWP();
 }
 
 void ControllerTest::inEngineEnd()
 {
-#ifdef DISPATCHER_TEST
-	cout << "Controller "<< this->getControllerId()<<" : in Line end " << endl;
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<" :WP in Line end " << endl;
+#endif
+	removeLastWP();
 	hal_aktorik_->motor_off();
 	hal_aktorik_->green_Light_off();
 	hal_aktorik_->red_Light_off();
 	hal_aktorik_->close_Switch();
-#endif
 }
 
 void ControllerTest::outEngineEnd()
 {
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<" :WP out Line end " << endl;
+#endif
 }
 
 void ControllerTest::startPressed()
 {
-#ifdef DISPATCHER_TEST
+#ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<<": Start button pressed " << endl;
+#endif
 	hal_aktorik_->motor_on();
 	hal_aktorik_->green_Light_on();
 	hal_aktorik_->red_Light_off();
 	hal_aktorik_->Start_LED_on();
-
-#endif
 }
 
 void ControllerTest::startReleased()
 {
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<": Start button released " << endl;
+#endif
 }
 
 void ControllerTest::stopPressed()
 {
-#ifdef DISPATCHER_TEST
+#ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<<" : Stop button pressed " << endl;
+#endif
 	hal_aktorik_->motor_off();
 	hal_aktorik_->green_Light_off();
 	hal_aktorik_->Start_LED_off();
-	hal_aktorik_->close_Switch();
-	sendMsg2Dispatcher(WP_IS_MISSING);
-#endif
+//	hal_aktorik_->close_Switch();
+//	sendMsg2Dispatcher(WP_IS_MISSING);
 }
 
 void ControllerTest::stopReleased()
 {
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<" : Stop button released " << endl;
+#endif
 }
 
 void ControllerTest::resetPressed()
 {
-#ifdef DISPATCHER_TEST
+#ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<<": Stop button pressed " << endl;
-	hal_aktorik_->motor_off();
-	hal_aktorik_->green_Light_off();
-	hal_aktorik_->Start_LED_off();
-	hal_aktorik_->close_Switch();
-	sendMsg2Dispatcher(WP_IS_MISSING);
+//	sendMsg2Dispatcher(WP_IS_MISSING);
 #endif
 
 }
 
 void ControllerTest::resetReleased()
 {
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<": Stop button released " << endl;
+#endif
 }
 
 void ControllerTest::EStopPressed()
 {
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<":E-Stop button pressed " << endl;
+#endif
+	hal_aktorik_->motor_off();
+	hal_aktorik_->green_Light_off();
+	hal_aktorik_->Start_LED_off();
+	hal_aktorik_->close_Switch();
 }
 
 void ControllerTest::EStopReleased()
 {
+#ifdef DEBUG_
+	cout << "Controller "<< this->getControllerId()<<":E-Stop button released " << endl;
+#endif
 }
 
 void ControllerTest::isMissing()
 {
+#ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<<": WP is missing " << endl;
+#endif
 	hal_aktorik_->red_Light_on();
 	hal_aktorik_->green_Light_off();
 }
@@ -210,9 +271,38 @@ int ControllerTest::sendMsg2Dispatcher(int message){
 	return 0;
 }
 
+/*
+ * @return Cotnroller id
+ */
 int ControllerTest::getControllerId()
 {
 	return ctr_id_;
+}
+
+/**
+ * @return first element in FIFO
+ */
+
+WorkPiece* ControllerTest::getLastWP()
+{
+	return wp_list_.front();
+}
+
+/**
+ * remove first element in FIFO
+ */
+void ControllerTest::removeLastWP()
+{
+	if (!wp_list_.empty()){
+#ifdef DEBUG_
+			cout << "ControlleTest: WP removed" << endl;
+#endif
+		wp_list_.erase(wp_list_.begin());
+	}
+	else{
+		cout << "Fifo is empty " << endl;
+	}
+
 }
 
 /**
@@ -224,14 +314,21 @@ void ControllerTest::addEvent(int event_index)
 }
 
 /**
- * Return al list of events the controller is registered to
+ * Return all list of events the controller is registered to
  */
 vector<int> ControllerTest::getEvents()
 {
 	return events_list_;
 }
 
+/*
+ * Not used here
+ */
+void ControllerTest::passWP2Ctr() {
+
+}
+
 
 ControllerTest::~ControllerTest() {
-	// TODO Auto-generated destructor stub
+
 }

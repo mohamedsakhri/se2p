@@ -1,11 +1,12 @@
 /*
- * @file 	Controller.cpp
+ * @file 	ControllerSeg3.cpp
  *
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
  *
- * @date	 Nov 26, 2012
+ * @date	 Dec 10, 2012
  *
+ * This class represents the controller of the third segment which controls the switch area
  */
 
 #define DISPATCHER_TEST

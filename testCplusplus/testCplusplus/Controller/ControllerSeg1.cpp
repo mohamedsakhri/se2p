@@ -1,11 +1,12 @@
 /*
- * @file 	Controller.cpp
+ * @file 	ControllerSeg1.cpp
  *
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
  *
  * @date	 Nov 26, 2012
  *
+ * This class represents the controller of the first segment which controls the line's start area.
  */
 
 #define DISPATCHER_TEST
@@ -102,7 +103,6 @@ void ControllerSeg1::addWP2List(WorkPiece* wp)
 
 WorkPiece* ControllerSeg1::getLastWP()
 {
-//	return wp_list_.at(wp_list_.size()-1);
 	return wp_list_.front();
 }
 

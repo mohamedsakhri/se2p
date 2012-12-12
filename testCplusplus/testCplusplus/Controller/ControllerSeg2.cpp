@@ -1,11 +1,12 @@
 /*
- * @file 	Controller.cpp
+ * @file 	ControllerSeg2.cpp
  *
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
  *
- * @date	 Nov 26, 2012
+ * @date	 Dec 10, 2012
  *
+ * This class represents the controller of the first segment which controls the height area.
  */
 
 #define DISPATCHER_TEST
@@ -87,46 +88,46 @@ int ControllerSeg2::sendMsg2Dispatcher(int message){
 /**
  * Add an event to controller
  */
-void ControllerSeg2::addEvent(int event_index)
-{
-	events_list_.push_back(event_index);
-}
+//void ControllerSeg2::addEvent(int event_index)
+//{
+//	events_list_.push_back(event_index);
+//}
 
 /**
  * Return al list of events the controller is registered to
  */
-vector<int> ControllerSeg2::getEvents()
-{
-	return events_list_;
-}
+//vector<int> ControllerSeg2::getEvents()
+//{
+//	return events_list_;
+//}
 
-void ControllerSeg2::addWP2List(WorkPiece* wp)
-{
-#ifdef DEBUG_
-	cout << "ControllerSeg2::addWP2List: ID: " << wp->getId() << " TOL: " << wp->getIs_inTolleranceRange() << endl;
-#endif
-	wp_list_.push_back(wp);
-}
+//void ControllerSeg2::addWP2List(WorkPiece* wp)
+//{
+//#ifdef DEBUG_
+//	cout << "ControllerSeg2::addWP2List: ID: " << wp->getId() << " TOL: " << wp->getIs_inTolleranceRange() << endl;
+//#endif
+//	wp_list_.push_back(wp);
+//}
 
-WorkPiece* ControllerSeg2::getLastWP()
-{
-//	return wp_list_.at(wp_list_.size());
-	return wp_list_.front();
-}
+//WorkPiece* ControllerSeg2::getLastWP()
+//{
+////	return wp_list_.at(wp_list_.size());
+//	return wp_list_.front();
+//}
 
 
-void ControllerSeg2::removeLastWP()
-{
-	if (!wp_list_.empty()){
-#ifdef DEBUG_
-			cout << "ControllerSeg2: WP:" << wp_list_.begin()->getId() <<" removed" << endl;
-#endif
-			wp_list_.erase(wp_list_.begin());
-		}
-	else{
-		cout << "fifo in seg2 empty " << endl;
-	}
-}
+//void ControllerSeg2::removeLastWP()
+//{
+//	if (!wp_list_.empty()){
+//#ifdef DEBUG_
+//			cout << "ControllerSeg2: WP:" << wp_list_.begin()->getId() <<" removed" << endl;
+//#endif
+//			wp_list_.erase(wp_list_.begin());
+//		}
+//	else{
+//		cout << "fifo in seg2 empty " << endl;
+//	}
+//}
 
 void ControllerSeg2::passWP2Ctr()
 {
