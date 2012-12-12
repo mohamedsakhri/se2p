@@ -8,9 +8,7 @@
 #ifndef STATELINESTART_H_
 #define STATELINESTART_H_
 
-#include "HALAktorik.h"
 #include "IState.h"
-#include <iostream.h>
 #include "ControllerSeg1.h"
 
 using namespace std;

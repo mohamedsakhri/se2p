@@ -11,6 +11,9 @@
 #ifndef HALCALLINTERFACE_H_
 #define HALCALLINTERFACE_H_
 
+#include <iostream.h>
+#include "Mutex.h"
+#include "Demultiplexer.h"
 #include <vector>
 #include "WorkPiece.h"
 #include "IState.h"
@@ -19,12 +22,12 @@
 
 class HALCallInterface {
 public :											//WP = Workpiece
-	virtual void inEngineStart() {};				//!< WP in engine's start
-	virtual void outEngineStart(){};				//!< WP has left engine's start
-	virtual void inHeightMeasurement(){};			//!< WP is in height measurement area
+	virtual void inLineStart() {};				//!< WP in line's start
+	virtual void outLineStart(){};				//!< WP has left line's start
+	virtual void inHeightMeasurement(){};		//!< WP is in height measurement area
 	virtual void outHeightMeasurement(){};		//!< WP has left height measurement area
 	virtual void inToleranceRange(){};			//!< WP's height is in tolerance range
-	virtual void notInToleranceRange(){};			//!< WP's height is not in tolerance range
+	virtual void notInToleranceRange(){};		//!< WP's height is not in tolerance range
 	virtual void isMetal(){};						//!< WP has metal
 	virtual void notMetal(){};					//!< WP doesn't have metal
 	virtual void inSwitch(){};					//!< WP is in switch area
@@ -33,8 +36,8 @@ public :											//WP = Workpiece
 	virtual void switchClosed(){};				//!< Switch has been closed
 	virtual void inSlide(){};						//!< WP is in Slide's barrier (Rutsche)
 	virtual void outSlide(){};					//!< WP out Slide's light barrier
-	virtual void inEngineEnd(){};				//!< WP is in engine's end
-	virtual void outEngineEnd(){};				//!< WP has left engine's end
+	virtual void inLineEnd(){};					//!< WP is in line's end
+	virtual void outLineEnd(){};					//!< WP has left line's end
 
 	virtual void startPressed(){};
 	virtual void startReleased(){};
@@ -46,6 +49,7 @@ public :											//WP = Workpiece
 	virtual void EStopReleased(){};
 
 	virtual void isMissing(){};
+
 	/**
 	 * @param even_index Id of event the controller want to register to
 	 */
@@ -66,11 +70,18 @@ public :											//WP = Workpiece
 	virtual void addWP2List(WorkPiece* wp) {
 		wp_list_.push_back(wp);
 	};
-	virtual WorkPiece* getLastWP() {
+
+	/**
+	 * @return first WP in Fifo
+	 */
+	virtual WorkPiece* getFirstWP() {
 		return wp_list_.front();
 	}
 
-	virtual void removeLastWP() {
+	/**
+	 * Remove first element from Fifo
+	 */
+	virtual void removeFirsttWP() {
 		if (!wp_list_.empty()){
 			wp_list_.erase(wp_list_.begin());
 			}
@@ -78,12 +89,14 @@ public :											//WP = Workpiece
 			cout << "Fifo is empty " << endl;
 		}
 	};
-	virtual void passWP2Ctr(){};
+
+	virtual void passWP2Ctr() = 0;	//!< Pass WP to next controller
 protected :
-	vector<int> events_list_;		//!< Event's list the controller is/want to registered to
-	vector<WorkPiece*> wp_list_;		//!< fifo list for workpieces
-	int con_id_;
-	IState* state_;
+	vector<int> events_list_;			//!< Event's list the controller is/want to registered to
+	vector<WorkPiece*> wp_list_;		//!< Fifo as list of pointers to workpieces
+	int con_id_;						//!< Connection Id to Demultiplexer Channel
+	int ctr_id_;
+	IState* state_;						//!< State machine
 };
 
 #endif //HALCALLINTERFACE_H_

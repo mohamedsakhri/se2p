@@ -21,9 +21,9 @@
 //#define LIGHT_TEST
 //#define SER_INTERFACE_TEST
 //#define SENSORIC_TEST
-#define DISPATCHER_TEST
+//#define DISPATCHER_TEST
 //#define DEBUG_MUTEX
-//#define STATE_TEST
+#define STATE_TEST
 
 
 #include "HWaccess.h"

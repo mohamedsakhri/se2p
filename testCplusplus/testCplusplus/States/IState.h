@@ -12,11 +12,10 @@
 #define ISTATE_H_
 
 //#include "HALCallInterface.h"
+
+#include <iostream>
 #include "HALAktorik.h"
 #include "WorkPiece.h"
-#include <iostream>
-
-class HALCallInterface;
 
 class IState {
 public :

@@ -11,8 +11,8 @@
 
 #define DISPATCHER_TEST
 //#define DEBUG_
-#include "ControllerSeg1.h"
 
+#include "ControllerSeg1.h"
 
 Mutex ControllerSeg1::controllerSeg1_mutex_ = Mutex();
 ControllerSeg1* ControllerSeg1::controllerSeg1_instance_ = NULL ;
@@ -51,14 +51,18 @@ void ControllerSeg1::init(){
 #endif
 }
 
-
-
-void ControllerSeg1::inEngineStart()
+/**
+ *
+ */
+void ControllerSeg1::inLineStart()
 {
 	state_->inLineStart();
 }
 
-void ControllerSeg1::outEngineStart()
+/**
+ *
+ */
+void ControllerSeg1::outLineStart()
 {
 	state_->outLineStart();
 }
@@ -81,54 +85,18 @@ int ControllerSeg1::sendMsg2Dispatcher(int message){
 }
 
 /**
- * Add an event to controller
+ * Pass a workpiece from a segment to the next one
  */
-void ControllerSeg1::addEvent(int event_index)
-{
-	events_list_.push_back(event_index);
-}
-
-/**
- * Return al list of events the controller is registered to
- */
-vector<int> ControllerSeg1::getEvents()
-{
-	return events_list_;
-}
-
-void ControllerSeg1::addWP2List(WorkPiece* wp)
-{
-	wp_list_.push_back(wp);
-}
-
-WorkPiece* ControllerSeg1::getLastWP()
-{
-	return wp_list_.front();
-}
-
-
-void ControllerSeg1::removeLastWP()
-{
-	if (!wp_list_.empty()){
-#ifdef DEBUG_
-			cout << "ControllerSeg1: WP:" << wp_list_.begin()->getId() <<" removed" << endl;
-#endif
-		wp_list_.erase(wp_list_.begin());
-	}
-	else{
-		cout << "fifo in seg1 empty " << endl;
-	}
-
-}
-
 // in case of problem : remove it and use addWP2List directely from state
 void ControllerSeg1::passWP2Ctr()
 {
-	cout << "ControllerSeg1::passWP2Ctr: ID: " << getLastWP()->getId() << " TOL: " << getLastWP()->getIs_inTolleranceRange() << endl;
-	ControllerSeg2::getInstance()->addWP2List(this->getLastWP());
+	cout << "ControllerSeg1::passWP2Ctr: ID: " << getFirstWP()->getId() << " TOL: " << getFirstWP()->getIs_inTolleranceRange() << endl;
+	ControllerSeg2::getInstance()->addWP2List(this->getFirstWP());
 }
 
-
+/**
+ * Delete instance of IState
+ */
 ControllerSeg1::~ControllerSeg1()
 {
 	delete state_;

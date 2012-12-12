@@ -12,6 +12,7 @@
  */
 
 #define DEBUG_
+
 #include "ControllerTest.h"
 
 int ControllerTest::ctr_number_ = 0;
@@ -44,7 +45,7 @@ void ControllerTest::init(){
 /*
  * Create Workpiece and add it to FIFO and call appropriate HALAktorik methods
  */
-void ControllerTest::inEngineStart()
+void ControllerTest::inLineStart()
 {
 #ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<< " In Engine Start" << endl;
@@ -61,7 +62,7 @@ void ControllerTest::inEngineStart()
 /*
  * WP left Line Start
  */
-void ControllerTest::outEngineStart()
+void ControllerTest::outLineStart()
 {
 #ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<< " Out Engine Start" << endl;
@@ -88,7 +89,7 @@ void ControllerTest::inToleranceRange()
 #ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<<": WP in Tolerance range " << endl;
 #endif
-	getLastWP()->setIs_inTolleranceRange(true);
+	getFirstWP()->setIs_inTolleranceRange(true);
 
 }
 
@@ -104,7 +105,7 @@ void ControllerTest::isMetal()
 #ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<<": WP has Metal : YES " << endl;
 #endif
-	getLastWP()->setIs_Metal(true);
+	getFirstWP()->setIs_Metal(true);
 
 }
 
@@ -121,7 +122,7 @@ void ControllerTest::inSwitch()
 	cout << "Controller "<< this->getControllerId()<<": WP in switch " << endl;
 #endif
 
-	if (getLastWP()->getIs_inTolleranceRange()){
+	if (getFirstWP()->getIs_inTolleranceRange()){
 		hal_aktorik_->open_Switch();
 	}
 }
@@ -153,22 +154,22 @@ void ControllerTest::outSlide()
 #ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<<": WP out Slide " << endl;
 #endif
-	removeLastWP();
+	removeFirsttWP();
 }
 
-void ControllerTest::inEngineEnd()
+void ControllerTest::inLineEnd()
 {
 #ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<<" :WP in Line end " << endl;
 #endif
-	removeLastWP();
+	removeFirsttWP();
 	hal_aktorik_->motor_off();
 	hal_aktorik_->green_Light_off();
 	hal_aktorik_->red_Light_off();
 	hal_aktorik_->close_Switch();
 }
 
-void ControllerTest::outEngineEnd()
+void ControllerTest::outLineEnd()
 {
 #ifdef DEBUG_
 	cout << "Controller "<< this->getControllerId()<<" :WP out Line end " << endl;
@@ -279,48 +280,6 @@ int ControllerTest::getControllerId()
 	return ctr_id_;
 }
 
-/**
- * @return first element in FIFO
- */
-
-WorkPiece* ControllerTest::getLastWP()
-{
-	return wp_list_.front();
-}
-
-/**
- * remove first element in FIFO
- */
-void ControllerTest::removeLastWP()
-{
-	if (!wp_list_.empty()){
-#ifdef DEBUG_
-			cout << "ControlleTest: WP removed" << endl;
-#endif
-		wp_list_.erase(wp_list_.begin());
-	}
-	else{
-		cout << "Fifo is empty " << endl;
-	}
-
-}
-
-/**
- * Add an event to controller
- */
-void ControllerTest::addEvent(int event_index)
-{
-	events_list_.push_back(event_index);
-}
-
-/**
- * Return all list of events the controller is registered to
- */
-vector<int> ControllerTest::getEvents()
-{
-	return events_list_;
-}
-
 /*
  * Not used here
  */
@@ -328,7 +287,9 @@ void ControllerTest::passWP2Ctr() {
 
 }
 
-
+/**
+ * Nothing to do !
+ */
 ControllerTest::~ControllerTest() {
 
 }

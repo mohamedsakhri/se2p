@@ -9,8 +9,6 @@
 #define STATEHEIGHT_H_
 
 #include "IState.h"
-#include "HALAktorik.h"
-#include <iostream>
 #include "ControllerSeg2.h"
 
 //class ControllerSeg2;

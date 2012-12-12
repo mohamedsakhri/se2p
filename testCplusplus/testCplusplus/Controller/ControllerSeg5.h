@@ -9,31 +9,31 @@
  * This class represents the controller of the third segment which controls the switch area
  */
 
-#ifndef CONTROLLERSEG3_H_
-#define CONTROLLERSEG3_H_
+#ifndef CONTROLLERSEG5_H_
+#define CONTROLLERSEG5_H_
 
 #include "HALCallInterface.h"
 #include "WaitingSwitch.h"
 
-class ControllerSeg3: public HALCallInterface {
+class ControllerSeg5: public HALCallInterface {
 public:
-	static ControllerSeg3* getInstance();
+	static ControllerSeg5* getInstance();
 
-	void inSwitch();
-	void outSwitch();
+	void inLineEnd();
+	void outLineEnd();
 
 	// Error's handling
 	int sendMsg2Dispatcher(int message);
 	void init();
 	void passWP2Ctr();
 
-	virtual ~ControllerSeg3();
+	virtual ~ControllerSeg5();
 
 private:
-	ControllerSeg3();
+	ControllerSeg5();
 
-	static ControllerSeg3* controllerSeg3_instance_;
-	static Mutex controllerSeg3_mutex_; //!< Mutex for thread-safe implementation
+	static ControllerSeg5* controllerSeg5_instance_;
+	static Mutex controllerSeg5_mutex_; //!< Mutex for thread-safe implementation
 };
 
-#endif /* CONTROLLERSEG3_H_ */
+#endif /* CONTROLLERSEG5_H_ */

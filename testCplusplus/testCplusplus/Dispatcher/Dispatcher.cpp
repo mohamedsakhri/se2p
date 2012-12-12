@@ -40,8 +40,8 @@ Dispatcher::Dispatcher() {
 */
 void Dispatcher::initPt2FuncArray () {
 	// Not all entries are defined and used now. This is just the Sensoric's part
-	pt2FuncArray[WP_IN_ENGINE_START] 	= &HALCallInterface::inEngineStart;
-	pt2FuncArray[WP_OUT_ENGINE_START] 	= &HALCallInterface::outEngineStart;
+	pt2FuncArray[WP_IN_ENGINE_START] 	= &HALCallInterface::inLineStart;
+	pt2FuncArray[WP_OUT_ENGINE_START] 	= &HALCallInterface::outLineStart;
 	pt2FuncArray[WP_IN_HEIGHT_M] 		= &HALCallInterface::inHeightMeasurement;
 	pt2FuncArray[WP_OUT_HEIGHT_M] 		= &HALCallInterface::outHeightMeasurement;
 	pt2FuncArray[WP_IN_TOLERANCE_R] 	= &HALCallInterface::inToleranceRange;
@@ -54,8 +54,8 @@ void Dispatcher::initPt2FuncArray () {
 	pt2FuncArray[SWITCH_IS_CLOSED] 		= &HALCallInterface::switchClosed;
 	pt2FuncArray[WP_IN_SLIDE] 			= &HALCallInterface::inSlide;
 	pt2FuncArray[WP_OUT_SLIDE] 			= &HALCallInterface::outSlide;
-	pt2FuncArray[WP_IN_ENGINE_END] 		= &HALCallInterface::inEngineEnd;
-	pt2FuncArray[WP_OUT_ENGINE_END] 	= &HALCallInterface::outEngineEnd;
+	pt2FuncArray[WP_IN_ENGINE_END] 		= &HALCallInterface::inLineEnd;
+	pt2FuncArray[WP_OUT_ENGINE_END] 	= &HALCallInterface::outLineEnd;
 
 	pt2FuncArray[START_PRESSED]			= &HALCallInterface::startPressed;
 	pt2FuncArray[START_RELEASED]		= &HALCallInterface::startReleased;

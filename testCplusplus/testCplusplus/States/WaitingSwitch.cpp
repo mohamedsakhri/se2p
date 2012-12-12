@@ -24,8 +24,8 @@ WaitingSwitch::~WaitingSwitch()
 
 void WaitingSwitch::inSwitch()
 {
-//	WorkPiece wp = ControllerSeg3::getInstance()->getLastWP();
-	if(ControllerSeg3::getInstance()->getLastWP()->getIs_inTolleranceRange() && ControllerSeg3::getInstance()->getLastWP() != NULL)
+//	WorkPiece wp = ControllerSeg3::getInstance()->getFirstWP();
+	if(ControllerSeg3::getInstance()->getFirstWP()->getIs_inTolleranceRange())
 	{
 		HALAktorik::getInstance()->open_Switch();
 		new (this) WorkPieceValid();
@@ -54,7 +54,7 @@ WorkPieceInvalid::~WorkPieceInvalid()
 
 void WorkPieceInvalid::outSwitch()
 {
-	ControllerSeg3::getInstance()->removeLastWP();
+	ControllerSeg3::getInstance()->removeFirsttWP();
 	new (this) WaitingSwitch();
 }
 
@@ -77,7 +77,7 @@ WorkPieceValid::~WorkPieceValid()
 void WorkPieceValid::outSwitch()
 {
 	cout << "close switch" << endl;
-	ControllerSeg3::getInstance()->removeLastWP();
+	ControllerSeg3::getInstance()->removeFirsttWP();
 	HALAktorik::getInstance()->close_Switch();
 	new (this) WaitingSwitch();
 }

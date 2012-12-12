@@ -50,7 +50,7 @@ void StateWorkPieceCreated::outLineStart(){
 	#endif
 	// Start timer ??
 	ControllerSeg1::getInstance()->passWP2Ctr();
-	ControllerSeg1::getInstance()->removeLastWP();
+	ControllerSeg1::getInstance()->removeFirsttWP();
 
 	new (this) StateLineStart();
 	cout << "StateWorkPieceCreated->outLineStart END" << endl;

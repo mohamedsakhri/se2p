@@ -12,15 +12,8 @@
 #ifndef CONTROLLERSEG2_H_
 #define CONTROLLERSEG2_H_
 
-#include <iostream.h>
 #include "HALCallInterface.h"
-//#include <vector>
-#include "Dispatcher.h"
-#include "Demultiplexer.h"
-//#include "IState.h"
-#include "WorkPiece.h"
 #include "StateHeight.h"
-#include "Mutex.h"
 #include "ControllerSeg3.h"
 
 class ControllerSeg2: public HALCallInterface {
@@ -32,33 +25,18 @@ public:
 	void inToleranceRange();
 	void notInToleranceRange();
 
-	//TODO COMMENT
-		// Error's handling
-		int sendMsg2Dispatcher(int message);
-		void init();
+	// Error's handling
+	int sendMsg2Dispatcher(int message);
+	void init();
+	void passWP2Ctr();
 
-		virtual ~ControllerSeg2();
+	virtual ~ControllerSeg2();
 
-//		void addEvent(int event_index);
-//		vector<int> getEvents();
+private:
+	ControllerSeg2();
 
-		//FIFO Control
-//		void addWP2List(WorkPiece* wp);
-//		WorkPiece* getLastWP();
-//		void removeLastWP();
-		void passWP2Ctr();
-
-	private:
-		ControllerSeg2();
-
-//		vector<int> events_list_;		//!< Event's list the controller is/want to registered to
-//		vector<WorkPiece*> wp_list_;		//!< fifo list for workpieces
-//		int con_id_;
-//		IState* state_;
-		static ControllerSeg2* controllerSeg2_instance_ ;
-		static Mutex controllerSeg2_mutex_; 		//!< Mutex for thread-safe implementation
-
-
-	};
+	static ControllerSeg2* controllerSeg2_instance_;
+	static Mutex controllerSeg2_mutex_; //!< Mutex for thread-safe implementation
+};
 
 #endif /* CONTROLLERSEG2_H_ */

@@ -9,8 +9,6 @@
 #define WAITINGSWITCH_H_
 
 #include "IState.h"
-#include "HALAktorik.h"
-#include <iostream>
 #include "ControllerSeg3.h"
 
 using namespace std;

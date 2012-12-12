@@ -34,9 +34,9 @@ void WaitingHeightM1::inToleranceRange(){
 	cout << "WaitingHeightM1->inToleranceRange" << endl;
 #endif
 	//TODO WP's Id !!
-	(ControllerSeg2::getInstance()->getLastWP())->setIs_inTolleranceRange(true);
-	cout << "get inTol after set inTol to true: " << ControllerSeg2::getInstance()->getLastWP()->getIs_inTolleranceRange() <<
-			" WP: " <<  (ControllerSeg2::getInstance()->getLastWP())->getId() << endl;
+	(ControllerSeg2::getInstance()->getFirstWP())->setIs_inTolleranceRange(true);
+	cout << "get inTol after set inTol to true: " << ControllerSeg2::getInstance()->getFirstWP()->getIs_inTolleranceRange() <<
+			" WP: " <<  (ControllerSeg2::getInstance()->getFirstWP())->getId() << endl;
 
 	new (this) CheckDrill();
 }
@@ -57,7 +57,7 @@ void TooSmall::outHeightMeasurement(){
 
 	//timer ??
 	ControllerSeg2::getInstance()->passWP2Ctr();
-	ControllerSeg2::getInstance()->removeLastWP();
+	ControllerSeg2::getInstance()->removeFirsttWP();
 	new (this) WaitingHeightM1();
 }
 
@@ -75,7 +75,7 @@ void CheckDrill::inHeightMeasurement(){
 #ifdef DEBUG_
 	cout << "CheckDrill::inHeightMeasurement" << endl;
 #endif
-	ControllerSeg2::getInstance()->getLastWP()->setHas_Drill(false);
+	ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(false);
 	new (this) DrillChecked();
 }
 
@@ -84,7 +84,7 @@ void CheckDrill::notInToleranceRange(){
 #ifdef DEBUG_
 	cout << "CheckDrill::notInToleranceRange " << endl;
 #endif
-	ControllerSeg2::getInstance()->getLastWP()->setHas_Drill(true);
+	ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(true);
 	new (this) DrillChecked();
 }
 
@@ -107,6 +107,6 @@ void DrillChecked::outHeightMeasurement(){
 
 	// timer !!
 	ControllerSeg2::getInstance()->passWP2Ctr();
-	ControllerSeg2::getInstance()->removeLastWP();
+	ControllerSeg2::getInstance()->removeFirsttWP();
 	new (this) WaitingHeightM1();
 }

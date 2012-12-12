@@ -11,6 +11,7 @@
 
 #define DISPATCHER_TEST
 #define DEBUG_
+
 #include "ControllerSeg3.h"
 
 Mutex ControllerSeg3::controllerSeg3_mutex_ = Mutex();
@@ -76,52 +77,11 @@ int ControllerSeg3::sendMsg2Dispatcher(int message){
 }
 
 /**
- * Add an event to controller
+ * Pass a workpiece from a segment to the next one
  */
-void ControllerSeg3::addEvent(int event_index)
-{
-	events_list_.push_back(event_index);
-}
-
-/**
- * Return al list of events the controller is registered to
- */
-vector<int> ControllerSeg3::getEvents()
-{
-	return events_list_;
-}
-
-void ControllerSeg3::addWP2List(WorkPiece* wp)
-{
-#ifdef DEBUG_
-	cout << "ControllerSeg3::addWP2List: ID: " << wp->getId() << " TOL: " << wp->getIs_inTolleranceRange() << endl;
-#endif
-	wp_list_.push_back(wp);
-}
-
-WorkPiece* ControllerSeg3::getLastWP()
-{
-//	return wp_list_.at(wp_list_.size());
-	return wp_list_.front();
-}
-
-
-void ControllerSeg3::removeLastWP()
-{
-	if (!wp_list_.empty()){
-#ifdef DEBUG_
-			cout << "ControllerSeg3: WP: removed" << endl;
-#endif
-			wp_list_.erase(wp_list_.begin());
-		}
-	else{
-		cout << "fifo in seg3 empty " << endl;
-	}
-}
-
 void ControllerSeg3::passWP2Ctr()
 {
-//	ControllerSeg5::getInstance()->addWP2List(getLastWP());
+//	ControllerSeg5::getInstance()->addWP2List(getFirstWP());
 }
 
 

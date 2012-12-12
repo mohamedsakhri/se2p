@@ -9,8 +9,9 @@
  * This class represents a Workpiece.
  */
 
-#include "WorkPiece.h"
 #include <iostream.h>
+#include "WorkPiece.h"
+
 
 /**
  * Set workpiece's attribut to default values

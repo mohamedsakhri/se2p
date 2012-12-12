@@ -14,20 +14,16 @@
 #ifndef CONTROLLERTEST_H_
 #define CONTROLLERTEST_H_
 
-#include <iostream.h>
 #include "HALCallInterface.h"
-#include <vector>
 #include "HALAktorik.h"
 #include "Dispatcher.h"
-#include "Demultiplexer.h"
-#include "WorkPiece.h"
 
 class ControllerTest: public HALCallInterface {
 public:
 	ControllerTest();
 
-	void inEngineStart();
-	void outEngineStart();
+	void inLineStart();
+	void outLineStart();
 	void inHeightMeasurement();
 	void outHeightMeasurement();
 	void inToleranceRange();
@@ -40,8 +36,8 @@ public:
 	void switchClosed();
 	void inSlide();
 	void outSlide();
-	void inEngineEnd();
-	void outEngineEnd();
+	void inLineEnd();
+	void outLineEnd();
 
 	void startPressed();
 	void startReleased();
@@ -57,24 +53,16 @@ public:
 	int sendMsg2Dispatcher(int message);
 	void init();
 
-	WorkPiece* getLastWP();
-	void removeLastWP();
 	int getControllerId();
-	void addEvent(int event_index);
-	vector<int> getEvents();
-
 	void passWP2Ctr();
+
 	virtual ~ControllerTest();
 
 private:
 	static int ctr_number_;		//!< Controller's number. Needed to assign an id to each new one
-	int ctr_id_;					//!< Controller id
-//	vector<int> events_list_;		//!< Event's list the controller is/want to registered to
-//	vector<WorkPiece*> wp_list_;		//!< fifo list for workpieces
 	// HALaktoric's instance now just for Dispatcher test
 	HALAktorik* hal_aktorik_;
 	Dispatcher* dispatcher_;
-	int con_id_;
 	Demultiplexer* demultiplexer_;
 };
 
