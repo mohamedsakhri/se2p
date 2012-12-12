@@ -22,10 +22,6 @@ public:
 
 	void inSlide();
 	void outSlide();
-	void startPressed();
-	void stopPressed();
-	void EStopPressed();
-	void EStopReleased();
 
 	// Error's handling
 	int sendMsg2Dispatcher(int message);

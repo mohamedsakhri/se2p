@@ -27,16 +27,24 @@ WaitLineEndM1::WaitLineEndM1()
 #endif
 }
 
-void WaitLineEndM1::inLineEnd()
-{
-	if (ControllerSeg5::getInstance()->getFirstWP()->getHas_Drill()) {
-		new (this) TransferMachine2();
-	} else {
-		HALAktorik::getInstance()->yellow_Light_on();
-		HALAktorik::getInstance()->motor_off();
-		HALAktorik::getInstance()->green_Light_off();
+void WaitLineEndM1::inLineEnd() {
+	if (!ControllerSeg5::getInstance()->isFifoEmpty()) {
+		if (ControllerSeg5::getInstance()->getFirstWP()->getHas_Drill()) {
+			new (this) TransferMachine2();
+		} else {
+			HALAktorik::getInstance()->yellow_Light_on();
+			HALAktorik::getInstance()->motor_off();
+			HALAktorik::getInstance()->green_Light_off();
 
-		new (this) WaitForTurn();
+			new (this) WaitForTurn();
+		}
+	} else {
+		//TODO  just send msg and let controller do the rest according to the error event handler
+		ControllerSeg5::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
+		HALAktorik::getInstance()->motor_off();
+		HALAktorik::getInstance()->red_Light_on();
+		HALAktorik::getInstance()->green_Light_off();
+		HALAktorik::getInstance()->yellow_Light_off();
 	}
 
 }
@@ -78,7 +86,7 @@ Turning::Turning()
 #endif
 }
 
-void Turning::inEndLine()
+void Turning::inLineEnd()
 {
 	new (this) TransferMachine2();
 }
@@ -97,11 +105,15 @@ TransferMachine2::TransferMachine2()
 #ifdef DEBUG_
 	cout << "TransferMachine2 Start constructor" << endl;
 #endif
+	this->messageReceived();
 }
 
 void TransferMachine2::messageReceived()
 {
-//TODO  communicate with machine 2
+//TODO  communicate with machine 2+
+	HALAktorik::getInstance()->motor_on();
+	HALAktorik::getInstance()->yellow_Light_off();
+	HALAktorik::getInstance()->green_Light_on();
 	new (this) Machine2Ready();
 }
 
@@ -141,16 +153,19 @@ Machine2Ready::Machine2Ready()
 #endif
 }
 
-void Machine2Ready::outEndLine()
+//TODO has to be changed. Just for get things in M! now
+void Machine2Ready::outLineEnd()
 {
+	ControllerSeg5::getInstance()->removeFirsttWP();
 	if (ControllerSeg1::getInstance()->isFifoEmpty()
-			&& ControllerSeg2::getInstance()->isFifoEmpty()
-			&& ControllerSeg3::getInstance()->isFifoEmpty()
-			&& ControllerSeg5::getInstance()->isFifoEmpty())
-	{
-		HALAktorik::getInstance()->stop_Motor();
-	}
-
+			&&ControllerSeg2::getInstance()->isFifoEmpty()
+			&&ControllerSeg3::getInstance()->isFifoEmpty()
+			&&ControllerSeg4::getInstance()->isFifoEmpty()
+			&&ControllerSeg5::getInstance()->isFifoEmpty())
+			{
+				HALAktorik::getInstance()->motor_off();
+			}
+	new (this) WaitLineEndM1();
 }
 
 Machine2Ready::~Machine2Ready()

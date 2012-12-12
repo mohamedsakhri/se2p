@@ -21,6 +21,7 @@ WorkPiece::WorkPiece(int id) {
 	is_Metal_ = false;
 	is_inTolleranceRange_ = false;
 	has_Drill_ = false;
+	tol_counter_ = 0;
 }
 
 /**
@@ -83,4 +84,16 @@ void WorkPiece::setHas_Drill(bool hasDrill)
 bool WorkPiece::getHas_Drill()
 {
     return this->has_Drill_;
+}
+
+int WorkPiece::getTolCounter(){
+	return tol_counter_;
+}
+
+void WorkPiece::incTolCounter(){
+	tol_counter_++;
+}
+
+void WorkPiece::resetTolCounter(){
+	tol_counter_ = 0;
 }

@@ -12,7 +12,7 @@
 
 #include "SegSlide.h"
 
-
+//#define DEBUG_
 /************************************************************************************
  *									SlideWait										*
  *																					*
@@ -49,18 +49,17 @@ InSlide::InSlide()
 #endif
 }
 
-void InSlide::outSlide()
-{
+void InSlide::outSlide() {
 	delete ControllerSeg4::getInstance()->getFirstWP();
 	ControllerSeg4::getInstance()->removeFirsttWP();
 	if (ControllerSeg1::getInstance()->isFifoEmpty()
 			&& ControllerSeg2::getInstance()->isFifoEmpty()
 			&& ControllerSeg3::getInstance()->isFifoEmpty()
-			&& ControllerSeg5::getInstance()->isFifoEmpty())
-	{
-		HALAktorik::getInstance()->stop_Motor();
-	}
+			&& ControllerSeg4::getInstance()->isFifoEmpty()
+			&& ControllerSeg5::getInstance()->isFifoEmpty()) {
 
+		HALAktorik::getInstance()->motor_off();
+	}
 	new (this) SlideWait();
 }
 

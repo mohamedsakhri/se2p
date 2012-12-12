@@ -40,13 +40,28 @@ public :											//WP = Workpiece
 	virtual void inLineEnd(){};					//!< WP is in line's end
 	virtual void outLineEnd(){};					//!< WP has left line's end
 
-	virtual void startPressed(){};
+	virtual void startPressed(){
+		HALAktorik::getInstance()->motor_on();
+		HALAktorik::getInstance()->red_Light_off();
+		HALAktorik::getInstance()->green_Light_on();
+		HALAktorik::getInstance()->yellow_Light_off();
+		HALAktorik::getInstance()->Start_LED_on();
+	};
 	virtual void startReleased(){};
-	virtual void stopPressed(){};
+	virtual void stopPressed(){
+		HALAktorik::getInstance()->motor_off();
+		HALAktorik::getInstance()->red_Light_off();
+		HALAktorik::getInstance()->green_Light_off();
+		HALAktorik::getInstance()->yellow_Light_off();
+		HALAktorik::getInstance()->Start_LED_off();
+	};
 	virtual void stopReleased(){};
 	virtual void resetPressed(){};
 	virtual void resetReleased(){};
-	virtual void EStopPressed(){};
+	virtual void EStopPressed(){
+		HALAktorik::getInstance()->motor_off();
+		HALAktorik::getInstance()->Start_LED_off();
+	};
 	virtual void EStopReleased(){};
 
 	virtual void isMissing(){};

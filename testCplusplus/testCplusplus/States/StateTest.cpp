@@ -35,6 +35,8 @@ void StateTest::execute(void *arg)
 	ctr1->addEvent(WP_OUT_ENGINE_START);
 	ctr1->addEvent(START_PRESSED);
 	ctr1->addEvent(STOP_PRESSED);
+	ctr1->addEvent(E_STOP_PRESSED);
+	ctr1->addEvent(E_STOP_RELEASED);
 
 	ctr2->addEvent(WP_IN_HEIGHT_M);
 	ctr2->addEvent(WP_OUT_HEIGHT_M);
@@ -42,21 +44,36 @@ void StateTest::execute(void *arg)
 	ctr2->addEvent(WP_NOT_IN_TOLERANCE_R);
 	ctr2->addEvent(START_PRESSED);
 	ctr2->addEvent(STOP_PRESSED);
+	ctr2->addEvent(E_STOP_PRESSED);
+	ctr2->addEvent(E_STOP_RELEASED);
+
 
 	ctr3->addEvent(WP_IN_SWITCH);
 	ctr3->addEvent(WP_OUT_SWITCH);
+	ctr3->addEvent(START_PRESSED);
 	ctr3->addEvent(STOP_PRESSED);
-	ctr3->addEvent(STOP_PRESSED);
+	ctr3->addEvent(E_STOP_PRESSED);
+	ctr3->addEvent(E_STOP_RELEASED);
+
 
 	ctr4->addEvent(WP_IN_SLIDE);
 	ctr4->addEvent(WP_OUT_SLIDE);
 	ctr4->addEvent(START_PRESSED);
 	ctr4->addEvent(STOP_PRESSED);
+	ctr4->addEvent(E_STOP_PRESSED);
+	ctr4->addEvent(E_STOP_RELEASED);
+
 
 	ctr5->addEvent(WP_IN_ENGINE_END);
 	ctr5->addEvent(WP_OUT_ENGINE_END);
 	ctr5->addEvent(START_PRESSED);
 	ctr5->addEvent(STOP_PRESSED);
+	ctr5->addEvent(E_STOP_PRESSED);
+	ctr5->addEvent(E_STOP_RELEASED);
+
+
+//	ctr3->addEvent(STOP_PRESSED);
+
 
 	// Register Controllers for some events
 	dispatcher_->registerHandler(ctr1);

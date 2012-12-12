@@ -12,7 +12,7 @@
 
 
 #include "SegLineStart.h"
-#define DEBUG_
+//#define DEBUG_
 
 
 /************************************************************************************
@@ -33,14 +33,13 @@ void StateLineStart::inLineStart()
 	//TODO check if the WP id is needed
 	WorkPiece* wp = new WorkPiece(1) ;
 	ControllerSeg1::getInstance()->addWP2List(wp);
-	// don't start if WP in line's end waiting to be turned or machine 2 to become ready
-	if (ControllerSeg5::getInstance()->isFifoEmpty()) {
-		//TODO test if the motor have to be started
+	//TODO test if the motor have to be started
+	if (ControllerSeg5::getInstance()->isFifoEmpty()){
 		HALAktorik::getInstance()->motor_on();
 		HALAktorik::getInstance()->green_Light_on();
 	}
-
 	new (this) StateWorkPieceCreated();
+
 }
 
 StateLineStart::~StateLineStart() {

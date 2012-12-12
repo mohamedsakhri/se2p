@@ -14,11 +14,11 @@
 #define SEGLINEEND_H_
 
 #include "IState.h"
-#include "ControllerSeg5.h"
 #include "ControllerSeg1.h"
 #include "ControllerSeg2.h"
 #include "ControllerSeg3.h"
 #include "ControllerSeg4.h"
+#include "ControllerSeg5.h"
 
 
 using namespace std;
@@ -64,7 +64,7 @@ public:
 	Turning();
 	virtual ~Turning();
 
-	void inEndLine();
+	void inLineEnd();
 };
 
 /*
@@ -87,7 +87,7 @@ public:
 	Machine2Ready();
 	virtual ~Machine2Ready();
 
-	void outEndLine();
+	void outLineEnd();
 };
 
 

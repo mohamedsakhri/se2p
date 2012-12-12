@@ -61,37 +61,6 @@ void ControllerSeg3::outSwitch()
 	state_->outSwitch();
 }
 
-//TODO to be updated for Error handling
-void ControllerSeg3::startPressed() {
-	HALAktorik::getInstance()->motor_on();
-	HALAktorik::getInstance()->red_Light_off();
-	HALAktorik::getInstance()->yellow_Light_off();
-	HALAktorik::getInstance()->green_Light_on();
-	HALAktorik::getInstance()->Start_LED_on();
-
-}
-
-//TODO to be updated for Error handling
-void ControllerSeg3::stopPressed() {
-	HALAktorik::getInstance()->motor_off();
-	HALAktorik::getInstance()->red_Light_off();
-	HALAktorik::getInstance()->yellow_Light_off();
-	HALAktorik::getInstance()->green_Light_off();
-	HALAktorik::getInstance()->Start_LED_off();
-}
-
-
-//TODO to be updated for Error handling
-void ControllerSeg3::EStopPressed() {
-	HALAktorik::getInstance()->motor_off();
-	HALAktorik::getInstance()->Reset_LED_on();
-}
-
-//TODO to be updated for Error handling
-void ControllerSeg3::EStopReleased() {
-	HALAktorik::getInstance()->Reset_LED_off();
-}
-
 /**
  * Send a message to Dispatcher
  */

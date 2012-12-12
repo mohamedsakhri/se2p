@@ -40,20 +40,20 @@ public:
 	CheckDrill();
 	virtual ~CheckDrill();
 
-	void inHeightMeasurement();
-	void notInToleranceRange();
+	void outHeightMeasurement();
+	void inToleranceRange();
 };
 
 /*
  *
  */
-class DrillChecked: public IState{
-public:
-	DrillChecked();
-	virtual ~DrillChecked();
-
-	void outHeightMeasurement();
-};
+//class DrillChecked: public IState{
+//public:
+//	DrillChecked();
+//	virtual ~DrillChecked();
+//
+//	void outHeightMeasurement();
+//};
 
 /*
  *

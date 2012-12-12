@@ -42,6 +42,9 @@ void WaitingHeightM1::inToleranceRange(){
 #endif
 	//TODO WP's Id !!
 	(ControllerSeg2::getInstance()->getFirstWP())->setIs_inTolleranceRange(true);
+		ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(false);
+
+
 #ifdef DEBUG_
 	cout << "get inTol after set inTol to true: " << ControllerSeg2::getInstance()->getFirstWP()->getIs_inTolleranceRange() <<
 			" WP: " <<  (ControllerSeg2::getInstance()->getFirstWP())->getId() << endl;
@@ -97,24 +100,44 @@ CheckDrill::~CheckDrill(){
 
 }
 
-void CheckDrill::inHeightMeasurement(){
+void CheckDrill::outHeightMeasurement(){
 #ifdef DEBUG_
 	cout << "CheckDrill::inHeightMeasurement" << endl;
 #endif
 
-	ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(false);
+//		ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(true);
+			if (!ControllerSeg2::getInstance()->isFifoEmpty()) {
+#ifdef DEBUG_
+				if(ControllerSeg2::getInstance()->getFirstWP()->getHas_Drill()){
+					cout << "WP has LOCH nach OBEN" << endl;
+				}else {
+					cout << "WP has LOCH nach UNTEN" << endl;
 
-	new (this) DrillChecked();
+				}
+#endif
+				ControllerSeg2::getInstance()->passWP2Ctr();
+				ControllerSeg2::getInstance()->removeFirsttWP();
+
+				new (this) WaitingHeightM1();
+			} else {
+				//TODO  just send msg and let controller do the rest according to the error event handler
+				ControllerSeg2::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
+				HALAktorik::getInstance()->motor_off();
+				HALAktorik::getInstance()->red_Light_on();
+				HALAktorik::getInstance()->green_Light_off();
+			}
+	new (this) WaitingHeightM1();
 }
 
 
-void CheckDrill::notInToleranceRange(){
+void CheckDrill::inToleranceRange(){
 #ifdef DEBUG_
 	cout << "CheckDrill::notInToleranceRange " << endl;
 #endif
 
 	ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(true);
-	new (this) DrillChecked();
+//	cout << " GehtHas Drill : " << ControllerSeg2::getInstance()->getFirstWP()->getHas_Drill();
+//	new (this) DrillChecked();
 }
 
 
@@ -123,31 +146,38 @@ void CheckDrill::notInToleranceRange(){
  *									DrillChecked									*
  *																					*
  ************************************************************************************/
-
-DrillChecked::DrillChecked(){
-	cout << "DrillChecked constructor" << endl;
-}
-
-DrillChecked::~DrillChecked(){
-
-}
-
-void DrillChecked::outHeightMeasurement(){
-#ifdef DEBUG_
-	cout << "DrillChecked::outHeightMeasurement" << endl;
-#endif
-	// Start timer ??
-	if (!ControllerSeg2::getInstance()->isFifoEmpty()) {
-		ControllerSeg2::getInstance()->passWP2Ctr();
-		ControllerSeg2::getInstance()->removeFirsttWP();
-
-		new (this) WaitingHeightM1();
-	} else {
-		//TODO  just send msg and let controller do the rest according to the error event handler
-		ControllerSeg2::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
-		HALAktorik::getInstance()->motor_off();
-		HALAktorik::getInstance()->red_Light_on();
-		HALAktorik::getInstance()->green_Light_off();
-	}
-}
+//
+//DrillChecked::DrillChecked(){
+//	cout << "DrillChecked constructor" << endl;
+//}
+//
+//DrillChecked::~DrillChecked(){
+//
+//}
+//
+//void DrillChecked::outHeightMeasurement(){
+//#ifdef DEBUG_
+//	cout << "DrillChecked::outHeightMeasurement" << endl;
+//#endif
+//
+//	if(ControllerSeg2::getInstance()->getFirstWP()->getHas_Drill()){
+//		cout << "WP has LOCH nach OBEN" << endl;
+//	}else {
+//		cout << "WP has LOCH nach UNTEN" << endl;
+//
+//	}
+//	// Start timer ??
+//	if (!ControllerSeg2::getInstance()->isFifoEmpty()) {
+//		ControllerSeg2::getInstance()->passWP2Ctr();
+//		ControllerSeg2::getInstance()->removeFirsttWP();
+//
+//		new (this) WaitingHeightM1();
+//	} else {
+//		//TODO  just send msg and let controller do the rest according to the error event handler
+//		ControllerSeg2::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
+//		HALAktorik::getInstance()->motor_off();
+//		HALAktorik::getInstance()->red_Light_on();
+//		HALAktorik::getInstance()->green_Light_off();
+//	}
+//}
 

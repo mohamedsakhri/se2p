@@ -187,7 +187,7 @@ void Demultiplexer::execute(void* arg){
 						if (new_value & E_STOP_BUTTON) {
 							message = E_STOP_RELEASED;
 						} else {
-							message = E_STOP_RELEASED;
+							message = E_STOP_PRESSED;
 						}
 						sendMsg2Dispatcher(message);
 						break;
@@ -202,17 +202,23 @@ void Demultiplexer::execute(void* arg){
 					case HEIGHT_SENSOR:		//WP in HeightSensor  LB2
 						if (!(new_value & HEIGHT_SENSOR)) {
 							message = WP_IN_HEIGHT_M;
+							cout << "Demultiplexer: WP_IN_HEIGHT_M" <<endl;
+
 						}else {
 							message = WP_OUT_HEIGHT_M;
+							cout << "Demultiplexer: WP_OUT_HEIGHT_M" <<endl;
+
 						}
 						sendMsg2Dispatcher(message);
 						break;
 					case HEIGHT_STATUS:		//HeightSensor tolerance range
 						if (new_value & HEIGHT_STATUS) {
 							message = WP_IN_TOLERANCE_R;
+							cout << "Demultiplexer: WP_INTOL" <<endl;
 						}
 						else {
 							message = WP_NOT_IN_TOLERANCE_R;
+							cout << "Demultiplexer: WP_NOT_INTOL" <<endl;
 						}
 						sendMsg2Dispatcher(message);
 						break;
