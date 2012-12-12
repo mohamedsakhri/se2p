@@ -92,6 +92,7 @@ void WorkPieceValid::outSwitch()
 	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG5);
 	ControllerSeg3::getInstance()->removeFirsttWP();
 	HALAktorik::getInstance()->close_Switch();
+
 	new (this) WaitingSwitch();
 }
 

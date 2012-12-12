@@ -30,6 +30,11 @@ public:
 	void init();
 	void passWP2Ctr();
 	void passWP2Ctr(int ctr_id);
+	void startPressed();
+	void stopPressed();
+	void EStopPressed();
+	void EStopReleased();
+
 	virtual ~ControllerSeg3();
 
 private:

@@ -14,7 +14,11 @@
 #define SEGSLIDE_H_
 
 #include "IState.h"
+#include "ControllerSeg1.h"
+#include "ControllerSeg2.h"
+#include "ControllerSeg3.h"
 #include "ControllerSeg4.h"
+#include "ControllerSeg5.h"
 
 using namespace std;
 

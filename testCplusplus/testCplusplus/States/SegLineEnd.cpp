@@ -143,6 +143,14 @@ Machine2Ready::Machine2Ready()
 
 void Machine2Ready::outEndLine()
 {
+	if (ControllerSeg1::getInstance()->isFifoEmpty()
+			&& ControllerSeg2::getInstance()->isFifoEmpty()
+			&& ControllerSeg3::getInstance()->isFifoEmpty()
+			&& ControllerSeg5::getInstance()->isFifoEmpty())
+	{
+		HALAktorik::getInstance()->stop_Motor();
+	}
+
 }
 
 Machine2Ready::~Machine2Ready()

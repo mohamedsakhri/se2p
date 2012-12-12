@@ -53,6 +53,14 @@ void InSlide::outSlide()
 {
 	delete ControllerSeg4::getInstance()->getFirstWP();
 	ControllerSeg4::getInstance()->removeFirsttWP();
+	if (ControllerSeg1::getInstance()->isFifoEmpty()
+			&& ControllerSeg2::getInstance()->isFifoEmpty()
+			&& ControllerSeg3::getInstance()->isFifoEmpty()
+			&& ControllerSeg5::getInstance()->isFifoEmpty())
+	{
+		HALAktorik::getInstance()->stop_Motor();
+	}
+
 	new (this) SlideWait();
 }
 
