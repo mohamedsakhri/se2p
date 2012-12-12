@@ -21,10 +21,15 @@
 
 WaitingSwitch::WaitingSwitch() {
 #ifdef DEBUG_
-	cout << "WaitingSwitch Start constructor" << endl;
+	cout << "WaitingSwitch :: Constructor" << endl;
 #endif
 }
 
+
+/*
+ *
+ * Check if WP is stranger  first //TODO May be in Error handling
+ */
 void WaitingSwitch::inSwitch() {
 	if (!ControllerSeg3::getInstance()->isFifoEmpty()) {
 		if (ControllerSeg3::getInstance()->getFirstWP()->getIs_inTolleranceRange()) {
@@ -54,10 +59,13 @@ WaitingSwitch::~WaitingSwitch() {
 WorkPieceInvalid::WorkPieceInvalid()
 {
 #ifdef DEBUG_
-	cout << "WorkPieceInValid Start constructor" << endl;
+	cout << "WorkPieceInValid :: Constructor" << endl;
 #endif
 }
 
+/**
+ *
+ */
 void WorkPieceInvalid::outSwitch()
 {
 	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG4);
@@ -79,26 +87,22 @@ WorkPieceInvalid::~WorkPieceInvalid()
 WorkPieceValid::WorkPieceValid()
 {
 #ifdef DEBUG_
-	cout << "WorkPieceValid Start constructor" << endl;
+	cout << "WorkPieceValid :: Constructor" << endl;
 #endif
 }
 
 
 void WorkPieceValid::outSwitch()
 {
-#ifdef DEBUG_
-	cout << "Switch closed" << endl;
-#endif
-
 	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG5);
 	ControllerSeg3::getInstance()->removeFirsttWP();
-	HALAktorik::getInstance()->close_Switch();
 	new (this) WaitingSwitch();
-}
+	// Use this to wait a bit before closing switching. Just for now!
+	WAIT_HALF_S;
+	HALAktorik::getInstance()->close_Switch();
 
+}
 
 WorkPieceValid::~WorkPieceValid()
 {
 }
-
-

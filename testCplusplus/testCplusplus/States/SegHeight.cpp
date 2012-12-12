@@ -20,7 +20,7 @@
 
 WaitingHeightM1::WaitingHeightM1(){
 #ifdef DEBUG_
-	cout << "WaitingHeightM1 Start constructor" << endl;
+	cout << "WaitingHeightM1 :: Constructor" << endl;
 #endif
 }
 
@@ -30,7 +30,7 @@ WaitingHeightM1::~WaitingHeightM1() {
 
 void WaitingHeightM1::inHeightMeasurement(){
 #ifdef DEBUG_
-	cout << "WaitingHeightM1::inHeightMeasurement" << endl;
+	cout << "WaitingHeightM1 :: inHeightMeasurement" << endl;
 #endif
 
 	new (this) TooSmall();
@@ -38,17 +38,11 @@ void WaitingHeightM1::inHeightMeasurement(){
 
 void WaitingHeightM1::inToleranceRange(){
 #ifdef DEBUG_
-	cout << "WaitingHeightM1->inToleranceRange" << endl;
+	cout << "WaitingHeightM1 :: inToleranceRange" << endl;
 #endif
 	//TODO WP's Id !!
 	(ControllerSeg2::getInstance()->getFirstWP())->setIs_inTolleranceRange(true);
 		ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(false);
-
-
-#ifdef DEBUG_
-	cout << "get inTol after set inTol to true: " << ControllerSeg2::getInstance()->getFirstWP()->getIs_inTolleranceRange() <<
-			" WP: " <<  (ControllerSeg2::getInstance()->getFirstWP())->getId() << endl;
-#endif
 
 	new (this) CheckDrill();
 }
@@ -60,7 +54,7 @@ void WaitingHeightM1::inToleranceRange(){
  ************************************************************************************/
 
 TooSmall::TooSmall(){
-	cout << "Too small constructor" << endl;
+	cout << "TooSmall :: Constructor" << endl;
 }
 
 TooSmall::~TooSmall(){
@@ -69,7 +63,7 @@ TooSmall::~TooSmall(){
 
 void TooSmall::outHeightMeasurement(){
 #ifdef DEBUG_
-	cout << "TooSmall::outHeightMeasurement" << endl;
+	cout << "TooSmall :: outHeightMeasurement" << endl;
 #endif
 	// Start timer ??
 	if (!ControllerSeg2::getInstance()->isFifoEmpty()) {
@@ -93,7 +87,7 @@ void TooSmall::outHeightMeasurement(){
  ************************************************************************************/
 
 CheckDrill::CheckDrill(){
-	cout << "CheckDrill constructor" << endl;
+	cout << "CheckDrill :: Constructor" << endl;
 }
 
 CheckDrill::~CheckDrill(){
@@ -102,16 +96,16 @@ CheckDrill::~CheckDrill(){
 
 void CheckDrill::outHeightMeasurement(){
 #ifdef DEBUG_
-	cout << "CheckDrill::inHeightMeasurement" << endl;
+	cout << "CheckDrill :: inHeightMeasurement" << endl;
 #endif
 
 //		ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(true);
 			if (!ControllerSeg2::getInstance()->isFifoEmpty()) {
 #ifdef DEBUG_
 				if(ControllerSeg2::getInstance()->getFirstWP()->getHas_Drill()){
-					cout << "WP has LOCH nach OBEN" << endl;
+					cout << "----------> LOCH : OBEN" << endl;
 				}else {
-					cout << "WP has LOCH nach UNTEN" << endl;
+					cout << "----------> LOCH : UNTEN" << endl;
 
 				}
 #endif
@@ -132,14 +126,14 @@ void CheckDrill::outHeightMeasurement(){
 
 void CheckDrill::inToleranceRange(){
 #ifdef DEBUG_
-	cout << "CheckDrill::notInToleranceRange " << endl;
+	cout << "CheckDrill :: notInToleranceRange " << endl;
 #endif
 
 	ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(true);
-//	cout << " GehtHas Drill : " << ControllerSeg2::getInstance()->getFirstWP()->getHas_Drill();
-//	new (this) DrillChecked();
 }
 
+
+// TODO to be removed if we are 100% we don't need it anymore
 
 
 /************************************************************************************
@@ -173,7 +167,7 @@ void CheckDrill::inToleranceRange(){
 //
 //		new (this) WaitingHeightM1();
 //	} else {
-//		//TODO  just send msg and let controller do the rest according to the error event handler
+// just send msg and let controller do the rest according to the error event handler
 //		ControllerSeg2::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
 //		HALAktorik::getInstance()->motor_off();
 //		HALAktorik::getInstance()->red_Light_on();

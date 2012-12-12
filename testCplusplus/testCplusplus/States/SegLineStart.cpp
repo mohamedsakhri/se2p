@@ -22,13 +22,13 @@
 
 StateLineStart::StateLineStart() {
 //	hal_aktorik_ = HALAktorik::getInstance();
-	cout << "StateLine Start constructor" << endl;
+	cout << "StateLine :: Constructor" << endl;
 }
 
 void StateLineStart::inLineStart()
 {
 #ifdef DEBUG_
-	cout << "StateLineStart->inLineStart" << endl;
+	cout << "StateLineStart :: inLineStart" << endl;
 #endif
 	//TODO check if the WP id is needed
 	WorkPiece* wp = new WorkPiece(1) ;
@@ -43,7 +43,6 @@ void StateLineStart::inLineStart()
 }
 
 StateLineStart::~StateLineStart() {
-	// TODO Auto-generated destructor stub
 }
 
 
@@ -53,12 +52,14 @@ StateLineStart::~StateLineStart() {
  ************************************************************************************/
 
 StateWorkPieceCreated::StateWorkPieceCreated(){
-	cout << "StateWorkPieceCreated Start constructor" << endl;
+#ifdef DEBUG_
+	cout << "StateWorkPieceCreated :: Constructor" << endl;
+#endif
 }
 
 void StateWorkPieceCreated::outLineStart(){
 #ifdef DEBUG_
-	cout << "StateWorkPieceCreated->outLineStart" << endl;
+	cout << "StateWorkPieceCreated :: outLineStart" << endl;
 #endif
 	// Start timer ??
 	if (!ControllerSeg1::getInstance()->isFifoEmpty()) {

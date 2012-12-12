@@ -23,7 +23,7 @@
 WaitLineEndM1::WaitLineEndM1()
 {
 #ifdef DEBUG_
-	cout << "WaitLineEndM1 Start constructor" << endl;
+	cout << "WaitLineEndM1 :: Constructor " << endl;
 #endif
 }
 
@@ -61,7 +61,7 @@ WaitLineEndM1::~WaitLineEndM1()
 WaitForTurn::WaitForTurn()
 {
 #ifdef DEBUG_
-	cout << "WaitForTurn Start constructor" << endl;
+	cout << "WaitForTurn :: Constructor" << endl;
 #endif
 }
 
@@ -82,7 +82,7 @@ WaitForTurn::~WaitForTurn()
 Turning::Turning()
 {
 #ifdef DEBUG_
-	cout << "Turning Start constructor" << endl;
+	cout << "Turning :: Constructor" << endl;
 #endif
 }
 
@@ -103,7 +103,7 @@ Turning::~Turning()
 TransferMachine2::TransferMachine2()
 {
 #ifdef DEBUG_
-	cout << "TransferMachine2 Start constructor" << endl;
+	cout << "TransferMachine2 :: Constructor" << endl;
 #endif
 	this->messageReceived();
 }
@@ -129,7 +129,7 @@ TransferMachine2::~TransferMachine2()
 WaitForMachine2::WaitForMachine2()
 {
 #ifdef DEBUG_
-	cout << "WaitForMachine2 Start constructor" << endl;
+	cout << "WaitForMachine2 :: Constructor" << endl;
 #endif
 }
 
@@ -149,7 +149,7 @@ WaitForMachine2::~WaitForMachine2()
 Machine2Ready::Machine2Ready()
 {
 #ifdef DEBUG_
-	cout << "Machine2Ready Start constructor" << endl;
+	cout << "Machine2Ready :: Constructor" << endl;
 #endif
 }
 

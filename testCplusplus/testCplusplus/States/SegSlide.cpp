@@ -13,6 +13,7 @@
 #include "SegSlide.h"
 
 //#define DEBUG_
+
 /************************************************************************************
  *									SlideWait										*
  *																					*
@@ -21,7 +22,7 @@
 SlideWait::SlideWait()
 {
 #ifdef DEBUG_
-	cout << "SlideWait Start constructor" << endl;
+	cout << "SlideWait :: Constructor" << endl;
 #endif
 }
 
@@ -49,9 +50,14 @@ InSlide::InSlide()
 #endif
 }
 
+/*
+ * Free memory located by WP
+ * Stop machine if it's empty
+ */
 void InSlide::outSlide() {
 	delete ControllerSeg4::getInstance()->getFirstWP();
 	ControllerSeg4::getInstance()->removeFirsttWP();
+
 	if (ControllerSeg1::getInstance()->isFifoEmpty()
 			&& ControllerSeg2::getInstance()->isFifoEmpty()
 			&& ControllerSeg3::getInstance()->isFifoEmpty()
@@ -66,6 +72,5 @@ void InSlide::outSlide() {
 InSlide::~InSlide()
 {
 }
-
 
 #define DEBUG_
