@@ -1,11 +1,16 @@
 /*
- * StateHeight.cpp
+ * @file	SegHeight.cpp
  *
- *  Created on: 30.11.2012
- *      Author: aax844
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ *
+ * @date	 Dec 10, 2012
+ *
+ * Classes which represent all states in Segment 2
+ *
  */
 
-#include "StateHeight.h"
+#include "SegHeight.h"
 #define DEBUG_
 
 

@@ -1,11 +1,17 @@
 /*
- * StateLineStart.cpp
+ * @file	SegLineStart.cpp
  *
- *  Created on: 30.11.2012
- *      Author: aax844
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ *
+ * @date	 Dec 10, 2012
+ *
+ * Classes which represent all states in Segment 1
+ *
  */
 
-#include "StateLineStart.h"
+
+#include "SegLineStart.h"
 #define DEBUG_
 
 StateLineStart::StateLineStart() {

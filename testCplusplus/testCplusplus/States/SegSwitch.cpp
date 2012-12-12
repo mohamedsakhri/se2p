@@ -1,11 +1,16 @@
 /*
- * WaitingSwitch.cpp
+ * @file	SegSwitch.cpp
  *
- *  Created on: 07.12.2012
- *      Author: aax844
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ *
+ * @date	 Dec 10, 2012
+ *
+ * Classes which represent all states in Segment 3
+ *
  */
 
-#include "WaitingSwitch.h"
+#include "SegSwitch.h"
 #define DEBUG_
 
 //TODO removeWP fehlt
@@ -59,7 +64,6 @@ void WorkPieceInvalid::outSwitch()
 }
 
 
-
 //------------WorkPiecevalid--------------------
 
 WorkPieceValid::WorkPieceValid()
@@ -70,16 +74,19 @@ WorkPieceValid::WorkPieceValid()
 }
 
 
-WorkPieceValid::~WorkPieceValid()
-{
-}
-
 void WorkPieceValid::outSwitch()
 {
-	cout << "close switch" << endl;
+#ifdef DEBUG_
+	cout << "Switch closed" << endl;
+#endif
 	ControllerSeg3::getInstance()->removeFirsttWP();
 	HALAktorik::getInstance()->close_Switch();
 	new (this) WaitingSwitch();
+}
+
+
+WorkPieceValid::~WorkPieceValid()
+{
 }
 
 

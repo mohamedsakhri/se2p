@@ -1,12 +1,17 @@
 /*
- * StateLineStart.h
+ * @file	SegLineStart.cpp
  *
- *  Created on: 30.11.2012
- *      Author: aax844
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ *
+ * @date	 Dec 10, 2012
+ *
+ * Classes which represent all states in Segment 1
+ *
  */
 
-#ifndef STATELINESTART_H_
-#define STATELINESTART_H_
+#ifndef SEGLINESTART_H_
+#define SEGLINESTART_H_
 
 #include "IState.h"
 #include "ControllerSeg1.h"
@@ -29,4 +34,4 @@ public:
 	void outLineStart();
 };
 
-#endif /* STATELINESTART_H_ */
+#endif /* SEGLINESTART_H_ */

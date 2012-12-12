@@ -10,7 +10,7 @@
  */
 
 #define DISPATCHER_TEST
-#define DEBUG_
+//#define DEBUG_
 
 #include "ControllerSeg3.h"
 
@@ -79,6 +79,7 @@ int ControllerSeg3::sendMsg2Dispatcher(int message){
 /**
  * Pass a workpiece from a segment to the next one
  */
+//TODO
 void ControllerSeg3::passWP2Ctr()
 {
 //	ControllerSeg5::getInstance()->addWP2List(getFirstWP());

@@ -1,19 +1,19 @@
 /*
- * @file 	ControllerSeg3.h
+ * @file 	ControllerSeg5.h
  *
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri
  *
  * @date	 Dec 10, 2012
  *
- * This class represents the controller of the third segment which controls the switch area
+ * This class represents the controller of the third segment which controls the line's end area
  */
 
 #ifndef CONTROLLERSEG5_H_
 #define CONTROLLERSEG5_H_
 
 #include "HALCallInterface.h"
-#include "WaitingSwitch.h"
+#include "SegSwitch.h"
 
 class ControllerSeg5: public HALCallInterface {
 public:

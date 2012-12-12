@@ -1,8 +1,13 @@
 /*
- * WaitingSwitch.h
+ * @file	SegSwitch.h
  *
- *  Created on: 07.12.2012
- *      Author: aax844
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ *
+ * @date	 Dec 10, 2012
+ *
+ * Classes which represent all states in Segment 3
+ *
  */
 
 #ifndef WAITINGSWITCH_H_
@@ -38,4 +43,4 @@ public:
 };
 
 
-#endif /* WAITINGSWITCH_H_ */
+#endif /*SEGSWITCH_H_ */

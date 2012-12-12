@@ -13,7 +13,7 @@
 #define CONTROLLERSEG2_H_
 
 #include "HALCallInterface.h"
-#include "StateHeight.h"
+#include "SegHeight.h"
 #include "ControllerSeg3.h"
 
 class ControllerSeg2: public HALCallInterface {

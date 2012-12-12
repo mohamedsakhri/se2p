@@ -6,7 +6,7 @@
  *
  * @date	 Dec 10, 2012
  *
- * This class represents the controller of the third segment which controls the slide area
+ * This class represents the controller of the third segment which controls the line's end area
  */
 
 #define DISPATCHER_TEST
@@ -18,6 +18,7 @@ Mutex ControllerSeg5::controllerSeg5_mutex_ = Mutex();
 ControllerSeg5* ControllerSeg5::controllerSeg5_instance_ = NULL ;
 
 ControllerSeg5::ControllerSeg5() {
+	//TODO slide state
 	state_ = new WaitingSwitch();
 	init();
 }

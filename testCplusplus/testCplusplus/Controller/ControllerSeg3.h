@@ -13,7 +13,7 @@
 #define CONTROLLERSEG3_H_
 
 #include "HALCallInterface.h"
-#include "WaitingSwitch.h"
+#include "SegSwitch.h"
 
 class ControllerSeg3: public HALCallInterface {
 public:

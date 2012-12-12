@@ -1,12 +1,17 @@
 /*
- * StateHeight.h
+ * @file	SegHeight.h
  *
- *  Created on: 30.11.2012
- *      Author: aax844
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ *
+ * @date	 Dec 10, 2012
+ *
+ * Classes which represent all states in Segment 2
+ *
  */
 
-#ifndef STATEHEIGHT_H_
-#define STATEHEIGHT_H_
+#ifndef SEGHEIGHT_H_
+#define SEGHEIGHT_H_
 
 #include "IState.h"
 #include "ControllerSeg2.h"
@@ -33,6 +38,7 @@ public:
 	void notInToleranceRange();
 };
 
+
 class DrillChecked: public IState{
 public:
 	DrillChecked();
@@ -40,10 +46,12 @@ public:
 	void outHeightMeasurement();
 };
 
+
 class TooSmall: public IState{
 public:
 	TooSmall();
 	virtual ~TooSmall();
 	void outHeightMeasurement();
 };
-#endif /* STATEHEIGHT_H_ */
+
+#endif /* SEGHEIGHT_H__ */

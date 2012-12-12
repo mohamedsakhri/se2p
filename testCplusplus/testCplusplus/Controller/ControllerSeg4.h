@@ -13,7 +13,8 @@
 #define CONTROLLERSEG4_H_
 
 #include "HALCallInterface.h"
-#include "WaitingSwitch.h"
+//TODO .h of slide
+#include "SegSwitch.h"
 
 class ControllerSeg4: public HALCallInterface {
 public:
