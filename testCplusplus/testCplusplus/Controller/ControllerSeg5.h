@@ -22,6 +22,11 @@ public:
 	void inLineEnd();
 	void outLineEnd();
 
+	void m2isBusy();
+	void m2isReady();
+
+	bool isMachin2Ready() ;
+
 	// Error's handling
 	int sendMsg2Dispatcher(int message);
 	void init();
@@ -31,6 +36,7 @@ public:
 
 private:
 	ControllerSeg5();
+	bool machine2_ready_;
 
 	static ControllerSeg5* controllerSeg5_instance_;
 	static Mutex controllerSeg5_mutex_; //!< Mutex for thread-safe implementation

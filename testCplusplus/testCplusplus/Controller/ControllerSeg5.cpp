@@ -19,6 +19,7 @@ ControllerSeg5* ControllerSeg5::controllerSeg5_instance_ = NULL ;
 
 ControllerSeg5::ControllerSeg5() {
 	ctr_id_ = CONTROLLER_SEG5;
+	machine2_ready_ = true;
 	state_ = new WaitLineEndM1();
 	init();
 }
@@ -59,6 +60,21 @@ void ControllerSeg5::inLineEnd()
 void ControllerSeg5::outLineEnd()
 {
 	state_->outLineEnd();
+}
+
+void ControllerSeg5::m2isBusy()
+{
+	machine2_ready_ = false;
+}
+
+void ControllerSeg5::m2isReady()
+{
+	machine2_ready_ = true;
+	state_->machine2IsReady();
+}
+
+bool ControllerSeg5::isMachin2Ready(){
+	return machine2_ready_;
 }
 
 /**

@@ -42,8 +42,9 @@
 #include "LightTest.h"
 #include "MotorTest.h"
 #include "SwitchTest.h"
-*/
 #include "SerInterfaceTest.h"
+*/
+#include "Reader.h"
 
 
 
@@ -61,8 +62,11 @@ int main(int argc, char *argv[]) {
 #ifdef STATE_TEST
 	StateTest state_test;
 	state_test.start(NULL);
-	SerInterfaceTest *SRtest = new SerInterfaceTest();
+	Reader reader;
+	reader.start(NULL);
+//	SerInterfaceTest *SRtest = new SerInterfaceTest();
 	state_test.join();
+	reader.join();
 #endif
 
 #ifdef DISPATCHER_TEST

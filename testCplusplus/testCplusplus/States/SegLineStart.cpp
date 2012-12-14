@@ -21,8 +21,9 @@
  ************************************************************************************/
 
 StateLineStart::StateLineStart() {
-//	hal_aktorik_ = HALAktorik::getInstance();
-	cout << "StateLine :: Constructor" << endl;
+#ifdef DEBUG_
+	cout << "StateLineStart :: Constructor" << endl;
+#endif
 }
 
 void StateLineStart::inLineStart()
@@ -33,7 +34,7 @@ void StateLineStart::inLineStart()
 	//TODO check if the WP id is needed
 	WorkPiece* wp = new WorkPiece(1) ;
 	ControllerSeg1::getInstance()->addWP2List(wp);
-	//TODO test if the motor have to be started
+	//TODO test if the motor have to be started and send msg to machine2 to start
 	if (ControllerSeg5::getInstance()->isFifoEmpty()){
 		HALAktorik::getInstance()->motor_on();
 		HALAktorik::getInstance()->green_Light_on();

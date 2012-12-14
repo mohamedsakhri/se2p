@@ -30,7 +30,7 @@ void Sender::send(int message) {
 #ifdef DEBUG_
 	cout << "sender thread start" << endl;
 #endif
-	ser_Interface_id_ = open("/dev/ser2", O_RDWR | O_NOCTTY); // open device with right/right rights
+	ser_Interface_id_ = open(DEVICE, O_RDWR | O_NOCTTY); // open device with right/right rights
 	// this process doesn't want to control the device
 
 	if (ser_Interface_id_ < 0) {

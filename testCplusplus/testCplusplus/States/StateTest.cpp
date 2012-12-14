@@ -8,6 +8,9 @@
 #include "StateTest.h"
 #include "Constants.h"
 
+//#define TEST_MACHINE_1
+#define TEST_MACHINE_2
+
 StateTest::StateTest() {
 	dispatcher_ = Dispatcher::getInstance();
 	HALAktorik::getInstance()->motor_off();
@@ -23,7 +26,7 @@ StateTest::~StateTest() {
 void StateTest::execute(void *arg)
 {
 	cout << "StateTaste started" << endl;
-
+#ifdef TEST_MACHINE_1
 	ControllerSeg1 *ctr1 = ControllerSeg1::getInstance();
 	ControllerSeg2 *ctr2 = ControllerSeg2::getInstance();
 	ControllerSeg3 *ctr3 = ControllerSeg3::getInstance();
@@ -81,6 +84,28 @@ void StateTest::execute(void *arg)
 	dispatcher_->registerHandler(ctr3);
 	dispatcher_->registerHandler(ctr4);
 	dispatcher_->registerHandler(ctr5);
+#endif
+
+#ifdef TEST_MACHINE_2
+	ControllerSegM2 *ctrM2 = ControllerSegM2::getInstance();
+
+	ctrM2->addEvent(WP_IN_ENGINE_START);
+	ctrM2->addEvent(WP_IN_HEIGHT_M);
+	ctrM2->addEvent(WP_OUT_HEIGHT_M);
+	ctrM2->addEvent(WP_IN_TOLERANCE_R);
+	ctrM2->addEvent(WP_IS_METAL);
+	ctrM2->addEvent(WP_IN_SWITCH);
+	ctrM2->addEvent(WP_OUT_SWITCH);
+	ctrM2->addEvent(WP_OUT_SLIDE);
+	ctrM2->addEvent(WP_OUT_ENGINE_END);
+
+	ctrM2->addEvent(START_PRESSED);
+	ctrM2->addEvent(STOP_PRESSED);
+	ctrM2->addEvent(E_STOP_PRESSED);
+	ctrM2->addEvent(E_STOP_RELEASED);
+
+	dispatcher_->registerHandler(ctrM2);
+#endif
 
 	dispatcher_->start(NULL);
 

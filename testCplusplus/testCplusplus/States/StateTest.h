@@ -13,6 +13,7 @@
 #include "ControllerSeg3.h"
 #include "ControllerSeg4.h"
 #include "ControllerSeg5.h"
+#include "ControllerSegM2.h"
 #include "HAWThread.h"
 #include "Dispatcher.h"
 

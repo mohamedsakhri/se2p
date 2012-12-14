@@ -111,10 +111,15 @@ TransferMachine2::TransferMachine2()
 void TransferMachine2::messageReceived()
 {
 //TODO  communicate with machine 2+
-	HALAktorik::getInstance()->motor_on();
-	HALAktorik::getInstance()->yellow_Light_off();
-	HALAktorik::getInstance()->green_Light_on();
-	new (this) Machine2Ready();
+	if (ControllerSeg5::getInstance()->isMachin2Ready() ){
+		new (this) Machine2Ready();
+	}
+	else {
+		HALAktorik::getInstance()->motor_off();
+		HALAktorik::getInstance()->yellow_Light_on();
+		HALAktorik::getInstance()->green_Light_off();
+		new (this) WaitForMachine2();
+	}
 }
 
 TransferMachine2::~TransferMachine2()
@@ -133,8 +138,10 @@ WaitForMachine2::WaitForMachine2()
 #endif
 }
 
-void WaitForMachine2::messageReceived()
+void WaitForMachine2::machine2IsReady()
 {
+	HALAktorik::getInstance()->motor_on();
+	new (this) Machine2Ready();
 }
 
 WaitForMachine2::~WaitForMachine2()

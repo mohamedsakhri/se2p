@@ -15,39 +15,33 @@
 #define STATEMACHINE2_H_
 
 #include "IState.h"
-#include "ControllerSeg1.h"
-#include "ControllerSeg2.h"
-#include "ControllerSeg3.h"
-#include "ControllerSeg4.h"
-#include "ControllerSeg5.h"
-
-class SegMachine2:public IState {
-public:
-	SegMachine2();
-	virtual ~SegMachine2();
+#include "ControllerSegM2.h"
+#include "Constants.h"
+#include "Messages.h"
 
 
-};
 
-//************************* inLineStart ***************************
 
-class StateLineStart2:public Istate{
+
+
+//************************* WaitForLinestart ***************************
+class WaitForLineStart:public IState {
 public :
-	StateLineStart2();
-	virtual ~StateLineStart2();
+	WaitForLineStart();
+	virtual ~WaitForLineStart();
 
 	void inLineStart();
 };
 
-//************************* WaitForHeightM2 ***************************
 
+//************************* WaitForHeightM2 ***************************
 class WaitForHeightM2:public IState {
 public :
 	WaitForHeightM2();
 	virtual ~WaitForHeightM2();
 
 	void inHeightMeasurement();
-	void inTolerance();
+	void inToleranceRange();
 };
 
 //************************* noDrill ***************************
@@ -55,20 +49,20 @@ public :
 class NoDrill:public IState {
 public :
 	NoDrill();
-	virtual ~noDrill();
+	virtual ~NoDrill();
 
 };
 
 
 //************************* CheckDrill ***************************
 
-class CheckDrill: public IState{
+class CheckDrillM2: public IState{
 public:
-	CheckDrill();
-	virtual ~ CheckDrill();
+	CheckDrillM2();
+	virtual ~CheckDrillM2();
 
 	void outHeightMeasurement();
-	void inTolerance();
+	void inToleranceRange();
 };
 
 //************************* DrillOkay ***************************
@@ -94,6 +88,7 @@ public:
 
 //************************* HasMetal ***************************
 class HasMetall: public IState {
+public:
 	HasMetall();
 	virtual ~HasMetall();
 
@@ -102,6 +97,7 @@ class HasMetall: public IState {
 
 //************************* WorkPieceIsInvalid ***************************
 class WorkPieceIsInvalid: public IState {
+public:
 	WorkPieceIsInvalid();
 	virtual ~WorkPieceIsInvalid();
 
@@ -109,15 +105,17 @@ class WorkPieceIsInvalid: public IState {
 };
 
 //************************* InSlide ***************************
-class InSlide: public IState {
-	InSlide();
-	virtual ~InSlide();
+class InSlideM2: public IState {
+public:
+	InSlideM2();
+	virtual ~InSlideM2();
 
 	void outSlide();
 };
 
 //************************* WorkPieceIsValid ***********************
 class WorkPieceIsValid: public IState {
+public:
 	WorkPieceIsValid();
 	virtual ~WorkPieceIsValid();
 
@@ -126,10 +124,11 @@ class WorkPieceIsValid: public IState {
 
 //************************* WaitForEndLine ***********************
 class WaitForEndLine: public IState {
+public:
 	WaitForEndLine();
 	virtual ~WaitForEndLine();
 
-	void inLineEnd();
+	void outLineEnd();
 };
 
 #endif /* STATEMACHINE2_H_ */

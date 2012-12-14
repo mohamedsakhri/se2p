@@ -45,6 +45,9 @@ public :
 	virtual void EStopPressed(){};
 	virtual void EStopReleased(){};
 
+	//Communication between Machine1 and Machine2
+	virtual void machine2IsReady(){};
+
 	virtual void isMissing(){};
 
 };

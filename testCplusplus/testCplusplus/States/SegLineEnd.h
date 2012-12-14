@@ -75,7 +75,7 @@ public:
 	WaitForMachine2();
 	virtual ~WaitForMachine2();
 
-	void messageReceived();
+	void machine2IsReady();
 };
 
 

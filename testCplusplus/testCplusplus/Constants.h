@@ -25,6 +25,7 @@
 #define CONTROLLER_SEG3 3
 #define CONTROLLER_SEG4 4
 #define CONTROLLER_SEG5 5
+#define CONTROLLER_SEGM2 6
 
 
 #endif /* CONSTANTS_H_ */

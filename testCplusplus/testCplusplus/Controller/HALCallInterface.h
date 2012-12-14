@@ -18,6 +18,7 @@
 #include "WorkPiece.h"
 #include "IState.h"
 #include "Constants.h"
+#include "Sender.h"
 
 //class WorkPiece;
 
@@ -66,6 +67,12 @@ public :											//WP = Workpiece
 
 	virtual void isMissing(){};
 	virtual void isStranger(){};
+
+	/*
+	 * Communication between Machine1 and machine2
+	 */
+	virtual void m2isReady(){};
+	virtual void m2isBusy(){};
 
 	/**
 	 * @param even_index Id of event the controller want to register to
@@ -126,6 +133,8 @@ protected :
 	int con_id_;						//!< Connection Id to Demultiplexer Channel
 	int ctr_id_;
 	IState* state_;						//!< State machine
+	//TODO det Sender as singelton
+	Sender* sender_;
 };
 
 #endif //HALCALLINTERFACE_H_
