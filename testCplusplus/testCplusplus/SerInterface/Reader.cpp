@@ -9,9 +9,12 @@
 #include "stdint.h"
 #include "SerInterface.h"
 #include "Constants.h"
+#include "Demultiplexer.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+
+#define DEBUG_
 
 using namespace std;
 Reader::Reader() {
@@ -27,37 +30,39 @@ void Reader::shutdown() {
 }
 
 void Reader::execute(void *arg) {
+#ifdef DEBUG_
 	cout << "(reader) thread start" << endl;
+#endif
 	int fd = open(DEVICE, O_RDWR | O_NOCTTY); // open device with right/right rights
 	// this process doesn't want to control the device
 	if (fd < 0) {
 		perror("Open failed : ");
 		exit(EXIT_FAILURE);
 	}
-
+#ifdef DEBUG_
 	cout << "(reader) fd: " << fd << endl;
-
+#endif
 	//recieved data will be saved in buffer
-	char buffer[DATA_SIZE];
+	int msg = -1;
+	while (!isStopped()) {
 
-	while (true) {
-		//  usleep(TIME_TO_WAIT);
+#ifdef DEBUG_
 		cout << "(reader) waiting for data" << endl;
-		int recieved_size = readcond(fd, buffer, sizeof(buffer), 2, 5, 0);
-
-		cout << "(reader) recieved_size: " << recieved_size << endl;
-
+#endif
+		int recieved_size = readcond(fd, &msg, sizeof(msg), 2, 5, 0);
 		// did we recieve something ?
 		if (recieved_size < 0) {
 			perror("Read error : ");
 		}
-
 		// did we recieve exactly the size of data we are waiting for ?
-		if (recieved_size != sizeof(buffer)) {
+		if (recieved_size != sizeof(msg)) {
 			cout << "received size != buffer" << endl;
 		}
+		cout << "###########  ERFOLG: " << msg << endl;
 
-		cout << "###########  ERFOLG: " << buffer << endl;
+		//TODO put message in pulse messege and send to dispatcher
+		Demultiplexer::getInstance()->sendMsg2Dispatcher(msg);
+		msg = -1;
 
 	}
 

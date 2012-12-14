@@ -19,7 +19,7 @@
 //#define SWITCH_TEST
 //#define MOTOR_TEST
 //#define LIGHT_TEST
-//#define SER_INTERFACE_TEST
+//#define SERINTERFACE_TEST
 //#define SENSORIC_TEST
 //#define DISPATCHER_TEST
 //#define DEBUG_MUTEX
@@ -42,9 +42,10 @@
 #include "LightTest.h"
 #include "MotorTest.h"
 #include "SwitchTest.h"
+*/
 #include "SerInterfaceTest.h"
 
-*/
+
 
 using namespace std;
 using namespace thread;
@@ -60,6 +61,7 @@ int main(int argc, char *argv[]) {
 #ifdef STATE_TEST
 	StateTest state_test;
 	state_test.start(NULL);
+	SerInterfaceTest *SRtest = new SerInterfaceTest();
 	state_test.join();
 #endif
 
@@ -96,6 +98,7 @@ int main(int argc, char *argv[]) {
 #endif
 
 #ifdef SERINTERFACE_TEST
+	cout << "testCplusplus Serial Interface" << endl;
 	SerInterfaceTest *SRtest = new SerInterfaceTest();
 #endif
 

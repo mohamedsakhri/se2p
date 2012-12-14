@@ -8,16 +8,16 @@
 #ifndef SENDER_H_
 #define SENDER_H_
 
-#include "HAWThread.h"
 
-using namespace thread;
 
-class Sender: public HAWThread {
+
+
+class Sender{
 public:
 	Sender();
 	virtual ~Sender();
-	virtual void execute(void*arg);
-	virtual void shutdown();
+	virtual void send(int message);
+//	virtual void shutdown();
 private:
 	int ser_Interface_id_;
 };

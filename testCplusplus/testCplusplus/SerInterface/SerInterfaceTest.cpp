@@ -6,18 +6,21 @@
  */
 
 #include "SerInterfaceTest.h"
+#include "Messages.h"
 //#include "SerInterface.h"
 
 
 SerInterfaceTest::SerInterfaceTest() {
 	// TODO Auto-generated constructor stub
+	cout << "Serial interface test start" << endl;
 	Reader rdr;
 	rdr.start(NULL);
 
 	Sender sdr;
-	sdr.start(NULL);
+	sdr.send(WP_IN_ENGINE_END);
+	sdr.send(WP_IN_ENGINE_START);
 
-	sdr.join();
+
 	rdr.join();
 }
 
