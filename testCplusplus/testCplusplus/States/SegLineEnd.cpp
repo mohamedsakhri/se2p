@@ -88,6 +88,9 @@ Turning::Turning()
 
 void Turning::inLineEnd()
 {
+	HALAktorik::getInstance()->motor_on();
+	HALAktorik::getInstance()->yellow_Light_off();
+	HALAktorik::getInstance()->green_Light_on();
 	new (this) TransferMachine2();
 }
 
@@ -170,7 +173,7 @@ void Machine2Ready::outLineEnd()
 			&&ControllerSeg4::getInstance()->isFifoEmpty()
 			&&ControllerSeg5::getInstance()->isFifoEmpty())
 			{
-				HALAktorik::getInstance()->motor_off();
+	//			HALAktorik::getInstance()->motor_off();
 			}
 	new (this) WaitLineEndM1();
 }

@@ -8,8 +8,8 @@
 #include "StateTest.h"
 #include "Constants.h"
 
-//#define TEST_MACHINE_1
-#define TEST_MACHINE_2
+#define TEST_MACHINE_1
+//#define TEST_MACHINE_2
 
 StateTest::StateTest() {
 	dispatcher_ = Dispatcher::getInstance();
