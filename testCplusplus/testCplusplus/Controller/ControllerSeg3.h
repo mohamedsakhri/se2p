@@ -20,6 +20,9 @@
 
 class ControllerSeg3: public HALCallInterface {
 public:
+	/**
+	 * @return The controller's instance
+	 */
 	static ControllerSeg3* getInstance();
 
 	void inSwitch();

@@ -13,11 +13,13 @@
 #define CONTROLLERSEG4_H_
 
 #include "HALCallInterface.h"
-//TODO .h of slide
 #include "SegSlide.h"
 
 class ControllerSeg4: public HALCallInterface {
 public:
+	/**
+	 * @return The controller's instance
+	 */
 	static ControllerSeg4* getInstance();
 
 	void inSlide();

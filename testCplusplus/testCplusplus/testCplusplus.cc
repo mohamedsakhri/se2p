@@ -24,10 +24,10 @@
 //#define DISPATCHER_TEST
 //#define DEBUG_MUTEX
 #define STATE_TEST
+//#define TIMER_TEST
 
 
 #include "HWaccess.h"
-//#include "MyThread.h"
 #include <cstdlib>
 #include <iostream>
 #include <unistd.h>
@@ -37,6 +37,8 @@
 //#include "Demultiplexer.h"
 #include "DispatcherTest.h"
 #include "StateTest.h"
+#include "TimerTest.h"
+#include "Reader.h"
 /*
 #include "LEDTest.h"
 #include "LightTest.h"
@@ -44,9 +46,6 @@
 #include "SwitchTest.h"
 #include "SerInterfaceTest.h"
 */
-#include "Reader.h"
-
-
 
 using namespace std;
 using namespace thread;
@@ -69,12 +68,17 @@ int main(int argc, char *argv[]) {
 	reader.join();
 #endif
 
+#ifdef TIMER_TEST
+	TimerTest timer_test;
+	timer_test.start(NULL);
+	timer_test.join();
+#endif
+
 #ifdef DISPATCHER_TEST
 	DispatcherTest dispatcher_test;
 	dispatcher_test.start(NULL);
 	dispatcher_test.join();
 #endif
-
 
 #ifdef SENSORIC_TEST
 	SensoricTest sensoric_test ;

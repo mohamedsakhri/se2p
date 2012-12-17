@@ -17,14 +17,22 @@
 Mutex ControllerSeg5::controllerSeg5_mutex_ = Mutex();
 ControllerSeg5* ControllerSeg5::controllerSeg5_instance_ = NULL ;
 
-ControllerSeg5::ControllerSeg5() {
+/*
+ *
+ */
+ControllerSeg5::ControllerSeg5()
+{
 	ctr_id_ = CONTROLLER_SEG5;
 	machine2_ready_ = true;
 	state_ = new WaitLineEndM1();
 	init();
 }
 
-ControllerSeg5* ControllerSeg5::getInstance() {
+/*
+ *
+ */
+ControllerSeg5* ControllerSeg5::getInstance()
+{
 
 	if (!controllerSeg5_instance_) {
 		controllerSeg5_mutex_.lock();
@@ -36,11 +44,11 @@ ControllerSeg5* ControllerSeg5::getInstance() {
 	return controllerSeg5_instance_;
 }
 
-
 /**
  * Do some initialization work
  */
-void ControllerSeg5::init(){
+void ControllerSeg5::init()
+{
 
 	con_id_ = ConnectAttach(0, 0, Demultiplexer::getInstance()->getChannelId(), _NTO_SIDE_CHANNEL, 0);
 	if (con_id_ == -1) {
@@ -52,36 +60,66 @@ void ControllerSeg5::init(){
 #endif
 }
 
+/*
+ *
+ */
 void ControllerSeg5::inLineEnd()
 {
 	state_->inLineEnd();
 }
 
+/*
+ *
+ */
 void ControllerSeg5::outLineEnd()
 {
 	state_->outLineEnd();
 }
 
+/*
+ *
+ */
 void ControllerSeg5::m2isBusy()
 {
 	machine2_ready_ = false;
 }
 
+/*
+ *
+ */
 void ControllerSeg5::m2isReady()
 {
 	machine2_ready_ = true;
 	state_->machine2IsReady();
 }
 
-bool ControllerSeg5::isMachin2Ready(){
+/*
+ *
+ */
+bool ControllerSeg5::isMachin2Ready()
+{
 	return machine2_ready_;
+}
+
+/*
+ *
+ */
+void ControllerSeg5::wpHasArrived()
+{
+	if (ControllerSeg1::getInstance()->isFifoEmpty()
+			&& ControllerSeg2::getInstance()->isFifoEmpty()
+			&& ControllerSeg3::getInstance()->isFifoEmpty()
+			&& ControllerSeg4::getInstance()->isFifoEmpty()
+			&& ControllerSeg5::getInstance()->isFifoEmpty()) {
+		HALAktorik::getInstance()->motor_off();
+	}
 }
 
 /**
  * Send a message to Dispatcher
  */
-int ControllerSeg5::sendMsg2Dispatcher(int message){
-
+int ControllerSeg5::sendMsg2Dispatcher(int message)
+{
 	if (-1 == MsgSendPulse(con_id_,SIGEV_PULSE_PRIO_INHERIT, CONTROLLER_CODE, message )) {
 		perror("ControllerSeg5 : MsgSendPulse");
 		exit(EXIT_FAILURE);
@@ -99,10 +137,14 @@ int ControllerSeg5::sendMsg2Dispatcher(int message){
  */
 void ControllerSeg5::passWP2Ctr()
 {
-//	controllerSeg5::getInstance()->addWP2List(getFirstWP());
+	cout << "ControllerSeg5::passWP2Ctr: ID: " << getFirstWP()->getId() << " TOL: " << getFirstWP()->getIs_inTolleranceRange() << endl;
+	ControllerSegM2::getInstance()->addWP2List(this->getFirstWP());
 }
 
-
-ControllerSeg5::~ControllerSeg5() {
+/**
+ * Delete instance of Istate
+ */
+ControllerSeg5::~ControllerSeg5()
+{
 	delete state_ ;
 }

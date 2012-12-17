@@ -30,7 +30,8 @@ WaitingSwitch::WaitingSwitch() {
  *
  * Check if WP is stranger  first //TODO May be in Error handling
  */
-void WaitingSwitch::inSwitch() {
+void WaitingSwitch::inSwitch()
+{
 	if (!ControllerSeg3::getInstance()->isFifoEmpty()) {
 		if (ControllerSeg3::getInstance()->getFirstWP()->getIs_inTolleranceRange()) {
 			HALAktorik::getInstance()->open_Switch();
@@ -39,7 +40,7 @@ void WaitingSwitch::inSwitch() {
 			new (this) WorkPieceInvalid();
 		}
 	} else {
-		//TODO  just send msg and let controller do the rest according to the error event handler
+		//TODO  just send msg and let controller do the rest according to the error event_ handler
 		ControllerSeg3::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
 		HALAktorik::getInstance()->motor_off();
 		HALAktorik::getInstance()->red_Light_on();
@@ -47,7 +48,8 @@ void WaitingSwitch::inSwitch() {
 	}
 }
 
-WaitingSwitch::~WaitingSwitch() {
+WaitingSwitch::~WaitingSwitch()
+{
 }
 
 
@@ -90,7 +92,6 @@ WorkPieceValid::WorkPieceValid()
 	cout << "WorkPieceValid :: Constructor" << endl;
 #endif
 }
-
 
 void WorkPieceValid::outSwitch()
 {

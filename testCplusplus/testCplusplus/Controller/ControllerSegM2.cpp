@@ -17,13 +17,18 @@
 Mutex ControllerSegM2::controllerSegM2_mutex_ = Mutex();
 ControllerSegM2* ControllerSegM2::controllerSegM2_instance_ = NULL ;
 
+/*
+ *
+ */
 ControllerSegM2::ControllerSegM2() {
 	ctr_id_ = CONTROLLER_SEGM2;
 	state_ = new WaitForLineStart();
-	sender_ = new Sender();
 	init();
 }
 
+/*
+ *
+ */
 ControllerSegM2* ControllerSegM2::getInstance() {
 
 	if (!controllerSegM2_instance_) {
@@ -52,44 +57,78 @@ void ControllerSegM2::init(){
 #endif
 }
 
+/*
+ *
+ */
+void ControllerSegM2::wpIsComming() {
+	state_->wpIsComming();
+}
 
+/*
+ *
+ */
 void ControllerSegM2::inLineStart(){
-	sender_->send(MACHINE2_IS_BUSY);
+	Sender::getInstance()->send(MACHINE2_IS_BUSY);
+	Sender::getInstance()->send(WP_HAS_ARRIVED);
 	state_->inLineStart();
 }
 
+/*
+ *
+ */
 void ControllerSegM2::inHeightMeasurement(){
 	state_->inHeightMeasurement();
 }
 
+/*
+ *
+ */
 void ControllerSegM2::outHeightMeasurement(){
 	state_->outHeightMeasurement();
 }
 
+/*
+ *
+ */
 void ControllerSegM2::inToleranceRange(){
 	state_->inToleranceRange();
 }
 
+/*
+ *
+ */
 void ControllerSegM2::isMetal(){
 	state_->isMetal();
 }
 
+/*
+ *
+ */
 void ControllerSegM2::outSwitch(){
 	state_->outSwitch();
 }
 
+/*
+ *
+ */
 void ControllerSegM2::inSwitch(){
 	state_->inSwitch();
 }
 
+/*
+ *
+ */
 void ControllerSegM2::outSlide(){
 	state_->outSlide();
-	sender_->send(MACHINE2_IS_READY);
+	Sender::getInstance()->send(MACHINE2_IS_READY);
 }
 
+/*
+ *
+ */
 void ControllerSegM2::outLineEnd(){
 	state_->outLineEnd();
-	sender_->send(MACHINE2_IS_READY);
+	Sender::getInstance()->send(MACHINE2_IS_READY);
 }
 
 /**
@@ -117,7 +156,9 @@ void ControllerSegM2::passWP2Ctr()
 //	controllerSegM2::getInstance()->addWP2List(getFirstWP());
 }
 
-
+/**
+ * Delete instance of Istate
+ */
 ControllerSegM2::~ControllerSegM2() {
 	delete state_ ;
 }

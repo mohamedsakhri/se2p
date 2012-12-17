@@ -1,61 +1,78 @@
 /*
- * Sender.cpp
+ * @file 	Sender.cpp
  *
- *  Created on : 29.10.2012
- *   *      Author: simohamed
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ *
+ * @date	 Dec 14, 2012
+ *
+ * This class represents the sender. It initialize the Serial Interface
+ * and offers a method to send messages.
+ *
  */
-
 #include "Sender.h"
-#include "stdint.h"
-#include "SerInterface.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-//#include "Messages.h"
 
 #define DEBUG_
 
 using namespace std;
 
+Mutex Sender::sender_mutex_ = Mutex();
+Sender* Sender::sender_instance_ = NULL ;
+
+/**
+ * Initialize the communication wit Serial Interface and react in case of fail
+ */
 Sender::Sender() {
-	// TODO Auto-generated constructor stub
-
-}
-
-Sender::~Sender() {
-	// TODO Auto-generated destructor stub
-}
-
-void Sender::send(int message) {
 #ifdef DEBUG_
-	cout << "sender thread start" << endl;
+	cout << "Sender :: Constructor " << endl;
 #endif
-	ser_Interface_id_ = open(DEVICE, O_RDWR | O_NOCTTY); // open device with right/right rights
-	// this process doesn't want to control the device
+
+	/*	O_RDWR		: open device with right/right rights
+	 * 	O_NOCITY	: this process doesn't want to control the device
+	 */
+	ser_Interface_id_ = open(DEVICE, O_RDWR | O_NOCTTY);
 
 	if (ser_Interface_id_ < 0) {
 		perror("Open failed : ");
-		exit(EXIT_FAILURE);
+		exit( EXIT_FAILURE);
 	}
-//	cout << "fd: " << ser_Interface_id_ << endl;
-
-//	int buffer;
-//	buffer = message;
-
-//	while (true) {
-		// call write here and react about errors
-		int writen_size = write(ser_Interface_id_, &message, sizeof(message));
-		usleep(TIME_TO_WAIT);
-
-		//	  cout << "data sent: " << buffer << endl;
-		if (writen_size < 0) {
-			perror("send error : ");
-		}
-//	}
 }
 
-//void Sender::shutdown() {
-//	//	close(ser_Interface_id_);
+/**
+ * Return the only instance of Sender, which is implemented as Singleton pattern.
+ */
+Sender* Sender::getInstance() {
 
-//}
+	if (!sender_instance_) {
+		sender_mutex_.lock();
+		if (!sender_instance_) {
+			sender_instance_ = new Sender;
+		}
+		sender_mutex_.unlock();
+	}
+	return sender_instance_;
+}
 
+/**
+ * Send message to the serial interface and test if the operation has been successful
+ */
+void Sender::send(int message) {
+#ifdef DEBUG_
+	cout << "Sender :: send " << endl;
+#endif
+
+	int writen_size = write(ser_Interface_id_, &message, sizeof(message));
+	//TODO do we need to wait!
+	usleep( TIME_TO_WAIT);
+
+	if (writen_size < 0) {
+		perror("send error : ");
+	}
+}
+
+/**
+ * Close the communication with the Serial Interface
+ */
+Sender::~Sender() {
+	close(ser_Interface_id_);
+}

@@ -16,9 +16,8 @@ SerInterfaceTest::SerInterfaceTest() {
 	Reader rdr;
 	rdr.start(NULL);
 
-	Sender sdr;
-	sdr.send(WP_IN_ENGINE_END);
-	sdr.send(WP_IN_ENGINE_START);
+	Sender::getInstance()->send(WP_IN_ENGINE_END);
+	Sender::getInstance()->send(WP_IN_ENGINE_START);
 
 
 	rdr.join();
@@ -27,5 +26,4 @@ SerInterfaceTest::SerInterfaceTest() {
 SerInterfaceTest::~SerInterfaceTest() {
 	// TODO Auto-generated destructor stub
 	cout << "Serial interface test end" << endl;
-	delete SRtest;
 }

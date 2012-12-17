@@ -27,7 +27,8 @@ WaitLineEndM1::WaitLineEndM1()
 #endif
 }
 
-void WaitLineEndM1::inLineEnd() {
+void WaitLineEndM1::inLineEnd()
+{
 	if (!ControllerSeg5::getInstance()->isFifoEmpty()) {
 		if (ControllerSeg5::getInstance()->getFirstWP()->getHas_Drill()) {
 			new (this) TransferMachine2();
@@ -39,7 +40,7 @@ void WaitLineEndM1::inLineEnd() {
 			new (this) WaitForTurn();
 		}
 	} else {
-		//TODO  just send msg and let controller do the rest according to the error event handler
+		//TODO  just send msg and let controller do the rest according to the error event_ handler
 		ControllerSeg5::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
 		HALAktorik::getInstance()->motor_off();
 		HALAktorik::getInstance()->red_Light_on();
@@ -129,6 +130,7 @@ TransferMachine2::~TransferMachine2()
 {
 }
 
+
 /************************************************************************************
  *									Machine2Ready									*
  *																					*
@@ -144,12 +146,15 @@ WaitForMachine2::WaitForMachine2()
 void WaitForMachine2::machine2IsReady()
 {
 	HALAktorik::getInstance()->motor_on();
+	HALAktorik::getInstance()->yellow_Light_off();
+	HALAktorik::getInstance()->green_Light_on();
 	new (this) Machine2Ready();
 }
 
 WaitForMachine2::~WaitForMachine2()
 {
 }
+
 
 /************************************************************************************
  *									Machine2Ready									*
@@ -166,16 +171,15 @@ Machine2Ready::Machine2Ready()
 //TODO has to be changed. Just for get things in M! now
 void Machine2Ready::outLineEnd()
 {
-	ControllerSeg5::getInstance()->removeFirsttWP();
-	if (ControllerSeg1::getInstance()->isFifoEmpty()
-			&&ControllerSeg2::getInstance()->isFifoEmpty()
-			&&ControllerSeg3::getInstance()->isFifoEmpty()
-			&&ControllerSeg4::getInstance()->isFifoEmpty()
-			&&ControllerSeg5::getInstance()->isFifoEmpty())
-			{
-	//			HALAktorik::getInstance()->motor_off();
-			}
-	new (this) WaitLineEndM1();
+	if (!ControllerSeg5::getInstance()->isFifoEmpty()) {
+		ControllerSeg5::getInstance()->passWP2Ctr();
+		ControllerSeg5::getInstance()->removeFirsttWP();
+		Sender::getInstance()->send(WP_IS_COMMING);
+		new (this) WaitLineEndM1();
+	} else {
+		HALAktorik::getInstance()->red_Light_on();
+		HALAktorik::getInstance()->green_Light_off();
+	}
 }
 
 Machine2Ready::~Machine2Ready()

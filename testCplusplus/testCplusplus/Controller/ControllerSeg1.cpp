@@ -17,13 +17,18 @@
 Mutex ControllerSeg1::controllerSeg1_mutex_ = Mutex();
 ControllerSeg1* ControllerSeg1::controllerSeg1_instance_ = NULL ;
 
-
+/*
+ *
+ */
 ControllerSeg1::ControllerSeg1() {
 	ctr_id_ = CONTROLLER_SEG1;
 	state_ = new StateLineStart();
 	init();
 }
 
+/*
+ *
+ */
 ControllerSeg1* ControllerSeg1::getInstance() {
 
 	if (!controllerSeg1_instance_) {
@@ -35,7 +40,6 @@ ControllerSeg1* ControllerSeg1::getInstance() {
 	}
 	return controllerSeg1_instance_;
 }
-
 
 /**
  * Do some initialization work
@@ -52,7 +56,7 @@ void ControllerSeg1::init(){
 #endif
 }
 
-/**
+/*
  *
  */
 void ControllerSeg1::inLineStart()
@@ -60,7 +64,7 @@ void ControllerSeg1::inLineStart()
 	state_->inLineStart();
 }
 
-/**
+/*
  *
  */
 void ControllerSeg1::outLineStart()
@@ -68,12 +72,9 @@ void ControllerSeg1::outLineStart()
 	state_->outLineStart();
 }
 
-
 /**
  * Send a message to Dispatcher
  */
-
-
 int ControllerSeg1::sendMsg2Dispatcher(int message){
 
 	if (-1 == MsgSendPulse(con_id_,SIGEV_PULSE_PRIO_INHERIT, CONTROLLER_CODE, message )) {
@@ -87,10 +88,11 @@ int ControllerSeg1::sendMsg2Dispatcher(int message){
 	return 0;
 }
 
+
 /**
  * Pass a workpiece from a segment to the next one
  */
-// in case of problem : remove it and use addWP2List directely from state
+// in case of problem : remove it and use addWP2List directly from state
 void ControllerSeg1::passWP2Ctr()
 {
 	cout << "ControllerSeg1::passWP2Ctr: ID: " << getFirstWP()->getId() << " TOL: " << getFirstWP()->getIs_inTolleranceRange() << endl;

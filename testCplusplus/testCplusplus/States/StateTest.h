@@ -1,8 +1,12 @@
 /*
- * StateTaste.h
+ * @file	StateTest.h
  *
- *  Created on: 30.11.2012
- *      Author: aax844
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ *
+ * @date	 Nov 11, 2012
+ *
+ * This class is used to test states' implementation.
  */
 
 #ifndef STATETASTE_H_

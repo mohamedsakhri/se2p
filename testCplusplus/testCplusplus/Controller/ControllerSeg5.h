@@ -13,10 +13,14 @@
 #define CONTROLLERSEG5_H_
 
 #include "HALCallInterface.h"
+#include "ControllerSegM2.h"
 #include "SegLineEnd.h"
 
 class ControllerSeg5: public HALCallInterface {
 public:
+	/**
+	 * @return The controller's instance
+	 */
 	static ControllerSeg5* getInstance();
 
 	void inLineEnd();
@@ -25,9 +29,14 @@ public:
 	void m2isBusy();
 	void m2isReady();
 
+	/**
+	 * @return true if machine 2 ready
+	 */
 	bool isMachin2Ready() ;
-
-	// Error's handling
+	void wpHasArrived();
+	/**
+	 * @param message Message to be sent to Dispatcher
+	 */
 	int sendMsg2Dispatcher(int message);
 	void init();
 	void passWP2Ctr();

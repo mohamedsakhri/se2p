@@ -1,8 +1,12 @@
 /*
- * StateTaste.cpp
+ * @file	StateTest.cpp
  *
- *  Created on: 30.11.2012
- *      Author: aax844
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ *
+ * @date	 Nov 11, 2012
+ *
+ * This class is used to test states' implementation.
  */
 
 #include "StateTest.h"
@@ -11,14 +15,16 @@
 #define TEST_MACHINE_1
 //#define TEST_MACHINE_2
 
-StateTest::StateTest() {
+StateTest::StateTest()
+{
 	dispatcher_ = Dispatcher::getInstance();
 	HALAktorik::getInstance()->motor_off();
 	HALAktorik::getInstance()->close_Switch();
 
 }
 
-StateTest::~StateTest() {
+StateTest::~StateTest()
+{
 	// TODO Auto-generated destructor stub
 }
 
@@ -40,6 +46,7 @@ void StateTest::execute(void *arg)
 	ctr1->addEvent(STOP_PRESSED);
 	ctr1->addEvent(E_STOP_PRESSED);
 	ctr1->addEvent(E_STOP_RELEASED);
+	ctr1->addEvent(WP_IS_MISSING);
 
 	ctr2->addEvent(WP_IN_HEIGHT_M);
 	ctr2->addEvent(WP_OUT_HEIGHT_M);
@@ -73,6 +80,7 @@ void StateTest::execute(void *arg)
 	ctr5->addEvent(STOP_PRESSED);
 	ctr5->addEvent(E_STOP_PRESSED);
 	ctr5->addEvent(E_STOP_RELEASED);
+	ctr5->addEvent(WP_HAS_ARRIVED);
 
 
 //	ctr3->addEvent(STOP_PRESSED);
@@ -89,6 +97,7 @@ void StateTest::execute(void *arg)
 #ifdef TEST_MACHINE_2
 	ControllerSegM2 *ctrM2 = ControllerSegM2::getInstance();
 
+	ctrM2->addEvent(WP_IS_COMMING);
 	ctrM2->addEvent(WP_IN_ENGINE_START);
 	ctrM2->addEvent(WP_IN_HEIGHT_M);
 	ctrM2->addEvent(WP_OUT_HEIGHT_M);

@@ -20,7 +20,8 @@
  *																					*
  ************************************************************************************/
 
-StateLineStart::StateLineStart() {
+StateLineStart::StateLineStart()
+{
 #ifdef DEBUG_
 	cout << "StateLineStart :: Constructor" << endl;
 #endif
@@ -43,7 +44,8 @@ void StateLineStart::inLineStart()
 
 }
 
-StateLineStart::~StateLineStart() {
+StateLineStart::~StateLineStart()
+{
 }
 
 
@@ -52,13 +54,15 @@ StateLineStart::~StateLineStart() {
  *																					*
  ************************************************************************************/
 
-StateWorkPieceCreated::StateWorkPieceCreated(){
+StateWorkPieceCreated::StateWorkPieceCreated()
+{
 #ifdef DEBUG_
 	cout << "StateWorkPieceCreated :: Constructor" << endl;
 #endif
 }
 
-void StateWorkPieceCreated::outLineStart(){
+void StateWorkPieceCreated::outLineStart()
+{
 #ifdef DEBUG_
 	cout << "StateWorkPieceCreated :: outLineStart" << endl;
 #endif
@@ -69,7 +73,7 @@ void StateWorkPieceCreated::outLineStart(){
 
 		new (this) StateLineStart();
 	} else {
-		//TODO  just send msg and let controller do the rest according to the error event handler
+		//TODO  just send msg and let controller do the rest according to the error event_ handler
 		ControllerSeg1::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
 		HALAktorik::getInstance()->motor_off();
 		HALAktorik::getInstance()->red_Light_on();
@@ -77,7 +81,8 @@ void StateWorkPieceCreated::outLineStart(){
 	}
 }
 
-StateWorkPieceCreated::~StateWorkPieceCreated(){
+StateWorkPieceCreated::~StateWorkPieceCreated()
+{
 
 }
 

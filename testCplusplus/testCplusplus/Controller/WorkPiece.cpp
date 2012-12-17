@@ -21,7 +21,8 @@ WorkPiece::WorkPiece(int id) {
 	is_Metal_ = false;
 	is_inTolleranceRange_ = false;
 	has_Drill_ = false;
-	tol_counter_ = 0;
+	timer_ = new Timer(2, 0, Demultiplexer::getInstance()->getChannelId(), 0, STOP_PRESSED);
+	timer_->start();
 }
 
 /**
@@ -86,14 +87,3 @@ bool WorkPiece::getHas_Drill()
     return this->has_Drill_;
 }
 
-int WorkPiece::getTolCounter(){
-	return tol_counter_;
-}
-
-void WorkPiece::incTolCounter(){
-	tol_counter_++;
-}
-
-void WorkPiece::resetTolCounter(){
-	tol_counter_ = 0;
-}

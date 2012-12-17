@@ -17,12 +17,19 @@
 Mutex ControllerSeg2::controllerSeg2_mutex_ = Mutex();
 ControllerSeg2* ControllerSeg2::controllerSeg2_instance_ = NULL ;
 
-ControllerSeg2::ControllerSeg2() {
+/*
+ *
+ */
+ControllerSeg2::ControllerSeg2()
+{
 	ctr_id_ = CONTROLLER_SEG2;
 	state_ = new WaitingHeightM1();
 	init();
 }
 
+/*
+ *
+ */
 ControllerSeg2* ControllerSeg2::getInstance() {
 
 	if (!controllerSeg2_instance_) {
@@ -35,11 +42,11 @@ ControllerSeg2* ControllerSeg2::getInstance() {
 	return controllerSeg2_instance_;
 }
 
-
 /**
  * Do some initialization work
  */
-void ControllerSeg2::init(){
+void ControllerSeg2::init()
+{
 
 	con_id_ = ConnectAttach(0, 0, Demultiplexer::getInstance()->getChannelId(), _NTO_SIDE_CHANNEL, 0);
 	if (con_id_ == -1) {
@@ -51,21 +58,33 @@ void ControllerSeg2::init(){
 #endif
 }
 
+/*
+ *
+ */
 void ControllerSeg2::inHeightMeasurement()
 {
 	state_->inHeightMeasurement();
 }
 
+/*
+ *
+ */
 void ControllerSeg2::outHeightMeasurement()
 {
 	state_->outHeightMeasurement();
 }
 
+/*
+ *
+ */
 void ControllerSeg2::inToleranceRange()
 {
 	state_->inToleranceRange();
 }
 
+/*
+ *
+ */
 void ControllerSeg2::notInToleranceRange()
 {
 //	state_->notInToleranceRange();
@@ -74,7 +93,8 @@ void ControllerSeg2::notInToleranceRange()
 /**
  * Send a message to Dispatcher
  */
-int ControllerSeg2::sendMsg2Dispatcher(int message){
+int ControllerSeg2::sendMsg2Dispatcher(int message)
+{
 
 	if (-1 == MsgSendPulse(con_id_,SIGEV_PULSE_PRIO_INHERIT, CONTROLLER_CODE, message )) {
 		perror("ControllerSeg2 : MsgSendPulse");
@@ -103,6 +123,7 @@ void ControllerSeg2::passWP2Ctr()
 /**
  * Delete instance of Istate
  */
-ControllerSeg2::~ControllerSeg2() {
+ControllerSeg2::~ControllerSeg2()
+{
 	delete state_ ;
 }

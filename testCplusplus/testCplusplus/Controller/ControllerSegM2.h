@@ -18,17 +18,21 @@
 
 class ControllerSegM2: public HALCallInterface {
 public:
+	/**
+	 * @return The controller's instance
+	 */
 	static ControllerSegM2* getInstance();
 
+	void wpIsComming();				//!< WP has left machine 1 and comming to machine 2
 	void inLineStart();				//!< WP in Line's start
 	void inHeightMeasurement();		//!< WP is in height measurement area
 	void outHeightMeasurement();		//!< WP has left height measurement area
 	void inToleranceRange();			//!< WP's height is in tolerance range
-	void isMetal();						//!< WP has metal
+	void isMetal();					//!< WP has metal
 	void outSwitch();					//!< WP has left Switch area
-	void inSwitch();
+	void inSwitch();					//!< WP is in Switch
 	void outSlide();					//!< WP out Slide's light barrier
-	void outLineEnd();
+	void outLineEnd();					//!< WP has left machine 2
 
 
 	// Error's handling

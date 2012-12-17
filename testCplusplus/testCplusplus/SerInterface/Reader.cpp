@@ -1,70 +1,81 @@
 /*
- * Reader.cpp
+ * @file 	Reader.cpp
  *
- *  Created on:
- *      Author: simohamed
+ * @author	Mahmoud Dariti
+ * @author	Mohamed Sakhri
+ *
+ * @date	 Dec 14, 2012
+ *
+ * This class represents the reader thread, which reads what is sent to the Serial interface.
  */
 
 #include "Reader.h"
-#include "stdint.h"
-#include "SerInterface.h"
-#include "Constants.h"
-#include "Demultiplexer.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
 #define DEBUG_
 
 using namespace std;
+
+/**
+ * Initialize the communication wit Serial Interface and react in case of fail
+ */
 Reader::Reader() {
-	// TODO Auto-generated constructor stub
-}
-
-Reader::~Reader() {
-	// TODO Auto-generated destructor stub
-}
-
-void Reader::shutdown() {
-	close(ser_Interface_id_);
-}
-
-void Reader::execute(void *arg) {
 #ifdef DEBUG_
-	cout << "(reader) thread start" << endl;
+	cout << "Reader :: Constructor " << endl;
 #endif
-	int fd = open(DEVICE, O_RDWR | O_NOCTTY); // open device with right/right rights
-	// this process doesn't want to control the device
-	if (fd < 0) {
+	/*	O_RDWR		: open device with right/right rights
+	 * 	O_NOCITY	: this process doesn't want to control the device
+	 */
+	ser_Interface_id_ = open(DEVICE, O_RDWR | O_NOCTTY);
+
+	if (ser_Interface_id_ < 0) {
 		perror("Open failed : ");
 		exit(EXIT_FAILURE);
 	}
+}
+
+/*
+ *
+ */
+void Reader::execute(void *arg) {
 #ifdef DEBUG_
-	cout << "(reader) fd: " << fd << endl;
+	cout << "Reader Thread started" << endl;
 #endif
-	//recieved data will be saved in buffer
+
+	//received data will be saved in buffer
 	int msg = -1;
 	while (!isStopped()) {
 
 #ifdef DEBUG_
-		cout << "(reader) waiting for data" << endl;
+		cout << "SI : Reader waiting for data " << endl;
 #endif
-		int recieved_size = readcond(fd, &msg, sizeof(msg), 2, 5, 0);
-		// did we recieve something ?
+		int recieved_size = readcond(ser_Interface_id_, &msg, sizeof(msg), 2, 5, 0);
+
 		if (recieved_size < 0) {
 			perror("Read error : ");
 		}
-		// did we recieve exactly the size of data we are waiting for ?
+		// did we receive exactly the size of data we are waiting for ?
 		if (recieved_size != sizeof(msg)) {
-			cout << "received size != buffer" << endl;
+			cout << "Error : Received size != buffer" << endl;
+			// Don't send message and go to the next loop
+			continue;
 		}
 		cout << "###########  ERFOLG: " << msg << endl;
-
-		//TODO put message in pulse messege and send to dispatcher
+		//Send message to Dispatcher
 		Demultiplexer::getInstance()->sendMsg2Dispatcher(msg);
+
+		//Reset message to invalid value to avoid reuse of the last message
 		msg = -1;
-
 	}
+}
 
+/**
+ * Close communication before thread's end
+ */
+void Reader::shutdown() {
+	close(ser_Interface_id_);
+}
+
+
+Reader::~Reader() {
 }
 

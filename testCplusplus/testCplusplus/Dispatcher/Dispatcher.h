@@ -8,7 +8,7 @@
  *
  *	This Class implements the Dispatcher's design pattern.
  *	Dispatcher gets messages from Demultiplexer ( and Controller )
- *	and execute a call-back to the right event handler(function) registred in its event handler table
+ *	and execute a call-back to the right event_ handler(function) registred in its event_ handler table
  */
 #ifndef DISPATCHER_H_
 #define DISPATCHER_H_
@@ -46,7 +46,7 @@ public:
 	 * @param handler Controller to be removed from Dispatcher
 	 */
 	void removeHandler(HALCallInterface* handler);		//!< Remove handler from Dispatcher
-//TODO Suggesttion : overload register and remove to add and remove single event passing as parameter
+//TODO Suggesttion : overload register and remove to add and remove single event_ passing as parameter
 	void execute(void* arg);
 	void shutdown();
 
@@ -62,7 +62,7 @@ private :
 	Demultiplexer* demultiplexer_;
 	pt2Func pt2FuncArray[MESSAGES_NUMBER];					//!< Array of pointers to functions
 	// MESSAGES_NUMBERS = Number of events. See Messages.h
-	ControllersList CTRList[MESSAGES_NUMBER];				//!< Array of Controllers' list for each event
+	ControllersList CTRList[MESSAGES_NUMBER];				//!< Array of Controllers' list for each event_
 };
 
 #endif /* DISPATCHER_H_ */

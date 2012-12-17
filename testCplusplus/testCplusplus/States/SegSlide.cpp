@@ -54,7 +54,8 @@ InSlide::InSlide()
  * Free memory located by WP
  * Stop machine if it's empty
  */
-void InSlide::outSlide() {
+void InSlide::outSlide()
+{
 	delete ControllerSeg4::getInstance()->getFirstWP();
 	ControllerSeg4::getInstance()->removeFirsttWP();
 

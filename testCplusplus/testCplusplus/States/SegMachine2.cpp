@@ -10,154 +10,208 @@
 
 
 //************************* WaitForLinestart ***************************
-WaitForLineStart::WaitForLineStart(){
+WaitForLineStart::WaitForLineStart()
+{
 #ifdef DEBUG_
 	cout << "WaitForLineStart :: Constructor" << endl;
 #endif
 }
-WaitForLineStart::~WaitForLineStart(){
+
+WaitForLineStart::~WaitForLineStart()
+{
 
 }
 
-void WaitForLineStart::inLineStart(){
+void WaitForLineStart::wpIsComming()
+{
 	HALAktorik::getInstance()->motor_on();
 	//send msg with busy message schon implementiert in controller
+	new (this) WpIsComming();
+}
+
+
+//************************* wpIsComming ***************************
+WpIsComming::WpIsComming()
+{
+#ifdef DEBUG_
+	cout << "WpIsComming :: Constructor" << endl;
+#endif
+}
+
+WpIsComming::~WpIsComming()
+{
+}
+
+void WpIsComming::inLineStart()
+{
+
 	new (this) WaitForHeightM2();
 }
 
+
 //************************* WaitForHeightM2 ***************************
 
-WaitForHeightM2::WaitForHeightM2(){
+WaitForHeightM2::WaitForHeightM2()
+{
 #ifdef DEBUG_
 	cout << "WaitForHeightM2 :: Constructor" << endl;
 #endif
 }
-WaitForHeightM2::~WaitForHeightM2(){
+
+WaitForHeightM2::~WaitForHeightM2()
+{
 
 }
 
-void WaitForHeightM2::inHeightMeasurement(){
+void WaitForHeightM2::inHeightMeasurement()
+{
 	cout << "WaitForHeightM2::inHeightMeasurement" << endl;
 	new (this) NoDrill();
 }
-void WaitForHeightM2::inToleranceRange(){
+
+void WaitForHeightM2::inToleranceRange()
+{
 	cout << "WaitForHeightM2::inTolerance" << endl;
 	new (this) CheckDrillM2();
 
 }
 
+
 //************************* noDrill ***************************
 //TODO error (if drill down or small WP)
-NoDrill::NoDrill(){
+NoDrill::NoDrill()
+{
 	cout << "ERROR WP Small or Drill Down" << endl;
 	HALAktorik::getInstance()->red_Light_on();
 	HALAktorik::getInstance()->green_Light_off();
 	HALAktorik::getInstance()->motor_off();
 }
-NoDrill::~NoDrill(){
+
+NoDrill::~NoDrill()
+{
 
 }
-
 
 
 //************************* CheckDrillM2 ***************************
 
-CheckDrillM2::CheckDrillM2(){
+CheckDrillM2::CheckDrillM2()
+{
 #ifdef DEBUG_
 	cout << "CheckDrillM2 :: Constructor" << endl;
 #endif
 }
-CheckDrillM2::~CheckDrillM2(){
+CheckDrillM2::~CheckDrillM2()
+{
 
 }
 
-void CheckDrillM2::outHeightMeasurement(){
+void CheckDrillM2::outHeightMeasurement()
+{
 	new (this) NoDrill();
 }
-void CheckDrillM2::inToleranceRange(){
+void CheckDrillM2::inToleranceRange()
+{
 	//Drill is UP
 	new (this) DrillOkay();
 }
 
 //************************* DrillOkay ***************************
 
-DrillOkay::DrillOkay(){
+DrillOkay::DrillOkay()
+{
 #ifdef DEBUG_
 	cout << "DrillOkay :: Constructor" << endl;
 #endif
 }
-DrillOkay::~DrillOkay(){
+DrillOkay::~DrillOkay()
+{
 
 }
 
-void DrillOkay::outHeightMeasurement(){
+void DrillOkay::outHeightMeasurement()
+{
 	new (this) WaitForMetal();
 }
 
 //************************* WaitForMetal ***************************
 
-WaitForMetal::WaitForMetal(){
+WaitForMetal::WaitForMetal()
+{
 #ifdef DEBUG_
 	cout << "WaitForMetal :: Constructor" << endl;
 #endif
 }
-WaitForMetal::~WaitForMetal(){
+WaitForMetal::~WaitForMetal()
+{
 
 }
 
-void WaitForMetal::inSwitch(){
+void WaitForMetal::inSwitch()
+{
 	//No Metall
 	HALAktorik::getInstance()->open_Switch();
 	new (this) WorkPieceIsValid();
 }
-void WaitForMetal::isMetal(){
+void WaitForMetal::isMetal()
+{
 	//HAS Metal
 	new (this) HasMetall();
 }
 
 
 //************************* HasMetal ***************************
-HasMetall::HasMetall(){
+HasMetall::HasMetall()
+{
 #ifdef DEBUG_
 	cout << "HasMetall :: Constructor" << endl;
 #endif
 }
-HasMetall::~HasMetall(){
+HasMetall::~HasMetall()
+{
 
 }
 
-void HasMetall::inSwitch(){
+void HasMetall::inSwitch()
+{
 	new (this) WorkPieceIsInvalid();
 }
 
 
 //************************* WorkPieceIsInvalid ***************************
-WorkPieceIsInvalid::WorkPieceIsInvalid(){
+WorkPieceIsInvalid::WorkPieceIsInvalid()
+{
 #ifdef DEBUG_
 	cout << "WorkPieceIsInvalid :: Constructor" << endl;
 #endif
 }
-WorkPieceIsInvalid::~WorkPieceIsInvalid(){
+WorkPieceIsInvalid::~WorkPieceIsInvalid()
+{
 
 }
 
-void WorkPieceIsInvalid::outSwitch(){
+void WorkPieceIsInvalid::outSwitch()
+{
 
 	new (this) InSlideM2();
 }
 
 
 //************************* InSlideM2 ***************************
-InSlideM2::InSlideM2(){
+InSlideM2::InSlideM2()
+{
 #ifdef DEBUG_
 	cout << "InSlideM2 :: Constructor" << endl;
 #endif
 }
-InSlideM2::~InSlideM2(){
+
+InSlideM2::~InSlideM2()
+{
 
 }
 
-void InSlideM2::outSlide(){
+void InSlideM2::outSlide()
+{
 	HALAktorik::getInstance()->motor_off();
 	//Send msg with ready
 	new (this) WaitForLineStart();
@@ -165,16 +219,20 @@ void InSlideM2::outSlide(){
 }
 
 //************************* WorkPieceIsValid ***********************
-WorkPieceIsValid::WorkPieceIsValid(){
+WorkPieceIsValid::WorkPieceIsValid()
+{
 #ifdef DEBUG_
 	cout << "WorkPieceIsValid :: Constructor" << endl;
 #endif
 }
-WorkPieceIsValid::~WorkPieceIsValid(){
+
+WorkPieceIsValid::~WorkPieceIsValid()
+{
 
 }
 
-void WorkPieceIsValid::outSwitch(){
+void WorkPieceIsValid::outSwitch()
+{
 
 	new (this) WaitForEndLine();
 	WAIT_HALF_S;
@@ -183,16 +241,20 @@ void WorkPieceIsValid::outSwitch(){
 }
 
 //************************* WaitForEndLine ***********************
-WaitForEndLine::WaitForEndLine(){
+WaitForEndLine::WaitForEndLine()
+{
 #ifdef DEBUG_
 	cout << "WaitForEndLine :: Constructor" << endl;
 #endif
 }
-WaitForEndLine::~WaitForEndLine(){
+
+WaitForEndLine::~WaitForEndLine()
+{
 
 }
 
-void WaitForEndLine::outLineEnd(){
+void WaitForEndLine::outLineEnd()
+{
 	WAIT_ONE_S;
 	HALAktorik::getInstance()->motor_off();
 	//sen msg with ready

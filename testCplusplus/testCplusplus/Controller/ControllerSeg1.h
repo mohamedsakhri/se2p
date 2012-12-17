@@ -19,6 +19,9 @@
 
 class ControllerSeg1: public HALCallInterface {
 public:
+	/**
+	 * @return The controller's instance
+	 */
 	static ControllerSeg1* getInstance();
 
 	void inLineStart();

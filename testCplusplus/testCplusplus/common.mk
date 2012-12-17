@@ -26,7 +26,7 @@ LIBS+=ioaccess
 EXTRA_SRCVPATH+=$(PROJECT_ROOT) $(PROJECT_ROOT)/HAL  \
 	$(PROJECT_ROOT)/Mutex $(PROJECT_ROOT)/Dispatcher  \
 	$(PROJECT_ROOT)/Controller $(PROJECT_ROOT)/States  \
-	$(PROJECT_ROOT)/SerInterface
+	$(PROJECT_ROOT)/SerInterface $(PROJECT_ROOT)/Timer
 
 include $(MKFILES_ROOT)/qmacros.mk
 ifndef QNX_INTERNAL

@@ -30,6 +30,15 @@ public :
 	WaitForLineStart();
 	virtual ~WaitForLineStart();
 
+	void wpIsComming();
+};
+
+//************************* wpIsComming ***************************
+class WpIsComming:public IState {
+public :
+	WpIsComming();
+	virtual ~WpIsComming();
+
 	void inLineStart();
 };
 

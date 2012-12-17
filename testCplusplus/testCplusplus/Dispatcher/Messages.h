@@ -8,7 +8,7 @@
  *
  *	This header contains en enum of all possible messages, which could be sent as pulses
  *	from Demupltiplexer to Dispatcher or from Controller to Dispatcher
- *	Dispatcher has an event handler table, where it assigns "each" message to an event handler
+ *	Dispatcher has an event_ handler table, where it assigns "each" message to an event_ handler
  */
 #ifndef MESSAGES_H_
 #define MESSAGES_H_
@@ -45,6 +45,8 @@ enum message {
 	E_STOP_RELEASED,
 
 	//Communication between Machine1 and Machine2
+	WP_IS_COMMING,
+	WP_HAS_ARRIVED,
 	MACHINE2_IS_READY,
 	MACHINE2_IS_BUSY,
 

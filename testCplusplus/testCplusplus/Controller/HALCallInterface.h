@@ -20,8 +20,6 @@
 #include "Constants.h"
 #include "Sender.h"
 
-//class WorkPiece;
-
 class HALCallInterface {
 public :											//WP = Workpiece
 	virtual void inLineStart() {};				//!< WP in line's start
@@ -57,7 +55,9 @@ public :											//WP = Workpiece
 		HALAktorik::getInstance()->Start_LED_off();
 	};
 	virtual void stopReleased(){};
-	virtual void resetPressed(){};
+	virtual void resetPressed(){
+		Sender::getInstance()->send(WP_HAS_ARRIVED);
+	};
 	virtual void resetReleased(){};
 	virtual void EStopPressed(){
 		HALAktorik::getInstance()->motor_off();
@@ -65,17 +65,19 @@ public :											//WP = Workpiece
 	};
 	virtual void EStopReleased(){};
 
-	virtual void isMissing(){};
+	virtual void isMissing(){	};
 	virtual void isStranger(){};
 
 	/*
 	 * Communication between Machine1 and machine2
 	 */
+	virtual void wpIsComming(){};
+	virtual void wpHasArrived(){};
 	virtual void m2isReady(){};
 	virtual void m2isBusy(){};
 
 	/**
-	 * @param even_index Id of event the controller want to register to
+	 * @param even_index Id of event_ the controller want to register to
 	 */
 	virtual void addEvent(int event_index) {
 		events_list_.push_back(event_index);
@@ -131,10 +133,8 @@ protected :
 	vector<int> events_list_;			//!< Event's list the controller is/want to registered to
 	vector<WorkPiece*> wp_list_;		//!< Fifo as list of pointers to workpieces
 	int con_id_;						//!< Connection Id to Demultiplexer Channel
-	int ctr_id_;
+	int ctr_id_;						//!< Id of each controller
 	IState* state_;						//!< State machine
-	//TODO det Sender as singelton
-	Sender* sender_;
 };
 
 #endif //HALCALLINTERFACE_H_

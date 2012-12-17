@@ -27,5 +27,9 @@
 #define CONTROLLER_SEG5 5
 #define CONTROLLER_SEGM2 6
 
+// Serial Interface
+#define DEVICE "/dev/ser1"
+#define TIME_TO_WAIT 20000
+
 
 #endif /* CONSTANTS_H_ */

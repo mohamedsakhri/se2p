@@ -18,6 +18,9 @@
 
 class ControllerSeg2: public HALCallInterface {
 public:
+	/**
+	 * @return The controller's instance
+	 */
 	static ControllerSeg2* getInstance();
 
 	void inHeightMeasurement();

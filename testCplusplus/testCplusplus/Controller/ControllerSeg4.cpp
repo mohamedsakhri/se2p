@@ -17,14 +17,21 @@
 Mutex ControllerSeg4::controllerSeg4_mutex_ = Mutex();
 ControllerSeg4* ControllerSeg4::controllerSeg4_instance_ = NULL ;
 
-ControllerSeg4::ControllerSeg4() {
+/*
+ *
+ */
+ControllerSeg4::ControllerSeg4()
+{
 	ctr_id_ = CONTROLLER_SEG4;
 	state_ = new SlideWait();
 	init();
 }
 
-ControllerSeg4* ControllerSeg4::getInstance() {
-
+/*
+ *
+ */
+ControllerSeg4* ControllerSeg4::getInstance()
+{
 	if (!controllerSeg4_instance_) {
 		controllerSeg4_mutex_.lock();
 		if (!controllerSeg4_instance_) {
@@ -35,11 +42,11 @@ ControllerSeg4* ControllerSeg4::getInstance() {
 	return controllerSeg4_instance_;
 }
 
-
 /**
  * Do some initialization work
  */
-void ControllerSeg4::init(){
+void ControllerSeg4::init()
+{
 
 	con_id_ = ConnectAttach(0, 0, Demultiplexer::getInstance()->getChannelId(), _NTO_SIDE_CHANNEL, 0);
 	if (con_id_ == -1) {
@@ -51,11 +58,17 @@ void ControllerSeg4::init(){
 #endif
 }
 
+/*
+ *
+ */
 void ControllerSeg4::inSlide()
 {
 	state_->inSlide();
 }
 
+/*
+ *
+ */
 void ControllerSeg4::outSlide()
 {
 	state_->outSlide();
@@ -64,7 +77,8 @@ void ControllerSeg4::outSlide()
 /**
  * Send a message to Dispatcher
  */
-int ControllerSeg4::sendMsg2Dispatcher(int message){
+int ControllerSeg4::sendMsg2Dispatcher(int message)
+{
 
 	if (-1 == MsgSendPulse(con_id_,SIGEV_PULSE_PRIO_INHERIT, CONTROLLER_CODE, message )) {
 		perror("ControllerSeg4 : MsgSendPulse");
@@ -88,6 +102,7 @@ void ControllerSeg4::passWP2Ctr()
 /**
  * Delete instance of Istate
  */
-ControllerSeg4::~ControllerSeg4() {
+ControllerSeg4::~ControllerSeg4()
+{
 	delete state_ ;
 }

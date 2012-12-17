@@ -1,5 +1,5 @@
 /*
- * @file	Controller.h
+ * @file	ControllerTest.h
  *
  * @author	Mahmoud Dariti
  * @author	Mohamed Sakhri

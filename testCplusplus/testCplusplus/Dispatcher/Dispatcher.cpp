@@ -8,7 +8,7 @@
  *
  *	This Class implements the Dispatcher's design pattern.
  *	Dispatcher gets messages from Demultiplexer ( and Controller )
- *	and execute a call-back to the right event handler(function) registred in its event handler table
+ *	and execute a call-back to the right event_ handler(function) registred in its event_ handler table
  */
 
 #include "Dispatcher.h"
@@ -69,6 +69,8 @@ void Dispatcher::initPt2FuncArray () {
 	pt2FuncArray[WP_IS_STRANGER]		= &HALCallInterface::isStranger;
 
 	//Communication between Machine1 and Machine2
+	pt2FuncArray[WP_IS_COMMING]			= &HALCallInterface::wpIsComming;
+	pt2FuncArray[WP_HAS_ARRIVED]		= &HALCallInterface::wpHasArrived;
 	pt2FuncArray[MACHINE2_IS_BUSY]		= &HALCallInterface::m2isBusy;
 	pt2FuncArray[MACHINE2_IS_READY]		= &HALCallInterface::m2isReady;
 
@@ -117,7 +119,7 @@ Dispatcher::~Dispatcher() {
 
 /**
  * All the Dispatcher's work will be done here
- * It gets messages from demultiplexer's channel and make call-backs using its event handler table
+ * It gets messages from demultiplexer's channel and make call-backs using its event_ handler table
  */
 void Dispatcher::execute(void* arg){
 #ifdef DEBUG_
@@ -135,7 +137,7 @@ void Dispatcher::execute(void* arg){
 
 
 	struct _pulse pulse;
-	int event_id = -1;		// an id (index) is assigned to each event handler
+	int event_id = -1;		// an id (index) is assigned to each event_ handler
 	int pulse_code = -1;
 
 	while (!isStopped()) {
@@ -160,7 +162,7 @@ void Dispatcher::execute(void* arg){
 		cout << "Dispatcher: Receive code: " << pulse_code << " Message: " << event_id << endl;
 #endif
 		/*
-		 * Each controller which is registered for this event will be notified
+		 * Each controller which is registered for this event_ will be notified
 		 * to callback its handler
 		 */
 		unsigned int i ;

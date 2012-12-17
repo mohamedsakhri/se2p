@@ -12,6 +12,10 @@
 #ifndef WORKPIECE_H_
 #define WORKPIECE_H_
 
+#include "Timer.h"
+#include "Demultiplexer.h"
+#include "Messages.h"
+
 class WorkPiece {
 public:
 	WorkPiece(int id);
@@ -46,17 +50,12 @@ public:
      */
     void setHas_Drill(bool hasDrill);
 
-    int getTolCounter();
-    void incTolCounter();
-    void resetTolCounter();
-
-
 private:
+    Timer* timer_;					//!< Timer to be used to control the workpiece status according to time
 	int wp_id_ ;					//!< Worpiece's Id
 	bool is_Metal_;					//!< Indicates workpiece's metal status
 	bool is_inTolleranceRange_;		//!< Indicates workpiece's tolerance range status
 	bool has_Drill_;				//!< Indicates workpiece's drill drill
-	int tol_counter_;
 };
 
 #endif /* WORKPIECE_H_ */
