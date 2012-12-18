@@ -21,8 +21,8 @@ WorkPiece::WorkPiece(int id) {
 	is_Metal_ = false;
 	is_inTolleranceRange_ = false;
 	has_Drill_ = false;
-	timer_ = new Timer(2, 0, Demultiplexer::getInstance()->getChannelId(), 0, STOP_PRESSED);
-	timer_->start();
+//	timer_ = new Timer(2, 0, Demultiplexer::getInstance()->getChannelId(), 0, STOP_PRESSED);
+//	timer_->start();
 }
 
 /**

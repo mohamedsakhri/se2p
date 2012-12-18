@@ -81,6 +81,8 @@ void StateTest::execute(void *arg)
 	ctr5->addEvent(E_STOP_PRESSED);
 	ctr5->addEvent(E_STOP_RELEASED);
 	ctr5->addEvent(WP_HAS_ARRIVED);
+	ctr5->addEvent(MACHINE2_IS_BUSY);
+	ctr5->addEvent(MACHINE2_IS_READY);
 
 
 //	ctr3->addEvent(STOP_PRESSED);

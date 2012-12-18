@@ -90,7 +90,8 @@ void ControllerSeg5::m2isBusy()
 void ControllerSeg5::m2isReady()
 {
 	machine2_ready_ = true;
-	state_->machine2IsReady();
+	//state_->machine2IsReady();
+	state_->messageReceived();
 }
 
 /*

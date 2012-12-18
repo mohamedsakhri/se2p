@@ -33,7 +33,8 @@ void WaitLineEndM1::inLineEnd()
 		if (ControllerSeg5::getInstance()->getFirstWP()->getHas_Drill()) {
 			new (this) TransferMachine2();
 		} else {
-			HALAktorik::getInstance()->yellow_Light_on();
+		//	HALAktorik::getInstance()->yellow_Light_on();
+			LightFlash::getInstance()->flash(YELLOW,HALF_S);
 			HALAktorik::getInstance()->motor_off();
 			HALAktorik::getInstance()->green_Light_off();
 
@@ -42,10 +43,12 @@ void WaitLineEndM1::inLineEnd()
 	} else {
 		//TODO  just send msg and let controller do the rest according to the error event_ handler
 		ControllerSeg5::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
+		//to be moved to ERROR
 		HALAktorik::getInstance()->motor_off();
 		HALAktorik::getInstance()->red_Light_on();
 		HALAktorik::getInstance()->green_Light_off();
-		HALAktorik::getInstance()->yellow_Light_off();
+		//HALAktorik::getInstance()->yellow_Light_off();
+		LightFlash::getInstance()->stopFlashing();
 	}
 
 }
@@ -90,7 +93,8 @@ Turning::Turning()
 void Turning::inLineEnd()
 {
 	HALAktorik::getInstance()->motor_on();
-	HALAktorik::getInstance()->yellow_Light_off();
+//	HALAktorik::getInstance()->yellow_Light_off();
+	LightFlash::getInstance()->stopFlashing();
 	HALAktorik::getInstance()->green_Light_on();
 	new (this) TransferMachine2();
 }
@@ -109,21 +113,22 @@ TransferMachine2::TransferMachine2()
 #ifdef DEBUG_
 	cout << "TransferMachine2 :: Constructor" << endl;
 #endif
-	this->messageReceived();
+	machine2IsReady();
 }
 
-void TransferMachine2::messageReceived()
+void TransferMachine2::machine2IsReady()
 {
-//TODO  communicate with machine 2+
 	if (ControllerSeg5::getInstance()->isMachin2Ready() ){
+		HALAktorik::getInstance()->motor_on();
 		new (this) Machine2Ready();
-	}
-	else {
-		HALAktorik::getInstance()->motor_off();
-		HALAktorik::getInstance()->yellow_Light_on();
-		HALAktorik::getInstance()->green_Light_off();
-		new (this) WaitForMachine2();
-	}
+		}
+		else {
+			HALAktorik::getInstance()->motor_off();
+	//		HALAktorik::getInstance()->yellow_Light_on();
+	//		HALAktorik::getInstance()->green_Light_off();
+			new (this) WaitForMachine2();
+		}
+
 }
 
 TransferMachine2::~TransferMachine2()
@@ -132,7 +137,7 @@ TransferMachine2::~TransferMachine2()
 
 
 /************************************************************************************
- *									Machine2Ready									*
+ *									WaitForMachine2									*
  *																					*
  ************************************************************************************/
 
@@ -143,13 +148,15 @@ WaitForMachine2::WaitForMachine2()
 #endif
 }
 
-void WaitForMachine2::machine2IsReady()
+void WaitForMachine2::messageReceived()
 {
 	HALAktorik::getInstance()->motor_on();
-	HALAktorik::getInstance()->yellow_Light_off();
-	HALAktorik::getInstance()->green_Light_on();
+
 	new (this) Machine2Ready();
+
 }
+
+
 
 WaitForMachine2::~WaitForMachine2()
 {
@@ -174,7 +181,9 @@ void Machine2Ready::outLineEnd()
 	if (!ControllerSeg5::getInstance()->isFifoEmpty()) {
 		ControllerSeg5::getInstance()->passWP2Ctr();
 		ControllerSeg5::getInstance()->removeFirsttWP();
+
 		Sender::getInstance()->send(WP_IS_COMMING);
+		cout << "WP_IS_COMMING SENT" <<endl;
 		new (this) WaitLineEndM1();
 	} else {
 		HALAktorik::getInstance()->red_Light_on();

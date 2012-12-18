@@ -57,7 +57,7 @@ void LightTest::execute(void *arg) {
 #endif /*LIGHT_TEST*/
 
 #ifdef FLASH_TEST
-	RedLightFlash flashTest;
+	LightFlash flashTest;
 	int seeptime = SLOW;			//sleeptime for slow blinking
 
 	cout << "START flashing test " << endl;

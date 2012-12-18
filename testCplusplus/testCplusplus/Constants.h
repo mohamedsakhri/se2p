@@ -9,7 +9,7 @@
 #define CONSTANTS_H_
 #include <unistd.h>
 
-
+//sleep code
 #define WAIT_ONE_S sleep(1)
 #define WAIT_THREE_S sleep(3)
 #define WAIT_FIVE_S sleep(5)
@@ -31,5 +31,13 @@
 #define DEVICE "/dev/ser1"
 #define TIME_TO_WAIT 20000
 
+//light code
+#define RED 	1
+#define YELLOW 	2
+#define GREEN	3
+
+//time constants in microsecond
+#define ONE_S 1000000
+#define HALF_S 500000
 
 #endif /* CONSTANTS_H_ */

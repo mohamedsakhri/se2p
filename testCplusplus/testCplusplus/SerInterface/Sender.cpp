@@ -58,12 +58,12 @@ Sender* Sender::getInstance() {
  */
 void Sender::send(int message) {
 #ifdef DEBUG_
-	cout << "Sender :: send " << endl;
+	cout << "Sender::send " << message << endl;
 #endif
 
 	int writen_size = write(ser_Interface_id_, &message, sizeof(message));
 	//TODO do we need to wait!
-	usleep( TIME_TO_WAIT);
+//	usleep( TIME_TO_WAIT);
 
 	if (writen_size < 0) {
 		perror("send error : ");

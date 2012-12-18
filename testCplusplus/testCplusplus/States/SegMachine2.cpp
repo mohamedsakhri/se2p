@@ -30,7 +30,7 @@ void WaitForLineStart::wpIsComming()
 }
 
 
-//************************* wpIsComming ***************************
+//************************* WpIsComming ***************************
 WpIsComming::WpIsComming()
 {
 #ifdef DEBUG_

@@ -19,6 +19,8 @@
 #include "ControllerSeg3.h"
 #include "ControllerSeg4.h"
 #include "ControllerSeg5.h"
+#include "LightFlash.h"
+#include "Constants.h"
 
 
 using namespace std;
@@ -42,7 +44,8 @@ public:
 	TransferMachine2();
 	virtual ~TransferMachine2();
 
-	void messageReceived();
+	void machine2IsReady();
+
 };
 
 /*
@@ -75,7 +78,7 @@ public:
 	WaitForMachine2();
 	virtual ~WaitForMachine2();
 
-	void machine2IsReady();
+	void messageReceived();
 };
 
 

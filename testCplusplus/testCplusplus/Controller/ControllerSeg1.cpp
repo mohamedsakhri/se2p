@@ -10,7 +10,7 @@
  */
 
 #define DISPATCHER_TEST
-//#define DEBUG_
+#define DEBUG_
 
 #include "ControllerSeg1.h"
 
@@ -95,7 +95,9 @@ int ControllerSeg1::sendMsg2Dispatcher(int message){
 // in case of problem : remove it and use addWP2List directly from state
 void ControllerSeg1::passWP2Ctr()
 {
+#ifdef DEBUG_
 	cout << "ControllerSeg1::passWP2Ctr: ID: " << getFirstWP()->getId() << " TOL: " << getFirstWP()->getIs_inTolleranceRange() << endl;
+#endif
 	ControllerSeg2::getInstance()->addWP2List(this->getFirstWP());
 }
 

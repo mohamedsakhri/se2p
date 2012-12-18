@@ -48,6 +48,7 @@ public :
 	//Communication between Machine1 and Machine2
 	virtual void wpIsComming(){};				//!< WP has left machine 1 and comming to machine 2
 	virtual void machine2IsReady(){};			//!< Machine 2 has passed from status busy to ready
+	virtual void messageReceived(){};
 
 	//Error handling
 	virtual void isMissing(){};

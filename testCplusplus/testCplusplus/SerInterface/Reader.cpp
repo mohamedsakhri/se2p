@@ -11,7 +11,7 @@
 
 #include "Reader.h"
 
-#define DEBUG_
+//#define DEBUG_
 
 using namespace std;
 
@@ -59,7 +59,9 @@ void Reader::execute(void *arg) {
 			// Don't send message and go to the next loop
 			continue;
 		}
-		cout << "###########  ERFOLG: " << msg << endl;
+#ifdef DEBUG_
+		cout << "RECEIVE: " << msg << endl;
+#endif
 		//Send message to Dispatcher
 		Demultiplexer::getInstance()->sendMsg2Dispatcher(msg);
 
