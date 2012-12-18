@@ -25,6 +25,8 @@ WaitForLineStart::~WaitForLineStart()
 void WaitForLineStart::wpIsComming()
 {
 	HALAktorik::getInstance()->motor_on();
+	HALAktorik::getInstance()->green_Light_on();
+	Sender::getInstance()->send(MACHINE2_IS_BUSY);
 	//send msg with busy message schon implementiert in controller
 	new (this) WpIsComming();
 }
@@ -65,6 +67,9 @@ WaitForHeightM2::~WaitForHeightM2()
 
 void WaitForHeightM2::inHeightMeasurement()
 {
+#ifdef DEBUG_
+	cout << "ERROR --> WP too Small" << endl;
+#endif
 	cout << "WaitForHeightM2::inHeightMeasurement" << endl;
 	new (this) NoDrill();
 }
@@ -108,11 +113,17 @@ CheckDrillM2::~CheckDrillM2()
 
 void CheckDrillM2::outHeightMeasurement()
 {
+#ifdef DEBUG_
+	cout << "LOCH NACH UNTEN" << endl;
+#endif
 	new (this) NoDrill();
 }
 void CheckDrillM2::inToleranceRange()
 {
 	//Drill is UP
+#ifdef DEBUG_
+	cout << "LOCH NACH OBEN" << endl;
+#endif
 	new (this) DrillOkay();
 }
 
@@ -156,6 +167,9 @@ void WaitForMetal::inSwitch()
 void WaitForMetal::isMetal()
 {
 	//HAS Metal
+#ifdef DEBUG_
+	cout << "WP HAS METAl" << endl;
+#endif
 	new (this) HasMetall();
 }
 
@@ -212,8 +226,8 @@ InSlideM2::~InSlideM2()
 
 void InSlideM2::outSlide()
 {
+	Sender::getInstance()->send(MACHINE2_IS_READY);
 	HALAktorik::getInstance()->motor_off();
-	//Send msg with ready
 	new (this) WaitForLineStart();
 
 }
@@ -258,6 +272,7 @@ void WaitForEndLine::outLineEnd()
 	WAIT_ONE_S;
 	HALAktorik::getInstance()->motor_off();
 	//sen msg with ready
+	Sender::getInstance()->send(MACHINE2_IS_READY);
 	new (this) WaitForLineStart();
 
 
