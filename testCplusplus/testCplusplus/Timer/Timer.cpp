@@ -30,7 +30,7 @@ Timer::Timer() {
 
 	SIGEV_PULSE_INIT(&event_, coid_, SIGEV_PULSE_PRIO_INHERIT, NULL, NULL );
 
-	if(timer_create(CLOCK_REALTIME, &this->event_, &this->timer_id_) == -1) {
+	if(timer_create(CLOCK_REALTIME, &event_, &timer_id_) == -1) {
 		perror("Timer create error : ");
 	}
 
@@ -58,7 +58,7 @@ Timer::Timer(int TimeS, int TimeNS, int chid, int pulseCode, int message)
 
 		SIGEV_PULSE_INIT(&event_, coid_, SIGEV_PULSE_PRIO_INHERIT, pulseCode, message );
 
-		if(timer_create(CLOCK_REALTIME, &this->event_, &this->timer_id_) == -1) {
+		if(timer_create(CLOCK_REALTIME, &event_, &timer_id_) == -1) {
 			perror("Timer create error : ");
 		}
 
@@ -115,14 +115,14 @@ void Timer::start()
 /*
  *
  */
-void Timer::stop()
-{
+void Timer::stop() {
 #ifdef DEBUG_
-	cout << "Timer stop - Timer Id:" << (int)timer_id_ << endl;
-	cout << "Timer Value:" <<itime.it_value.tv_sec << endl;
+	cout << "Timer stop - Timer Id:" << (int) timer_id_ << endl;
+	cout << "Timer Value:" << itime.it_value.tv_sec << endl;
 #endif
-
-	if (timer_settime(this->timer_id_, 0, NULL, NULL) == -1 ) {
+	this->itime.it_value.tv_sec = 0;
+	this->itime.it_value.tv_nsec = 0;
+	if (timer_settime(timer_id_, 0, &itime, NULL) == -1) {
 		perror("Timer stop error : ");
 	}
 }
@@ -136,8 +136,8 @@ void Timer::pause()
 	cout << "Timer pause - Timer Id:" << (int)timer_id_ << endl;
 #endif
 
-	if (timer_settime(this->timer_id_, 0, NULL, &remainingTime_) == -1 ) {
-		perror("Timer start  error : ");
+	if (timer_settime(this->timer_id_, 0, 0, &remainingTime_) == -1 ) {
+		perror("Timer pause error : ");
 	}
 }
 
@@ -151,19 +151,6 @@ void Timer::resume()
 #endif
 
 	if (timer_settime(this->timer_id_, 0, &remainingTime_, NULL) == -1 ) {
-		perror("Timer start  error : ");
+		perror("Timer resume  error : ");
 	}
 }
-
-///*
-// *
-// */
-//int Timer::getRemainingTime()
-//{
-//	itimerspec* its ;
-//	time_t remaining;
-//	timer_gettime(this->timer_id_, its);
-//	remaining = its->it_value.tv_sec;
-//	return (int) remaining;
-//
-//}

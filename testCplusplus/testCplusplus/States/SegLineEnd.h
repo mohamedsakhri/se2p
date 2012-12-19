@@ -19,6 +19,7 @@
 #include "ControllerSeg3.h"
 #include "ControllerSeg4.h"
 #include "ControllerSeg5.h"
+#include "MainController.h"
 #include "LightFlash.h"
 #include "Constants.h"
 

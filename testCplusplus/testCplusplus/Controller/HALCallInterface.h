@@ -39,30 +39,13 @@ public :											//WP = Workpiece
 	virtual void inLineEnd(){};					//!< WP is in line's end
 	virtual void outLineEnd(){};					//!< WP has left line's end
 
-	virtual void startPressed(){
-		HALAktorik::getInstance()->motor_on();
-		HALAktorik::getInstance()->red_Light_off();
-		HALAktorik::getInstance()->green_Light_on();
-		HALAktorik::getInstance()->yellow_Light_off();
-		HALAktorik::getInstance()->Start_LED_on();
-	};
+	virtual void startPressed(){};
 	virtual void startReleased(){};
-	virtual void stopPressed(){
-		HALAktorik::getInstance()->motor_off();
-		HALAktorik::getInstance()->red_Light_off();
-		HALAktorik::getInstance()->green_Light_off();
-		HALAktorik::getInstance()->yellow_Light_off();
-		HALAktorik::getInstance()->Start_LED_off();
-	};
+	virtual void stopPressed(){};
 	virtual void stopReleased(){};
-	virtual void resetPressed(){
-		Sender::getInstance()->send(WP_HAS_ARRIVED);
-	};
+	virtual void resetPressed(){};
 	virtual void resetReleased(){};
-	virtual void EStopPressed(){
-		HALAktorik::getInstance()->motor_off();
-		HALAktorik::getInstance()->Start_LED_off();
-	};
+	virtual void EStopPressed(){};
 	virtual void EStopReleased(){};
 
 	virtual void isMissing(){	};
@@ -129,12 +112,28 @@ public :											//WP = Workpiece
 		return ctr_id_;
 	}
 
+	/**
+	 * @return If machine is motor is running
+	 */
+	virtual bool isRunning() {
+		return isRunning_;
+	}
+
+	/**
+	 * @param isRunning true if motor is running
+	 */
+	void setIsRunning(bool isRunning)
+	{
+		this->isRunning_ = isRunning;
+	}
+
 protected :
 	vector<int> events_list_;			//!< Event's list the controller is/want to registered to
 	vector<WorkPiece*> wp_list_;		//!< Fifo as list of pointers to workpieces
 	int con_id_;						//!< Connection Id to Demultiplexer Channel
 	int ctr_id_;						//!< Id of each controller
 	IState* state_;						//!< State machine
+	bool isRunning_;
 };
 
 #endif //HALCALLINTERFACE_H_

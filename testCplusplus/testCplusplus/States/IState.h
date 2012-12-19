@@ -51,7 +51,14 @@ public :
 	virtual void messageReceived(){};
 
 	//Error handling
+	virtual void initState(){};
+	virtual void runningMachine1(){};
+	virtual void runningMchine2(){};
+	virtual void stop(){};
+	virtual void errorHandling(){};
+	virtual void emergency(){};
 	virtual void isMissing(){};
+	virtual void error() {};
 
 };
 

@@ -34,9 +34,11 @@ void WaitLineEndM1::inLineEnd()
 			new (this) TransferMachine2();
 		} else {
 		//	HALAktorik::getInstance()->yellow_Light_on();
+			MainController::getInstance()->setIsRunning(false);
 			LightFlash::getInstance()->flash(YELLOW,HALF_S);
 			HALAktorik::getInstance()->motor_off();
 			HALAktorik::getInstance()->green_Light_off();
+
 
 			new (this) WaitForTurn();
 		}
@@ -93,6 +95,7 @@ Turning::Turning()
 void Turning::inLineEnd()
 {
 	HALAktorik::getInstance()->motor_on();
+	MainController::getInstance()->setIsRunning(true);
 //	HALAktorik::getInstance()->yellow_Light_off();
 	LightFlash::getInstance()->stopFlashing();
 	HALAktorik::getInstance()->green_Light_on();
@@ -120,10 +123,12 @@ void TransferMachine2::machine2IsReady()
 {
 	if (ControllerSeg5::getInstance()->isMachin2Ready() ){
 		HALAktorik::getInstance()->motor_on();
+		MainController::getInstance()->setIsRunning(true);
 		new (this) Machine2Ready();
 		}
 		else {
 			HALAktorik::getInstance()->motor_off();
+			MainController::getInstance()->setIsRunning(false);
 	//		HALAktorik::getInstance()->yellow_Light_on();
 	//		HALAktorik::getInstance()->green_Light_off();
 			new (this) WaitForMachine2();
@@ -151,6 +156,8 @@ WaitForMachine2::WaitForMachine2()
 void WaitForMachine2::messageReceived()
 {
 	HALAktorik::getInstance()->motor_on();
+	MainController::getInstance()->setIsRunning(true);
+
 
 	new (this) Machine2Ready();
 

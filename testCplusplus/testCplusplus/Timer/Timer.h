@@ -30,11 +30,11 @@ public:
 	 */
 	Timer(int timeS, int timeNS, int chid, int pulsecode, int message);
 
-	void setTimer();
 	void start();
 	void pause();
 	void resume();
 	void stop();
+	void karlchen();
 
 	/**
 	 * @return

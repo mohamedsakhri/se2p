@@ -33,6 +33,7 @@ void StateLineStart::inLineStart()
 	cout << "StateLineStart :: inLineStart" << endl;
 #endif
 	//TODO check if the WP id is needed
+	ControllerSeg1::getInstance()->setIsRunning(true);
 	WorkPiece* wp = new WorkPiece(1) ;
 	ControllerSeg1::getInstance()->addWP2List(wp);
 	//TODO test if the motor have to be started and send msg to machine2 to start
