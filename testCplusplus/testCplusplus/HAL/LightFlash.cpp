@@ -10,7 +10,7 @@
  */
 
 #include "LightFlash.h"
-#define DEBUG_
+//#define DEBUG_
 
 LightFlash* LightFlash::light_flash_instance_ = NULL;
 Mutex LightFlash::light_flash_mutex_ = Mutex();
@@ -82,7 +82,6 @@ void LightFlash::execute(void* arg){
 	else if (light_ == YELLOW){
 		cout << "In else if : !isStopped() " << !isStopped() << endl;
 		while (!isStopped()){
-			cout << "In while : !isStopped() " << !isStopped() << endl;
 			HALAktorik::getInstance()->yellow_Light_on();
 					usleep(sleeptime_);
 					HALAktorik::getInstance()->yellow_Light_off();

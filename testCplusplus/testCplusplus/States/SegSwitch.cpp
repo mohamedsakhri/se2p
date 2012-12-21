@@ -99,7 +99,7 @@ void WorkPieceValid::outSwitch()
 	ControllerSeg3::getInstance()->removeFirsttWP();
 	new (this) WaitingSwitch();
 	// Use this to wait a bit before closing switching. Just for now!
-	WAIT_HALF_S;
+//	WAIT_HALF_S;
 	HALAktorik::getInstance()->close_Switch();
 
 }

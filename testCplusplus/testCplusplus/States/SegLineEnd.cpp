@@ -35,10 +35,8 @@ void WaitLineEndM1::inLineEnd()
 		} else {
 		//	HALAktorik::getInstance()->yellow_Light_on();
 			MainController::getInstance()->setIsRunning(false);
-			LightFlash::getInstance()->flash(YELLOW,HALF_S);
 			HALAktorik::getInstance()->motor_off();
-			HALAktorik::getInstance()->green_Light_off();
-
+			LightFlash::getInstance()->flash(YELLOW,HALF_S);
 
 			new (this) WaitForTurn();
 		}
@@ -98,7 +96,6 @@ void Turning::inLineEnd()
 	MainController::getInstance()->setIsRunning(true);
 //	HALAktorik::getInstance()->yellow_Light_off();
 	LightFlash::getInstance()->stopFlashing();
-	HALAktorik::getInstance()->green_Light_on();
 	new (this) TransferMachine2();
 }
 

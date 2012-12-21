@@ -28,10 +28,42 @@ InitState::~InitState() {
 }
 
 void InitState::startPressed() {
-	HALAktorik::getInstance()->red_Light_off();
+	ControllerSeg1 *ctr1 = ControllerSeg1::getInstance();
+	ControllerSeg2 *ctr2 = ControllerSeg2::getInstance();
+	ControllerSeg3 *ctr3 = ControllerSeg3::getInstance();
+	ControllerSeg4 *ctr4 = ControllerSeg4::getInstance();
+	ControllerSeg5 *ctr5 = ControllerSeg5::getInstance();
+
+	// Controllers add some events to register to
+	ctr1->addEvent(WP_IN_ENGINE_START);
+	ctr1->addEvent(WP_OUT_ENGINE_START);
+
+	ctr2->addEvent(WP_IN_HEIGHT_M);
+	ctr2->addEvent(WP_OUT_HEIGHT_M);
+	ctr2->addEvent(WP_IN_TOLERANCE_R);
+	ctr2->addEvent(WP_NOT_IN_TOLERANCE_R);
+
+	ctr3->addEvent(WP_IN_SWITCH);
+	ctr3->addEvent(WP_OUT_SWITCH);
+
+	ctr4->addEvent(WP_IN_SLIDE);
+	ctr4->addEvent(WP_OUT_SLIDE);
+
+	ctr5->addEvent(WP_IN_ENGINE_END);
+	ctr5->addEvent(WP_OUT_ENGINE_END);
+	ctr5->addEvent(WP_HAS_ARRIVED);
+	ctr5->addEvent(MACHINE2_IS_BUSY);
+	ctr5->addEvent(MACHINE2_IS_READY);
+
+	Dispatcher::getInstance()->registerHandler(ControllerSeg1::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg2::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg3::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg4::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg5::getInstance());
+
 	HALAktorik::getInstance()->green_Light_on();
-	HALAktorik::getInstance()->yellow_Light_off();
 	HALAktorik::getInstance()->Start_LED_on();
+
 
 	new (this) RunningMachine1();
 }
