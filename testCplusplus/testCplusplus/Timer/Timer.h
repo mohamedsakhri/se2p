@@ -34,7 +34,12 @@ public:
 	void pause();
 	void resume();
 	void stop();
-	void karlchen();
+
+	/**
+	 * @param timeS Time in seconds
+	 * @param timeNS Time in nanoseconds
+	 */
+	void setNewTime(int timeS,int timeNS);
 
 	/**
 	 * @return

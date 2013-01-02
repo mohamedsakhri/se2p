@@ -35,7 +35,8 @@ void WaitingHeightM1::inHeightMeasurement()
 #ifdef DEBUG_
 	cout << "WaitingHeightM1 :: inHeightMeasurement" << endl;
 #endif
-
+	// WP has arrived, stop timer
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
 	new (this) TooSmall();
 }
 
@@ -45,6 +46,9 @@ void WaitingHeightM1::inToleranceRange()
 	cout << "WaitingHeightM1 :: inToleranceRange" << endl;
 #endif
 	//TODO WP's Id !!
+	// WP has arrived, stop timer
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
+
 	(ControllerSeg2::getInstance()->getFirstWP())->setIs_inTolleranceRange(true);
 		ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(false);
 

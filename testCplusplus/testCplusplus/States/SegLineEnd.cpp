@@ -29,6 +29,9 @@ WaitLineEndM1::WaitLineEndM1()
 
 void WaitLineEndM1::inLineEnd()
 {
+	// Workpiece has arrived : Stop timer
+	ControllerSeg5::getInstance()->getFirstWP()->getTimer()->stop();
+
 	if (!ControllerSeg5::getInstance()->isFifoEmpty()) {
 		if (ControllerSeg5::getInstance()->getFirstWP()->getHas_Drill()) {
 			new (this) TransferMachine2();
@@ -92,6 +95,9 @@ Turning::Turning()
 
 void Turning::inLineEnd()
 {
+#ifdef DEBUG_
+	cout << "Turning :: Timer stopped" << endl;
+#endif
 	HALAktorik::getInstance()->motor_on();
 	MainController::getInstance()->setIsRunning(true);
 //	HALAktorik::getInstance()->yellow_Light_off();

@@ -26,6 +26,7 @@ public:
 	void startPressed();
 	void stopPressed();
 	void resetPressed();
+	void resetReleased();
 	void EStopPressed();
 	void EStopReleased();
 	void isMissing();

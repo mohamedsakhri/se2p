@@ -58,7 +58,7 @@ public:
 	virtual ~ErrorHandling();
 
 	void errorFixed();
-	void resetMachine();
+	void resetReleased();
 };
 
 /*

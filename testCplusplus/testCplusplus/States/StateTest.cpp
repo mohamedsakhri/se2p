@@ -49,6 +49,8 @@ void StateTest::execute(void *arg)
 	mainCtr->addEvent(STOP_PRESSED);
 	mainCtr->addEvent(E_STOP_PRESSED);
 	mainCtr->addEvent(E_STOP_RELEASED);
+	mainCtr->addEvent(RESET_PRESSED);
+	mainCtr->addEvent(RESET_RELEASED);
 	mainCtr->addEvent(WP_IS_MISSING);
 //
 //	ctr2->addEvent(WP_IN_HEIGHT_M);

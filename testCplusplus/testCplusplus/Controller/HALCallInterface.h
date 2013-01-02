@@ -48,8 +48,13 @@ public :											//WP = Workpiece
 	virtual void EStopPressed(){};
 	virtual void EStopReleased(){};
 
-	virtual void isMissing(){	};
+	/*
+	 * Error Handling
+	 */
+	virtual void isMissing(){};
 	virtual void isStranger(){};
+	virtual void slideFull(){};
+	virtual void wpNotTurned(){};
 
 	/*
 	 * Communication between Machine1 and machine2

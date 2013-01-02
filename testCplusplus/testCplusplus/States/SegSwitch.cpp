@@ -95,6 +95,9 @@ WorkPieceValid::WorkPieceValid()
 
 void WorkPieceValid::outSwitch()
 {
+	//Set new time for Segment 5 - From Switch to line  end -
+	ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(9, 0);
+	ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start();
 	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG5);
 	ControllerSeg3::getInstance()->removeFirsttWP();
 	new (this) WaitingSwitch();

@@ -44,7 +44,7 @@ Timer::Timer() {
 /*
  *
  */
-Timer::Timer(int TimeS, int TimeNS, int chid, int pulseCode, int message)
+Timer::Timer(int timeS, int timeNS, int chid, int pulseCode, int message)
 {
 #ifdef DEBUG_
 	cout << "Timer :: Constructor" << endl;
@@ -62,8 +62,8 @@ Timer::Timer(int TimeS, int TimeNS, int chid, int pulseCode, int message)
 			perror("Timer create error : ");
 		}
 
-		this->WaitTimeS_ = TimeS;
-	    this->WaitTimeNS_ = TimeNS;
+		this->WaitTimeS_ = timeS;
+	    this->WaitTimeNS_ = timeNS;
 	    this->itime.it_value.tv_sec = this->WaitTimeS_;  			/* 500 million nsecs = .5 secs */
 	    this->itime.it_value.tv_nsec = this->WaitTimeNS_;
 		this->itime.it_interval.tv_sec = 0;		/* 500 million nsecs = .5 secs */
@@ -91,6 +91,16 @@ int Timer::getChId()
 int Timer::getRcvId()
 {
 	return this->rcvid_;
+}
+
+/*
+ * Set a new delay for Timer. Because every segment has a different delay
+ */
+void Timer::setNewTime(int timeS, int timeNS){
+	this->WaitTimeS_ = timeS;
+    this->WaitTimeNS_ = timeNS;
+    this->itime.it_value.tv_sec = this->WaitTimeS_;
+    this->itime.it_value.tv_nsec = this->WaitTimeNS_;
 }
 
 /*
@@ -135,8 +145,9 @@ void Timer::pause()
 #ifdef DEBUG_
 	cout << "Timer pause - Timer Id:" << (int)timer_id_ << endl;
 #endif
-
-	if (timer_settime(this->timer_id_, 0, 0, &remainingTime_) == -1 ) {
+	this->itime.it_value.tv_sec = 0;
+	this->itime.it_value.tv_nsec = 0;
+	if (timer_settime(this->timer_id_, 0, &itime, &remainingTime_) == -1 ) {
 		perror("Timer pause error : ");
 	}
 }

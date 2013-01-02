@@ -12,7 +12,7 @@
 
 #include "MainState.h"
 
-//#define DEBUG_
+#define DEBUG_
 
 /************************************************************************************
  *									initState									*
@@ -20,7 +20,9 @@
  ************************************************************************************/
 
 InitState::InitState() {
-
+#ifdef DEBUG_
+	cout << "InitState :: Constructor" << endl;
+#endif
 }
 
 InitState::~InitState() {
@@ -74,7 +76,9 @@ void InitState::startPressed() {
  ************************************************************************************/
 RunningMachine1::RunningMachine1()
 {
-
+#ifdef DEBUG_
+	cout << "RunningMachine1 :: Constructor" << endl;
+#endif
 }
 
 RunningMachine1::~RunningMachine1()
@@ -107,6 +111,7 @@ void RunningMachine1::EStopPressed()
 
 void RunningMachine1::error()
 {
+	new (this) ErrorHandling();
 
 }
 
@@ -116,6 +121,20 @@ void RunningMachine1::error()
  ************************************************************************************/
 ErrorHandling::ErrorHandling()
 {
+#ifdef DEBUG_
+	cout << "ErrorHandling :: Constructor" << endl;
+#endif
+
+	Dispatcher::getInstance()->removeHandler(ControllerSeg1::getInstance());
+	Dispatcher::getInstance()->removeHandler(ControllerSeg2::getInstance());
+	Dispatcher::getInstance()->removeHandler(ControllerSeg3::getInstance());
+	Dispatcher::getInstance()->removeHandler(ControllerSeg4::getInstance());
+	Dispatcher::getInstance()->removeHandler(ControllerSeg5::getInstance());
+
+	HALAktorik::getInstance()->stop_Motor();
+	HALAktorik::getInstance()->red_Light_on();
+
+	//TODO send message to M2
 
 }
 
@@ -126,11 +145,32 @@ ErrorHandling::~ErrorHandling()
 
 void ErrorHandling::errorFixed()
 {
+	Dispatcher::getInstance()->registerHandler(ControllerSeg1::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg2::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg3::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg4::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg5::getInstance());
+
+	HALAktorik::getInstance()->motor_on();
+	HALAktorik::getInstance()->red_Light_off();
 
 }
 
-void ErrorHandling::resetMachine()
+void ErrorHandling::resetReleased()
 {
+#ifdef DEBUG_
+	cout << "ErrorHandling :: resetReleased" << endl;
+#endif
+	//TODO reset every segment to init state
+
+	Dispatcher::getInstance()->registerHandler(ControllerSeg1::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg2::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg3::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg4::getInstance());
+	Dispatcher::getInstance()->registerHandler(ControllerSeg5::getInstance());
+
+	HALAktorik::getInstance()->red_Light_off();
+	HALAktorik::getInstance()->green_Light_on();
 
 }
 
@@ -140,6 +180,9 @@ void ErrorHandling::resetMachine()
  ************************************************************************************/
 Stop::Stop()
 {
+#ifdef DEBUG_
+	cout << "Stop :: Constructor" << endl;
+#endif
 
 }
 
@@ -180,7 +223,9 @@ void Stop::resetMachine()
  ************************************************************************************/
 Emergency::Emergency()
 {
-
+#ifdef DEBUG_
+	cout << "Emergency :: Constructor" << endl;
+#endif
 }
 
 Emergency::~Emergency()

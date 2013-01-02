@@ -80,6 +80,10 @@ void MainController::resetPressed()
 	state_->resetPressed();
 }
 
+void MainController::resetReleased()
+{
+	state_->resetReleased();
+}
 /*
  *
  */

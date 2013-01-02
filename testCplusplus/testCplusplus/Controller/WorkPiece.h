@@ -49,6 +49,10 @@ public:
      * @param hasDrill Set has_Drill to true or false
      */
     void setHas_Drill(bool hasDrill);
+    /**
+     * @return Timer associated to the workpiece
+     */
+    Timer* getTimer();
 
 private:
     Timer* timer_;					//!< Timer to be used to control the workpiece status according to time
