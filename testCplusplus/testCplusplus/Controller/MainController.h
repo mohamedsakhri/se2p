@@ -40,6 +40,11 @@ public:
 	void init();
 	void passWP2Ctr();
 
+	void pauseAllTimers();
+	void resumeAllTimers();
+	void pauseTimers(HALCallInterface* ctr);
+	void resumeTimers(HALCallInterface* ctr);
+
 	virtual ~MainController();
 
 private:

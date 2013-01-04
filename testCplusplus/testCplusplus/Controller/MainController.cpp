@@ -10,6 +10,7 @@
  */
 #define DISPATCHER_TEST
 #define DEBUG_
+#define MACHINE1
 
 #include "MainController.h"
 #include "MainState.h"
@@ -160,6 +161,70 @@ void MainController::passWP2Ctr()
 #endif
 }
 
+/**
+ *
+ */
+void MainController::pauseAllTimers(){
+#ifdef MACHINE1
+	pauseTimers(ControllerSeg1::getInstance());
+	pauseTimers(ControllerSeg2::getInstance());
+	pauseTimers(ControllerSeg3::getInstance());
+	pauseTimers(ControllerSeg4::getInstance());
+	pauseTimers(ControllerSeg5::getInstance());
+#endif
+
+#ifdef MACHINE2
+	resumeTimers(ControllerSegM2::getInstance());
+#endif
+
+}
+
+/**
+ *
+ */
+void MainController::resumeAllTimers(){
+#ifdef MACHINE1
+	resumeTimers(ControllerSeg1::getInstance());
+	resumeTimers(ControllerSeg2::getInstance());
+	resumeTimers(ControllerSeg3::getInstance());
+	resumeTimers(ControllerSeg4::getInstance());
+	resumeTimers(ControllerSeg5::getInstance());
+#endif
+
+#ifdef MACHINE2
+	resumeTimers(ControllerSegM2::getInstance());
+#endif
+
+
+}
+
+/**
+ *
+ */
+void MainController::pauseTimers(HALCallInterface* ctr)
+{
+	unsigned int i ;
+	if (!ctr->isFifoEmpty()) {
+		for ( i = 0; i < ctr->getWPList().size(); i++) {
+			ctr->getWPList().at(i)->getTimer()->pause();
+		}
+	}
+	//TODO pause CTR-timers
+}
+
+/**
+ *
+ */
+void MainController::resumeTimers(HALCallInterface* ctr)
+{
+	unsigned int i ;
+	if (!ctr->isFifoEmpty()) {
+		for ( i = 0; i < ctr->getWPList().size(); i++) {
+			ctr->getWPList().at(i)->getTimer()->resume();
+		}
+	}
+	//TODO resume CTR-timers
+}
 /**
  * Delete instance of IState
  */

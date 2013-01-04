@@ -40,7 +40,8 @@ void WaitLineEndM1::inLineEnd()
 			MainController::getInstance()->setIsRunning(false);
 			HALAktorik::getInstance()->motor_off();
 			LightFlash::getInstance()->flash(YELLOW,HALF_S);
-
+			// Pause all timers while motor is stopped
+			MainController::getInstance()->pauseAllTimers();
 			new (this) WaitForTurn();
 		}
 	} else {
@@ -74,6 +75,7 @@ WaitForTurn::WaitForTurn()
 
 void WaitForTurn::outLineEnd()
 {
+	ControllerSeg5::getInstance()->getTimer()->start();
 	new (this) Turning();
 }
 
@@ -98,6 +100,8 @@ void Turning::inLineEnd()
 #ifdef DEBUG_
 	cout << "Turning :: Timer stopped" << endl;
 #endif
+	ControllerSeg5::getInstance()->getTimer()->stop();
+	MainController::getInstance()->resumeAllTimers();
 	HALAktorik::getInstance()->motor_on();
 	MainController::getInstance()->setIsRunning(true);
 //	HALAktorik::getInstance()->yellow_Light_off();
@@ -130,6 +134,7 @@ void TransferMachine2::machine2IsReady()
 		new (this) Machine2Ready();
 		}
 		else {
+			MainController::getInstance()->pauseAllTimers();
 			HALAktorik::getInstance()->motor_off();
 			MainController::getInstance()->setIsRunning(false);
 	//		HALAktorik::getInstance()->yellow_Light_on();
@@ -158,6 +163,8 @@ WaitForMachine2::WaitForMachine2()
 
 void WaitForMachine2::messageReceived()
 {
+	MainController::getInstance()->resumeAllTimers();
+
 	HALAktorik::getInstance()->motor_on();
 	MainController::getInstance()->setIsRunning(true);
 
@@ -188,8 +195,8 @@ Machine2Ready::Machine2Ready()
 //TODO has to be changed. Just for get things in M! now
 void Machine2Ready::outLineEnd()
 {
+
 	if (!ControllerSeg5::getInstance()->isFifoEmpty()) {
-		ControllerSeg5::getInstance()->passWP2Ctr();
 		ControllerSeg5::getInstance()->removeFirsttWP();
 
 		Sender::getInstance()->send(WP_IS_COMMING);

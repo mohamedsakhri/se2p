@@ -41,12 +41,14 @@ public:
 	void init();
 	void passWP2Ctr();
 
+	Timer* getTimer();
+
 	virtual ~ControllerSeg5();
 
 private:
 	ControllerSeg5();
 	bool machine2_ready_;
-
+	Timer* timer_seg5_;
 	static ControllerSeg5* controllerSeg5_instance_;
 	static Mutex controllerSeg5_mutex_; //!< Mutex for thread-safe implementation
 };

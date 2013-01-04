@@ -104,6 +104,10 @@ public :											//WP = Workpiece
 		}
 	};
 
+	virtual vector<WorkPiece*> getWPList() {
+		return wp_list_;
+	}
+
 	virtual bool isFifoEmpty() {
 		return wp_list_.empty();
 	};

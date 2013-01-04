@@ -55,19 +55,28 @@ Timer::Timer(int timeS, int timeNS, int chid, int pulseCode, int message)
 		if(coid_ == -1 ){
 			perror ("ConnectAttach error : ");
 		}
-
+#ifdef DEBUG_
+	cout << "Timer :: ConnectAttach" << endl;
+#endif
 		SIGEV_PULSE_INIT(&event_, coid_, SIGEV_PULSE_PRIO_INHERIT, pulseCode, message );
-
+#ifdef DEBUG_
+	cout << "Timer :: SIGEV_PULSE_INIT" << endl;
+#endif
 		if(timer_create(CLOCK_REALTIME, &event_, &timer_id_) == -1) {
 			perror("Timer create error : ");
 		}
-
+#ifdef DEBUG_
+	cout << "Timer :: timer_create" << endl;
+#endif
 		this->WaitTimeS_ = timeS;
 	    this->WaitTimeNS_ = timeNS;
 	    this->itime.it_value.tv_sec = this->WaitTimeS_;  			/* 500 million nsecs = .5 secs */
 	    this->itime.it_value.tv_nsec = this->WaitTimeNS_;
 		this->itime.it_interval.tv_sec = 0;		/* 500 million nsecs = .5 secs */
 		this->itime.it_interval.tv_nsec = 0;
+#ifdef DEBUG_
+	cout << "Timer :: constructor end" << endl;
+#endif
 }
 
 /*
