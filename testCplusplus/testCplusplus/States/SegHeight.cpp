@@ -35,8 +35,11 @@ void WaitingHeightM1::inHeightMeasurement()
 #ifdef DEBUG_
 	cout << "WaitingHeightM1 :: inHeightMeasurement" << endl;
 #endif
-	// WP has arrived, stop timer
+	// WP has arrived, stop timer and  set new time for Seg3
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(2,0);
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
+
 	new (this) TooSmall();
 }
 
@@ -45,9 +48,10 @@ void WaitingHeightM1::inToleranceRange()
 #ifdef DEBUG_
 	cout << "WaitingHeightM1 :: inToleranceRange" << endl;
 #endif
-	//TODO WP's Id !!
-	// WP has arrived, stop timer
+	// WP has arrived, stop timer and  set new time for Seg3
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(2,0);
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
 
 	(ControllerSeg2::getInstance()->getFirstWP())->setIs_inTolleranceRange(true);
 		ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(false);
@@ -80,6 +84,11 @@ void TooSmall::outHeightMeasurement()
 	if (!ControllerSeg2::getInstance()->isFifoEmpty()) {
 		ControllerSeg2::getInstance()->passWP2Ctr();
 		ControllerSeg2::getInstance()->removeFirsttWP();
+
+		// WP has arrived, stop timer and  set new time for Seg3
+		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
+		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(2,0);
+		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
 
 		new (this) WaitingHeightM1();
 	} else {
@@ -122,6 +131,11 @@ void CheckDrill::outHeightMeasurement()
 					cout << "----------> LOCH : UNTEN" << endl;
 				}
 #endif
+				// WP has arrived, stop timer and  set new time for Seg3
+				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
+				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(2,0);
+				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
+
 				ControllerSeg2::getInstance()->passWP2Ctr();
 				ControllerSeg2::getInstance()->removeFirsttWP();
 

@@ -29,6 +29,7 @@ SlideWait::SlideWait()
 
 void SlideWait::inSlide()
 {
+	ControllerSeg4::getInstance()->getFirstWP()->getTimer()->stop();
 	new (this) InSlide();
 }
 

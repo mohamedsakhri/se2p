@@ -33,10 +33,17 @@ WaitingSwitch::WaitingSwitch() {
 void WaitingSwitch::inSwitch()
 {
 	if (!ControllerSeg3::getInstance()->isFifoEmpty()) {
+		ControllerSeg3::getInstance()->getFirstWP()->getTimer()->stop();
 		if (ControllerSeg3::getInstance()->getFirstWP()->getIs_inTolleranceRange()) {
+			// WP has arrived, stop timer and  set new time for Seg5
+			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(7,0);
+			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start();
+
 			HALAktorik::getInstance()->open_Switch();
 			new (this) WorkPieceValid();
 		} else {
+			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(4,0);
+			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start();
 			new (this) WorkPieceInvalid();
 		}
 	} else {
@@ -96,7 +103,7 @@ WorkPieceValid::WorkPieceValid()
 void WorkPieceValid::outSwitch()
 {
 	//Set new time for Segment 5 - From Switch to line  end -
-	ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(9, 0);
+	ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(6, 0);
 	ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start();
 	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG5);
 	ControllerSeg3::getInstance()->removeFirsttWP();

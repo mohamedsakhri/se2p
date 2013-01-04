@@ -22,7 +22,7 @@ WorkPiece::WorkPiece(int id) {
 	is_inTolleranceRange_ = false;
 	has_Drill_ = false;
 	timer_ = new Timer(3, 0, Demultiplexer::getInstance()->getChannelId(), 0, WP_IS_MISSING);
-	timer_->start();
+//	timer_->start();
 }
 
 /**

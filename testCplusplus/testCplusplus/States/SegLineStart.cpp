@@ -69,6 +69,8 @@ void StateWorkPieceCreated::outLineStart()
 #endif
 	// Start timer ??
 	if (!ControllerSeg1::getInstance()->isFifoEmpty()) {
+		ControllerSeg1::getInstance()->getFirstWP()->getTimer()->setNewTime(3, 0);
+		ControllerSeg1::getInstance()->getFirstWP()->getTimer()->start();
 		ControllerSeg1::getInstance()->passWP2Ctr();
 		ControllerSeg1::getInstance()->removeFirsttWP();
 
