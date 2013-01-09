@@ -96,8 +96,9 @@ int ControllerSeg1::sendMsg2Dispatcher(int message){
 void ControllerSeg1::passWP2Ctr()
 {
 #ifdef DEBUG_
-	cout << "ControllerSeg1::passWP2Ctr: ID: " << getFirstWP()->getId() << " TOL: " << getFirstWP()->getIs_inTolleranceRange() << endl;
+	cout << "ControllerSeg1 :: passWP2Ctr" << endl;
 #endif
+
 	ControllerSeg2::getInstance()->addWP2List(this->getFirstWP());
 }
 

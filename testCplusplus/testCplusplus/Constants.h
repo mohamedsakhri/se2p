@@ -28,17 +28,28 @@
 #define CONTROLLER_SEGM2 6
 #define MAIN_CONTROLLER 7
 
-// Serial Interface
+//Serial Interface
 #define DEVICE "/dev/ser1"
 #define TIME_TO_WAIT 20000
 
-//light code
+//Light code
 #define RED 	1
 #define YELLOW 	2
 #define GREEN	3
 
-//time constants in microsecond
+//Time constants in microsecond
 #define ONE_S 1000000
 #define HALF_S 500000
+
+//Time's values to be used in Timer
+#define ONE_SEC 1
+#define TWO_SEC 2
+#define THREE_SEC 3
+#define FOUR_SEC 4
+#define FIVE_SEC 5
+#define SIX_SEC 6
+#define SEVEN_SEC 7
+#define EIGHT_SEC 8
+#define NULL_MSEC 0
 
 #endif /* CONSTANTS_H_ */

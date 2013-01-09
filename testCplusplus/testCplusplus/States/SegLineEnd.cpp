@@ -42,6 +42,7 @@ void WaitLineEndM1::inLineEnd()
 			LightFlash::getInstance()->flash(YELLOW,HALF_S);
 			// Pause all timers while motor is stopped
 			MainController::getInstance()->pauseAllTimers();
+
 			new (this) WaitForTurn();
 		}
 	} else {
@@ -128,6 +129,9 @@ TransferMachine2::TransferMachine2()
 
 void TransferMachine2::machine2IsReady()
 {
+#ifdef DEBUG_
+	cout << "TransferMachine2 :: machine2IsReady" << endl;
+#endif
 	if (ControllerSeg5::getInstance()->isMachin2Ready() ){
 		HALAktorik::getInstance()->motor_on();
 		MainController::getInstance()->setIsRunning(true);
@@ -168,9 +172,7 @@ void WaitForMachine2::messageReceived()
 	HALAktorik::getInstance()->motor_on();
 	MainController::getInstance()->setIsRunning(true);
 
-
 	new (this) Machine2Ready();
-
 }
 
 
@@ -195,14 +197,20 @@ Machine2Ready::Machine2Ready()
 //TODO has to be changed. Just for get things in M! now
 void Machine2Ready::outLineEnd()
 {
+#ifdef DEBUG_
+	cout << "Machine2Ready :: outLineEnd" << endl;
+#endif
 
 	if (!ControllerSeg5::getInstance()->isFifoEmpty()) {
 		ControllerSeg5::getInstance()->removeFirsttWP();
-
+		// Notify machine 2 that a WP is comming
 		Sender::getInstance()->send(WP_IS_COMMING);
-		cout << "WP_IS_COMMING SENT" <<endl;
+
 		new (this) WaitLineEndM1();
+
 	} else {
+		// Case of Error
+		ControllerSeg5::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
 		HALAktorik::getInstance()->red_Light_on();
 		HALAktorik::getInstance()->green_Light_off();
 	}

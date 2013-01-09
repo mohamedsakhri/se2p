@@ -16,29 +16,18 @@
 /**
  * Set workpiece's attribut to default values
  */
-WorkPiece::WorkPiece(int id) {
-	wp_id_ = id;
+WorkPiece::WorkPiece() {
 	is_Metal_ = false;
 	is_inTolleranceRange_ = false;
 	has_Drill_ = false;
-	timer_ = new Timer(3, 0, Demultiplexer::getInstance()->getChannelId(), 0, WP_IS_MISSING);
-//	timer_->start();
+	timer_ = new Timer(THREE_SEC, NULL_MSEC, Demultiplexer::getInstance()->getChannelId(), 0, WP_IS_MISSING);
 }
 
 /**
  * Nothing to do in Destructor!
  */
 WorkPiece::~WorkPiece() {
-
 }
-/**
- * Return Workpiece Id
- */
-int WorkPiece::getId()
-{
-	return this->wp_id_;
-}
-
 /**
  * Set Workpiece's tolerance range status
  */

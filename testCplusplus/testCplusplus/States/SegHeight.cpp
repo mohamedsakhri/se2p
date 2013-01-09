@@ -37,7 +37,7 @@ void WaitingHeightM1::inHeightMeasurement()
 #endif
 	// WP has arrived, stop timer and  set new time for Seg3
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(2,0);
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
 
 	new (this) TooSmall();
@@ -50,11 +50,11 @@ void WaitingHeightM1::inToleranceRange()
 #endif
 	// WP has arrived, stop timer and  set new time for Seg3
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(2,0);
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
 
-	(ControllerSeg2::getInstance()->getFirstWP())->setIs_inTolleranceRange(true);
-		ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(false);
+	ControllerSeg2::getInstance()->getFirstWP()->setIs_inTolleranceRange(true);
+	ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(false);
 
 	new (this) CheckDrill();
 }
@@ -87,7 +87,7 @@ void TooSmall::outHeightMeasurement()
 
 		// WP has arrived, stop timer and  set new time for Seg3
 		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
-		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(2,0);
+		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
 		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
 
 		new (this) WaitingHeightM1();
@@ -133,7 +133,7 @@ void CheckDrill::outHeightMeasurement()
 #endif
 				// WP has arrived, stop timer and  set new time for Seg3
 				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
-				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(2,0);
+				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
 				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
 
 				ControllerSeg2::getInstance()->passWP2Ctr();

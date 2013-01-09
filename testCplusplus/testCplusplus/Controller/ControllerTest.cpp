@@ -51,7 +51,7 @@ void ControllerTest::inLineStart()
 	cout << "Controller "<< this->getControllerId()<< " In Engine Start" << endl;
 #endif
 	WorkPiece* wp;
-	wp = new WorkPiece(1);
+	wp = new WorkPiece();
 	wp_list_.push_back(wp);
 	hal_aktorik_->motor_on();
 	hal_aktorik_->green_Light_on();

@@ -30,6 +30,7 @@ SlideWait::SlideWait()
 void SlideWait::inSlide()
 {
 	ControllerSeg4::getInstance()->getFirstWP()->getTimer()->stop();
+	ControllerSeg4::getInstance()->getTimer()->start();
 	new (this) InSlide();
 }
 
@@ -57,6 +58,7 @@ InSlide::InSlide()
  */
 void InSlide::outSlide()
 {
+	ControllerSeg4::getInstance()->getTimer()->stop();
 	delete ControllerSeg4::getInstance()->getFirstWP();
 	ControllerSeg4::getInstance()->removeFirsttWP();
 

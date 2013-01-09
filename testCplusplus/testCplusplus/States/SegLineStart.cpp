@@ -32,11 +32,11 @@ void StateLineStart::inLineStart()
 #ifdef DEBUG_
 	cout << "StateLineStart :: inLineStart" << endl;
 #endif
-	//TODO check if the WP id is needed
 	ControllerSeg1::getInstance()->setIsRunning(true);
-	WorkPiece* wp = new WorkPiece(1) ;
+
+	WorkPiece* wp = new WorkPiece() ;
 	ControllerSeg1::getInstance()->addWP2List(wp);
-	//TODO test if the motor have to be started and send msg to machine2 to start
+
 	if (ControllerSeg5::getInstance()->isFifoEmpty()){
 		HALAktorik::getInstance()->motor_on();
 		HALAktorik::getInstance()->green_Light_on();
@@ -67,10 +67,11 @@ void StateWorkPieceCreated::outLineStart()
 #ifdef DEBUG_
 	cout << "StateWorkPieceCreated :: outLineStart" << endl;
 #endif
-	// Start timer ??
 	if (!ControllerSeg1::getInstance()->isFifoEmpty()) {
-		ControllerSeg1::getInstance()->getFirstWP()->getTimer()->setNewTime(3, 0);
+		// Start timer for seg2
+		ControllerSeg1::getInstance()->getFirstWP()->getTimer()->setNewTime(THREE_SEC, NULL_MSEC);
 		ControllerSeg1::getInstance()->getFirstWP()->getTimer()->start();
+
 		ControllerSeg1::getInstance()->passWP2Ctr();
 		ControllerSeg1::getInstance()->removeFirsttWP();
 

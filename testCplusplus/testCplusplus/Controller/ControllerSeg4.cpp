@@ -22,6 +22,7 @@ ControllerSeg4* ControllerSeg4::controllerSeg4_instance_ = NULL ;
  */
 ControllerSeg4::ControllerSeg4()
 {
+	timer_seg4_ = new Timer(TWO_SEC, NULL_MSEC, Demultiplexer::getInstance()->getChannelId(), 0, WP_IS_MISSING);
 	ctr_id_ = CONTROLLER_SEG4;
 	state_ = new SlideWait();
 	init();
@@ -99,6 +100,13 @@ void ControllerSeg4::passWP2Ctr()
 //	ControllerSeg5::getInstance()->addWP2List(getFirstWP());
 }
 
+/**
+ * Return Seg5 Timer
+ */
+Timer* ControllerSeg4::getTimer()
+{
+	return timer_seg4_;
+}
 /**
  * Delete instance of Istate
  */

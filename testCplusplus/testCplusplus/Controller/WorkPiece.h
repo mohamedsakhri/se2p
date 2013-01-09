@@ -15,16 +15,13 @@
 #include "Timer.h"
 #include "Demultiplexer.h"
 #include "Messages.h"
+#include "Constants.h"
 
 class WorkPiece {
 public:
-	WorkPiece(int id);
+	WorkPiece();
 	virtual ~WorkPiece();
 
-	/**
-	 * @return id Workpiece's id
-	 */
-	int getId();
 	/**
 	* @return true if Worpiece's in tolerance range
 	*/
@@ -56,7 +53,6 @@ public:
 
 private:
     Timer* timer_;					//!< Timer to be used to control the workpiece status according to time
-	int wp_id_ ;					//!< Worpiece's Id
 	bool is_Metal_;					//!< Indicates workpiece's metal status
 	bool is_inTolleranceRange_;		//!< Indicates workpiece's tolerance range status
 	bool has_Drill_;				//!< Indicates workpiece's drill drill

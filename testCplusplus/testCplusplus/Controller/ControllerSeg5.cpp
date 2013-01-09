@@ -22,7 +22,7 @@ ControllerSeg5* ControllerSeg5::controllerSeg5_instance_ = NULL ;
  */
 ControllerSeg5::ControllerSeg5()
 {
-	timer_seg5_ = new Timer(5, 0, Demultiplexer::getInstance()->getChannelId(), 0, WP_IS_MISSING);
+	timer_seg5_ = new Timer(FIVE_SEC, NULL_MSEC, Demultiplexer::getInstance()->getChannelId(), 0, WP_IS_MISSING);
 	ctr_id_ = CONTROLLER_SEG5;
 	machine2_ready_ = true;
 	state_ = new WaitLineEndM1();
@@ -139,7 +139,7 @@ int ControllerSeg5::sendMsg2Dispatcher(int message)
  */
 void ControllerSeg5::passWP2Ctr()
 {
-	cout << "ControllerSeg5::passWP2Ctr: ID: " << getFirstWP()->getId() << " TOL: " << getFirstWP()->getIs_inTolleranceRange() << endl;
+	cout << "ControllerSeg5 :: passWP2Ctr" << endl;
 	ControllerSegM2::getInstance()->addWP2List(this->getFirstWP());
 }
 

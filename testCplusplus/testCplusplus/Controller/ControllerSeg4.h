@@ -30,11 +30,13 @@ public:
 	void init();
 	void passWP2Ctr();
 
+	Timer* getTimer();
+
 	virtual ~ControllerSeg4();
 
 private:
 	ControllerSeg4();
-
+	Timer* timer_seg4_;
 	static ControllerSeg4* controllerSeg4_instance_;
 	static Mutex controllerSeg4_mutex_; //!< Mutex for thread-safe implementation
 };

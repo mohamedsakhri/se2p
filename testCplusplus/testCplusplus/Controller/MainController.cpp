@@ -157,7 +157,7 @@ int MainController::sendMsg2Dispatcher(int message){
 void MainController::passWP2Ctr()
 {
 #ifdef DEBUG_
-	cout << "MainController::passWP2Ctr: ID: " << getFirstWP()->getId() << " TOL: " << getFirstWP()->getIs_inTolleranceRange() << endl;
+	cout << "MainController :: passWP2Ctr" << endl;
 #endif
 }
 
