@@ -59,6 +59,7 @@ public :
 	virtual void emergency(){};
 	virtual void isMissing(){};
 	virtual void error() {};
+	virtual void errorFixed(){};
 
 };
 

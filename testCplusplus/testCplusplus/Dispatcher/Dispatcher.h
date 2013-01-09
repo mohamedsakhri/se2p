@@ -37,11 +37,25 @@ public:
 	/**
 	* @return Dispatcher's instance
 	*/
+
 	static Dispatcher* getInstance();						//!< For Singleton pattern implementation
+
 	/**
 	 * @param handler Controller to be registered in Dispatcher
 	 */
 	void registerHandler(HALCallInterface* handler);		//!< Register handler in Dispatcher's list
+	/**
+	 * @param handler Controller to be register in Dispatcher
+	 * @param event Event that Controller want to register to
+	 */
+	void registerEvent(HALCallInterface* handler, int event);
+
+	/**
+	 * @param handler Controller to be register in Dispatcher
+	 * @param event Event that Controller want to unregister from
+	 */
+	void removeEvent(HALCallInterface* handler, int event);
+
 	/**
 	 * @param handler Controller to be removed from Dispatcher
 	 */

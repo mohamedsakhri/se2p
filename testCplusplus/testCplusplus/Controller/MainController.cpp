@@ -123,7 +123,20 @@ void MainController::isStranger()
 void MainController::slideFull()
 {
 	state_->error();
+//	Dispatcher::getInstance()->registerEvent(this, WP_OUT_SLIDE);
+
 }
+
+/*
+ *
+ */
+void MainController::outSlide()
+{
+	// To be changed with errorfixed
+//	Dispatcher::getInstance()->removeEvent(this, WP_OUT_SLIDE);
+	state_->errorFixed();
+}
+
 
 /*
  *

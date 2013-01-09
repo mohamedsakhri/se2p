@@ -33,6 +33,8 @@ public:
 	void isStranger();
 	void slideFull();
 	void notTurned();
+	//To fix remediable errors
+	void outSlide();
 
 
 	int sendMsg2Dispatcher(int message);

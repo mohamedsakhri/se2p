@@ -48,6 +48,8 @@ void StateTest::execute(void *arg) {
 	mainCtr->addEvent(RESET_PRESSED);
 	mainCtr->addEvent(RESET_RELEASED);
 	mainCtr->addEvent(WP_IS_MISSING);
+	mainCtr->addEvent(SLIDE_FULL);
+
 	//
 	// ctr2->addEvent(WP_IN_HEIGHT_M);
 	// ctr2->addEvent(WP_OUT_HEIGHT_M);

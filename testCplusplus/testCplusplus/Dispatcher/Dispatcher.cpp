@@ -191,6 +191,27 @@ void Dispatcher::registerHandler(HALCallInterface* handler){
 }
 
 /**
+ *  Register handler for an event
+ */
+void Dispatcher::registerEvent(HALCallInterface* handler, int event) {
+	CTRList[event].push_back(handler);
+}
+
+/**
+ * Remove Handler from an event
+ */
+void Dispatcher::removeEvent(HALCallInterface* handler, int event) {
+	unsigned int i;
+	for (i = 0; i < CTRList[event].size(); i++) {
+		if (handler->getControllerId()
+				== CTRList[event].at(i)->getControllerId())
+			;
+		CTRList[event].erase(CTRList[event].begin() + i);
+	}
+}
+
+
+/**
  * Remove handler from Dispatcher's list of Controllers
  */
 void Dispatcher::removeHandler(HALCallInterface* handler){
@@ -203,7 +224,7 @@ void Dispatcher::removeHandler(HALCallInterface* handler){
 #endif
 
 	/*
-	 * Find controllers registered for events and remove the the one which has to be removed
+	 * Find controllers registered for events and remove the one which has to be removed
 	 * Therefore is he controller id needed
 	 */
 	for ( i = 0 ; i < events.size(); i++){
