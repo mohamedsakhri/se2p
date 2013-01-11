@@ -29,6 +29,7 @@ public:
 	int sendMsg2Dispatcher(int message);
 	void init();
 	void passWP2Ctr();
+	void reset();
 
 	Timer* getTimer();
 

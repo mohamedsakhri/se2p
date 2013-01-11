@@ -46,7 +46,7 @@ WpIsComming::~WpIsComming() {
 
 void WpIsComming::inLineStart() {
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->setNewTime(4, 0);
+	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->setNewTime(NINE_SEC, NULL_MSEC);
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start();
 	new (this) WaitForHeightM2();
 }
@@ -81,8 +81,8 @@ void WaitForHeightM2::inToleranceRange() {
 //TODO error (if drill down or small WP)
 NoDrill::NoDrill() {
 	cout << "ERROR WP Small or Drill Down" << endl;
-	HALAktorik::getInstance()->red_Light_on();
-	HALAktorik::getInstance()->green_Light_off();
+//	HALAktorik::getInstance()->red_Light_on();
+//	HALAktorik::getInstance()->green_Light_off();
 	HALAktorik::getInstance()->motor_off();
 }
 
@@ -222,7 +222,6 @@ WorkPieceIsValid::~WorkPieceIsValid() {
 void WorkPieceIsValid::outSwitch() {
 
 	new (this) WaitForEndLine();
-	WAIT_HALF_S;
 	HALAktorik::getInstance()->close_Switch();
 
 }

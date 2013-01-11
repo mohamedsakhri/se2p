@@ -23,6 +23,8 @@ Timer::Timer() {
 	cout << "Timer :: Constructor" << endl;
 #endif
 
+	name_ = -1 ;  			// for debugging (-1 : no given name)
+
 	coid_ = ConnectAttach(0, 0, chid_, _NTO_SIDE_CHANNEL, 0);
 	if (coid_ == -1) {
 		perror("ConnectAttach error : ");
@@ -46,6 +48,7 @@ Timer::Timer() {
  */
 Timer::Timer(int timeS, int timeNS, int chid, int pulseCode, int message)
 {
+	name_ = -1 ;  			// for debugging (-1 : no given name)
 #ifdef DEBUG_
 	cout << "Timer :: Constructor" << endl;
 #endif
@@ -118,16 +121,14 @@ void Timer::setNewTime(int timeS, int timeNS){
 void Timer::start()
 {
 #ifdef DEBUG_
-	cout << "Timer Start - Timer Id:" << (int)timer_id_ << endl;
+	cout << "Timer Start - Timer Id:" << name_ << endl;
 	cout << "Timer Value:" <<itime.it_value.tv_sec << endl;
 #endif
 
 	if (timer_settime(timer_id_, 0, &itime, NULL) == -1 ) {
 		perror("Timer start  error : ");
 	}
-#ifdef DEBUG_
-	cout << "Timer end " << (int)timer_id_ << endl;
-#endif
+
 
 }
 
@@ -136,7 +137,7 @@ void Timer::start()
  */
 void Timer::stop() {
 #ifdef DEBUG_
-	cout << "Timer stop - Timer Id:" << (int) timer_id_ << endl;
+	cout << "Timer stop - Timer Id:" << name_ << endl;
 	cout << "Timer Value:" << itime.it_value.tv_sec << endl;
 #endif
 	this->itime.it_value.tv_sec = 0;
@@ -152,7 +153,7 @@ void Timer::stop() {
 void Timer::pause()
 {
 #ifdef DEBUG_
-	cout << "Timer pause - Timer Id:" << (int)timer_id_ << endl;
+	cout << "Timer pause - Timer Id:" << name_ << endl;
 #endif
 	this->itime.it_value.tv_sec = 0;
 	this->itime.it_value.tv_nsec = 0;
@@ -167,10 +168,25 @@ void Timer::pause()
 void Timer::resume()
 {
 #ifdef DEBUG_
-	cout << "Timer resume - Timer Id:" << (int)timer_id_ << endl;
+	cout << "Timer resume - Timer Id:" << name_ << endl;
 #endif
 
 	if (timer_settime(this->timer_id_, 0, &remainingTime_, NULL) == -1 ) {
 		perror("Timer resume  error : ");
 	}
 }
+
+
+/*
+ * function for debugging
+ */
+void Timer::setName(int name)
+{
+	name_ = name;
+}
+
+void Timer::printName()
+{
+	cout << "Timer name: " << name_ << endl;
+}
+

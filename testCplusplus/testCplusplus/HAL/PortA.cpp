@@ -113,6 +113,13 @@ void PortA::stop_Motor() {
 	PortA::set_Bit_on(BIT_3);
 }
 
+/**
+ * \see set_Bit_on()
+ */
+void PortA::start_Motor() {
+	PortA::set_Bit_off(BIT_3);
+}
+
 /************************************************************************************
  *									LIGHTS											*
  *																					*

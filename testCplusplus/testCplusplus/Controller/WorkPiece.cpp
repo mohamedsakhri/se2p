@@ -16,11 +16,13 @@
 /**
  * Set workpiece's attribut to default values
  */
+int WorkPiece::counter = 0;
 WorkPiece::WorkPiece() {
 	is_Metal_ = false;
 	is_inTolleranceRange_ = false;
 	has_Drill_ = false;
 	timer_ = new Timer(THREE_SEC, NULL_MSEC, Demultiplexer::getInstance()->getChannelId(), 0, WP_IS_MISSING);
+	timer_->setName(counter++);
 }
 
 /**

@@ -22,7 +22,8 @@ ControllerSeg4* ControllerSeg4::controllerSeg4_instance_ = NULL ;
  */
 ControllerSeg4::ControllerSeg4()
 {
-	timer_seg4_ = new Timer(TWO_SEC, NULL_MSEC, Demultiplexer::getInstance()->getChannelId(), 0, WP_IS_MISSING);
+	timer_seg4_ = new Timer(ONE_SEC, NULL_MSEC, Demultiplexer::getInstance()->getChannelId(), 0, SLIDE_FULL);
+	timer_seg4_->setName(4);
 	ctr_id_ = CONTROLLER_SEG4;
 	state_ = new SlideWait();
 	init();
@@ -106,6 +107,11 @@ void ControllerSeg4::passWP2Ctr()
 Timer* ControllerSeg4::getTimer()
 {
 	return timer_seg4_;
+}
+
+void ControllerSeg4::reset() {
+	this->wp_list_.clear();
+	this->state_ = new SlideWait();
 }
 /**
  * Delete instance of Istate

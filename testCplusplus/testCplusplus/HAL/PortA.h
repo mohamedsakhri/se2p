@@ -35,6 +35,7 @@ public:
 	void run_right();	//!< Run production line from right to left
 	void run_left();	//!< Run production line from left to right
 	void stop_Motor();	//!< Stop motor
+	void start_Motor(); //!< Start motor
 
 	void open_Switch();	//!< Open the switch
 	void close_Switch();	//!< Close the switch

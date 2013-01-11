@@ -122,9 +122,8 @@ void MainController::isStranger()
  */
 void MainController::slideFull()
 {
-	state_->error();
-//	Dispatcher::getInstance()->registerEvent(this, WP_OUT_SLIDE);
-
+	state_->slideFull();
+	Dispatcher::getInstance()->registerEvent(MainController::getInstance(), WP_OUT_SLIDE);
 }
 
 /*
@@ -132,9 +131,11 @@ void MainController::slideFull()
  */
 void MainController::outSlide()
 {
-	// To be changed with errorfixed
-//	Dispatcher::getInstance()->removeEvent(this, WP_OUT_SLIDE);
+	// To be changed with error fixed
 	state_->errorFixed();
+	Dispatcher::getInstance()->removeEvent(MainController::getInstance(), WP_OUT_SLIDE);
+
+
 }
 
 

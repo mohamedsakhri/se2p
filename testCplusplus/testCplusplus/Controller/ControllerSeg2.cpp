@@ -120,6 +120,11 @@ void ControllerSeg2::passWP2Ctr()
 	}
 }
 
+void ControllerSeg2::reset() {
+	this->wp_list_.clear();
+	this->state_ = new WaitingHeightM1();
+}
+
 /**
  * Delete instance of Istate
  */

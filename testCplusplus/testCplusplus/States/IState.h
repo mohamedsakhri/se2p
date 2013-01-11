@@ -16,6 +16,7 @@
 #include <iostream>
 #include "HALAktorik.h"
 #include "WorkPiece.h"
+#include "RedLightFlash.h"
 
 class IState {
 public :
@@ -60,6 +61,7 @@ public :
 	virtual void isMissing(){};
 	virtual void error() {};
 	virtual void errorFixed(){};
+	virtual void slideFull(){};
 
 };
 

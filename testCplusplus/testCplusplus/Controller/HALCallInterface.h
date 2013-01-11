@@ -21,23 +21,23 @@
 #include "Sender.h"
 
 class HALCallInterface {
-public :											//WP = Workpiece
+public :										//WP = Workpiece
 	virtual void inLineStart() {};				//!< WP in line's start
 	virtual void outLineStart(){};				//!< WP has left line's start
 	virtual void inHeightMeasurement(){};		//!< WP is in height measurement area
 	virtual void outHeightMeasurement(){};		//!< WP has left height measurement area
 	virtual void inToleranceRange(){};			//!< WP's height is in tolerance range
 	virtual void notInToleranceRange(){};		//!< WP's height is not in tolerance range
-	virtual void isMetal(){};						//!< WP has metal
+	virtual void isMetal(){};					//!< WP has metal
 	virtual void notMetal(){};					//!< WP doesn't have metal
 	virtual void inSwitch(){};					//!< WP is in switch area
 	virtual void outSwitch(){};					//!< WP has left Switch area
-	virtual void switchOpen(){};					//!< Switch has been opened
+	virtual void switchOpen(){};				//!< Switch has been opened
 	virtual void switchClosed(){};				//!< Switch has been closed
-	virtual void inSlide(){};						//!< WP is in Slide's barrier (Rutsche)
+	virtual void inSlide(){};					//!< WP is in Slide's barrier (Rutsche)
 	virtual void outSlide(){};					//!< WP out Slide's light barrier
 	virtual void inLineEnd(){};					//!< WP is in line's end
-	virtual void outLineEnd(){};					//!< WP has left line's end
+	virtual void outLineEnd(){};				//!< WP has left line's end
 
 	virtual void startPressed(){};
 	virtual void startReleased(){};
@@ -56,6 +56,8 @@ public :											//WP = Workpiece
 	virtual void slideFull(){};
 	virtual void wpNotTurned(){};
 
+
+
 	/*
 	 * Communication between Machine1 and machine2
 	 */
@@ -63,6 +65,12 @@ public :											//WP = Workpiece
 	virtual void wpHasArrived(){};
 	virtual void m2isReady(){};
 	virtual void m2isBusy(){};
+
+	/*
+	 * Reset controller
+	 */
+
+	virtual void reset(){};
 
 	/**
 	 * @param even_index Id of event_ the controller want to register to

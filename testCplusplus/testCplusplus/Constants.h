@@ -50,6 +50,7 @@
 #define SIX_SEC 6
 #define SEVEN_SEC 7
 #define EIGHT_SEC 8
+#define NINE_SEC 9
 #define NULL_MSEC 0
 
 #endif /* CONSTANTS_H_ */

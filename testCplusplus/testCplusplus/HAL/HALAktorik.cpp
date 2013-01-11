@@ -80,6 +80,10 @@ void HALAktorik::stop_Motor() {
 	portA_->stop_Motor();
 }
 
+void HALAktorik::start_Motor(){
+	portA_->start_Motor();
+}
+
 void HALAktorik::run_right() {
 	portA_->run_right();
 }

@@ -72,6 +72,16 @@ void ControllerSeg1::outLineStart()
 	state_->outLineStart();
 }
 
+/*
+ * Reset Controller
+ */
+
+void ControllerSeg1::reset() {
+	this->wp_list_.clear();
+	this->state_ = new StateLineStart();
+}
+
+
 /**
  * Send a message to Dispatcher
  */

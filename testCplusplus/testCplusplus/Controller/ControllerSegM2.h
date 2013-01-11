@@ -40,6 +40,8 @@ public:
 	void init();
 	void passWP2Ctr();
 
+	void reset();
+
 	virtual ~ControllerSegM2();
 
 private:

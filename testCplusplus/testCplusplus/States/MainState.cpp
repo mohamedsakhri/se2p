@@ -106,6 +106,11 @@ RunningMachine1::~RunningMachine1() {
 
 }
 
+void RunningMachine1::resetPressed() {
+	RedLightFlash::getInstance()->hold();
+	HALAktorik::getInstance()->red_Light_off();
+}
+
 void RunningMachine1::stopPressed() {
 	HALAktorik::getInstance()->motor_off();
 	HALAktorik::getInstance()->red_Light_off();
@@ -136,6 +141,10 @@ void RunningMachine1::error() {
 
 }
 
+void RunningMachine1::slideFull() {
+	new (this) SlideHandling();
+}
+
 /************************************************************************************
  * ErrorHandling *
  * *
@@ -144,15 +153,17 @@ ErrorHandling::ErrorHandling() {
 #ifdef DEBUG_
 	cout << "ErrorHandling :: Constructor" << endl;
 #endif
-
+	//TODO stop all timers
+	MainController::getInstance()->pauseAllTimers();
 	Dispatcher::getInstance()->removeHandler(ControllerSeg1::getInstance());
 	Dispatcher::getInstance()->removeHandler(ControllerSeg2::getInstance());
 	Dispatcher::getInstance()->removeHandler(ControllerSeg3::getInstance());
 	Dispatcher::getInstance()->removeHandler(ControllerSeg4::getInstance());
 	Dispatcher::getInstance()->removeHandler(ControllerSeg5::getInstance());
 
-	HALAktorik::getInstance()->stop_Motor();
-	HALAktorik::getInstance()->red_Light_on();
+	HALAktorik::getInstance()->motor_off();
+
+	RedLightFlash::getInstance()->flash(RED,HALF_S);
 
 	//TODO send message to M2
 
@@ -162,33 +173,104 @@ ErrorHandling::~ErrorHandling() {
 
 }
 
-void ErrorHandling::errorFixed() {
+void ErrorHandling::startPressed() {
+#ifdef DEBUG_
+	cout << "ErrorHandling :: Constructor" << endl;
+#endif
+
+	ControllerSeg1::getInstance()->reset();
+	ControllerSeg2::getInstance()->reset();
+	ControllerSeg3::getInstance()->reset();
+	ControllerSeg4::getInstance()->reset();
+	ControllerSeg5::getInstance()->reset();
+
 	Dispatcher::getInstance()->registerHandler(ControllerSeg1::getInstance());
 	Dispatcher::getInstance()->registerHandler(ControllerSeg2::getInstance());
 	Dispatcher::getInstance()->registerHandler(ControllerSeg3::getInstance());
 	Dispatcher::getInstance()->registerHandler(ControllerSeg4::getInstance());
 	Dispatcher::getInstance()->registerHandler(ControllerSeg5::getInstance());
-
-	HALAktorik::getInstance()->motor_on();
 	HALAktorik::getInstance()->red_Light_off();
 
+	new (this) RunningMachine1;
 }
 
-void ErrorHandling::resetReleased() {
+/**
+ *
+ */
+void ErrorHandling::resetPressed() {
 #ifdef DEBUG_
 	cout << "ErrorHandling :: resetReleased" << endl;
 #endif
 	//TODO reset every segment to init state
+	RedLightFlash::getInstance()->hold();
+	HALAktorik::getInstance()->red_Light_on();
+}
 
+/*************************************************
+ *
+ *
+ */
+
+/************************************************************************************
+ * ErrorHandling *
+ * *
+ ************************************************************************************/
+SlideHandling::SlideHandling() {
+#ifdef DEBUG_
+	cout << "SlideHandling :: Constructor" << endl;
+#endif
+	MainController::getInstance()->pauseAllTimers();
+	Dispatcher::getInstance()->removeHandler(ControllerSeg1::getInstance());
+	Dispatcher::getInstance()->removeHandler(ControllerSeg2::getInstance());
+	Dispatcher::getInstance()->removeHandler(ControllerSeg3::getInstance());
+//	Dispatcher::getInstance()->removeHandler(ControllerSeg4::getInstance());
+	Dispatcher::getInstance()->removeHandler(ControllerSeg5::getInstance());
+
+	HALAktorik::getInstance()->motor_off();
+	RedLightFlash::getInstance()->flash(RED,HALF_S);
+
+
+	//TODO send message to M2
+
+}
+
+SlideHandling::~SlideHandling() {
+
+}
+
+void SlideHandling::errorFixed() {
+#ifdef DEBUG_
+	cout << "ErrorHandling :: Constructor" << endl;
+#endif
+	MainController::getInstance()->resumeAllTimers();
 	Dispatcher::getInstance()->registerHandler(ControllerSeg1::getInstance());
 	Dispatcher::getInstance()->registerHandler(ControllerSeg2::getInstance());
 	Dispatcher::getInstance()->registerHandler(ControllerSeg3::getInstance());
-	Dispatcher::getInstance()->registerHandler(ControllerSeg4::getInstance());
+//	Dispatcher::getInstance()->registerHandler(ControllerSeg4::getInstance());
 	Dispatcher::getInstance()->registerHandler(ControllerSeg5::getInstance());
 
-	HALAktorik::getInstance()->red_Light_off();
-	HALAktorik::getInstance()->green_Light_on();
+	if (!ControllerSeg1::getInstance()->isFifoEmpty()
+			|| !ControllerSeg2::getInstance()->isFifoEmpty()
+			|| !ControllerSeg3::getInstance()->isFifoEmpty()
+			|| !ControllerSeg5::getInstance()->isFifoEmpty()
+			) {
+		if (MainController::getInstance()->isRunning())
+			HALAktorik::getInstance()->motor_on();
+	}
+	RedLightFlash::getInstance()->flash(RED,ONE_S);
 
+	new (this) RunningMachine1();
+
+}
+void SlideHandling::resetPressed() {
+#ifdef DEBUG_
+	cout << "SlideHandling :: resetReleased" << endl;
+#endif
+	//TODO reset every segment to init state
+
+
+	RedLightFlash::getInstance()->hold();
+	HALAktorik::getInstance()->red_Light_on();
 }
 
 /************************************************************************************

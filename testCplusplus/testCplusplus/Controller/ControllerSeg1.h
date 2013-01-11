@@ -33,6 +33,8 @@ public:
 	void init();
 	void passWP2Ctr();
 
+	void reset();
+
 	virtual ~ControllerSeg1();
 
 private:

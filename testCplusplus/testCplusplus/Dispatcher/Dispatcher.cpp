@@ -194,6 +194,8 @@ void Dispatcher::registerHandler(HALCallInterface* handler){
  *  Register handler for an event
  */
 void Dispatcher::registerEvent(HALCallInterface* handler, int event) {
+	cout << "Dispatcher::registerEvent" << endl;
+
 	CTRList[event].push_back(handler);
 }
 
@@ -201,6 +203,8 @@ void Dispatcher::registerEvent(HALCallInterface* handler, int event) {
  * Remove Handler from an event
  */
 void Dispatcher::removeEvent(HALCallInterface* handler, int event) {
+	cout << "Dispatcher::registerEvent" << endl;
+
 	unsigned int i;
 	for (i = 0; i < CTRList[event].size(); i++) {
 		if (handler->getControllerId()

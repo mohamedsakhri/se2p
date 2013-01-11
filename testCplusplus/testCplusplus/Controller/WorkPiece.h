@@ -51,6 +51,8 @@ public:
      */
     Timer* getTimer();
 
+    static int counter;
+
 private:
     Timer* timer_;					//!< Timer to be used to control the workpiece status according to time
 	bool is_Metal_;					//!< Indicates workpiece's metal status

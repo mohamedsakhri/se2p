@@ -157,6 +157,15 @@ void ControllerSegM2::passWP2Ctr()
 }
 
 /**
+ * reset
+ */
+void ControllerSegM2::reset()
+{
+
+}
+
+
+/**
  * Delete instance of Istate
  */
 ControllerSegM2::~ControllerSegM2() {

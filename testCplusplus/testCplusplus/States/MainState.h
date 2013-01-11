@@ -45,8 +45,10 @@ public:
 	virtual ~RunningMachine1();
 
 	void stopPressed();
+	void resetPressed();
 	void EStopPressed();
 	void error();
+	void slideFull();
 };
 
 /*
@@ -57,8 +59,20 @@ public:
 	ErrorHandling();
 	virtual ~ErrorHandling();
 
+	void startPressed();
+	void resetPressed();
+};
+
+/*
+ *
+ */
+class SlideHandling: public IState{
+public:
+	SlideHandling();
+	virtual ~SlideHandling();
+
+	void resetPressed();
 	void errorFixed();
-	void resetReleased();
 };
 
 /*

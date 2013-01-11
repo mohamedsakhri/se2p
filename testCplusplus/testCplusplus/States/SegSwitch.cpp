@@ -50,8 +50,8 @@ void WaitingSwitch::inSwitch()
 		//TODO  just send msg and let controller do the rest according to the error event_ handler
 		ControllerSeg3::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
 		HALAktorik::getInstance()->motor_off();
-		HALAktorik::getInstance()->red_Light_on();
-		HALAktorik::getInstance()->green_Light_off();
+//		HALAktorik::getInstance()->red_Light_on();
+//		HALAktorik::getInstance()->green_Light_off();
 	}
 }
 

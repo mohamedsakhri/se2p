@@ -37,7 +37,7 @@ void WaitingHeightM1::inHeightMeasurement()
 #endif
 	// WP has arrived, stop timer and  set new time for Seg3
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(FOUR_SEC,NULL_MSEC);
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
 
 	new (this) TooSmall();
@@ -50,7 +50,7 @@ void WaitingHeightM1::inToleranceRange()
 #endif
 	// WP has arrived, stop timer and  set new time for Seg3
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(FOUR_SEC,NULL_MSEC);
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
 
 	ControllerSeg2::getInstance()->getFirstWP()->setIs_inTolleranceRange(true);
@@ -85,18 +85,18 @@ void TooSmall::outHeightMeasurement()
 		ControllerSeg2::getInstance()->passWP2Ctr();
 		ControllerSeg2::getInstance()->removeFirsttWP();
 
-		// WP has arrived, stop timer and  set new time for Seg3
-		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
-		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
-		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
+//		// WP has arrived, stop timer and  set new time for Seg3
+//		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
+//		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
+//		ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
 
 		new (this) WaitingHeightM1();
 	} else {
 		//TODO  just send msg and let controller do the rest according to the error event_ handler
 		ControllerSeg2::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
 		HALAktorik::getInstance()->motor_off();
-		HALAktorik::getInstance()->red_Light_on();
-		HALAktorik::getInstance()->green_Light_off();
+//		HALAktorik::getInstance()->red_Light_on();
+//		HALAktorik::getInstance()->green_Light_off();
 	}
 }
 
@@ -132,9 +132,9 @@ void CheckDrill::outHeightMeasurement()
 				}
 #endif
 				// WP has arrived, stop timer and  set new time for Seg3
-				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
-				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
-				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
+//				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
+//				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
+//				ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
 
 				ControllerSeg2::getInstance()->passWP2Ctr();
 				ControllerSeg2::getInstance()->removeFirsttWP();
@@ -144,8 +144,8 @@ void CheckDrill::outHeightMeasurement()
 				//TODO  just send msg and let controller do the rest according to the error event_ handler
 				ControllerSeg2::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
 				HALAktorik::getInstance()->motor_off();
-				HALAktorik::getInstance()->red_Light_on();
-				HALAktorik::getInstance()->green_Light_off();
+//				HALAktorik::getInstance()->red_Light_on();
+//				HALAktorik::getInstance()->green_Light_off();
 			}
 	new (this) WaitingHeightM1();
 }

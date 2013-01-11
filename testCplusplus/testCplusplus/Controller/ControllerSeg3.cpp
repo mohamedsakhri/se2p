@@ -109,6 +109,10 @@ void ControllerSeg3::passWP2Ctr(int controller_id)
 		ControllerSeg5::getInstance()->addWP2List(getFirstWP());
 }
 
+void ControllerSeg3::reset() {
+	this->wp_list_.clear();
+	this->state_ = new WaitingSwitch();
+}
 /**
  * Delete instance of IState
  */

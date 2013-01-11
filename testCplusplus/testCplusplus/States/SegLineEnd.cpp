@@ -50,8 +50,8 @@ void WaitLineEndM1::inLineEnd()
 		ControllerSeg5::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
 		//to be moved to ERROR
 		HALAktorik::getInstance()->motor_off();
-		HALAktorik::getInstance()->red_Light_on();
-		HALAktorik::getInstance()->green_Light_off();
+//		HALAktorik::getInstance()->red_Light_on();
+//		HALAktorik::getInstance()->green_Light_off();
 		//HALAktorik::getInstance()->yellow_Light_off();
 		LightFlash::getInstance()->stopFlashing();
 	}
@@ -211,8 +211,8 @@ void Machine2Ready::outLineEnd()
 	} else {
 		// Case of Error
 		ControllerSeg5::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
-		HALAktorik::getInstance()->red_Light_on();
-		HALAktorik::getInstance()->green_Light_off();
+//		HALAktorik::getInstance()->red_Light_on();
+//		HALAktorik::getInstance()->green_Light_off();
 	}
 }
 

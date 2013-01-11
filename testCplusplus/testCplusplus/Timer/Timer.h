@@ -54,6 +54,14 @@ public:
 	 */
 	int getRemainingTime();
 
+	/*
+	 * for debugging
+	 */
+	void setName(int name);
+	void printName();
+
+
+
 	virtual ~Timer();
 
 private:
@@ -66,6 +74,7 @@ private:
 		int						chid_;
 		int						coid_;
 		int						rcvid_;
+		int 					name_;    //!< for debugging
 };
 
 #endif /* TIMER_H_ */

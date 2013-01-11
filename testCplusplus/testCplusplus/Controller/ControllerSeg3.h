@@ -33,6 +33,8 @@ public:
 	void init();
 	void passWP2Ctr();
 	void passWP2Ctr(int ctr_id);
+	void reset();
+
 	virtual ~ControllerSeg3();
 
 private:

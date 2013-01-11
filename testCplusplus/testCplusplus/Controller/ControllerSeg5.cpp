@@ -139,8 +139,6 @@ int ControllerSeg5::sendMsg2Dispatcher(int message)
  */
 void ControllerSeg5::passWP2Ctr()
 {
-	cout << "ControllerSeg5 :: passWP2Ctr" << endl;
-	ControllerSegM2::getInstance()->addWP2List(this->getFirstWP());
 }
 
 /**
@@ -151,6 +149,11 @@ Timer* ControllerSeg5::getTimer()
 	return timer_seg5_;
 }
 
+void ControllerSeg5::reset() {
+	this->wp_list_.clear();
+	machine2_ready_ = true;
+	this->state_ = new WaitForEndLine();
+}
 /**
  * Delete instance of Istate
  */
