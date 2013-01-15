@@ -58,6 +58,7 @@ void RedLightFlash::flash(int light, int sleeptime){
 	} else {
 		this->start(NULL);
 	}
+	is_flashing_ = true;
 }
 
 

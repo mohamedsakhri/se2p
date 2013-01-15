@@ -10,7 +10,7 @@
  */
 
 #define DISPATCHER_TEST
-//#define DEBUG_
+#define DEBUG_
 
 #include "ControllerSeg2.h"
 
@@ -113,11 +113,9 @@ int ControllerSeg2::sendMsg2Dispatcher(int message)
 void ControllerSeg2::passWP2Ctr()
 {
 #ifdef DEBUG_
-	cout << "ControllerSeg2::passWP2Ctr: ID: " << getFirstWP()->getId() << " TOL: " << getFirstWP()->getIs_inTolleranceRange() << endl;
+//	cout << "ControllerSeg2::passWP2Ctr: ID: " << getFirstWP()->getId() << " TOL: " << getFirstWP()->getIs_inTolleranceRange() << endl;
 #endif
-	if (!wp_list_.empty()) {
-		ControllerSeg3::getInstance()->addWP2List(getFirstWP());
-	}
+	ControllerSeg3::getInstance()->addWP2List(this->getFirstWP());
 }
 
 void ControllerSeg2::reset() {

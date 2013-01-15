@@ -31,7 +31,7 @@ public:
 	void isMetal();					//!< WP has metal
 	void outSwitch();					//!< WP has left Switch area
 	void inSwitch();					//!< WP is in Switch
-	void outSlide();					//!< WP out Slide's light barrier
+//	void outSlide();					//!< WP out Slide's light barrier
 	void outLineEnd();					//!< WP has left machine 2
 
 

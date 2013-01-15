@@ -88,6 +88,7 @@ void MainController::resetReleased()
  */
 void MainController::EStopPressed()
 {
+	//cout << "ESTop pressed " << endl;
 	state_->EStopPressed();
 }
 
@@ -96,6 +97,7 @@ void MainController::EStopPressed()
  */
 void MainController::EStopReleased()
 {
+	//cout << "ESTop released " << endl;
 	state_->EStopReleased();
 }
 
@@ -112,6 +114,7 @@ void MainController::isMissing()
  */
 void MainController::isStranger()
 {
+	cout << "IS STRANGER" << endl;
 	state_->timeOutError();
 }
 
@@ -121,17 +124,15 @@ void MainController::isStranger()
 void MainController::slideFull()
 {
 	state_->slideFull();
-	Dispatcher::getInstance()->registerEvent(MainController::getInstance(), WP_OUT_SLIDE);
 }
 
 /**
  *
  */
-void MainController::outSlide()
+void MainController::slideEmpty()
 {
-	// To be changed with error fixed
 	state_->slideErrorFixed();
-	Dispatcher::getInstance()->removeEvent(MainController::getInstance(), WP_OUT_SLIDE);
+
 }
 
 /**
@@ -139,7 +140,7 @@ void MainController::outSlide()
  */
 void MainController::notTurned()
 {
-	state_->timeOutError();
+	state_->turningErrorHandling();
 }
 
 /**
@@ -178,12 +179,17 @@ void MainController::pauseAllTimers(){
 	pauseTimers(ControllerSeg3::getInstance());
 	pauseTimers(ControllerSeg4::getInstance());
 	pauseTimers(ControllerSeg5::getInstance());
-#endif
 
+	// Pause timer assigned to controller4 : Timer to control if slide is full
+
+		ControllerSeg4::getInstance()->getTimer()->pause();
+
+	 // Pause timer assigned to controller : Timer to control if has been put back after turning it
+		ControllerSeg5::getInstance()->getTimer()->pause();
+#endif
 #ifdef MACHINE_2
-	resumeTimers(ControllerSegM2::getInstance());
+//	resumeTimers(ControllerSegM2::getInstance());
 #endif
-
 }
 
 /**
@@ -196,10 +202,18 @@ void MainController::resumeAllTimers() {
 	resumeTimers(ControllerSeg3::getInstance());
 	resumeTimers(ControllerSeg4::getInstance());
 	resumeTimers(ControllerSeg5::getInstance());
-#endif
+	/*
+	 * Resume timer assigned to controller4 : Timer to control if slide is full
+	 */
+	ControllerSeg4::getInstance()->getTimer()->resume();
+	/*
+	 * Resume timer assigned to controller : Timer to control if has been put back after turning it
+	 */
+		ControllerSeg5::getInstance()->getTimer()->resume();
 
+#endif
 #ifdef MACHINE_2
-	resumeTimers(ControllerSegM2::getInstance());
+//	resumeTimers(ControllerSegM2::getInstance());
 #endif
 }
 
@@ -209,32 +223,12 @@ void MainController::resumeAllTimers() {
 void MainController::pauseTimers(HALCallInterface* ctr)
 {
 	unsigned int i ;
-	/*
-	 * Pause all timers assigned to workpieces
-	 */
+	 // Pause all timers assigned to workpieces
 	if (!ctr->isFifoEmpty()) {
 		for ( i = 0; i < ctr->getWPList().size(); i++) {
 			ctr->getWPList().at(i)->getTimer()->pause();
 		}
 	}
-
-#ifdef MACHINE_1
-	/*
-	 * Resume timer assigned to controller4 : Timer to control if slide is full
-	 */
-	if (ctr->getControllerId() == ControllerSeg4::getInstance()->getControllerId()) {
-		ControllerSeg4::getInstance()->getTimer()->pause();
-	}
-	/*
-	 * Resume timer assigned to controller : Timer to control if has been put back after turning it
-	 */
-	if (ctr->getControllerId() == ControllerSeg5::getInstance()->getControllerId()) {
-		ControllerSeg5::getInstance()->getTimer()->pause();
-	}
-#endif
-#ifdef MACHINE_2
-
-#endif
 }
 
 /**
@@ -248,24 +242,48 @@ void MainController::resumeTimers(HALCallInterface* ctr)
 			ctr->getWPList().at(i)->getTimer()->resume();
 		}
 	}
+}
+
+
+/**
+ * Resume all timers in the machine
+ */
+void MainController::stopAllTimers() {
 #ifdef MACHINE_1
-	/*
-	 * Resume timer assigned to controller4 : Timer to control if slide is full
-	 */
-	if (ctr->getControllerId() == ControllerSeg4::getInstance()->getControllerId()) {
-		ControllerSeg4::getInstance()->getTimer()->resume();
+	stopTimers(ControllerSeg1::getInstance());
+	stopTimers(ControllerSeg2::getInstance());
+	stopTimers(ControllerSeg3::getInstance());
+	stopTimers(ControllerSeg4::getInstance());
+	stopTimers(ControllerSeg5::getInstance());
+	// Resume timer assigned to controller4 : Timer to control if slide is full
+	if (ControllerSeg4::getInstance()->getControllerId()) {
+		ControllerSeg4::getInstance()->getTimer()->stop();
 	}
-	/*
-	 * Resume timer assigned to controller : Timer to control if has been put back after turning it
-	 */
-	if (ctr->getControllerId() == ControllerSeg5::getInstance()->getControllerId()) {
-		ControllerSeg5::getInstance()->getTimer()->resume();
+	 // Resume timer assigned to controller : Timer to control if has been put back after turning it
+	if (ControllerSeg5::getInstance()->getControllerId()) {
+		ControllerSeg5::getInstance()->getTimer()->stop();
 	}
 #endif
-#ifdef MACHINE_2
 
+#ifdef MACHINE_2
+//	stopTimers(ControllerSegM2::getInstance());
 #endif
 }
+
+/**
+ * Pause all timers in a segment controlled by ctr
+ */
+void MainController::stopTimers(HALCallInterface* ctr)
+{
+	unsigned int i ;
+	 // Pause all timers assigned to workpieces
+	if (!ctr->isFifoEmpty()) {
+		for ( i = 0; i < ctr->getWPList().size(); i++) {
+			ctr->getWPList().at(i)->getTimer()->stop();
+		}
+	}
+}
+
 
 /**
  * Delete instance of IState and detach connecntion to channel
@@ -278,3 +296,5 @@ MainController::~MainController()
 		perror("ConnectDetach error : ");
 	}
 }
+
+

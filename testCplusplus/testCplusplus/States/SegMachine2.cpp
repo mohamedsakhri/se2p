@@ -35,8 +35,8 @@ void WaitForLineStart::wpIsComming() {
 	WorkPiece* wp = new WorkPiece();
 	ControllerSegM2::getInstance()->addWP2List(wp);
 
-	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->setNewTime(THREE_SEC, NULL_MSEC);
-	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start();
+//	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->setNewTime(THREE_SEC, NULL_MSEC);
+	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start(THREE_SEC, NULL_MSEC);
 
 	HALAktorik::getInstance()->motor_on();
 
@@ -69,8 +69,8 @@ WpIsComming::~WpIsComming() {
 void WpIsComming::inLineStart() {
 	Sender::getInstance()->send(WP_HAS_ARRIVED);
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->setNewTime(NINE_SEC, NULL_MSEC);
-	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start();
+//	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->setNewTime(NINE_SEC, NULL_MSEC);
+	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start(NINE_SEC, NULL_MSEC);
 	new (this) WaitForHeightM2();
 }
 
@@ -229,8 +229,7 @@ WaitForMetal::~WaitForMetal() {
 void WaitForMetal::inSwitch() {
 	//No Metall
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->setNewTime(3, 0);
-	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start();
+	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start(THREE_SEC, NULL_MSEC);
 	HALAktorik::getInstance()->open_Switch();
 
 	new (this) WorkPieceIsValid();
@@ -270,7 +269,7 @@ HasMetall::~HasMetall() {
 void HasMetall::inSwitch() {
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->stop();
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->setNewTime(4, 0);
-	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start();
+	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start(FOUR_SEC, NULL_MSEC);
 	new (this) WorkPieceIsInvalid();
 }
 
@@ -299,43 +298,46 @@ WorkPieceIsInvalid::~WorkPieceIsInvalid() {
  */
 void WorkPieceIsInvalid::outSwitch() {
 
-	new (this) InSlideM2();
+
+//	new (this) InSlideM2();
 }
 
-/************************************************************************************
- 	 	 	 	 	 	 	 	 InSlideM2
-
- ************************************************************************************/
-/**
- *
- */
-InSlideM2::InSlideM2() {
-#ifdef DEBUG_
-	cout << "InSlideM2 :: Constructor" << endl;
-#endif
-}
-
-/**
- *
- */
-InSlideM2::~InSlideM2() {
-
-}
-
-/**
- * Workpiece has left slide :
- * Remove it from fifo
- * Notify machine 1 that machine 2 is ready
- * Stop motor
- */
-void InSlideM2::outSlide() {
-	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSegM2::getInstance()->removeFirsttWP();
-	Sender::getInstance()->send(MACHINE2_IS_READY);
-	HALAktorik::getInstance()->motor_off();
-	new (this) WaitForLineStart();
-
-}
+///************************************************************************************
+// 	 	 	 	 	 	 	 	 InSlideM2
+//
+// ************************************************************************************/
+///**
+// *
+// */
+//InSlideM2::InSlideM2() {
+//#ifdef DEBUG_
+//	cout << "InSlideM2 :: Constructor" << endl;
+//#endif
+//}
+//
+///**
+// *
+// */
+//InSlideM2::~InSlideM2() {
+//
+//}
+//
+///**
+// * Workpiece has left slide :
+// * Remove it from fifo
+// * Notify machine 1 that machine 2 is ready
+// * Stop motor
+// */
+//void InSlideM2::outSlide() {
+//	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->stop();
+//	ControllerSegM2::getInstance()->removeFirsttWP();
+//	Sender::getInstance()->send(MACHINE2_IS_READY);
+//	HALAktorik::getInstance()->motor_off();
+//
+//
+//	new (this) WaitForLineStart();
+//
+//}
 
 /************************************************************************************
  	 	 	 	 	 	 	 	 WorkPieceIsValid

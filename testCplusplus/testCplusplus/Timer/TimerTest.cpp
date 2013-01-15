@@ -31,8 +31,8 @@ void TimerTest::execute(void *arg) {
 	ConnectAttach(0, 0, tchid, _NTO_SIDE_CHANNEL, 0);
 
 	cout << "Start the Timer" << endl;
-	ourTestTimer->start();
-	ourTestTimer2->start();
+	ourTestTimer->start(FIVE_SEC, NULL_MSEC);
+	ourTestTimer2->start(NINE_SEC, NULL_MSEC);
 
 	for (;;) {
 		cout << "Waiting for Message to be received" << endl;

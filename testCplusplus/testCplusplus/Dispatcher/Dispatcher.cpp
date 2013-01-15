@@ -68,13 +68,14 @@ void Dispatcher::initPt2FuncArray () {
 	//Errors handling
 	pt2FuncArray[WP_IS_MISSING]			= &HALCallInterface::isMissing;
 	pt2FuncArray[WP_IS_STRANGER]		= &HALCallInterface::isStranger;
-	pt2FuncArray[WP_NOT_TURNED]			= &HALCallInterface::wpNotTurned;
+	pt2FuncArray[WP_NOT_TURNED]			= &HALCallInterface::notTurned;
 	pt2FuncArray[SLIDE_FULL]			= &HALCallInterface::slideFull;
 	//Communication between Machine1 and Machine2
 	pt2FuncArray[WP_IS_COMMING]			= &HALCallInterface::wpIsComming;
 	pt2FuncArray[WP_HAS_ARRIVED]		= &HALCallInterface::wpHasArrived;
 	pt2FuncArray[MACHINE2_IS_BUSY]		= &HALCallInterface::m2isBusy;
 	pt2FuncArray[MACHINE2_IS_READY]		= &HALCallInterface::m2isReady;
+	pt2FuncArray[SLIDE_EMPTY]			= &HALCallInterface::slideEmpty;
 
 
 //TODO More items are supposed to be added if we want to assign some error's treatment here too

@@ -12,7 +12,9 @@
 
 #include "SegSlide.h"
 
-//#define DEBUG_
+#define DEBUG_
+#define MACHINE_1
+//#define MACHINE_2
 
 /************************************************************************************
  *									SlideWait										*
@@ -29,9 +31,17 @@ SlideWait::SlideWait()
 
 void SlideWait::inSlide()
 {
+#ifdef MACHINE_1
+	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG4);
+	ControllerSeg3::getInstance()->removeFirsttWP();
+#endif
+#ifdef MACHINE_2
+	ControllerSegM2::getInstance()->passWP2Ctr(CONTROLLER_SEG4);
+	ControllerSegM2::getInstance()->removeFirsttWP();
+#endif
 	ControllerSeg4::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSeg4::getInstance()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
-	ControllerSeg4::getInstance()->getTimer()->start();
+//	ControllerSeg4::getInstance()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
+	ControllerSeg4::getInstance()->getTimer()->start(TWO_SEC,NULL_MSEC);
 	new (this) InSlide();
 }
 
@@ -59,10 +69,11 @@ InSlide::InSlide()
  */
 void InSlide::outSlide()
 {
+
 	ControllerSeg4::getInstance()->getTimer()->stop();
 	delete ControllerSeg4::getInstance()->getFirstWP();
 	ControllerSeg4::getInstance()->removeFirsttWP();
-
+#ifdef MACHINE_1
 	if (ControllerSeg1::getInstance()->isFifoEmpty()
 			&& ControllerSeg2::getInstance()->isFifoEmpty()
 			&& ControllerSeg3::getInstance()->isFifoEmpty()
@@ -72,7 +83,16 @@ void InSlide::outSlide()
 		HALAktorik::getInstance()->motor_off();
 
 	}
+	ControllerSeg4::getInstance()->sendMsg2Dispatcher(SLIDE_EMPTY);
 	new (this) SlideWait();
+#endif
+#ifdef MACHINE_2
+	if (ControllerSegM2::getInstance()->isFifoEmpty())
+		HALAktorik::getInstance()->motor_off();
+	ControllerSeg4::getInstance()->sendMsg2Dispatcher(SLIDE_EMPTY);
+	Sender::getInstance()->send(MACHINE2_IS_READY);
+#endif
+
 }
 
 InSlide::~InSlide()

@@ -22,8 +22,8 @@ ControllerSeg4* ControllerSeg4::controllerSeg4_instance_ = NULL ;
  */
 ControllerSeg4::ControllerSeg4()
 {
-	timer_seg4_ = new Timer(ONE_SEC, NULL_MSEC, Demultiplexer::getInstance()->getChannelId(), 0, SLIDE_FULL);
-	timer_seg4_->setName(CONTROLLER_SEG4);
+	timer_seg4_ = new Timer(NULL, NULL_MSEC, Demultiplexer::getInstance()->getChannelId(), 0, SLIDE_FULL);
+	timer_seg4_->setName(-4);
 	ctr_id_ = CONTROLLER_SEG4;
 	state_ = new SlideWait();
 	init();

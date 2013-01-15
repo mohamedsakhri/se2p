@@ -51,6 +51,7 @@ void StateTest::execute(void *arg) {
 	mainCtr->addEvent(WP_IS_MISSING);
 	mainCtr->addEvent(WP_IS_STRANGER);
 	mainCtr->addEvent(SLIDE_FULL);
+	mainCtr->addEvent(SLIDE_EMPTY);
 	mainCtr->addEvent(WP_NOT_TURNED);
 
 

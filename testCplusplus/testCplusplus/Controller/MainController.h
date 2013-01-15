@@ -34,7 +34,7 @@ public:
 	void notTurned();
 
 	//To fix remediable errors
-	void outSlide();
+	void slideEmpty();
 
 
 	int sendMsg2Dispatcher(int message);
@@ -48,15 +48,15 @@ public:
 	void pauseAllTimers();
 
 	/**
-	 * Resume all timers
-	 */
-	void resumeAllTimers();
-
-	/**
 	 * Pause a controller's timer
 	 * @param ctr Controller which timers has to be paused
 	 */
 	void pauseTimers(HALCallInterface* ctr);
+
+	/**
+	 * Resume all timers
+	 */
+	void resumeAllTimers();
 
 	/**
 	 * Resume a controller's timer
@@ -64,11 +64,30 @@ public:
 	 */
 	void resumeTimers(HALCallInterface* ctr);
 
+	/**
+	 * stop all timer
+	 */
+	void stopAllTimers();
+
+	/**
+	 * stop a controller's timer
+	 * @param ctr Controller which timers has to be paused
+	 */
+	void stopTimers(HALCallInterface* ctr);
+
+	bool isEStopPressed() {
+		return EStop_pressed_;
+	}
+
+	void setEStop(bool estop) {
+		EStop_pressed_ = estop;
+	}
+
 	virtual ~MainController();
 
 private:
 	MainController();
-
+	bool EStop_pressed_ ;
 	static MainController *mainController_instance_ ;
 	static Mutex mainController_mutex_; 		//!< Mutex for thread-safe implementation
 };

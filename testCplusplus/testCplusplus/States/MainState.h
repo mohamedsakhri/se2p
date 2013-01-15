@@ -51,6 +51,9 @@ public:
 	void slideFull();
 	void startPressed(){};
 	void startReleased(){};
+	void turningErrorHandling();
+private:
+	bool EStop_pressed_;
 };
 
 /*
@@ -75,6 +78,19 @@ public:
 
 	void resetPressed();
 	void slideErrorFixed();
+};
+
+/*
+ *
+ */
+class TurningErrorHandling: public IState{
+public:
+	TurningErrorHandling();
+	virtual ~TurningErrorHandling();
+
+	void resetPressed();
+	void startPressed();
+	void inLineEnd();
 };
 
 /*
@@ -108,7 +124,7 @@ public:
 	WaitingForReset();
 	virtual ~WaitingForReset();
 
-	void ResetPressed();
+	void resetPressed();
 };
 
 

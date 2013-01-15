@@ -36,20 +36,20 @@ void WaitingSwitch::inSwitch()
 		ControllerSeg3::getInstance()->getFirstWP()->getTimer()->stop();
 		if (ControllerSeg3::getInstance()->getFirstWP()->getIs_inTolleranceRange()) {
 			// WP has arrived, stop timer and  set new time for Seg5
-			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(SEVEN_SEC,NULL_MSEC);
-			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start();
+//			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(SEVEN_SEC,NULL_MSEC);
+			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start(SEVEN_SEC,NULL_MSEC);
 
 			HALAktorik::getInstance()->open_Switch();
 			new (this) WorkPieceValid();
 		} else {
-			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(FOUR_SEC,NULL_MSEC);
-			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start();
+//			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(FOUR_SEC,NULL_MSEC);
+			ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start(FOUR_SEC,NULL_MSEC);
 			new (this) WorkPieceInvalid();
 		}
 	} else {
 		//TODO  just send msg and let controller do the rest according to the error event_ handler
 		ControllerSeg3::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
-		HALAktorik::getInstance()->motor_off();
+//		HALAktorik::getInstance()->motor_off();
 //		HALAktorik::getInstance()->red_Light_on();
 //		HALAktorik::getInstance()->green_Light_off();
 	}
@@ -77,8 +77,8 @@ WorkPieceInvalid::WorkPieceInvalid()
  */
 void WorkPieceInvalid::outSwitch()
 {
-	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG4);
-	ControllerSeg3::getInstance()->removeFirsttWP();
+//	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG4);
+	//ControllerSeg3::getInstance()->removeFirsttWP();
 
 	new (this) WaitingSwitch();
 }
@@ -103,8 +103,8 @@ WorkPieceValid::WorkPieceValid()
 void WorkPieceValid::outSwitch()
 {
 	//Set new time for Segment 5 - From Switch to line  end -
-	ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(SIX_SEC, NULL_MSEC);
-	ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start();
+//	ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(SIX_SEC, NULL_MSEC);
+	ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start(SIX_SEC, NULL_MSEC);
 	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG5);
 	ControllerSeg3::getInstance()->removeFirsttWP();
 

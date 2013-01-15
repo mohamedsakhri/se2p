@@ -113,12 +113,12 @@ void ControllerSegM2::inSwitch(){
 	state_->inSwitch();
 }
 
-/*
- *
- */
-void ControllerSegM2::outSlide(){
-	state_->outSlide();
-}
+///*
+// *
+// */
+//void ControllerSegM2::outSlide(){
+//	state_->outSlide();
+//}
 
 /*
  *

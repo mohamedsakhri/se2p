@@ -63,6 +63,7 @@ public :
 	virtual void errorFixed(){};
 	virtual void slideFull(){};
 	virtual void slideErrorFixed(){};
+	virtual void turningErrorHandling(){};
 
 };
 

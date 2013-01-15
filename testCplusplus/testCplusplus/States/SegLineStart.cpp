@@ -34,7 +34,7 @@ void StateLineStart::inLineStart()
 #ifdef DEBUG_
 	cout << "StateLineStart :: inLineStart" << endl;
 #endif
-	ControllerSeg1::getInstance()->setIsRunning(true);
+	MainController::getInstance()->setIsRunning(true);
 
 	WorkPiece* wp = new WorkPiece() ;
 	ControllerSeg1::getInstance()->addWP2List(wp);
@@ -73,15 +73,14 @@ void StateWorkPieceCreated::outLineStart()
 #endif
 	if (!ControllerSeg1::getInstance()->isFifoEmpty()) {
 		// Start timer for seg2
-		ControllerSeg1::getInstance()->getFirstWP()->getTimer()->setNewTime(THREE_SEC, NULL_MSEC);
-		ControllerSeg1::getInstance()->getFirstWP()->getTimer()->start();
+//		ControllerSeg1::getInstance()->getFirstWP()->getTimer()->setNewTime(THREE_SEC, NULL_MSEC);
+		ControllerSeg1::getInstance()->getFirstWP()->getTimer()->start(THREE_SEC, NULL_MSEC);
 
 		ControllerSeg1::getInstance()->passWP2Ctr();
 		ControllerSeg1::getInstance()->removeFirsttWP();
 
 		new (this) StateLineStart();
 	} else {
-		//TODO  just send msg and let controller do the rest according to the error event_ handler
 		ControllerSeg1::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
 	}
 }

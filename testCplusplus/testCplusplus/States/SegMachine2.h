@@ -114,13 +114,13 @@ public:
 };
 
 //************************* InSlide ***************************
-class InSlideM2: public IState {
-public:
-	InSlideM2();
-	virtual ~InSlideM2();
-
-	void outSlide();
-};
+//class InSlideM2: public IState {
+//public:
+//	InSlideM2();
+//	virtual ~InSlideM2();
+//
+//	void outSlide();
+//};
 
 //************************* WorkPieceIsValid ***********************
 class WorkPieceIsValid: public IState {

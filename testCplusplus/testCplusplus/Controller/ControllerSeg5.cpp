@@ -1,10 +1,10 @@
 /*
- * @file 	ControllerSeg5.cpp
+ * @file ControllerSeg5.cpp
  *
- * @author	Mahmoud Dariti
- * @author	Mohamed Sakhri
+ * @author Mahmoud Dariti
+ * @author Mohamed Sakhri
  *
- * @date	 Dec 10, 2012
+ * @date Dec 10, 2012
  *
  * This class represents the controller of the third segment which controls the line's end area
  */
@@ -15,15 +15,16 @@
 #include "ControllerSeg5.h"
 
 Mutex ControllerSeg5::controllerSeg5_mutex_ = Mutex();
-ControllerSeg5* ControllerSeg5::controllerSeg5_instance_ = NULL ;
+ControllerSeg5* ControllerSeg5::controllerSeg5_instance_ = NULL;
 
 /*
  *
  */
-ControllerSeg5::ControllerSeg5()
-{
-	timer_seg5_ = new Timer(FIVE_SEC, NULL_MSEC, Demultiplexer::getInstance()->getChannelId(), 0, WP_IS_MISSING);
+ControllerSeg5::ControllerSeg5() {
+	timer_seg5_ = new Timer(NULL, NULL_MSEC, Demultiplexer::getInstance()->getChannelId(), 0, WP_NOT_TURNED);
+	timer_seg5_->setName(-5);
 	ctr_id_ = CONTROLLER_SEG5;
+	machine2_ready_ = true;
 	state_ = new WaitLineEndM1();
 	init();
 }
@@ -31,8 +32,7 @@ ControllerSeg5::ControllerSeg5()
 /*
  *
  */
-ControllerSeg5* ControllerSeg5::getInstance()
-{
+ControllerSeg5* ControllerSeg5::getInstance() {
 
 	if (!controllerSeg5_instance_) {
 		controllerSeg5_mutex_.lock();
@@ -47,10 +47,10 @@ ControllerSeg5* ControllerSeg5::getInstance()
 /**
  * Do some initialization work
  */
-void ControllerSeg5::init()
-{
+void ControllerSeg5::init() {
 
-	con_id_ = ConnectAttach(0, 0, Demultiplexer::getInstance()->getChannelId(), _NTO_SIDE_CHANNEL, 0);
+	con_id_ = ConnectAttach(0, 0, Demultiplexer::getInstance()->getChannelId(),
+			_NTO_SIDE_CHANNEL, 0);
 	if (con_id_ == -1) {
 		perror("ControllerSeg5 : ConnectAttach failed : ");
 		exit(EXIT_FAILURE);
@@ -63,46 +63,44 @@ void ControllerSeg5::init()
 /*
  *
  */
-void ControllerSeg5::inLineEnd()
-{
+void ControllerSeg5::inLineEnd() {
 	state_->inLineEnd();
 }
 
 /*
  *
  */
-void ControllerSeg5::outLineEnd()
-{
+void ControllerSeg5::outLineEnd() {
 	state_->outLineEnd();
 }
+
 /*
  *
  */
-void ControllerSeg5::m2isBusy()
-{
+void ControllerSeg5::m2isBusy() {
 	machine2_ready_ = false;
 }
 
 /*
  *
  */
-bool ControllerSeg5::isMachin2Ready()
-{
-	return machine2_ready_;
-}
-/**
- *
- */
-void ControllerSeg5::m2isReady()
-{
+void ControllerSeg5::m2isReady() {
+	machine2_ready_ = true;
+	//state_->machine2IsReady();
 	state_->messageReceived();
 }
 
 /*
  *
  */
-void ControllerSeg5::wpHasArrived()
-{
+bool ControllerSeg5::isMachin2Ready() {
+	return machine2_ready_;
+}
+
+/*
+ *
+ */
+void ControllerSeg5::wpHasArrived() {
 	if (ControllerSeg1::getInstance()->isFifoEmpty()
 			&& ControllerSeg2::getInstance()->isFifoEmpty()
 			&& ControllerSeg3::getInstance()->isFifoEmpty()
@@ -115,14 +113,15 @@ void ControllerSeg5::wpHasArrived()
 /**
  * Send a message to Dispatcher
  */
-int ControllerSeg5::sendMsg2Dispatcher(int message)
-{
-	if (-1 == MsgSendPulse(con_id_,SIGEV_PULSE_PRIO_INHERIT, CONTROLLER_CODE, message )) {
+int ControllerSeg5::sendMsg2Dispatcher(int message) {
+	if (-1 == MsgSendPulse(con_id_, SIGEV_PULSE_PRIO_INHERIT, CONTROLLER_CODE,
+			message)) {
 		perror("ControllerSeg5 : MsgSendPulse");
 		exit(EXIT_FAILURE);
 	} else {
 #ifdef DEBUG_
-		cout << "ControllerSeg5: message sent to dispatcher: " << message << " code " << CONTROLLER_CODE << endl;
+		cout << "ControllerSeg5: message sent to dispatcher: " << message
+				<< " code " << CONTROLLER_CODE << endl;
 #endif
 	}
 	return 0;
@@ -132,32 +131,24 @@ int ControllerSeg5::sendMsg2Dispatcher(int message)
 /**
  * Pass a workpiece from a segment to the next one
  */
-void ControllerSeg5::passWP2Ctr()
-{
+void ControllerSeg5::passWP2Ctr() {
 }
 
 /**
  * Return Seg5 Timer
  */
-Timer* ControllerSeg5::getTimer()
-{
+Timer* ControllerSeg5::getTimer() {
 	return timer_seg5_;
 }
 
-/**
- *
- */
 void ControllerSeg5::reset() {
 	this->wp_list_.clear();
 	machine2_ready_ = true;
-	this->state_ = new WaitForEndLine();
+	this->state_ = new WaitLineEndM1();
 }
 /**
- * Delete instance of Istate and delete timer
+ * Delete instance of Istate
  */
-ControllerSeg5::~ControllerSeg5()
-{
-	delete state_ ;
-	delete timer_seg5_;
+ControllerSeg5::~ControllerSeg5() {
+	delete state_;
 }
-

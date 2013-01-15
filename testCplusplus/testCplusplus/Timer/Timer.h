@@ -34,7 +34,7 @@ public:
 	/*
 	 * Methods to control timer
 	 */
-	void start();
+	void start(int timeS, int timeNS);
 	void pause();
 	void resume();
 	void stop();

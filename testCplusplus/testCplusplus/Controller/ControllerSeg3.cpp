@@ -104,9 +104,9 @@ void ControllerSeg3::passWP2Ctr()
 void ControllerSeg3::passWP2Ctr(int controller_id)
 {
 	if (controller_id == CONTROLLER_SEG4)
-		ControllerSeg4::getInstance()->addWP2List(getFirstWP());
+		ControllerSeg4::getInstance()->addWP2List(this->getFirstWP());
 	if (controller_id == CONTROLLER_SEG5)
-		ControllerSeg5::getInstance()->addWP2List(getFirstWP());
+		ControllerSeg5::getInstance()->addWP2List(this->getFirstWP());
 }
 
 /**

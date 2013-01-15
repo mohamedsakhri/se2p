@@ -32,15 +32,15 @@ Timer::Timer() {
 		perror("ConnectAttach error : ");
 	}
 
-	SIGEV_PULSE_INIT(&event_, coid_, SIGEV_PULSE_PRIO_INHERIT, NULL, NULL );
+//	SIGEV_PULSE_INIT(&event_, coid_, SIGEV_PULSE_PRIO_INHERIT, NULL, NULL );
 
 	// Create new timer
 	if(timer_create(CLOCK_REALTIME, &event_, &timer_id_) == -1) {
 		perror("Timer create error : ");
 	}
-	this->itime.it_value.tv_sec = 2; /* 500 million nsecs = .5 secs */
-	this->itime.it_value.tv_nsec = 50000000;
-	this->itime.it_interval.tv_sec = 2; /* 500 million nsecs = .5 secs */
+//	this->itime.it_value.tv_sec = 0; /* 500 million nsecs = .5 secs */
+//	this->itime.it_value.tv_nsec = 50000000;
+	this->itime.it_interval.tv_sec = 0; /* 500 million nsecs = .5 secs */
 	this->itime.it_interval.tv_nsec = 0;
 }
 
@@ -86,8 +86,8 @@ int Timer::getChId()
  */
 void Timer::setNewTime(int timeS, int timeNS){
 #ifdef DEBUG_
-	cout << "Timer SetNewTime : " << endl << " ID :	" << name_;
-	cout << "Value:	" << timeS << endl;
+	cout << "Timer SetNewTime ID :	" << name_;
+	cout << " Value:  " << timeS << endl;
 #endif
 
     this->itime.it_value.tv_sec = timeS;
@@ -97,11 +97,13 @@ void Timer::setNewTime(int timeS, int timeNS){
 /*
  * Start timer
  */
-void Timer::start() {
+void Timer::start(int timeS, int timeNS) {
 #ifdef DEBUG_
-	cout << "Timer Start : " << endl << " ID :	" << name_;
-	cout << "Value:	" << itime.it_value.tv_sec << endl;
+	cout << "Timer Start ID : " << name_;
+	cout << " Value:	" << itime.it_value.tv_sec << endl;
 #endif
+	this->itime.it_value.tv_sec = timeS;
+	this->itime.it_value.tv_nsec = timeNS;
 
 	if (timer_settime(timer_id_, 0, &itime, NULL) == -1) {
 		perror("Timer start  error : ");
@@ -113,8 +115,8 @@ void Timer::start() {
  */
 void Timer::stop() {
 #ifdef DEBUG_
-	cout << "Timer Stop : " << endl << " ID :	" << name_;
-	cout << "Value:	" << itime.it_value.tv_sec << endl;
+	cout << "Timer Stop ID : " << name_;
+	cout << " Value:	" << itime.it_value.tv_sec << endl;
 #endif
 
 	this->itime.it_value.tv_sec = 0;
@@ -129,8 +131,8 @@ void Timer::stop() {
  */
 void Timer::pause() {
 #ifdef DEBUG_
-	cout << "Timer Pause : " << endl << " ID :	" << name_;
-	cout << "Value:	" << itime.it_value.tv_sec << endl;
+	cout << "Timer Pause ID : " << name_;
+	cout << " Value: " << itime.it_value.tv_sec << endl;
 #endif
 
 	this->itime.it_value.tv_sec = 0;
@@ -145,8 +147,8 @@ void Timer::pause() {
  */
 void Timer::resume() {
 #ifdef DEBUG_
-	cout << "Timer Resume : " << endl << " ID :	" << name_;
-	cout << "Value:	" << itime.it_value.tv_sec << endl;
+	cout << "Timer Resume ID : " << name_;
+	cout << " RemainValue : " << remainingTime_.it_value.tv_sec << endl;
 #endif
 
 	if (timer_settime(this->timer_id_, 0, &remainingTime_, NULL) == -1) {
@@ -177,7 +179,7 @@ void Timer::printName()
 Timer::~Timer()
 {
 #ifdef DEBUG_
-	cout << "Timer Deconstructor : " << endl << " ID :	" << name_;
+	cout << "Timer Deconstructor ID: " << name_;
 #endif
 
 	if (ConnectDetach(this->event_.sigev_coid == -1)) {

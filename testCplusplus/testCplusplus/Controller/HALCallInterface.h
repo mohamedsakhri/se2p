@@ -54,7 +54,8 @@ public :										//WP = Workpiece
 	virtual void isMissing(){};
 	virtual void isStranger(){};
 	virtual void slideFull(){};
-	virtual void wpNotTurned(){};
+	virtual void slideEmpty(){};
+	virtual void notTurned(){};
 
 
 
@@ -141,7 +142,7 @@ public :										//WP = Workpiece
 	 */
 	void setIsRunning(bool isRunning)
 	{
-		this->isRunning_ = isRunning;
+		isRunning_ = isRunning;
 	}
 
 protected :

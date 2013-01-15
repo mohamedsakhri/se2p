@@ -37,8 +37,8 @@ void WaitingHeightM1::inHeightMeasurement()
 #endif
 	// WP has arrived, stop timer and  set new time for Seg3
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(FOUR_SEC,NULL_MSEC);
-	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
+//	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(FOUR_SEC,NULL_MSEC);
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start(FOUR_SEC,NULL_MSEC);
 
 	new (this) TooSmall();
 }
@@ -50,8 +50,8 @@ void WaitingHeightM1::inToleranceRange()
 #endif
 	// WP has arrived, stop timer and  set new time for Seg3
 	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(FOUR_SEC,NULL_MSEC);
-	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start();
+//	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->setNewTime(FOUR_SEC,NULL_MSEC);
+	ControllerSeg2::getInstance()->getFirstWP()->getTimer()->start(FOUR_SEC,NULL_MSEC);
 
 	ControllerSeg2::getInstance()->getFirstWP()->setIs_inTolleranceRange(true);
 	ControllerSeg2::getInstance()->getFirstWP()->setHas_Drill(false);
@@ -94,9 +94,6 @@ void TooSmall::outHeightMeasurement()
 	} else {
 		//TODO  just send msg and let controller do the rest according to the error event_ handler
 		ControllerSeg2::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
-		HALAktorik::getInstance()->motor_off();
-//		HALAktorik::getInstance()->red_Light_on();
-//		HALAktorik::getInstance()->green_Light_off();
 	}
 }
 
