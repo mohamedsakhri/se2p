@@ -12,9 +12,9 @@
 
 #ifndef WAITINGSWITCH_H_
 #define WAITINGSWITCH_H_
+
 #include "IState.h"
 #include "ControllerSeg3.h"
-
 
 
 using namespace std;

@@ -59,9 +59,10 @@ public :
 	virtual void errorHandling(){};
 	virtual void emergency(){};
 	virtual void isMissing(){};
-	virtual void error() {};
+	virtual void timeOutError() {};
 	virtual void errorFixed(){};
 	virtual void slideFull(){};
+	virtual void slideErrorFixed(){};
 
 };
 

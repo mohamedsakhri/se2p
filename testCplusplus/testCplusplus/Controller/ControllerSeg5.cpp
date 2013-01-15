@@ -24,7 +24,6 @@ ControllerSeg5::ControllerSeg5()
 {
 	timer_seg5_ = new Timer(FIVE_SEC, NULL_MSEC, Demultiplexer::getInstance()->getChannelId(), 0, WP_IS_MISSING);
 	ctr_id_ = CONTROLLER_SEG5;
-	machine2_ready_ = true;
 	state_ = new WaitLineEndM1();
 	init();
 }
@@ -76,7 +75,6 @@ void ControllerSeg5::outLineEnd()
 {
 	state_->outLineEnd();
 }
-
 /*
  *
  */
@@ -88,19 +86,16 @@ void ControllerSeg5::m2isBusy()
 /*
  *
  */
-void ControllerSeg5::m2isReady()
-{
-	machine2_ready_ = true;
-	//state_->machine2IsReady();
-	state_->messageReceived();
-}
-
-/*
- *
- */
 bool ControllerSeg5::isMachin2Ready()
 {
 	return machine2_ready_;
+}
+/**
+ *
+ */
+void ControllerSeg5::m2isReady()
+{
+	state_->messageReceived();
 }
 
 /*
@@ -149,15 +144,20 @@ Timer* ControllerSeg5::getTimer()
 	return timer_seg5_;
 }
 
+/**
+ *
+ */
 void ControllerSeg5::reset() {
 	this->wp_list_.clear();
 	machine2_ready_ = true;
 	this->state_ = new WaitForEndLine();
 }
 /**
- * Delete instance of Istate
+ * Delete instance of Istate and delete timer
  */
 ControllerSeg5::~ControllerSeg5()
 {
 	delete state_ ;
+	delete timer_seg5_;
 }
+

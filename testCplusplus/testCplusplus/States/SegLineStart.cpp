@@ -19,7 +19,9 @@
  *									StateLineStart									*
  *																					*
  ************************************************************************************/
-
+/**
+ *
+ */
 StateLineStart::StateLineStart()
 {
 #ifdef DEBUG_
@@ -45,10 +47,12 @@ void StateLineStart::inLineStart()
 
 }
 
+/**
+ *
+ */
 StateLineStart::~StateLineStart()
 {
 }
-
 
 /************************************************************************************
  *									StateWorkPieceCreated							*
@@ -79,12 +83,12 @@ void StateWorkPieceCreated::outLineStart()
 	} else {
 		//TODO  just send msg and let controller do the rest according to the error event_ handler
 		ControllerSeg1::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
-		HALAktorik::getInstance()->motor_off();
-//		HALAktorik::getInstance()->red_Light_on();
-//		HALAktorik::getInstance()->green_Light_off();
 	}
 }
 
+/**
+ *
+ */
 StateWorkPieceCreated::~StateWorkPieceCreated()
 {
 

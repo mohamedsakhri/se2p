@@ -70,6 +70,7 @@ void InSlide::outSlide()
 			&& ControllerSeg5::getInstance()->isFifoEmpty()) {
 
 		HALAktorik::getInstance()->motor_off();
+
 	}
 	new (this) SlideWait();
 }

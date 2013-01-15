@@ -68,8 +68,6 @@ void ControllerSegM2::wpIsComming() {
  *
  */
 void ControllerSegM2::inLineStart(){
-	Sender::getInstance()->send(MACHINE2_IS_BUSY);
-	Sender::getInstance()->send(WP_HAS_ARRIVED);
 	state_->inLineStart();
 }
 
@@ -120,7 +118,6 @@ void ControllerSegM2::inSwitch(){
  */
 void ControllerSegM2::outSlide(){
 	state_->outSlide();
-	Sender::getInstance()->send(MACHINE2_IS_READY);
 }
 
 /*
@@ -128,7 +125,6 @@ void ControllerSegM2::outSlide(){
  */
 void ControllerSegM2::outLineEnd(){
 	state_->outLineEnd();
-	Sender::getInstance()->send(MACHINE2_IS_READY);
 }
 
 /**
@@ -161,7 +157,8 @@ void ControllerSegM2::passWP2Ctr()
  */
 void ControllerSegM2::reset()
 {
-
+	this->wp_list_.clear();
+	this->state_ = new WaitForLineStart();
 }
 
 

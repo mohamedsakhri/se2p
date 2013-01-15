@@ -47,8 +47,10 @@ public:
 	void stopPressed();
 	void resetPressed();
 	void EStopPressed();
-	void error();
+	void timeOutError();
 	void slideFull();
+	void startPressed(){};
+	void startReleased(){};
 };
 
 /*
@@ -72,7 +74,7 @@ public:
 	virtual ~SlideHandling();
 
 	void resetPressed();
-	void errorFixed();
+	void slideErrorFixed();
 };
 
 /*
@@ -84,7 +86,6 @@ public:
 	virtual ~Stop();
 
 	void startPressed();
-	void resetMachine();
 };
 
 /*
@@ -98,5 +99,17 @@ public:
 	//TODO Only Reset is allowed when EStop released
 	void EStopReleased();
 };
+
+/*
+ *
+ */
+class WaitingForReset: public IState {
+public:
+	WaitingForReset();
+	virtual ~WaitingForReset();
+
+	void ResetPressed();
+};
+
 
 #endif /*MAINSTATE_H_ */

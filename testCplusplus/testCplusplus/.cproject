@@ -55,7 +55,7 @@
 <instrumentedFunctionProfiling value="false"/>
 <type value="1"/>
 <parallel_build value="true"/>
-<parallel_build_number value="6"/>
+<parallel_build_number value="4"/>
 <active_configurations>
 <configuration value="_x86_r"/>
 <configuration indexing="true" value="_x86_g"/>

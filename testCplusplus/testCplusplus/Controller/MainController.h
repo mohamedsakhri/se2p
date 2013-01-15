@@ -9,7 +9,7 @@
  *
  */
 
-#ifndef	MAINCONTROLLER_H_
+#ifndef	 MAINCONTROLLER_H_
 #define MAINCONTROLLER_H_
 
 #include "HALCallInterface.h"
@@ -22,7 +22,6 @@ public:
 	 */
 	static MainController* getInstance();
 
-
 	void startPressed();
 	void stopPressed();
 	void resetPressed();
@@ -33,6 +32,7 @@ public:
 	void isStranger();
 	void slideFull();
 	void notTurned();
+
 	//To fix remediable errors
 	void outSlide();
 
@@ -42,9 +42,26 @@ public:
 	void init();
 	void passWP2Ctr();
 
+	/**
+	 * Pause all timers
+	 */
 	void pauseAllTimers();
+
+	/**
+	 * Resume all timers
+	 */
 	void resumeAllTimers();
+
+	/**
+	 * Pause a controller's timer
+	 * @param ctr Controller which timers has to be paused
+	 */
 	void pauseTimers(HALCallInterface* ctr);
+
+	/**
+	 * Resume a controller's timer
+	 * @param ctr Controller which timers has to be resumed
+	 */
 	void resumeTimers(HALCallInterface* ctr);
 
 	virtual ~MainController();

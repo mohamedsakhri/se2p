@@ -48,6 +48,7 @@ public:
 
 private:
 	ControllerSeg5();
+
 	bool machine2_ready_;
 	Timer* timer_seg5_;
 	static ControllerSeg5* controllerSeg5_instance_;

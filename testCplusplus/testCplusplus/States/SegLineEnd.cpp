@@ -141,11 +141,8 @@ void TransferMachine2::machine2IsReady()
 			MainController::getInstance()->pauseAllTimers();
 			HALAktorik::getInstance()->motor_off();
 			MainController::getInstance()->setIsRunning(false);
-	//		HALAktorik::getInstance()->yellow_Light_on();
-	//		HALAktorik::getInstance()->green_Light_off();
 			new (this) WaitForMachine2();
 		}
-
 }
 
 TransferMachine2::~TransferMachine2()
