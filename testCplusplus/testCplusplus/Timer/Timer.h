@@ -23,13 +23,17 @@ class Timer {
 public:
 	Timer();
 	/**
-	 * @param timeS
-	 * @param timeNS
-	 * @param chid_
-	 * @param pulsecode
+	 * @param timeS 	Time in seconds
+	 * @param timeNS 	Time in nanoseconds
+	 * @param chid 		Channel-Id to which message will be send
+	 * @param pulsecode Pulse's code
+	 * @param message 	Message to be sent when timer fires
 	 */
 	Timer(int timeS, int timeNS, int chid, int pulsecode, int message);
 
+	/*
+	 * Methods to control timer
+	 */
 	void start();
 	void pause();
 	void resume();
@@ -42,39 +46,33 @@ public:
 	void setNewTime(int timeS,int timeNS);
 
 	/**
-	 * @return
+	 * @return Channel-Id
 	 */
 	int getChId();
+
 	/**
-	 * @return
-	 */
-	int getRcvId();
-	/**
-	 * @return
+	 * @return Rmaining time for timer to fire
 	 */
 	int getRemainingTime();
 
 	/*
-	 * for debugging
+	 * Methods for debugging only
+	 * @param name : Timer Id
 	 */
 	void setName(int name);
 	void printName();
 
-
-
 	virtual ~Timer();
 
 private:
-		int WaitTimeS_;
-		int WaitTimeNS_;
-		struct sigevent			event_;
-		struct itimerspec      itime;
-		struct itimerspec		remainingTime_;
-		timer_t                 timer_id_;
-		int						chid_;
-		int						coid_;
-		int						rcvid_;
-		int 					name_;    //!< for debugging
+		struct sigevent			event_;			//!< Event to be sent when timer fires
+		struct itimerspec      itime;			//!< Timer's time
+		struct itimerspec		remainingTime_;	//!< Remaining time for timer to fire
+		timer_t                 timer_id_;		//!< Timer to be created
+		int						chid_;			//!< Channel-Id
+		int						coid_;			//!< Connection-Id
+		// For debug only
+		int 					name_;			// Timer-Id
 };
 
 #endif /* TIMER_H_ */
