@@ -13,8 +13,8 @@
 #include "SegSlide.h"
 
 #define DEBUG_
-#define MACHINE_1
-//#define MACHINE_2
+//#define MACHINE_1
+#define MACHINE_2
 
 /************************************************************************************
  *									SlideWait										*
@@ -35,8 +35,9 @@ void SlideWait::inSlide()
 	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG4);
 	ControllerSeg3::getInstance()->removeFirsttWP();
 #endif
+
 #ifdef MACHINE_2
-	ControllerSegM2::getInstance()->passWP2Ctr(CONTROLLER_SEG4);
+	ControllerSegM2::getInstance()->passWP2Ctr();
 	ControllerSegM2::getInstance()->removeFirsttWP();
 #endif
 	ControllerSeg4::getInstance()->getFirstWP()->getTimer()->stop();
@@ -84,7 +85,7 @@ void InSlide::outSlide()
 
 	}
 	ControllerSeg4::getInstance()->sendMsg2Dispatcher(SLIDE_EMPTY);
-	new (this) SlideWait();
+
 #endif
 #ifdef MACHINE_2
 	if (ControllerSegM2::getInstance()->isFifoEmpty())
@@ -92,6 +93,7 @@ void InSlide::outSlide()
 	ControllerSeg4::getInstance()->sendMsg2Dispatcher(SLIDE_EMPTY);
 	Sender::getInstance()->send(MACHINE2_IS_READY);
 #endif
+	new (this) SlideWait();
 
 }
 

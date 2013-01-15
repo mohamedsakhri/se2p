@@ -15,6 +15,7 @@
 
 #include "HALCallInterface.h"
 #include "SegMachine2.h"
+#include "ControllerSeg4.h"
 
 class ControllerSegM2: public HALCallInterface {
 public:

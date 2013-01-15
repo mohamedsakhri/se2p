@@ -149,7 +149,7 @@ int ControllerSegM2::sendMsg2Dispatcher(int message){
  */
 void ControllerSegM2::passWP2Ctr()
 {
-//	controllerSegM2::getInstance()->addWP2List(getFirstWP());
+	ControllerSeg4::getInstance()->addWP2List(this->getFirstWP());
 }
 
 /**

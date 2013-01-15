@@ -52,8 +52,8 @@ public:
 	void startPressed(){};
 	void startReleased(){};
 	void turningErrorHandling();
-private:
-	bool EStop_pressed_;
+//private:
+//	bool EStop_pressed_;
 };
 
 /*

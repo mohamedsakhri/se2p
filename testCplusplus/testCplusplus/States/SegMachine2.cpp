@@ -297,7 +297,7 @@ WorkPieceIsInvalid::~WorkPieceIsInvalid() {
  *
  */
 void WorkPieceIsInvalid::outSwitch() {
-
+	new (this) WaitForLineStart();
 
 //	new (this) InSlideM2();
 }

@@ -12,8 +12,8 @@
 #include "StateTest.h"
 #include "Constants.h"
 
-#define TEST_MACHINE_1
-//#define TEST_MACHINE_2
+//#define TEST_MACHINE_1
+#define TEST_MACHINE_2
 
 StateTest::StateTest() {
 	dispatcher_ = Dispatcher::getInstance();
@@ -105,6 +105,9 @@ void StateTest::execute(void *arg) {
 	mainCtr->addEvent(RESET_PRESSED);
 	mainCtr->addEvent(RESET_RELEASED);
 	mainCtr->addEvent(WP_IS_MISSING);
+	mainCtr->addEvent(WP_IS_STRANGER);
+	mainCtr->addEvent(SLIDE_FULL);
+	mainCtr->addEvent(SLIDE_EMPTY);
 
 	// ctrM2->addEvent(WP_IS_COMMING);
 	// ctrM2->addEvent(WP_IN_ENGINE_START);

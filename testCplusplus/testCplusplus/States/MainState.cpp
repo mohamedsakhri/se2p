@@ -12,8 +12,8 @@
 #include "MainState.h"
 
 #define DEBUG_
-#define MACHINE_1
-//#define MACHINE_2
+//#define MACHINE_1
+#define MACHINE_2
 
 /************************************************************************************
   	  	  	  	  	  	  	  	  initState
@@ -74,7 +74,7 @@ void InitState::startPressed() {
 #ifdef MACHINE_2
 
 	ControllerSegM2 *ctrM2 = ControllerSegM2::getInstance();
-	ControllerSeg4 *ctr4 = ControllerSeg3::getInstance();
+	ControllerSeg4 *ctr4 = ControllerSeg4::getInstance();
 
 	ctrM2->addEvent(WP_IS_COMMING);
 	ctrM2->addEvent(WP_IN_ENGINE_START);
@@ -122,7 +122,7 @@ RunningMachine1::RunningMachine1() {
 #ifdef DEBUG_
 	cout << "RunningMachine1 :: Constructor" << endl;
 #endif
-	EStop_pressed_ = false;
+//	EStop_pressed_ = false;
 }
 
 /**
@@ -167,10 +167,15 @@ void RunningMachine1::EStopPressed() {
 	HALAktorik::getInstance()->motor_off();
 	MainController::getInstance()->pauseAllTimers();
 
-	new (this) Emergency();
+
 	// Send message to stop the other machine
 	if (!MainController::getInstance()->isEStopPressed()){
 		Sender::getInstance()->send(E_STOP_PRESSED);
+		new (this) Emergency();
+	}
+	else {
+		new (this) WaitingForReset();
+
 	}
 	MainController::getInstance()->setEStop(true);
 }
