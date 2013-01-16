@@ -23,7 +23,7 @@
 //#define SENSORIC_TEST
 //#define DISPATCHER_TEST
 //#define DEBUG_MUTEX
-//#define STATE_TEST
+#define STATE_TEST
 //#define TIMER_TEST
 
 
@@ -59,12 +59,12 @@ int main(int argc, char *argv[]) {
 	IOaccess_open(); // Baue die Verbindung zur Simulation auf
 #endif
 
-	Starter starter;
-	starter.start(NULL);
-	Reader reader;
-	reader.start(NULL);
-	starter.join();
-	reader.join();
+//	Starter starter;
+//	starter.start(NULL);
+//	Reader reader;
+//	reader.start(NULL);
+//	starter.join();
+//	reader.join();
 
 #ifdef STATE_TEST
 	StateTest state_test;

@@ -58,6 +58,8 @@ void StateTest::execute(void *arg) {
 	mainCtr->addEvent(STOP_PRESSED);
 	mainCtr->addEvent(E_STOP_PRESSED);
 	mainCtr->addEvent(E_STOP_RELEASED);
+	mainCtr->addEvent(E_STOP_PRESSED_OTHER);
+	mainCtr->addEvent(E_STOP_RELEASED_OTHER);
 	mainCtr->addEvent(RESET_PRESSED);
 	mainCtr->addEvent(RESET_RELEASED);
 	mainCtr->addEvent(WP_IS_MISSING);

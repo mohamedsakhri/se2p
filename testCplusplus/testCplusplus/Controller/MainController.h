@@ -79,10 +79,25 @@ public:
 	 */
 	void stopTimers(HALCallInterface* ctr);
 
+	/**
+	 * @return true if error has been registered
+	 */
+	bool isErrorRegistered() {
+		return errorRegistered_;
+	}
+
+	/**
+	 * @param errorStatus If error registered or not
+	 */
+	void setErrorRegistered(bool errorStatus) {
+		errorRegistered_ = errorStatus;
+	}
 	virtual ~MainController();
 
 private:
 	MainController();
+
+	bool errorRegistered_;
 
 	static MainController *mainController_instance_ ;
 	static Mutex mainController_mutex_; 		//!< Mutex for thread-safe implementation

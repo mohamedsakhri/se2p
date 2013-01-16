@@ -13,8 +13,8 @@
 #include "SegSlide.h"
 
 #define DEBUG_
-//#define MACHINE_1
-#define MACHINE_2
+#define MACHINE_1
+//#define MACHINE_2
 
 /************************************************************************************
  *									SlideWait										*

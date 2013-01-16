@@ -25,6 +25,7 @@ MainController* MainController::mainController_instance_ = NULL ;
 MainController::MainController() {
 	ctr_id_ = MAIN_CONTROLLER;
 	state_ = new InitState();
+	errorRegistered_ = false;
 	init();
 }
 
@@ -81,7 +82,7 @@ void MainController::resetPressed()
 
 void MainController::resetReleased()
 {
-	HALAktorik::getInstance()->Reset_LED_off();
+//	HALAktorik::getInstance()->Reset_LED_off();
 }
 /**
  *

@@ -135,6 +135,8 @@ void RunningMachine::resetPressed() {
 	RedLightFlash::getInstance()->stopFlashing();
 	HALAktorik::getInstance()->red_Light_off();
 	HALAktorik::getInstance()->Reset_LED_on();
+	//set error status
+	MainController::getInstance()->setErrorRegistered(true);
 }
 
 /**
@@ -248,7 +250,8 @@ ErrorHandling::ErrorHandling() {
 	HALAktorik::getInstance()->Start_LED_off();
 	//The error has not been registered. Red light start flashing quickly.
 	RedLightFlash::getInstance()->flash(RED,HALF_S);
-
+	//set error status
+	MainController::getInstance()->setErrorRegistered(false);
 }
 
 /**
@@ -287,10 +290,17 @@ void ErrorHandling::startPressed() {
 	Sender::getInstance()->send(MACHINE2_IS_READY);
 #endif
 
-	//Turn red light of in case error has been registered.
-	HALAktorik::getInstance()->red_Light_off();
+//	//Turn red light of in case error has been registered.
+//	HALAktorik::getInstance()->red_Light_off();
 	//Start LED goes on.
 	HALAktorik::getInstance()->Start_LED_on();
+	if (!MainController::getInstance()->isErrorRegistered()) {
+		//Error has been fixed, but not registered yet : red light flashes slowly.
+		RedLightFlash::getInstance()->flash(RED,ONE_S);
+	}else {
+		HALAktorik::getInstance()->red_Light_off();
+	}
+
 
 	//Machine goes back to state running.
 	new (this) RunningMachine;
@@ -310,6 +320,8 @@ void ErrorHandling::resetPressed() {
 	HALAktorik::getInstance()->red_Light_on();
 	//Reset LED goes on.
 	HALAktorik::getInstance()->Reset_LED_on();
+	//Set error status to registered
+	MainController::getInstance()->setErrorRegistered(true);
 }
 
 /**
@@ -342,6 +354,9 @@ SlideHandling::SlideHandling() {
 	RedLightFlash::getInstance()->flash(RED,HALF_S);
 	//Reset LED goes off because it has to be pressed to register error
 	HALAktorik::getInstance()->Reset_LED_off();
+	// set error status
+	MainController::getInstance()->setErrorRegistered(false);
+
 	//Unregister all segments' controllers but slide's controller.
 #ifdef MACHINE_1
 	Dispatcher::getInstance()->removeHandler(ControllerSeg1::getInstance());
@@ -390,8 +405,12 @@ void SlideHandling::slideErrorFixed() {
 	Dispatcher::getInstance()->registerHandler(ControllerSegM2::getInstance());
 	Sender::getInstance()->send(MACHINE2_IS_READY);
 #endif
+if (!MainController::getInstance()->isErrorRegistered()) {
 	//Error has been fixed, but not registered yet : red light flashes slowly.
 	RedLightFlash::getInstance()->flash(RED,ONE_S);
+} else{
+	HALAktorik::getInstance()->red_Light_off();
+}
 
 	//Machine goes back to state running.
 	new (this) RunningMachine();
@@ -410,6 +429,9 @@ void SlideHandling::resetPressed() {
 	HALAktorik::getInstance()->red_Light_on();
 	//Reset LED goes on
 	HALAktorik::getInstance()->Reset_LED_on();
+	//Set error status to registered
+	MainController::getInstance()->setErrorRegistered(true);
+
 }
 
 /**
@@ -453,6 +475,8 @@ TurningErrorHandling::TurningErrorHandling() {
 	HALAktorik::getInstance()->Reset_LED_off();
 	//Start LED goes off. It has to be pressed to start machine again.
 	HALAktorik::getInstance()->Start_LED_off();
+	// set error status
+	MainController::getInstance()->setErrorRegistered(false);
 }
 
 /**
@@ -480,6 +504,13 @@ void TurningErrorHandling::startPressed() {
 #endif
 	//Turn red light of in case error has been registered.
 	HALAktorik::getInstance()->red_Light_off();
+	if (!MainController::getInstance()->isErrorRegistered()) {
+		//Error has been fixed, but not registered yet : red light flashes slowly.
+		RedLightFlash::getInstance()->flash(RED,ONE_S);
+	}else {
+		HALAktorik::getInstance()->red_Light_off();
+	}
+
 	//Start LED goes on.
 	HALAktorik::getInstance()->Start_LED_on();
 
@@ -500,6 +531,8 @@ void TurningErrorHandling::resetPressed() {
 	HALAktorik::getInstance()->red_Light_on();
 	//Reset LED goes on.
 	HALAktorik::getInstance()->Reset_LED_on();
+	//Set error status to registered
+	MainController::getInstance()->setErrorRegistered(true);
 }
 
 /**
@@ -521,8 +554,13 @@ void TurningErrorHandling::inLineEnd() {
 	Dispatcher::getInstance()->registerHandler(ControllerSeg3::getInstance());
 	Dispatcher::getInstance()->registerHandler(ControllerSeg4::getInstance());
 
-	//Error has been fixed, but not registered yet : red light flashes slowly.
-	RedLightFlash::getInstance()->flash(RED,ONE_S);
+	if (!MainController::getInstance()->isErrorRegistered()) {
+		//Error has been fixed, but not registered yet : red light flashes slowly.
+		RedLightFlash::getInstance()->flash(RED,ONE_S);
+	}else {
+		HALAktorik::getInstance()->red_Light_off();
+	}
+
 
 	//Machine goes back to running state.
 	new (this) RunningMachine();
@@ -657,6 +695,8 @@ void WaitingForReset::resetPressed() {
 #ifdef MACHINE_2
 	Dispatcher::getInstance()->registerHandler(ControllerSegM2::getInstance());
 #endif
+	//set error status
+//	MainController::getInstance()->setErrorRegistered(true);
 
 	//Machine goes back to running state.
 	new (this) RunningMachine();
