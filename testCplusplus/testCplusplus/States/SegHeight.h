@@ -19,6 +19,7 @@
 //class ControllerSeg2;
 
 using namespace std;
+
 /*
  *
  */
@@ -44,16 +45,6 @@ public:
 	void inToleranceRange();
 };
 
-/*
- *
- */
-//class DrillChecked: public IState{
-//public:
-//	DrillChecked();
-//	virtual ~DrillChecked();
-//
-//	void outHeightMeasurement();
-//};
 
 /*
  *

@@ -49,10 +49,10 @@ public:
 private:
 	ControllerSeg5();
 
-	bool machine2_ready_;
-	Timer* timer_seg5_;
-	static ControllerSeg5* controllerSeg5_instance_;
-	static Mutex controllerSeg5_mutex_; //!< Mutex for thread-safe implementation
+	bool machine2_ready_;								//!< If machine2 is ready or not
+	Timer* timer_seg5_;									//!< Timer to control if WP is back to line end
+	static ControllerSeg5* controllerSeg5_instance_;	//!< Controller's instance
+	static Mutex controllerSeg5_mutex_; 				//!< Mutex for thread-safe implementation
 };
 
 #endif /* CONTROLLERSEG5_H_ */

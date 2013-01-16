@@ -1,34 +1,48 @@
 /*
- * @file StateTest.cpp
+ * @file Configurator.cpp
  *
  * @author Mahmoud Dariti
  * @author Mohamed Sakhri
  *
  * @date Nov 11, 2012
  *
- * This class is used to test states' implementation.
+ * This class is used to start the configuration of machine.
  */
 
-#include "StateTest.h"
+#include "Starter.h"
 #include "Constants.h"
 
-#define TEST_MACHINE_1
-//#define TEST_MACHINE_2
+#define MACHINE_1
+//#define MACHINE_2
 
-StateTest::StateTest() {
-	dispatcher_ = Dispatcher::getInstance();
-	HALAktorik::getInstance()->motor_off();
-	HALAktorik::getInstance()->close_Switch();
+#define DEBUG_
+
+
+/**
+ * Constructor has nothing to do.
+ */
+Starter::Starter() {
+#ifdef DEBUG_
+	cout << "Starter :: Constructor" << endl;
+#endif
+}
+
+/**
+ * Deconstructor has nothing to do.
+ */
+Starter::~Starter() {
 
 }
 
-StateTest::~StateTest() {
-	// TODO Auto-generated destructor stub
-}
+/**
+ * Create main controller and register it by dispatcher with its events.
+ */
+void Starter::execute(void *arg) {
+#ifdef DEBUG_
+	cout << "Starter  started" << endl;
+#endif
 
-void StateTest::execute(void *arg) {
-	cout << "StateTaste started" << endl;
-#ifdef TEST_MACHINE_1
+#ifdef MACHINE_1
 
 	MainController *mainCtr = MainController::getInstance();
 
@@ -47,11 +61,11 @@ void StateTest::execute(void *arg) {
 	mainCtr->addEvent(SLIDE_EMPTY);
 	mainCtr->addEvent(WP_NOT_TURNED);
 
-	dispatcher_->registerHandler(mainCtr);
+	Dispatcher::getInstance()->registerHandler(mainCtr);
 
 #endif
 
-#ifdef TEST_MACHINE_2
+#ifdef MACHINE_2
 	MainController *mainCtr = MainController::getInstance();
 
 	mainCtr->addEvent(START_PRESSED);
@@ -68,11 +82,14 @@ void StateTest::execute(void *arg) {
 	dispatcher_->registerHandler(mainCtr);
 #endif
 
-	dispatcher_->start(NULL);
-	dispatcher_->join();
-
+	Dispatcher::getInstance()->start(NULL);
+	Dispatcher::getInstance()->join();
 }
 
-void StateTest::shutdown() {
+/**
+ * shutdown has nothing to do.
+ */
+void Starter::shutdown() {
+
 }
 

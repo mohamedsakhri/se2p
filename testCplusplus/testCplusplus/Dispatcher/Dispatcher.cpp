@@ -65,18 +65,22 @@ void Dispatcher::initPt2FuncArray () {
 	pt2FuncArray[RESET_RELEASED]		= &HALCallInterface::resetReleased;
 	pt2FuncArray[E_STOP_PRESSED]		= &HALCallInterface::EStopPressed;
 	pt2FuncArray[E_STOP_RELEASED]		= &HALCallInterface::EStopReleased;
+
 	//Errors handling
 	pt2FuncArray[WP_IS_MISSING]			= &HALCallInterface::isMissing;
 	pt2FuncArray[WP_IS_STRANGER]		= &HALCallInterface::isStranger;
 	pt2FuncArray[WP_NOT_TURNED]			= &HALCallInterface::notTurned;
 	pt2FuncArray[SLIDE_FULL]			= &HALCallInterface::slideFull;
+
 	//Communication between Machine1 and Machine2
 	pt2FuncArray[WP_IS_COMMING]			= &HALCallInterface::wpIsComming;
 	pt2FuncArray[WP_HAS_ARRIVED]		= &HALCallInterface::wpHasArrived;
 	pt2FuncArray[MACHINE2_IS_BUSY]		= &HALCallInterface::m2isBusy;
 	pt2FuncArray[MACHINE2_IS_READY]		= &HALCallInterface::m2isReady;
 	pt2FuncArray[SLIDE_EMPTY]			= &HALCallInterface::slideEmpty;
-
+	//Communication in case of E-Stop Button pressed
+	pt2FuncArray[E_STOP_PRESSED_OTHER]	= &HALCallInterface::EStopPressedOther;
+	pt2FuncArray[E_STOP_RELEASED_OTHER]	= &HALCallInterface::EStopReleasedOther;
 
 //TODO More items are supposed to be added if we want to assign some error's treatment here too
 }

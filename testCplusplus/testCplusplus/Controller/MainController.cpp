@@ -10,8 +10,8 @@
  */
 
 #define DEBUG_
-//#define MACHINE_1	// MainController for machine 1
-#define MACHINE_2	//MainController for machine 2
+#define MACHINE_1	// MainController for machine 1
+//#define MACHINE_2	//MainController for machine 2
 
 #include "MainController.h"
 #include "MainState.h"
@@ -24,7 +24,6 @@ MainController* MainController::mainController_instance_ = NULL ;
  */
 MainController::MainController() {
 	ctr_id_ = MAIN_CONTROLLER;
-	EStop_pressed_ = false;
 	state_ = new InitState();
 	init();
 }
@@ -89,8 +88,8 @@ void MainController::resetReleased()
  */
 void MainController::EStopPressed()
 {
-	//cout << "ESTop pressed " << endl;
 	state_->EStopPressed();
+	Sender::getInstance()->send(E_STOP_PRESSED_OTHER);
 }
 
 /**
@@ -98,7 +97,23 @@ void MainController::EStopPressed()
  */
 void MainController::EStopReleased()
 {
-	//cout << "ESTop released " << endl;
+	state_->EStopReleased();
+	Sender::getInstance()->send(E_STOP_RELEASED_OTHER);
+}
+
+/**
+ *
+ */
+void MainController::EStopPressedOther()
+{
+	state_->EStopPressed();
+}
+
+/**
+ *
+ */
+void MainController::EStopReleasedOther()
+{
 	state_->EStopReleased();
 }
 

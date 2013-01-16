@@ -60,10 +60,9 @@ public:
 
 private:
 	static int ctr_number_;		//!< Controller's number. Needed to assign an id to each new one
-	// HALaktoric's instance now just for Dispatcher test
-	HALAktorik* hal_aktorik_;
-	Dispatcher* dispatcher_;
-	Demultiplexer* demultiplexer_;
+	HALAktorik* hal_aktorik_;		//!< HALAktorik's instance
+	Dispatcher* dispatcher_;		//!< Dispatcher's instance
+	Demultiplexer* demultiplexer_;	//!< Dimultiplexer's instance
 };
 
 #endif /* CONTROLLER_H_ */

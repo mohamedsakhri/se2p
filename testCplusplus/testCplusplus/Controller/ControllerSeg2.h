@@ -28,7 +28,9 @@ public:
 	void inToleranceRange();
 	void notInToleranceRange();
 
-	// Error's handling
+	/*
+	 * @param message Message to be sent.
+	 */
 	int sendMsg2Dispatcher(int message);
 	void init();
 	void passWP2Ctr();
@@ -40,8 +42,8 @@ public:
 private:
 	ControllerSeg2();
 
-	static ControllerSeg2* controllerSeg2_instance_;
-	static Mutex controllerSeg2_mutex_; //!< Mutex for thread-safe implementation
+	static ControllerSeg2* controllerSeg2_instance_;	//!< Controller's instance
+	static Mutex controllerSeg2_mutex_; 				//!< Mutex for thread-safe implementation
 };
 
 #endif /* CONTROLLERSEG2_H_ */

@@ -28,6 +28,8 @@ public:
 	void resetReleased();
 	void EStopPressed();
 	void EStopReleased();
+	void EStopPressedOther();
+	void EStopReleasedOther();
 	void isMissing();
 	void isStranger();
 	void slideFull();
@@ -36,7 +38,9 @@ public:
 	//To fix remediable errors
 	void slideEmpty();
 
-
+	/*
+	 * @param message Message to be sent.
+	 */
 	int sendMsg2Dispatcher(int message);
 
 	void init();
@@ -75,19 +79,11 @@ public:
 	 */
 	void stopTimers(HALCallInterface* ctr);
 
-	bool isEStopPressed() {
-		return EStop_pressed_;
-	}
-
-	void setEStop(bool estop) {
-		EStop_pressed_ = estop;
-	}
-
 	virtual ~MainController();
 
 private:
 	MainController();
-	bool EStop_pressed_ ;
+
 	static MainController *mainController_instance_ ;
 	static Mutex mainController_mutex_; 		//!< Mutex for thread-safe implementation
 };

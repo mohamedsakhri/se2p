@@ -22,54 +22,75 @@
 #include "MainController.h"
 
 
-
 using namespace std;
 
-/*
- *
+/**
+ * State when machine has started the first time. It is the "Start State".
+ * In this state only Start-Button can be pressed to initialize machine.
  */
 class InitState: public IState {
 public:
 	InitState();
 	virtual ~InitState();
 
+	//Start button has to be pressed to initialize machine
 	void startPressed();
+
+	//Buttons to be ignored
+//	void startReleased(){};
+//	void resetPressed(){};
+//	void resetReleased(){};
+//	void EStopPressed(){};
+//	void EStopReleased(){};
 };
 
-/*
- *
+/**
+ * State when machine is running. In this state the machine is working normal.
  */
-class RunningMachine1: public IState {
+class RunningMachine: public IState {
 public:
-	RunningMachine1();
-	virtual ~RunningMachine1();
+	RunningMachine();
+	virtual ~RunningMachine();
 
+	//Methods to control buttons
 	void stopPressed();
 	void resetPressed();
 	void EStopPressed();
+
+	//Methods to handle errors
 	void timeOutError();
 	void slideFull();
-	void startPressed(){};
-	void startReleased(){};
 	void turningErrorHandling();
-//private:
-//	bool EStop_pressed_;
+
+	//Buttons to be ignored
+//	void EStopReleased(){};
+//	void startPressed(){};
+//	void startReleased(){};
+
 };
 
-/*
- *
+/**
+ * State when an error has occurred. The machine will be in this state in case of :
+ * 1. Errors related to timer : A workpiece is missing or stranger
+ * 2. Workpiece is not put back when it has to be turned in the end of machine1
  */
 class ErrorHandling: public IState {
 public:
 	ErrorHandling();
 	virtual ~ErrorHandling();
 
+	//Methods to control buttons
 	void startPressed();
 	void resetPressed();
+
+	//Buttons to be ignored
+//	void EStopPressed(){};
+//	void EStopReleased(){};
+//	void startReleased(){};
 };
 
-/*
- *
+/**
+ * State when slide becomes full.
  */
 class SlideHandling: public IState{
 public:
@@ -80,8 +101,8 @@ public:
 	void slideErrorFixed();
 };
 
-/*
- *
+/**
+ * State when a Workpiece is not put back in line when it has to be turned in the end of machine1
  */
 class TurningErrorHandling: public IState{
 public:
@@ -93,8 +114,8 @@ public:
 	void inLineEnd();
 };
 
-/*
- *
+/**
+ * State when the machine is stopped after the stop button has been pressed
  */
 class Stop: public IState {
 public:
@@ -104,20 +125,20 @@ public:
 	void startPressed();
 };
 
-/*
- *
+/**
+ * State when E-Stop button has been pressed.
  */
 class Emergency: public IState {
 public:
 	Emergency();
 	virtual ~Emergency();
 
-	//TODO Only Reset is allowed when EStop released
 	void EStopReleased();
 };
 
-/*
- *
+/**
+ * State when E-Stop button has been pulled out.
+ * In this state only Reset button can be pressed.
  */
 class WaitingForReset: public IState {
 public:
@@ -126,6 +147,5 @@ public:
 
 	void resetPressed();
 };
-
 
 #endif /*MAINSTATE_H_ */

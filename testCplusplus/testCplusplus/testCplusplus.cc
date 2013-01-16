@@ -23,7 +23,7 @@
 //#define SENSORIC_TEST
 //#define DISPATCHER_TEST
 //#define DEBUG_MUTEX
-#define STATE_TEST
+//#define STATE_TEST
 //#define TIMER_TEST
 
 
@@ -39,6 +39,7 @@
 #include "StateTest.h"
 #include "TimerTest.h"
 #include "Reader.h"
+#include "Starter.h"
 /*
 #include "LEDTest.h"
 #include "LightTest.h"
@@ -57,6 +58,13 @@ int main(int argc, char *argv[]) {
 			<< endl;
 	IOaccess_open(); // Baue die Verbindung zur Simulation auf
 #endif
+
+	Starter starter;
+	starter.start(NULL);
+	Reader reader;
+	reader.start(NULL);
+	starter.join();
+	reader.join();
 
 #ifdef STATE_TEST
 	StateTest state_test;

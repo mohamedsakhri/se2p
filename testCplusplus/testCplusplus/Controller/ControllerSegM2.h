@@ -32,7 +32,6 @@ public:
 	void isMetal();					//!< WP has metal
 	void outSwitch();					//!< WP has left Switch area
 	void inSwitch();					//!< WP is in Switch
-//	void outSlide();					//!< WP out Slide's light barrier
 	void outLineEnd();					//!< WP has left machine 2
 
 
@@ -48,8 +47,8 @@ public:
 private:
 	ControllerSegM2();
 
-	static ControllerSegM2* controllerSegM2_instance_;
-	static Mutex controllerSegM2_mutex_; //!< Mutex for thread-safe implementation
+	static ControllerSegM2* controllerSegM2_instance_;		//!< Controller's instance
+	static Mutex controllerSegM2_mutex_; 					//!< Mutex for thread-safe implementation
 };
 
 #endif /* CONTROLLERSEGM2_H_ */

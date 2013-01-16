@@ -27,12 +27,13 @@ public:
 	void inLineStart();
 	void outLineStart();
 
-	// Error's handling
+	/**
+	 * @param message Message to be sent.
+	 */
 	int sendMsg2Dispatcher(int message);
 
 	void init();
 	void passWP2Ctr();
-
 	void reset();
 
 	virtual ~ControllerSeg1();
@@ -40,8 +41,8 @@ public:
 private:
 	ControllerSeg1();
 
-	static ControllerSeg1 *controllerSeg1_instance_ ;
-	static Mutex controllerSeg1_mutex_; 		//!< Mutex for thread-safe implementation
+	static ControllerSeg1 *controllerSeg1_instance_ ;	//!< Controller's instance
+	static Mutex controllerSeg1_mutex_; 				//!< Mutex for thread-safe implementation
 };
 
 #endif /* CONTROLLERSEG1_H_ */

@@ -28,10 +28,15 @@ public:
 	void inSwitch();
 	void outSwitch();
 
-	// Error's handling
+	/**
+	 * @param message Message to be sent.
+	 */
 	int sendMsg2Dispatcher(int message);
 	void init();
 	void passWP2Ctr();
+	/**
+	 * @param ctr_id Controller Id
+	 */
 	void passWP2Ctr(int ctr_id);
 	void reset();
 
@@ -40,8 +45,8 @@ public:
 private:
 	ControllerSeg3();
 
-	static ControllerSeg3* controllerSeg3_instance_;
-	static Mutex controllerSeg3_mutex_; //!< Mutex for thread-safe implementation
+	static ControllerSeg3* controllerSeg3_instance_;	//!< Controller's instance
+	static Mutex controllerSeg3_mutex_; 				//!< Mutex for thread-safe implementation
 };
 
 #endif /* CONTROLLERSEG3_H_ */

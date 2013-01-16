@@ -56,6 +56,8 @@ enum message {
 	WP_NOT_TURNED,		// Error from band2 if workpiece has not been turned in the end of band1
 	SLIDE_FULL,
 	SLIDE_EMPTY,
+	E_STOP_PRESSED_OTHER,
+	E_STOP_RELEASED_OTHER,
 	//...
 
 	// More specified errors are possible and could be added as messages here. May be later!
