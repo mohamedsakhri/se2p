@@ -2,6 +2,7 @@
  * @file	MainController.h
  *
  * @author	Mohamed Sakhri
+ * @author	Mahmoud Dariti
  *
  * @date	 Dec 19, 2012
  *
@@ -92,12 +93,42 @@ public:
 	void setErrorRegistered(bool errorStatus) {
 		errorRegistered_ = errorStatus;
 	}
+
+	/**
+	 * @return true if error has been registered
+	 */
+	bool isM2Ready() {
+		return isM2Ready_;
+	}
+
+	/**
+	 * @param errorStatus If error registered or not
+	 */
+	void setM2Ready(bool m2Ready) {
+		errorRegistered_ = m2Ready;
+	}
+
+	/**
+	 * Set machine2's status to busy
+	 */
+	void m2isBusy() {
+		isM2Ready_ = false;
+	}
+
+	/**
+	 * Set machine2's status to busy
+	 */
+	void m2isReady() {
+		isM2Ready_ = true;
+	}
+
 	virtual ~MainController();
 
 private:
 	MainController();
 
-	bool errorRegistered_;
+	bool errorRegistered_;						//!< Error's registration state
+	bool isM2Ready_;							//!< Machine's state
 
 	static MainController *mainController_instance_ ;
 	static Mutex mainController_mutex_; 		//!< Mutex for thread-safe implementation

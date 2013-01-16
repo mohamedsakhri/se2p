@@ -113,7 +113,7 @@ void TransferMachine2::machine2IsReady() {
 #ifdef DEBUG_
 	cout << "TransferMachine2 :: machine2IsReady" << endl;
 #endif
-	if (ControllerSeg5::getInstance()->isMachin2Ready()) {
+	if (MainController::getInstance()->isM2Ready()) {
 		HALAktorik::getInstance()->motor_on();
 		MainController::getInstance()->setIsRunning(true);
 		new (this) Machine2Ready();

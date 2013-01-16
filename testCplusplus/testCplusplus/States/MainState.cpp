@@ -2,6 +2,7 @@
  * @file MainState.cpp
  *
  * @author Mohamed Sakhri
+ * @author	Mahmoud Dariti
  *
  * @date Dec 19, 2012
  *
@@ -11,7 +12,8 @@
 
 #include "MainState.h"
 
-#define DEBUG_
+//#define DEBUG_
+#define DEBUIG_ERROR_
 
 #define MACHINE_1		// If programm is running on machine 1.
 //#define MACHINE_2		// If programm is running on machine 2.
@@ -61,7 +63,7 @@ void InitState::startPressed() {
 	ctr5->addEvent(WP_IN_ENGINE_END);
 	ctr5->addEvent(WP_OUT_ENGINE_END);
 	ctr5->addEvent(WP_HAS_ARRIVED);
-	ctr5->addEvent(MACHINE2_IS_BUSY);
+//	ctr5->addEvent(MACHINE2_IS_BUSY);
 	ctr5->addEvent(MACHINE2_IS_READY);
 
 	//Register controllers by dispatcher.
@@ -107,11 +109,11 @@ void InitState::startPressed() {
 }
 
 /**
- * Deconstructor has nothing to do.
+ * Destructor has nothing to do.
  */
 InitState::~InitState() {
 #ifdef DEBUG_
-	cout << "InitState :: Deconstructor" << endl;
+	cout << "InitState :: Destructor" << endl;
 #endif
 }
 
@@ -132,6 +134,9 @@ RunningMachine::RunningMachine() {
  * Error registered : stop flashing or turn red light off.
  */
 void RunningMachine::resetPressed() {
+#ifdef DEBUIG_ERROR_
+	cout << "ERROR registered" << endl;
+#endif
 	RedLightFlash::getInstance()->stopFlashing();
 	HALAktorik::getInstance()->red_Light_off();
 	HALAktorik::getInstance()->Reset_LED_on();
@@ -219,11 +224,11 @@ void RunningMachine::turningErrorHandling() {
 }
 
 /**
- * Deconstructor has nothing to do.
+ * Destructor has nothing to do.
  */
 RunningMachine::~RunningMachine() {
 #ifdef DEBUG_
-	cout << "RunningMachine1 :: Deconstructor" << endl;
+	cout << "RunningMachine1 :: Destructor" << endl;
 #endif
 }
 
@@ -238,6 +243,9 @@ RunningMachine::~RunningMachine() {
 ErrorHandling::ErrorHandling() {
 #ifdef DEBUG_
 	cout << "ErrorHandling :: Constructor" << endl;
+#endif
+#ifdef DEBUIG_ERROR_
+	cout << "ERROR : TimeOut or Stranger" << endl;
 #endif
 
 	//Stop all timers.
@@ -313,6 +321,8 @@ void ErrorHandling::startPressed() {
 	}else {
 		HALAktorik::getInstance()->red_Light_off();
 	}
+	// Stop yellow light flashing
+	LightFlash::getInstance()->stopFlashing();
 
 
 	//Machine goes back to state running.
@@ -338,7 +348,7 @@ void ErrorHandling::resetPressed() {
 }
 
 /**
- * Deconstructor has nothing to do.
+ * Destructor has nothing to do.
  */
 ErrorHandling::~ErrorHandling() {
 
@@ -359,6 +369,10 @@ SlideHandling::SlideHandling() {
 #ifdef DEBUG_
 	cout << "SlideHandling :: Constructor" << endl;
 #endif
+#ifdef DEBUIG_ERROR_
+	cout << "ERROR : Slide full" << endl;
+#endif
+
 	//Pause all timers.
 	MainController::getInstance()->pauseAllTimers();
 	//Stop motor.
@@ -391,6 +405,9 @@ void SlideHandling::slideErrorFixed() {
 	cout << "SlideHandling::slideErrorFixed()" << endl;
 #endif
 #ifdef MACHINE_1
+#ifdef DEBUIG_ERROR_
+	cout << "ERROR Fixed : Slide full" << endl;
+#endif
 
 //	ControllerSeg4::getInstance()->getTimer()->stop();
 	//Unregister all segments' controllers
@@ -400,7 +417,7 @@ void SlideHandling::slideErrorFixed() {
 	Dispatcher::getInstance()->registerHandler(ControllerSeg5::getInstance());
 
 	//Start motor if there is worpieces on the machine
-	//and machine was runnins before the slide had become full
+	//and machine was running before the slide had become full
 	if (!ControllerSeg1::getInstance()->isFifoEmpty()
 			|| !ControllerSeg2::getInstance()->isFifoEmpty()
 			|| !ControllerSeg3::getInstance()->isFifoEmpty()
@@ -436,6 +453,10 @@ void SlideHandling::resetPressed() {
 #ifdef DEBUG_
 	cout << "SlideHandling :: resetReleased" << endl;
 #endif
+#ifdef DEBUIG_ERROR_
+	cout << "ERROR : Slide full registered" << endl;
+#endif
+
 	//Stop red light flashing
 	RedLightFlash::getInstance()->stopFlashing();
 	//Red light goes on
@@ -444,11 +465,10 @@ void SlideHandling::resetPressed() {
 	HALAktorik::getInstance()->Reset_LED_on();
 	//Set error status to registered
 	MainController::getInstance()->setErrorRegistered(true);
-
 }
 
 /**
- * Deconstructor has nothing to do.
+ * Destructor has nothing to do.
  */
 SlideHandling::~SlideHandling() {
 
@@ -469,6 +489,9 @@ SlideHandling::~SlideHandling() {
 TurningErrorHandling::TurningErrorHandling() {
 #ifdef DEBUG_
 	cout << "TurningErrorHandling :: Constructor" << endl;
+#endif
+#ifdef DEBUIG_ERROR_
+	cout << "ERROR : Worpiece NOT back" << endl;
 #endif
 
 	//Stop all timers
@@ -500,6 +523,9 @@ void TurningErrorHandling::startPressed() {
 #ifdef DEBUG_
 	cout << "TurningErrorHandling :: startPressed" << endl;
 #endif
+#ifdef DEBUIG_ERROR_
+	cout << "ERROR Fixed : WP NOT back => START " << endl;
+#endif
 
 #ifdef MACHINE_1
 	//Reset all controllers.
@@ -523,6 +549,8 @@ void TurningErrorHandling::startPressed() {
 	}else {
 		HALAktorik::getInstance()->red_Light_off();
 	}
+	// Stop yellow light flashing
+	LightFlash::getInstance()->stopFlashing();
 
 	//Start LED goes on.
 	HALAktorik::getInstance()->Start_LED_on();
@@ -537,6 +565,9 @@ void TurningErrorHandling::startPressed() {
 void TurningErrorHandling::resetPressed() {
 #ifdef DEBUG_
 	cout << "TurningErrorHandling :: resetPressed" << endl;
+#endif
+#ifdef DEBUIG_ERROR_
+	cout << "ERROR  : WP NOT back registered" << endl;
 #endif
 	//Stop red light flashing
 	RedLightFlash::getInstance()->stopFlashing();
@@ -554,6 +585,9 @@ void TurningErrorHandling::resetPressed() {
 void TurningErrorHandling::inLineEnd() {
 #ifdef DEBUG_
 	cout << "TurningErrorHandling :: inLineEnd" << endl;
+#endif
+#ifdef DEBUIG_ERROR_
+	cout << "ERROR Fixed : WP NOT back => WP is back" << endl;
 #endif
 	//Start motor and resumer all timers if the machine was running before
 	//the error had occured
@@ -579,7 +613,7 @@ void TurningErrorHandling::inLineEnd() {
 	new (this) RunningMachine();
 }
 /**
- * Deconstructor has nothing to do.
+ * Destructor has nothing to do.
  */
 TurningErrorHandling::~TurningErrorHandling() {
 
@@ -657,7 +691,7 @@ void Emergency::EStopReleased() {
 }
 
 /**
- * Deconstructor has nothing to do.
+ * Destructor has nothing to do.
  */
 Emergency::~Emergency() {
 
@@ -716,7 +750,7 @@ void WaitingForReset::resetPressed() {
 }
 
 /**
- * Deconstructor has nothing to do.
+ * Destructor has nothing to do.
  */
 WaitingForReset::~WaitingForReset() {
 

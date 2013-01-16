@@ -100,17 +100,19 @@ WorkPieceValid::WorkPieceValid()
 #endif
 }
 
-void WorkPieceValid::outSwitch()
-{
-	//Set new time for Segment 5 - From Switch to line  end -
-//	ControllerSeg3::getInstance()->getFirstWP()->getTimer()->setNewTime(SIX_SEC, NULL_MSEC);
-	ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start(SIX_SEC, NULL_MSEC);
-	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG5);
-	ControllerSeg3::getInstance()->removeFirsttWP();
+void WorkPieceValid::outSwitch() {
+	if (ControllerSeg3::getInstance()->isFifoEmpty()) {
+		ControllerSeg3::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
+	} else {
+		ControllerSeg3::getInstance()->getFirstWP()->getTimer()->start(SIX_SEC,
+				NULL_MSEC);
+		ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG5);
+		ControllerSeg3::getInstance()->removeFirsttWP();
 
-	new (this) WaitingSwitch();
-	// Use this to wait a bit before closing switching. Just for now!
-	// WAIT_HALF_S;
+		new (this) WaitingSwitch();
+		// Use this to wait a bit before closing switching. Just for now!
+		// WAIT_HALF_S;
+	}
 	HALAktorik::getInstance()->close_Switch();
 
 }

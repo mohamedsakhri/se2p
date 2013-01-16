@@ -17,8 +17,8 @@
 Mutex ControllerSeg3::controllerSeg3_mutex_ = Mutex();
 ControllerSeg3* ControllerSeg3::controllerSeg3_instance_ = NULL ;
 
-/*
- *
+/**
+ * Initialize segment3's state
  */
 ControllerSeg3::ControllerSeg3()
 {
@@ -27,8 +27,8 @@ ControllerSeg3::ControllerSeg3()
 	init();
 }
 
-/*
- *
+/**
+ * Return segment3's controller
  */
 ControllerSeg3* ControllerSeg3::getInstance()
 {
@@ -43,8 +43,8 @@ ControllerSeg3* ControllerSeg3::getInstance()
 }
 
 /**
- * Do some initialization work
- */
+ * Do some initialization work :
+  */
 void ControllerSeg3::init()
 {
 	con_id_ = ConnectAttach(0, 0, Demultiplexer::getInstance()->getChannelId(), _NTO_SIDE_CHANNEL, 0);
@@ -57,16 +57,16 @@ void ControllerSeg3::init()
 #endif
 }
 
-/*
- *
+/**
+ * WP is in switch
  */
 void ControllerSeg3::inSwitch()
 {
 	state_->inSwitch();
 }
 
-/*
- *
+/**
+ * WP is out switch
  */
 void ControllerSeg3::outSwitch()
 {
@@ -90,16 +90,15 @@ int ControllerSeg3::sendMsg2Dispatcher(int message) {
 }
 
 /**
- * Pass a workpiece from a segment to the next one
+ * Pass a workpiece from a segment to the next one. Not used here.
  */
-//TODO
 void ControllerSeg3::passWP2Ctr()
 {
-//	ControllerSeg5::getInstance()->addWP2List(getFirstWP());
+
 }
 
-/*
- *
+/**
+ * Pass a workpiece from a segment to the next one
  */
 void ControllerSeg3::passWP2Ctr(int controller_id)
 {
@@ -110,7 +109,7 @@ void ControllerSeg3::passWP2Ctr(int controller_id)
 }
 
 /**
- *
+ * Reset controller
  */
 void ControllerSeg3::reset() {
 	this->wp_list_.clear();

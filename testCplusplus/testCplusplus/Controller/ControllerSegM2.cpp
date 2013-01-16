@@ -43,7 +43,7 @@ ControllerSegM2* ControllerSegM2::getInstance() {
 
 
 /**
- * Do some initialization work
+ * Do some initialization work : connect to demultiplexer's channel
  */
 void ControllerSegM2::init(){
 
@@ -57,71 +57,64 @@ void ControllerSegM2::init(){
 #endif
 }
 
-/*
- *
+/**
+ * WP is comming from machine2
  */
 void ControllerSegM2::wpIsComming() {
 	state_->wpIsComming();
 }
 
-/*
- *
+/**
+ * WP in line start
  */
 void ControllerSegM2::inLineStart(){
 	state_->inLineStart();
 }
 
-/*
- *
+/**
+ * WP in height measurement
  */
 void ControllerSegM2::inHeightMeasurement(){
 	state_->inHeightMeasurement();
 }
 
-/*
- *
+/**
+ * WP out height measurement
  */
 void ControllerSegM2::outHeightMeasurement(){
 	state_->outHeightMeasurement();
 }
 
-/*
- *
+/**
+ * WP in tolerance range
  */
 void ControllerSegM2::inToleranceRange(){
 	state_->inToleranceRange();
 }
 
-/*
- *
+/**
+ * WP is metal
  */
 void ControllerSegM2::isMetal(){
 	state_->isMetal();
 }
 
-/*
- *
+/**
+ * WP in out switch
  */
 void ControllerSegM2::outSwitch(){
 	state_->outSwitch();
 }
 
-/*
- *
+/**
+ * WP is in switch
  */
 void ControllerSegM2::inSwitch(){
 	state_->inSwitch();
 }
 
-///*
-// *
-// */
-//void ControllerSegM2::outSlide(){
-//	state_->outSlide();
-//}
-
-/*
- *
+/**
+ * WP has leaved end line
  */
 void ControllerSegM2::outLineEnd(){
 	state_->outLineEnd();
@@ -143,9 +136,8 @@ int ControllerSegM2::sendMsg2Dispatcher(int message){
 	return 0;
 }
 
-//TODO communicate with Line 2
 /**
- * Pass a workpiece from a segment to the next one
+ * Pass a WP to next segment's controller
  */
 void ControllerSegM2::passWP2Ctr()
 {
@@ -153,7 +145,7 @@ void ControllerSegM2::passWP2Ctr()
 }
 
 /**
- * reset
+ * Reset controller
  */
 void ControllerSegM2::reset()
 {

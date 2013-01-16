@@ -27,7 +27,6 @@ WaitingHeightM1::WaitingHeightM1()
 
 WaitingHeightM1::~WaitingHeightM1()
 {
-
 }
 
 void WaitingHeightM1::inHeightMeasurement()
@@ -72,7 +71,6 @@ TooSmall::TooSmall()
 
 TooSmall::~TooSmall()
 {
-
 }
 
 void TooSmall::outHeightMeasurement()
@@ -138,11 +136,7 @@ void CheckDrill::outHeightMeasurement()
 
 				new (this) WaitingHeightM1();
 			} else {
-				//TODO  just send msg and let controller do the rest according to the error event_ handler
 				ControllerSeg2::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
-				HALAktorik::getInstance()->motor_off();
-//				HALAktorik::getInstance()->red_Light_on();
-//				HALAktorik::getInstance()->green_Light_off();
 			}
 	new (this) WaitingHeightM1();
 }

@@ -17,8 +17,8 @@
 Mutex ControllerSeg1::controllerSeg1_mutex_ = Mutex();
 ControllerSeg1* ControllerSeg1::controllerSeg1_instance_ = NULL ;
 
-/*
- *
+/**
+ * Initialize segment's state and connect to channel
  */
 ControllerSeg1::ControllerSeg1() {
 	ctr_id_ = CONTROLLER_SEG1;
@@ -26,8 +26,8 @@ ControllerSeg1::ControllerSeg1() {
 	init();
 }
 
-/*
- *
+/**
+ * Return instance of Segment's 5 controller
  */
 ControllerSeg1* ControllerSeg1::getInstance() {
 
@@ -42,7 +42,7 @@ ControllerSeg1* ControllerSeg1::getInstance() {
 }
 
 /**
- * Do some initialization work
+ * Do some initialization work : connect to Demultiplexer channel
  */
 void ControllerSeg1::init(){
 
@@ -56,16 +56,16 @@ void ControllerSeg1::init(){
 #endif
 }
 
-/*
- *
+/**
+ * WP is in line start : Segment goes to state inlineStart
  */
 void ControllerSeg1::inLineStart()
 {
 	state_->inLineStart();
 }
 
-/*
- *
+/**
+ * WP is out line start : Segment goes to state ouLineStart
  */
 void ControllerSeg1::outLineStart()
 {
@@ -102,7 +102,6 @@ int ControllerSeg1::sendMsg2Dispatcher(int message){
 /**
  * Pass a workpiece from a segment to the next one
  */
-// in case of problem : remove it and use addWP2List directly from state
 void ControllerSeg1::passWP2Ctr()
 {
 #ifdef DEBUG_

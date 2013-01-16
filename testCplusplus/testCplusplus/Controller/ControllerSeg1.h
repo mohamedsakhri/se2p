@@ -23,8 +23,14 @@ public:
 	 * @return The controller's instance
 	 */
 	static ControllerSeg1* getInstance();
-
+	/**
+	 * What to do when WP in in Line start
+	 */
 	void inLineStart();
+
+	/**
+	 * What to do when WP in in Line start
+	 */
 	void outLineStart();
 
 	/**
@@ -32,10 +38,24 @@ public:
 	 */
 	int sendMsg2Dispatcher(int message);
 
+	/**
+	 * Initialize connection with demultiplexers' channel
+	 */
 	void init();
+
+	/**
+	 * Pass a WP to next segment's controller
+	 */
 	void passWP2Ctr();
+
+	/**
+	 * Reset controller
+	 */
 	void reset();
 
+	/**
+	 * Deconstructor
+	 */
 	virtual ~ControllerSeg1();
 
 private:

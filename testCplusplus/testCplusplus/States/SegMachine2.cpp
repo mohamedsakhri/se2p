@@ -22,7 +22,7 @@ WaitForLineStart::WaitForLineStart() {
 }
 
 /**
- * Deconstructor has nothing to do
+ * Destructor has nothing to do
  */
 WaitForLineStart::~WaitForLineStart() {
 
@@ -51,7 +51,7 @@ void WaitForLineStart::wpIsComming() {
 
  ************************************************************************************/
 /**
- *
+ * Constructor does nothing
  */
 WpIsComming::WpIsComming() {
 #ifdef DEBUG_
@@ -60,13 +60,14 @@ WpIsComming::WpIsComming() {
 }
 
 /**
- *
+ * Destructor does nothing
  */
 WpIsComming::~WpIsComming() {
 }
 
 /**
- *
+ * Wp in line start :
+ * Notify machine1 and goes to new state
  */
 void WpIsComming::inLineStart() {
 	Sender::getInstance()->send(WP_HAS_ARRIVED);
@@ -81,7 +82,7 @@ void WpIsComming::inLineStart() {
 
  ************************************************************************************/
 /**
- *
+ * Constructor does nothing
  */
 WaitForHeightM2::WaitForHeightM2() {
 #ifdef DEBUG_
@@ -90,14 +91,14 @@ WaitForHeightM2::WaitForHeightM2() {
 }
 
 /**
- *
+ * Destructor does nothing
  */
 WaitForHeightM2::~WaitForHeightM2() {
 
 }
 
 /**
- *
+ * WP in height measurement
  */
 void WaitForHeightM2::inHeightMeasurement() {
 #ifdef DEBUG_
@@ -108,7 +109,7 @@ void WaitForHeightM2::inHeightMeasurement() {
 }
 
 /**
- *
+ * WP in tolerance range
  */
 void WaitForHeightM2::inToleranceRange() {
 #ifdef DEBUG_
@@ -122,17 +123,20 @@ void WaitForHeightM2::inToleranceRange() {
  	 	 	 	 	 	 	 	 NoDrill
 
  ************************************************************************************/
-//TODO error (if drill down or small WP)
 /**
- *
+ * WP has no drill :
+ * stop motor and send message to Dispatcher
  */
 NoDrill::NoDrill() {
+#ifdef DEBUG_
 	cout << "ERROR WP Small or Drill Down" << endl;
-//	HALAktorik::getInstance()->red_Light_on();
-//	HALAktorik::getInstance()->green_Light_off();
-	HALAktorik::getInstance()->motor_off();
+#endif
+	ControllerSegM2::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
 }
 
+/**
+ * Destructor does nothing
+ */
 NoDrill::~NoDrill() {
 
 }
@@ -142,7 +146,7 @@ NoDrill::~NoDrill() {
 
  ************************************************************************************/
 /**
- *
+ * WP's Drill is checked
  */
 CheckDrillM2::CheckDrillM2() {
 #ifdef DEBUG_
@@ -151,14 +155,14 @@ CheckDrillM2::CheckDrillM2() {
 }
 
 /**
- *
+ * Destructor does nothing
  */
 CheckDrillM2::~CheckDrillM2() {
 
 }
 
 /**
- *
+ * WP out height measurement
  */
 void CheckDrillM2::outHeightMeasurement() {
 #ifdef DEBUG_
@@ -168,7 +172,7 @@ void CheckDrillM2::outHeightMeasurement() {
 }
 
 /**
- *
+ * WP in tolerance range
  */
 void CheckDrillM2::inToleranceRange() {
 #ifdef DEBUG_
@@ -183,7 +187,7 @@ void CheckDrillM2::inToleranceRange() {
 
  ************************************************************************************/
 /**
- *
+ * WP's drill is ok
  */
 DrillOkay::DrillOkay() {
 #ifdef DEBUG_
@@ -192,14 +196,14 @@ DrillOkay::DrillOkay() {
 }
 
 /**
- *
+ * Destructor does nothing
  */
 DrillOkay::~DrillOkay() {
 
 }
 
 /**
- *
+ * WP is out height measurement after its drill has been checked
  */
 void DrillOkay::outHeightMeasurement() {
 	new (this) WaitForMetal();
@@ -210,7 +214,7 @@ void DrillOkay::outHeightMeasurement() {
 
  ************************************************************************************/
 /**
- *
+ * Constructor does nothing
  */
 WaitForMetal::WaitForMetal() {
 #ifdef DEBUG_
@@ -219,17 +223,16 @@ WaitForMetal::WaitForMetal() {
 }
 
 /**
- *
+ * Destructor does nothing
  */
 WaitForMetal::~WaitForMetal() {
 
 }
 
 /**
- *
+ * WP in switch : stop timer and start new one
  */
 void WaitForMetal::inSwitch() {
-	//No Metall
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->stop();
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start(THREE_SEC, NULL_MSEC);
 	HALAktorik::getInstance()->open_Switch();
@@ -238,13 +241,14 @@ void WaitForMetal::inSwitch() {
 }
 
 /**
- *
+ * WP has metal
  */
 void WaitForMetal::isMetal() {
 	//HAS Metal
 #ifdef DEBUG_
 	cout << "WP HAS METAl" << endl;
 #endif
+
 	new (this) HasMetall();
 }
 
@@ -252,6 +256,9 @@ void WaitForMetal::isMetal() {
  	 	 	 	 	 	 	 	 HasMetall
 
  ************************************************************************************/
+/**
+ * Constructor does nothing
+ */
 HasMetall::HasMetall() {
 #ifdef DEBUG_
 	cout << "HasMetall :: Constructor" << endl;
@@ -259,19 +266,20 @@ HasMetall::HasMetall() {
 }
 
 /**
- *
+ * Destructor does nothing
  */
 HasMetall::~HasMetall() {
 
 }
 
 /**
- *
+ * WP has metal and is in switch :
+ * stop timer and start new one for next segment
  */
 void HasMetall::inSwitch() {
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->stop();
-	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->setNewTime(4, 0);
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start(FOUR_SEC, NULL_MSEC);
+
 	new (this) WorkPieceIsInvalid();
 }
 
@@ -280,7 +288,7 @@ void HasMetall::inSwitch() {
 
  ************************************************************************************/
 /**
- *
+ * Constructor does nothing
  */
 WorkPieceIsInvalid::WorkPieceIsInvalid() {
 #ifdef DEBUG_
@@ -289,64 +297,27 @@ WorkPieceIsInvalid::WorkPieceIsInvalid() {
 }
 
 /**
- *
+ * Destructor does nothing
  */
 WorkPieceIsInvalid::~WorkPieceIsInvalid() {
 
 }
 
 /**
- *
+ * WP is out switch
  */
 void WorkPieceIsInvalid::outSwitch() {
 	new (this) WaitForLineStart();
 
-//	new (this) InSlideM2();
 }
 
-///************************************************************************************
-// 	 	 	 	 	 	 	 	 InSlideM2
-//
-// ************************************************************************************/
-///**
-// *
-// */
-//InSlideM2::InSlideM2() {
-//#ifdef DEBUG_
-//	cout << "InSlideM2 :: Constructor" << endl;
-//#endif
-//}
-//
-///**
-// *
-// */
-//InSlideM2::~InSlideM2() {
-//
-//}
-//
-///**
-// * Workpiece has left slide :
-// * Remove it from fifo
-// * Notify machine 1 that machine 2 is ready
-// * Stop motor
-// */
-//void InSlideM2::outSlide() {
-//	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->stop();
-//	ControllerSegM2::getInstance()->removeFirsttWP();
-//	Sender::getInstance()->send(MACHINE2_IS_READY);
-//	HALAktorik::getInstance()->motor_off();
-//
-//
-//	new (this) WaitForLineStart();
-//
-//}
 
 /************************************************************************************
  	 	 	 	 	 	 	 	 WorkPieceIsValid
 
  ************************************************************************************/
 /**
- *
+ * Constructor does nothing
  */
 WorkPieceIsValid::WorkPieceIsValid() {
 #ifdef DEBUG_
@@ -355,17 +326,18 @@ WorkPieceIsValid::WorkPieceIsValid() {
 }
 
 /**
- *
+ * Destructor does nothing
  */
 WorkPieceIsValid::~WorkPieceIsValid() {
 
 }
 
 /**
- *
+ * WP is valid and out switch : close switch
  */
 void WorkPieceIsValid::outSwitch() {
 	new (this) WaitForEndLine();
+
 	HALAktorik::getInstance()->close_Switch();
 
 }
@@ -375,7 +347,7 @@ void WorkPieceIsValid::outSwitch() {
 
  ************************************************************************************/
 /**
- *
+ * Constructor does nothing
  */
 WaitForEndLine::WaitForEndLine() {
 #ifdef DEBUG_
@@ -384,23 +356,26 @@ WaitForEndLine::WaitForEndLine() {
 }
 
 /**
- *
+ * Destructor does nothing
  */
 WaitForEndLine::~WaitForEndLine() {
 
 }
 
 /**
- *
+ * WP is has left line end : remove WP from fifo and stop motor
+ * Notify machine1 that machine2 is ready
  */
 void WaitForEndLine::outLineEnd() {
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->stop();
 	ControllerSegM2::getInstance()->removeFirsttWP();
+
 	// Wait one second so that workpiece can leave the line
 	WAIT_ONE_S;
+
 	HALAktorik::getInstance()->motor_off();
 	MainController::getInstance()->setIsRunning(false);
 	Sender::getInstance()->send(MACHINE2_IS_READY);
-	new (this) WaitForLineStart();
 
+	new (this) WaitForLineStart();
 }

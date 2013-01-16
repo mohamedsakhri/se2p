@@ -17,8 +17,8 @@
 Mutex ControllerSeg2::controllerSeg2_mutex_ = Mutex();
 ControllerSeg2* ControllerSeg2::controllerSeg2_instance_ = NULL ;
 
-/*
- *
+/**
+ * Initialize segment2's state
  */
 ControllerSeg2::ControllerSeg2()
 {
@@ -28,10 +28,9 @@ ControllerSeg2::ControllerSeg2()
 }
 
 /*
- *
+ * Retunr segment2's controller
  */
 ControllerSeg2* ControllerSeg2::getInstance() {
-
 	if (!controllerSeg2_instance_) {
 		controllerSeg2_mutex_.lock();
 		if (!controllerSeg2_instance_) {
@@ -43,11 +42,10 @@ ControllerSeg2* ControllerSeg2::getInstance() {
 }
 
 /**
- * Do some initialization work
+ * Do some initialization work : Connect to demultiplexer's channel
  */
 void ControllerSeg2::init()
 {
-
 	con_id_ = ConnectAttach(0, 0, Demultiplexer::getInstance()->getChannelId(), _NTO_SIDE_CHANNEL, 0);
 	if (con_id_ == -1) {
 		perror("ControllerSeg2 : ConnectAttach failed : ");
@@ -58,32 +56,32 @@ void ControllerSeg2::init()
 #endif
 }
 
-/*
- *
+/**
+ * WP is in Height measurement : Segment's state goes to heightMeaseurement state
  */
 void ControllerSeg2::inHeightMeasurement()
 {
 	state_->inHeightMeasurement();
 }
 
-/*
- *
+/**
+ * WP is out Height measurement
  */
 void ControllerSeg2::outHeightMeasurement()
 {
 	state_->outHeightMeasurement();
 }
 
-/*
- *
+/**
+ * WP is in Tolerance range
  */
 void ControllerSeg2::inToleranceRange()
 {
 	state_->inToleranceRange();
 }
 
-/*
- *
+/**
+ * WP is not in Tolerance range
  */
 void ControllerSeg2::notInToleranceRange()
 {

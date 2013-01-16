@@ -26,6 +26,7 @@ MainController::MainController() {
 	ctr_id_ = MAIN_CONTROLLER;
 	state_ = new InitState();
 	errorRegistered_ = false;
+	isM2Ready_ = true;
 	init();
 }
 
@@ -131,7 +132,6 @@ void MainController::isMissing()
  */
 void MainController::isStranger()
 {
-	cout << "IS STRANGER" << endl;
 	state_->timeOutError();
 }
 
@@ -240,7 +240,7 @@ void MainController::resumeAllTimers() {
 void MainController::pauseTimers(HALCallInterface* ctr)
 {
 	unsigned int i ;
-	 // Pause all timers assigned to workpieces
+	 // Pause all timers assigned to workpiece
 	if (!ctr->isFifoEmpty()) {
 		for ( i = 0; i < ctr->getWPList().size(); i++) {
 			ctr->getWPList().at(i)->getTimer()->pause();
@@ -293,7 +293,7 @@ void MainController::stopAllTimers() {
 void MainController::stopTimers(HALCallInterface* ctr)
 {
 	unsigned int i ;
-	 // Pause all timers assigned to workpieces
+	 // Pause all timers assigned to workpiece
 	if (!ctr->isFifoEmpty()) {
 		for ( i = 0; i < ctr->getWPList().size(); i++) {
 			ctr->getWPList().at(i)->getTimer()->stop();
@@ -303,7 +303,7 @@ void MainController::stopTimers(HALCallInterface* ctr)
 
 
 /**
- * Delete instance of IState and detach connecntion to channel
+ * Delete instance of IState and detach connection to channel
  */
 MainController::~MainController()
 {

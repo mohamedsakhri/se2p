@@ -253,7 +253,7 @@ void Dispatcher::removeHandler(HALCallInterface* handler){
 }
 
 /**
- *
+ * Does nothing here.
  */
 void Dispatcher::shutdown(){
 

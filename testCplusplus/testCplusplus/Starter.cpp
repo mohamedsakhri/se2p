@@ -28,7 +28,7 @@ Starter::Starter() {
 }
 
 /**
- * Deconstructor has nothing to do.
+ * Destructor has nothing to do.
  */
 Starter::~Starter() {
 

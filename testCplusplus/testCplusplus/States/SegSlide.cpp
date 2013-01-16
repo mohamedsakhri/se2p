@@ -32,18 +32,30 @@ SlideWait::SlideWait()
 void SlideWait::inSlide()
 {
 #ifdef MACHINE_1
-	ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG4);
-	ControllerSeg3::getInstance()->removeFirsttWP();
+	if (!ControllerSeg3::getInstance()->isFifoEmpty()) {
+		ControllerSeg3::getInstance()->passWP2Ctr(CONTROLLER_SEG4);
+		ControllerSeg3::getInstance()->removeFirsttWP();
+	}else {
+		ControllerSeg3::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
+	}
 #endif
 
 #ifdef MACHINE_2
-	ControllerSegM2::getInstance()->passWP2Ctr();
-	ControllerSegM2::getInstance()->removeFirsttWP();
+	if (!ControllerSegM2::getInstance()->isFifoEmpty()) {
+		ControllerSegM2::getInstance()->passWP2Ctr();
+		ControllerSegM2::getInstance()->removeFirsttWP();
+	}else {
+		ControllerSegM2::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
+	}
 #endif
-	ControllerSeg4::getInstance()->getFirstWP()->getTimer()->stop();
+	if (ControllerSeg4::getInstance()->isFifoEmpty()) {
+		ControllerSeg3::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
+	}else {
+		ControllerSeg4::getInstance()->getFirstWP()->getTimer()->stop();
 //	ControllerSeg4::getInstance()->getTimer()->setNewTime(TWO_SEC,NULL_MSEC);
-	ControllerSeg4::getInstance()->getTimer()->start(TWO_SEC,NULL_MSEC);
-	new (this) InSlide();
+		ControllerSeg4::getInstance()->getTimer()->start(TWO_SEC,NULL_MSEC);
+		new (this) InSlide();
+}
 }
 
 
@@ -70,10 +82,13 @@ InSlide::InSlide()
  */
 void InSlide::outSlide()
 {
+	if (!ControllerSeg4::getInstance()->isFifoEmpty()) {
+		ControllerSeg4::getInstance()->getTimer()->stop();
+		ControllerSeg4::getInstance()->removeFirsttWP();
+	}else {
+	ControllerSeg4::getInstance()->sendMsg2Dispatcher(WP_IS_STRANGER);
+	}
 
-	ControllerSeg4::getInstance()->getTimer()->stop();
-	delete ControllerSeg4::getInstance()->getFirstWP();
-	ControllerSeg4::getInstance()->removeFirsttWP();
 #ifdef MACHINE_1
 	if (ControllerSeg1::getInstance()->isFifoEmpty()
 			&& ControllerSeg2::getInstance()->isFifoEmpty()

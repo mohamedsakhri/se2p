@@ -179,7 +179,7 @@ void Timer::printName()
 Timer::~Timer()
 {
 #ifdef DEBUG_
-	cout << "Timer Deconstructor ID: " << name_;
+	cout << "Timer Destructor ID: " << name_;
 #endif
 
 	if (ConnectDetach(this->event_.sigev_coid == -1)) {

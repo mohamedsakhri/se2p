@@ -54,15 +54,15 @@ enum message {
 	WP_IS_MISSING,		// a workpiece disappears or arrives to late
 	WP_IS_STRANGER,		// an unknown workpiece in engine or a workpiece arrives too early
 	WP_NOT_TURNED,		// Error from band2 if workpiece has not been turned in the end of band1
-	SLIDE_FULL,
-	SLIDE_EMPTY,
-	E_STOP_PRESSED_OTHER,
-	E_STOP_RELEASED_OTHER,
+	SLIDE_FULL,					// Slide is full
+	SLIDE_EMPTY,				// Slide is no more full
+	E_STOP_PRESSED_OTHER,		// EStop button pressed in the other machine
+	E_STOP_RELEASED_OTHER,		// EStop button puller out in the other machine
 	//...
 
 	// More specified errors are possible and could be added as messages here. May be later!
 
-	// Trick to automaticly get the messages' number in this enum
+	// Trick to automatically get the messages' number in this enum
 	DUMMY_MESSAGE
 } ;
 

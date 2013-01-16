@@ -45,7 +45,7 @@ ControllerSeg5* ControllerSeg5::getInstance() {
 }
 
 /**
- * Do some initialization work
+ * Do some initialization work : connect to demultiplexer's channel
  */
 void ControllerSeg5::init() {
 
@@ -85,7 +85,7 @@ void ControllerSeg5::m2isBusy() {
  *
  */
 void ControllerSeg5::m2isReady() {
-	machine2_ready_ = true;
+//	machine2_ready_ = true;
 	//state_->machine2IsReady();
 	state_->messageReceived();
 }

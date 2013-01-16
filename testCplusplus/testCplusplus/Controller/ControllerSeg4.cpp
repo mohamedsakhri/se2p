@@ -17,8 +17,8 @@
 Mutex ControllerSeg4::controllerSeg4_mutex_ = Mutex();
 ControllerSeg4* ControllerSeg4::controllerSeg4_instance_ = NULL ;
 
-/*
- *
+/**
+ * Initialize controller
  */
 ControllerSeg4::ControllerSeg4()
 {
@@ -29,8 +29,8 @@ ControllerSeg4::ControllerSeg4()
 	init();
 }
 
-/*
- *
+/**
+ * Return controller's instance
  */
 ControllerSeg4* ControllerSeg4::getInstance()
 {
@@ -45,7 +45,7 @@ ControllerSeg4* ControllerSeg4::getInstance()
 }
 
 /**
- * Do some initialization work
+ * Do some initialization work : connect to demultiplexer's channel
  */
 void ControllerSeg4::init()
 {
@@ -60,16 +60,16 @@ void ControllerSeg4::init()
 #endif
 }
 
-/*
- *
+/**
+ * WP is in Slide
  */
 void ControllerSeg4::inSlide()
 {
 	state_->inSlide();
 }
 
-/*
- *
+/**
+ * WP is out slide
  */
 void ControllerSeg4::outSlide()
 {
@@ -110,7 +110,7 @@ Timer* ControllerSeg4::getTimer()
 }
 
 /**
- *
+ * Reset controller
  */
 void ControllerSeg4::reset() {
 	this->wp_list_.clear();

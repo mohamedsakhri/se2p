@@ -46,6 +46,8 @@ void StateTest::execute(void *arg) {
 	mainCtr->addEvent(SLIDE_FULL);
 	mainCtr->addEvent(SLIDE_EMPTY);
 	mainCtr->addEvent(WP_NOT_TURNED);
+	mainCtr->addEvent(MACHINE2_IS_BUSY);
+	mainCtr->addEvent(MACHINE2_IS_READY);
 
 	dispatcher_->registerHandler(mainCtr);
 

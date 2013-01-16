@@ -5,7 +5,7 @@
  * @date	NOV 6, 2012
  *
  *	This class is a thread implementation of the flashing red light.
- *	the blinking frequence id given as a parameter of the thread function execute.
+ *	the blinking frequency id given as a parameter of the thread function execute.
  *
  */
 

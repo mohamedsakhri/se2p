@@ -14,7 +14,7 @@
 
 
 /**
- * Set workpiece's attribut to default values
+ * Set workpiece's attributes to default values
  */
 int WorkPiece::counter = 0;
 WorkPiece::WorkPiece() {

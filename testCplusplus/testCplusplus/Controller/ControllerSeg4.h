@@ -31,6 +31,9 @@ public:
 	void passWP2Ctr();
 	void reset();
 
+	/**
+	 * @return Controller's timer
+	 */
 	Timer* getTimer();
 
 	virtual ~ControllerSeg4();

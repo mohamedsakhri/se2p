@@ -2,6 +2,7 @@
  * @file	MainState.h
  *
  * @author	Mohamed Sakhri
+ * @author	Mahmoud Dariti
  *
  * @date	 Dec 19, 2012
  *

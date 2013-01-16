@@ -41,20 +41,13 @@ public:
 
 private:
 	Demultiplexer();
-	void init();										//!< Init dispatcher and HALSensoric
-	/**
-	 * @param message Message to be sent to Dispatcher
-	 * @return 0 in case of success, otherwise -1
-	 */
 
+	void init();										//!< Init dispatcher and HALSensoric
 	int channel_id_;									//!< get Channel ID to receive and send messages
 	int con_id_;										//!< Connection ID : with HAL Sensoric
 	HALSensoric *hal_sensoric_;
 	static Demultiplexer *demultiplexer_instance_;		//!< The only demultiplexer's instance
 	static Mutex demultiplexer_mutex_;					//!< Mutex used in Singleton implementation
-	//static Dispatcher *dispatcher_;
-//	struct sigevent event_;
-
 
 };
 
