@@ -39,6 +39,8 @@ void WaitForLineStart::wpIsComming() {
 	ControllerSegM2::getInstance()->getFirstWP()->getTimer()->start(THREE_SEC, NULL_MSEC);
 
 	HALAktorik::getInstance()->motor_on();
+	MainController::getInstance()->setIsRunning(true);
+
 
 	Sender::getInstance()->send(MACHINE2_IS_BUSY);
 	new (this) WpIsComming();
@@ -397,6 +399,7 @@ void WaitForEndLine::outLineEnd() {
 	// Wait one second so that workpiece can leave the line
 	WAIT_ONE_S;
 	HALAktorik::getInstance()->motor_off();
+	MainController::getInstance()->setIsRunning(false);
 	Sender::getInstance()->send(MACHINE2_IS_READY);
 	new (this) WaitForLineStart();
 

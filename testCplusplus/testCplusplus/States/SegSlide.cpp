@@ -82,7 +82,7 @@ void InSlide::outSlide()
 			&& ControllerSeg5::getInstance()->isFifoEmpty()) {
 
 		HALAktorik::getInstance()->motor_off();
-
+		MainController::getInstance()->setIsRunning(false);
 	}
 	ControllerSeg4::getInstance()->sendMsg2Dispatcher(SLIDE_EMPTY);
 
