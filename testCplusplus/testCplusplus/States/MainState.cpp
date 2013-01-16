@@ -178,6 +178,19 @@ void RunningMachine::EStopPressed() {
 	HALAktorik::getInstance()->Reset_LED_off();
 	//Pause all timers.
 	MainController::getInstance()->pauseAllTimers();
+	//Unregister all segments' controllers.
+
+#ifdef MACHINE_1
+	Dispatcher::getInstance()->removeHandler(ControllerSeg1::getInstance());
+	Dispatcher::getInstance()->removeHandler(ControllerSeg2::getInstance());
+	Dispatcher::getInstance()->removeHandler(ControllerSeg3::getInstance());
+	Dispatcher::getInstance()->removeHandler(ControllerSeg4::getInstance());
+	Dispatcher::getInstance()->removeHandler(ControllerSeg5::getInstance());
+#endif
+#ifdef MACHINE_2
+	Dispatcher::getInstance()->removeHandler(ControllerSegM2::getInstance());
+	Sender::getInstance()->send(MACHINE2_IS_BUSY);
+#endif
 
 	//Machine goes to Emergency state.
 	new (this) Emergency();
